@@ -54,6 +54,7 @@ public:
   DECLARE_EXCEPTION(FetchRequestTokenServerError, OsmOAuthException);
   DECLARE_EXCEPTION(FinishAuthorizationServerError, OsmOAuthException);
   DECLARE_EXCEPTION(ResetPasswordServerError, OsmOAuthException);
+  DECLARE_EXCEPTION(AuthenticityTokenNotFound, OsmOAuthException);
 
   static bool IsValid(std::string const & ks);
 
