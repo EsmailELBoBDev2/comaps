@@ -160,6 +160,8 @@ public class PlacePageView extends Fragment
   private ShapeableImageView mColorIcon;
   private MaterialTextView mTvCategory;
   private MaterialButton mEditBookmark;
+  private View mOsmDescriptionContainer;
+  private TextView mTvOsmDescription;
 
   // Data
   private CoordinatesFormat mCoordsFormat = CoordinatesFormat.LatLonDecimal;
@@ -276,6 +278,10 @@ public class PlacePageView extends Fragment
     mColorIcon.setOnClickListener(this);
     mTvCategory.setOnClickListener(this);
     mEditBookmark.setOnClickListener(this);
+
+    mOsmDescriptionContainer = mFrame.findViewById(R.id.osm_description_container);
+    mTvOsmDescription = mFrame.findViewById(R.id.tv__osm_description);
+    mTvOsmDescription.setOnLongClickListener(this);
 
     MaterialButton shareButton = mPreview.findViewById(R.id.share_button);
     shareButton.setOnClickListener(this::shareClickListener);
@@ -484,7 +490,17 @@ public class PlacePageView extends Fragment
       mToolbar.setTitle(mMapObject.getTitle());
     setTextAndColorizeSubtitle();
     UiUtils.setTextAndHideIfEmpty(mTvAddress, mMapObject.getAddress());
+
     refreshCategoryPreview();
+
+    final String osmDescription = mMapObject.getOsmDescription();
+    if (osmDescription.isEmpty())
+      mOsmDescriptionContainer.setVisibility(GONE);
+    else
+    {
+      mTvOsmDescription.setText(osmDescription);
+      mOsmDescriptionContainer.setVisibility(VISIBLE);
+    }
   }
 
   void refreshCategoryPreview()
@@ -1033,6 +1049,8 @@ public class PlacePageView extends Fragment
       items.add(mTvSecondaryTitle.getText().toString());
     else if (id == R.id.tv__address)
       items.add(mTvAddress.getText().toString());
+    else if (id == R.id.tv__osm_description)
+      items.add(mTvOsmDescription.getText().toString());
     else if (id == R.id.ll__place_latlon)
     {
       final double lat = mMapObject.getLat();
