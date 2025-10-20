@@ -757,9 +757,9 @@ highway|track|grade5|permissive;[highway=track][tracktype=grade5][access=permiss
 lateral|port;[seamark:buoy_lateral:category=port],[seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=tower],[seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=lattice],[seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=pile],[seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=buoyant];;;;632;
 lateral|starboard;[seamark:buoy_lateral:category=starboard],[seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=tower],[seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=lattice],[seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=pile],[seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=buoyant];;;;633;
 highway|tertiary_link|tunnel;[highway=tertiary_link][tunnel?];;name;int_name;634;
-deprecated|deprecated;635;x
-deprecated|deprecated;636;x
-deprecated|deprecated;637;x
+railway|miniature;635;
+railway|miniature|bridge;[railway=miniature][bridge?];;name;int_name;636;
+railway|miniature|tunnel;[railway=miniature][tunnel?];;name;int_name;637;
 deprecated|deprecated;638;x
 deprecated|deprecated;639;x
 deprecated|deprecated;640;x
