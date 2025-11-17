@@ -197,7 +197,7 @@ import AVFoundation
                 return mapAppearance
             }
             
-            return .auto
+            return .light
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: userDefaultsKeyMapAppearance)
