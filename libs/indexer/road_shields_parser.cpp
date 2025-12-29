@@ -913,7 +913,7 @@ RoadShieldsSetT GetRoadShields(std::string const & mwmName, std::string const & 
     return MoldovaRoadShieldParser(roadNumber).GetRoadShields();
   if (mwmName == "Portugal")
     return PortugalRoadShieldParser(roadNumber).GetRoadShields();
-if (mwmName == "Albania")
+  if (mwmName == "Albania")
     return AlbaniaRoadShieldParser(roadNumber).GetRoadShields();
   if (mwmName == "Romania")
     return RomaniaRoadShieldParser(roadNumber).GetRoadShields();
