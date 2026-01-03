@@ -15,6 +15,7 @@
   <color name="bg_cards">#FF3C4044</color>
   <color name="bg_panel">@color/bg_window</color>
   <color name="bg_primary_dark">#FF588157</color>
+  <color name="bg_app">#10140F</color>
 
   <color name="bg_menu">#CC2D3237</color>
 
