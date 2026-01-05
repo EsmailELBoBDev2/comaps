@@ -703,9 +703,9 @@ class GermanyRoadShieldParser : public SimpleRoadShieldParser
 {
 public:
   explicit GermanyRoadShieldParser(std::string const & baseRoadNumber)
-    : SimpleRoadShieldParser(baseRoadNumber, {{"A", RoadShieldType::Highway_Hexagon_Blue, false, true},
-                                              {"D", RoadShieldType::Hidden},
-                                              {"B", RoadShieldType::Generic_Orange_Bordered},
+    : SimpleRoadShieldParser(baseRoadNumber, {{"A ", RoadShieldType::Highway_Hexagon_Blue, false, true},
+                                              {"D ", RoadShieldType::Hidden},
+                                              {"B ", RoadShieldType::Generic_Orange_Bordered},
                                               {"L", RoadShieldType::Generic_White_Bordered},
                                               {"K", RoadShieldType::Generic_White_Bordered}})
   {}
