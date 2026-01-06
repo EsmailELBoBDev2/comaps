@@ -554,7 +554,7 @@ public:
   explicit ItalyRoadShieldParser(std::string const & baseRoadNumber)
     : SimpleRoadShieldParser(baseRoadNumber, {{"A", RoadShieldType::Italy_Autostrada},
                                               {"RA", RoadShieldType::Generic_Green_Bordered},
-                                              {"NSA", RoadShieldType::Generic_Green_Bordered},
+                                              {"NSA", RoadShieldType::Generic_Blue_Bordered},
                                               {"SS", RoadShieldType::Generic_Blue_Bordered},
                                               {"SR", RoadShieldType::Generic_Blue_Bordered},
                                               {"SP", RoadShieldType::Generic_Blue_Bordered}})
