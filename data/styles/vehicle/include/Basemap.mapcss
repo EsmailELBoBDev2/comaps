@@ -352,6 +352,7 @@ area|z13-[landuse=garages],
 
 area|z15-[amenity=charging_station][motorcar?],
 area|z15-[amenity=fuel],
+area|z15-[amenity=recycling][recycling_type=centre],
 area|z17-[amenity=vehicle_inspection],
 area|z17-[amenity=car_wash],
 area|z17-[amenity=motorcycle_parking],

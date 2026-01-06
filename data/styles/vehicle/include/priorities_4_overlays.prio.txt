@@ -220,6 +220,7 @@ railway-level_crossing                              # icon z17-
 === 2700
 
 amenity-car_wash                                    # icon z17- (also has caption(optional) z17-, area z17-)
+amenity-recycling-centre                            # icon z16- (also has caption(optional) z16-, area z15-)
 amenity-vehicle_inspection                          # icon z17- (also has area z17-)
 amenity-vending_machine-parking_tickets             # icon z17- (also has caption(optional) z17-)
 shop-car_parts                                      # icon z17-
@@ -820,6 +821,7 @@ entrance-emergency                                  # icon z19- (also has captio
 # === -7250
 
 # amenity-car_wash                                  # caption(optional) z17- (also has icon z17-, area z17-)
+# amenity-recycling-centre                          # caption(optional) z16- (also has icon z16-, area z15-)
 # amenity-vending_machine-parking_tickets           # caption(optional) z17- (also has icon z17-)
 # shop-car_repair-tyres                             # caption(optional) z15- (also has icon z15-)
 # tourism-camp_site                                 # caption(optional) z18- (also has icon z18-)
