@@ -1024,11 +1024,11 @@
 "type.public_transport.platform" = "Platform";
 "type.railway" = "Railway";
 "type.railway.abandoned" = "Abandoned Railway";
-"type.railway.abandoned.bridge" = "Abandoned Railway Bridge";
-"type.railway.abandoned.tunnel" = "Abandoned Railway Tunnel";
 "type.railway.construction" = "Railway Construction";
 "type.railway.crossing" = "Railway Crossing";
 "type.railway.disused" = "Disused Railway";
+"type.railway.disused.bridge" = "Disused Railway Bridge";
+"type.railway.disused.tunnel" = "Disused Railway Tunnel";
 "type.railway.funicular" = "Funicular";
 "type.railway.funicular.bridge" = "Funicular Bridge";
 "type.railway.funicular.tunnel" = "Funicular Tunnel";

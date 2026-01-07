@@ -931,11 +931,11 @@
     <string name="type.public_transport.platform">Platform</string>
     <string name="type.railway">Railway</string>
     <string name="type.railway.abandoned">Abandoned Railway</string>
-    <string name="type.railway.abandoned.bridge">Abandoned Railway Bridge</string>
-    <string name="type.railway.abandoned.tunnel">Abandoned Railway Tunnel</string>
     <string name="type.railway.construction">Railway Construction</string>
     <string name="type.railway.crossing">Railway Crossing</string>
     <string name="type.railway.disused">Disused Railway</string>
+    <string name="type.railway.disused.bridge">Disused Railway Bridge</string>
+    <string name="type.railway.disused.tunnel">Disused Railway Tunnel</string>
     <string name="type.railway.funicular">Funicular</string>
     <string name="type.railway.funicular.bridge">Funicular Bridge</string>
     <string name="type.railway.funicular.tunnel">Funicular Tunnel</string>
