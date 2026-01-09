@@ -25,7 +25,7 @@ import java.util.Set;
 public class LanguagesFragment extends BaseMwmRecyclerFragment<LanguagesAdapter>
 {
   final static String EXISTING_LOCALIZED_NAMES = "ExistingLocalizedNames";
-  final static String INCLUDE_LOCAL_LANGUAGE = "IncludeLocalLanguage";
+  final static String IS_MAP_LANGUAGE_SELECTION = "IsMapLanguageSelection";
 
   public interface Listener
   {
@@ -39,8 +39,8 @@ public class LanguagesFragment extends BaseMwmRecyclerFragment<LanguagesAdapter>
   protected LanguagesAdapter createAdapter()
   {
     Bundle args = getArguments();
-    boolean includeLocalLanguage =
-        args != null ? args.getBoolean(INCLUDE_LOCAL_LANGUAGE) : true;
+    boolean isMapLanguageSelection =
+        args != null ? args.getBoolean(IS_MAP_LANGUAGE_SELECTION) : true;
     Set<String> existingLanguages =
         args != null ? new HashSet<>(args.getStringArrayList(EXISTING_LOCALIZED_NAMES)) : new HashSet<>();
 
@@ -52,7 +52,10 @@ public class LanguagesFragment extends BaseMwmRecyclerFragment<LanguagesAdapter>
     for (int i = 0; i < systemLocales.size(); i++)
       systemLanguages.add(null);
 
-    for (Language lang : Editor.nativeGetSupportedLanguages(false))
+    // service languages are old_name, alt_name, ...
+    boolean includeServiceLangs = !isMapLanguageSelection;
+
+    for (Language lang : Editor.nativeGetSupportedLanguages(includeServiceLangs))
     {
       if (existingLanguages.contains(lang.code))
         continue;
@@ -78,7 +81,7 @@ public class LanguagesFragment extends BaseMwmRecyclerFragment<LanguagesAdapter>
 
     languages.addAll(0, systemLanguages.stream().filter(Objects::nonNull).toList());
 
-    if (includeLocalLanguage) {
+    if (isMapLanguageSelection) {
       String localLanguageLabel = getString(R.string.pref_maplanguage_local);
       Language localLanguage = new Language(DEFAULT_LANG_CODE, localLanguageLabel);
       languages.add(0, localLanguage);

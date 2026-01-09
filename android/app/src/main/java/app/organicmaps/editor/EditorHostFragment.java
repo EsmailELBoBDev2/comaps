@@ -237,7 +237,7 @@ public class EditorHostFragment
     for (LocalizedName name : sNames)
       languages.add(name.lang);
     args.putStringArrayList(LanguagesFragment.EXISTING_LOCALIZED_NAMES, languages);
-    args.putBoolean(LanguagesFragment.INCLUDE_LOCAL_LANGUAGE, false);
+    args.putBoolean(LanguagesFragment.IS_MAP_LANGUAGE_SELECTION, false);
     editWithFragment(Mode.LANGUAGE, R.string.choose_language, args, LanguagesFragment.class, false);
   }
 
