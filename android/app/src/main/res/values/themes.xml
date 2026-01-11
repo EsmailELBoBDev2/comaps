@@ -288,5 +288,15 @@
         <item name="cornerFamily">rounded</item>
         <item name="android:colorBackground">?attr/colorSurfaceContainerHigh</item>
         <item name="android:layout">@layout/m3_alert_dialog</item>
+        <item name="buttonBarPositiveButtonStyle">@style/MwmTheme.M3.AlertDialog.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/MwmTheme.M3.AlertDialog.Button</item>
+        <item name="buttonBarNeutralButtonStyle">@style/MwmTheme.M3.AlertDialog.Button.Neutral</item>
     </style>
+
+  <style name="MwmTheme.M3.AlertDialog.Button" parent="@style/Widget.Material3.Button.TextButton.Dialog">
+       <item name="android:textColor">?colorSecondary</item>
+  </style>
+  <style name="MwmTheme.M3.AlertDialog.Button.Neutral" parent="@style/Widget.Material3.Button.TextButton.Dialog.Flush">
+       <item name="android:textColor">?colorSecondary</item>
+  </style>
 </resources>
