@@ -2445,6 +2445,7 @@ amenity-waste_disposal                              # icon z18- (also has captio
 emergency-access_point                              # icon z18- (also has caption(optional) z18-)
 emergency-assembly_point                            # icon z18- (also has caption(optional) z18-)
 emergency-defibrillator                             # icon z18- (also has caption(optional) z18-)
+emergency-disaster_help_point                       # icon z18- (also has caption(optional) z18-)
 emergency-phone                                     # icon z17- (also has caption(optional) z19-)
 man_made-telescope                                  # icon z18- (also has caption(optional) z18-)
 === -9980
@@ -2483,6 +2484,7 @@ amenity-loading_dock                                # icon z19- (also has captio
 # emergency-access_point                            # caption(optional) z18- (also has icon z18-)
 # emergency-assembly_point                          # caption(optional) z18- (also has icon z18-)
 # emergency-defibrillator                           # caption(optional) z18- (also has icon z18-)
+# emergency-disaster_help_point                     # caption(optional) z18- (also has icon z18-)
 # emergency-fire_hydrant                            # caption(optional) z19- (also has icon z19-)
 # emergency-life_ring                               # caption(optional) z19- (also has icon z19-)
 # emergency-phone                                   # caption(optional) z19- (also has icon z17-)

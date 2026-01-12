@@ -541,7 +541,7 @@ healthcare|psychotherapist;426;
 # TODO: deprecated, migrate to ford=*
 highway|ford;427;
 area:highway|path;428;
-deprecated:railway|siding:06.2023;429;x
+emergency|disaster_help_point;429;
 highway|track|area;[highway=track][area?];;name;int_name;430;
 amenity|sanitary_dump_station;431;
 railway|funicular;432;
