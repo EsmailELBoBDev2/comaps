@@ -270,6 +270,10 @@ public:
     ShuttleTrain,
     DisusedBusiness,
     Building,
+    ChargingStation,
+    SmallChargingStation,
+    MotorcarChargingStation,
+    CarlessChargingStation,
     Count
   };
 
@@ -311,6 +315,10 @@ public:
         {ShuttleTrain, {"route", "shuttle_train"}},
         {DisusedBusiness, {"disusedbusiness"}},
         {Building, {"building"}},
+        {ChargingStation, {"amenity", "charging_station"}},
+        {SmallChargingStation, {"amenity", "charging_station", "small"}},
+        {MotorcarChargingStation, {"amenity", "charging_station", "motorcar"}},
+        {CarlessChargingStation, {"amenity", "charging_station", "carless"}},
     };
 
     m_types.resize(static_cast<size_t>(Count));
@@ -1336,6 +1344,25 @@ void PostprocessElement(OsmElement * p, FeatureBuilderParams & params)
       });
 
       railwayDone = true;
+    }
+  }
+
+  // This is needed in the generator to work around charing stations, which are only implicitly marked as for cars
+  if (params.IsTypeExist(types.Get(CachedTypes::ChargingStation)))
+  {
+    uint32_t const motorcarChargingStation = types.Get(CachedTypes::MotorcarChargingStation);
+    uint32_t const carlessChargingStation = types.Get(CachedTypes::CarlessChargingStation);
+
+    if (!params.IsTypeExist(motorcarChargingStation) && !params.IsTypeExist(carlessChargingStation))
+      params.AddType(motorcarChargingStation);
+
+    if (params.IsTypeExist(carlessChargingStation))
+    {
+      params.PopExactType(carlessChargingStation);
+
+      uint32_t const smallChargingStation = types.Get(CachedTypes::SmallChargingStation);
+      if (params.IsTypeExist(smallChargingStation))
+        params.PopExactType(smallChargingStation);
     }
   }
 }

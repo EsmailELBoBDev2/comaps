@@ -409,13 +409,6 @@ void FeatureParams::SetRwSubwayType(char const * cityName)
 
 FeatureParams::TypesResult FeatureParams::FinishAddingTypesEx()
 {
-  auto const & cl = classif();
-  auto charingStation = cl.GetTypeByPath({"amenity", "charging_station"});
-  auto motorcarCharingStation = cl.GetTypeByPath({"amenity", "charging_station", "motorcar"});
-  auto carelessCharingStation = cl.GetTypeByPath({"amenity", "charging_station", "carless"});
-  if (IsTypeExist(charingStation) && !IsTypeExist(motorcarCharingStation) && !IsTypeExist(carelessCharingStation))
-    AddType(motorcarCharingStation);
-
   base::SortUnique(m_types);
 
   TypesResult res = TYPES_GOOD;

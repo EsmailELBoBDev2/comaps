@@ -122,19 +122,12 @@ std::string MapObject::GetLocalizedAllTypes(bool withMainType) const
   auto const & isPoi = ftypes::IsPoiChecker::Instance();
   auto const & subtypes = ftypes::Subtypes::Instance();
   auto const & amenityChecker = ftypes::IsAmenityChecker::Instance();
-  auto const & charingStationCarChecker = ftypes::IsCharingStationCarChecker::Instance();
-  auto const & charingStationCarlessChecker = ftypes::IsCharingStationCarlessChecker::Instance();
-  auto const & charingStationSmallChecker = ftypes::IsCharingStationSmallChecker::Instance();
 
   std::ostringstream oss;
   bool isMainType = true;
   bool isFirst = true;
   for (auto const type : copy)
   {
-    // Ignore some charing stations
-    if (charingStationCarlessChecker(type) || ((charingStationCarChecker(type) || charingStationSmallChecker(type)) && charingStationCarlessChecker(copy)))
-      continue;
-    
     if (isMainType && !withMainType)
     {
       isMainType = false;

@@ -511,30 +511,6 @@ public:
   DECLARE_CHECKER_INSTANCE(IsPublicTransportStopChecker);
 };
 
-class IsCharingStationCarChecker : public ftypes::BaseChecker
-{
-  IsCharingStationCarChecker();
-
-public:
-  DECLARE_CHECKER_INSTANCE(IsCharingStationCarChecker);
-};
-
-class IsCharingStationCarlessChecker : public ftypes::BaseChecker
-{
-  IsCharingStationCarlessChecker();
-
-public:
-  DECLARE_CHECKER_INSTANCE(IsCharingStationCarlessChecker);
-};
-
-class IsCharingStationSmallChecker : public ftypes::BaseChecker
-{
-  IsCharingStationSmallChecker();
-
-public:
-  DECLARE_CHECKER_INSTANCE(IsCharingStationSmallChecker);
-};
-
 class IsTaxiChecker : public BaseChecker
 {
   IsTaxiChecker();

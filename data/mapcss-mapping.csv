@@ -419,6 +419,7 @@ highway|primary_link|bridge;[highway=primary_link][bridge?];;name;int_name;310;
 man_made|tower|communication;[man_made=tower][tower:type=communication];;name;int_name;311;
 sport|equestrian;312;
 tourism|information|office;[tourism=information][information=office];;name;int_name;313;
+# This is needed in the generator to work around charing stations, which are only implicitly marked as for cars, but this type never will actually make it into the map data
 amenity|charging_station|carless;[amenity=charging_station][motorcar=not],[amenity=charging_station][motorcar=no];;name;int_name;314;
 aeroway|gate;315;
 # TODO: railway=preserved is deprecated in OSM, recommended mapping is railway:preserved=yes + railway=*

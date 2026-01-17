@@ -746,24 +746,6 @@ IsPublicTransportStopChecker::IsPublicTransportStopChecker()
   m_types.push_back(c.GetTypeByPath({"railway", "tram_stop"}));
 }
 
-IsCharingStationCarChecker::IsCharingStationCarChecker() : ftypes::BaseChecker(3 /* level */)
-{
-  Classificator const & c = classif();
-  m_types.push_back(c.GetTypeByPath({"amenity", "charging_station", "motorcar"}));
-}
-
-IsCharingStationCarlessChecker::IsCharingStationCarlessChecker() : ftypes::BaseChecker(3 /* level */)
-{
-  Classificator const & c = classif();
-  m_types.push_back(c.GetTypeByPath({"amenity", "charging_station", "carless"}));
-}
-
-IsCharingStationSmallChecker::IsCharingStationSmallChecker() : ftypes::BaseChecker(3 /* level */)
-{
-  Classificator const & c = classif();
-  m_types.push_back(c.GetTypeByPath({"amenity", "charging_station", "small"}));
-}
-
 IsTaxiChecker::IsTaxiChecker()
 {
   Classificator const & c = classif();
