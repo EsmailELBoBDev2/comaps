@@ -1293,7 +1293,7 @@ node|z17-[leisure=fitness_station]
 node|z16-[leisure=sports_centre],
 {icon-image: sports_centre-m.svg;icon-min-distance: 9;}
 node|z17-[leisure=sports_hall]
-{icon-image: sports_centre-m.svg;icon-min-distance: 10;}
+{icon-image: pitch-m.svg;icon-min-distance: 10;}
 node|z16-[leisure=dance]
 {icon-image: dance-m.svg;icon-min-distance: 10;}
 node|z16-[leisure=fitness_centre]
