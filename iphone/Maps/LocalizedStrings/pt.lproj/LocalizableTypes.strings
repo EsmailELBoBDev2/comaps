@@ -157,7 +157,7 @@
 "type.amenity.shelter.basic_hut" = "Cabana Básica";
 
 /* A traditional 3-walled shelter (one side open), suitable for overnight camping. */
-"type.amenity.shelter.lean_to" = "Abrigo tipo telheiro";
+"type.amenity.shelter.lean_to" = "Abrigo tipo Telheiro";
 "type.amenity.public_bath" = "Banho público";
 "type.amenity.shower" = "Chuveiro";
 "type.amenity.stripclub" = "Clube de striptease";
@@ -176,7 +176,7 @@
 "type.amenity.vending_machine.food" = "Distribuidor de alimentos";
 "type.amenity.vending_machine.newspapers" = "Distribuidor de jornais";
 "type.amenity.vending_machine.parking_tickets" = "Máquina venda de bilhetes de estacionamento";
-"type.amenity.vending_machine.public_transport_tickets" = "Máquina venda de bilhetes de transporte público";
+"type.amenity.vending_machine.public_transport_tickets" = "Máquina de Venda de Bilhetes de Transportes Públicos";
 "type.amenity.vending_machine.sweets" = "Dispensador de doces";
 "type.amenity.vending_machine.excrement_bags" = "Dispensador de sacos de excrementos";
 "type.amenity.parcel_locker" = "Cacifo";
@@ -1590,3 +1590,12 @@
 "type.amenity.hydrant" = "Boca de Rega";
 "type.amenity.charging_station.small" = "Capacidade Limitada";
 "type.amenity.charging_station.motorcycle" = "Motociclos";
+"type.railway.disused.bridge" = "Ponte Ferroviária Desativada";
+"type.railway.turntable" = "Plataforma Giratória Ferroviária";
+"type.tourism.information.tactile_map" = "Mapa tátil";
+"type.railway.miniature.bridge" = "Ponte Ferroviária em Miniatura";
+"type.emergency.disaster_help_point" = "Ponto de Ajuda de Emergências e Desastres";
+"type.emergency.access_point.address" = "Endereço de Resgate de Emergência";
+"type.railway.miniature.tunnel" = "Túnel Ferroviário em Miniatura";
+"type.railway.disused.tunnel" = "Túnel Ferroviário Desativada";
+"type.railway.miniature" = "Ferrovia em Miniatura";

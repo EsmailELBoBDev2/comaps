@@ -1101,3 +1101,4 @@
 "voice_explanation_before_version26" = "É possível escolher uma voz melhor nas definições do sistema sob *Acessibilidade*, *Conteúdo Falado*, *Vozes*.";
 "voice_explanation" = "É possível escolher uma voz melhor nas definições do sistema sob *Acessibilidade*, *Ler & Falar*, *Vozes*.";
 "avoid_paved" = "Evitar rotas pavimentadas";
+"limit_map_language_alternatives_to_local" = "Utilizar apenas outros idiomas do sistema na sua região";
