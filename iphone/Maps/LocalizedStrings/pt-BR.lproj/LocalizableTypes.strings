@@ -42,7 +42,7 @@
 "type.leisure.amusement_arcade" = "Fliperama";
 "type.amenity.charging_station" = "Eletroposto";
 "type.amenity.charging_station.bicycle" = "Ponto de recarga de bicicletas";
-"type.amenity.charging_station.motorcar" = "Eletroposto";
+"type.amenity.charging_station.motorcar" = "Carros";
 "type.amenity.childcare" = "Creche";
 "type.amenity.cinema" = "Cinema";
 "type.leisure.bowling_alley" = "Pista de boliche";
@@ -1519,7 +1519,7 @@
 "type.leisure.sports_centre.sport.scuba_diving" = "Centro esportivo";
 "type.leisure.sports_centre.sport.field_hockey" = "Centro esportivo";
 "type.leisure.sports_centre.sport.bowls" = "Centro esportivo";
-"type.amenity.bench.backless" = "Banco sem encosto";
+"type.amenity.bench.backless" = "Sem encosto";
 "type.leisure.bandstand" = "Coreto";
 "type.disusedbusiness" = "Estabelecimento vazio";
 "type.amenity.lounger" = "Espreguiçadeira";
@@ -1588,3 +1588,4 @@
 "type.man_made.mast.communication" = "Mastro de comunicações";
 "type.shop.beauty.nails" = "Manicure";
 "type.amenity.hydrant" = "Hidrante de irrigação";
+"type.amenity.charging_station.motorcycle" = "Motos";

@@ -175,7 +175,7 @@
     <string name="downloader_search_field_hint">Kavos mappa</string>
     <string name="editor_login_error_dialog">Error dres omgelmi</string>
     <string name="editor_edit_place_name_hint">Hanow a an le</string>
-    <string name="editor_default_language_hint">Dell yw skrifys yn an yeth teythiek</string>
+    <string name="editor_default_language_hint">Dell yw skrifys y\'n yeth leel</string>
     <string name="editor_edit_place_category_title">Klass</string>
     <string name="detailed_problem_description">Deskrifans manylys a an kudyn</string>
     <string name="editor_report_problem_other_title">Kudyn dyffrans</string>
@@ -297,7 +297,7 @@
     <string name="parkings">Parkyans</string>
     <string name="fuel_places">Petrolva</string>
     <string name="medicine">Medhegneth</string>
-    <string name="search_in_the_list">Hwilas yn an rol</string>
+    <string name="search_in_the_list">Hwilas y\'n rol</string>
     <string name="religious_places">Leow kryjyk</string>
     <string name="select_list">Dewis rol</string>
     <string name="transit_not_found">Navygacyon metro yn an pow ma usi nakavadow hwath</string>
@@ -319,7 +319,7 @@
     <string name="osm_wiki_about_url">https://wiki.openstreetmap.org/wiki/About_OpenStreetMap</string>
     <string name="comma_separated_pair">%1$s, %2$s</string>
     <string name="app_tip_00">Meur ras rag ow devnydhya a\'gan mappys drehevys gans an kemeneth!</string>
-    <string name="app_tip_01">Gans agas argevrohow ha skoodhyans, ni a yll gul an mappys an gwella yn an Nor!</string>
+    <string name="app_tip_01">Gans agas argevrohow ha skoodhyans, ni a yll gul an mappys an gwella y\'n Nor!</string>
     <string name="app_tip_02">Yw da genes a\'gan app? Argevri mar pleg dhe skoodhya an displegyans! Yw na da genes a\'n hwath? Mar pleg, kedhlewgh dhyn prag ha ni a ewnhe a\'n!</string>
     <string name="app_tip_06">Ty a yll gweres treylya a\'gan app yn dhayeth.</string>
     <string name="aa_connected_title">Dha vos lemmyn rosweythys dhe Android Auto</string>
@@ -375,7 +375,7 @@
     <string name="edit">Golegi</string>
     <string name="downloader_no_space_title">Nyns eus lowr dalghuster</string>
     <string name="translated_om_site_url">https://comaps.app/</string>
-    <string name="download_has_failed">Y fyllis an iskarg, tava dhe dasassaya</string>
+    <string name="download_has_failed">Y fyllis an iskarg, tava rag assaya arta</string>
     <string name="downloading">Owth Iskargaow…</string>
     <string name="location_is_disabled_long_text">Hwi ungallosegi y\'n eur ma oll Gonisyow GPS rag an devis po app ma. Mar pleg, gallosegi y\'s yn Settyansow.</string>
     <string name="precise_location_is_disabled_long_text">Rag surhe navygacyon ewn, gallosegi GPS Kewar yn Settyansow</string>
@@ -585,7 +585,7 @@
     <string name="power_managment_setting_never">Bynner</string>
     <string name="power_managment_setting_auto">Pan batri yw isel</string>
     <string name="power_managment_setting_manual_max">Pub prys</string>
-    <string name="enable_logging_warning_message">Gallosegi yn servadow an dewis ma rag rekordya ha danvon dre dhorn kovadhow manylys a-dro gas kudyn dhe ni gans \"Derivas unn kudyn\" yn an folen Gweres. Kovadhow re komprehendya kedhlow GPS.</string>
+    <string name="enable_logging_warning_message">Gallosegi yn servadow an dewis ma rag rekordya ha danvon dre dhorn kovadhow manylys a-dro gas kudyn dhe ni gans \"Derivas unn kudyn\" y\'n folen Gweres. Kovadhow re komprehendya kedhlow GPS.</string>
     <string name="driving_options_title">Dewisyow kerdh</string>
     <string name="avoid_tolls">Goheles tollow</string>
     <string name="avoid_unpaved">Goheles fordh ankonsys</string>
@@ -594,7 +594,7 @@
     <string name="avoid_steps">Goheles stayrys</string>
     <string name="avoid_paved">Goheles fordh konsys</string>
     <string name="unable_to_calc_alert_title">Anabel kalkya kerdh</string>
-    <string name="unable_to_calc_alert_subtitle">Unn kerdh na gallos kavosys. Ma re bos drefen gas dewisyow kerdh po data OpenStreetMap andhien. Mar pleg chanjya gas dewisyow kerdh ha dasassaya.</string>
+    <string name="unable_to_calc_alert_subtitle">Unn kerdh na gallos kavosys. Ma re bos drefen gas dewisyow kerdh po data OpenStreetMap andhien. Mar pleg chanjya gas dewisyow kerdh hag assaya arta.</string>
     <string name="change_driving_options_btn">Dewisyow kerdh gallosegys</string>
     <string name="week_ago_sorttype">Nans yw unn seythen</string>
     <string name="month_ago_sorttype">Nans yw unn mis</string>
@@ -636,7 +636,7 @@
     <string name="continue_recording">Pesya Rekordya</string>
     <string name="track_recording_alert_title">Sawya yn Drudhow?</string>
     <string name="track_recording_toast_nothing_to_save">Lergh yw gwag - mann rag sawyans</string>
-    <string name="error_no_file_manager_app">Anabel diskwedhes fenester dewis restrenva dre reson app fytti vyth yw leys war gas devis. Mar pleg, lea unn dyghtyer restrennow ha dasassaya.</string>
+    <string name="error_no_file_manager_app">Anabel dhe diskwedhes fenester dewis restrenva dre reson app fytti vyth yw leys war gas devis. Mar pleg, lea unn dyghtyer restrennow hag assaya arta.</string>
     <string name="uri_open_location_failed">App leys vyth may gallos ygeri an tyller</string>
     <string name="pref_left_button_disable">Ungallosegi</string>
     <string name="pref_backup_title">Backupya drudhow</string>
@@ -655,7 +655,7 @@
     <string name="pref_backup_interval_title">Backupya yn awtomatek</string>
     <string name="backup_interval_manual_only">Marow (dre dhorn hepken)</string>
     <string name="dialog_report_error_missing_folder">An tyller dewisys yw ankavadow po redya-hepken. Dewis unn tyller aral, mar pleg.</string>
-    <string name="dialog_report_error_with_logs">Mar pleg danvon unn derivas error dhe ni:\n - \"Gallosegi kovadhow\" yn an settyansow\n - Dasleverel yn diogel an kudyn\n - yn an skrin \"A-dro ha Gweres\", levna an boton \"Derivas unn kudyn\" ha danvon der ebost po keskows\n - ungallosegi kovadhow</string>
+    <string name="dialog_report_error_with_logs">Mar pleg danvon unn derivas error dhe ni:\n - \"Gallosegi kovadhow\" y\'n settyansow\n - Dasleverel yn diogel an kudyn\n - y\'n skrin \"A-dro ha Gweres\", levna an boton \"Derivas unn kudyn\" ha danvon der ebost po keskows\n - ungallosegi kovadhow</string>
     <string name="route_type">Eghen kerdh</string>
     <string name="open_now">Ygeri lemmyn</string>
     <string name="closed_now">Degeys lemmyn</string>

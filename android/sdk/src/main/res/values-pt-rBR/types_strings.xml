@@ -43,7 +43,7 @@
     <string name="type.leisure.amusement_arcade">Fliperama</string>
     <string name="type.amenity.charging_station">Eletroposto</string>
     <string name="type.amenity.charging_station.bicycle">Ponto de recarga de bicicletas</string>
-    <string name="type.amenity.charging_station.motorcar">Eletroposto</string>
+    <string name="type.amenity.charging_station.motorcar">Carros</string>
     <string name="type.amenity.childcare">Creche</string>
     <string name="type.amenity.cinema">Cinema</string>
     <string name="type.leisure.bowling_alley">Pista de boliche</string>
@@ -1384,7 +1384,7 @@
     <string name="type.office.security">Escritório de segurança privada</string>
     <string name="type.power.portal">Portal de subestação</string>
     <string name="type.shop.lighting">Loja de iluminação</string>
-    <string name="type.amenity.bench.backless">Banco sem encosto</string>
+    <string name="type.amenity.bench.backless">Sem encosto</string>
     <string name="type.leisure.bandstand">Coreto</string>
     <string name="type.leisure.sports_centre.sport.multi">Centro esportivo</string>
     <string name="type.leisure.sports_centre.sport.american_football">Centro esportivo</string>
@@ -1486,4 +1486,5 @@
     <string name="type.man_made.mast.communication">Mastro de comunicações</string>
     <string name="type.shop.beauty.nails">Manicure</string>
     <string name="type.amenity.hydrant">Hidrante de irrigação</string>
+    <string name="type.amenity.charging_station.motorcycle">Motos</string>
 </resources>

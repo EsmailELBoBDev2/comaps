@@ -99,7 +99,6 @@
 "pref_map_3d_buildings_disabled_summary" = "3D বিল্ডিং দেখানো পাওয়ার সাশ্রয় মোডে বন্ধ হয়ে যায়";
 "pref_map_3d_buildings_title" = "3D বিল্ডিং";
 "email_error_body" = "The email client has not been set up. Please configure it or contact us at %@";
-"pref_calibration_title" = "Compass calibration";
 "disabled" = "Disabled";
 "donate" = "দান করুন";
 "volunteer" = "Volunteer";
@@ -384,7 +383,7 @@
 "near_me_sorttype" = "Near me";
 "pref_tts_speedcams_auto" = "Warn if speeding";
 "details" = "বিস্তারিত";
-"privacy_policy" = "Privacy policy";
+"privacy_policy" = "গোপনীয়তা নীতি";
 "editor_default_language_hint" = "স্থানীয় ভাষায় যেমন লেখা আছে";
 "search_not_found" = "Oops, no results found।";
 "editor_add_select_location" = "অবস্থান বেছে নিন";
@@ -464,7 +463,7 @@
 "migration_no_space_message" = "To download, you need more space. Please delete any unnecessary data।";
 "downloader_no_downloaded_maps_message" = "Download maps to search and navigate offline।";
 "search_history_text" = "View your recent searches।";
-"location_services_disabled_on_device_2" = "2. Select Privacy";
+"location_services_disabled_on_device_2" = "২. গোপনীয়তা বাছুন";
 "bookmarks_error_title_list_name_too_long" = "This name is too long";
 "sort_type" = "Sort by type";
 "cuisine" = "রন্ধনপ্রণালী";

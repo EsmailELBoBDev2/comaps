@@ -923,4 +923,5 @@
     <string name="download_resources_custom_url_title">自定义地图服务器</string>
     <string name="download_resources_custom_url_message">覆盖用于地图下载的默认地图下载服务器。留空则使用 CoMaps 默认服务器。</string>
     <string name="pref_maplanguage_local">本地语言</string>
+    <string name="limit_map_language_alternatives_to_local">仅使用所在区域的其他系统语言</string>
 </resources>

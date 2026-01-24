@@ -62,11 +62,11 @@
     <!-- "Add new bookmark list" dialog title -->
     <string name="add_new_set">Adicionar novo conjunto</string>
     <!-- Add Bookmark list dialog - hint when the list name is empty -->
-    <string name="bookmark_set_name">Nome do conjunto de favoritos</string>
+    <string name="bookmark_set_name">Nome do conjunto</string>
     <!-- Should be used in the bookmarks-only context, see bookmarks_and_tracks if tracks are also implied. -->
     <string name="bookmarks">Favoritos</string>
     <!-- "Bookmarks and Tracks" dialog title, also sync it with iphone/plist.txt -->
-    <string name="bookmarks_and_tracks">Favoritos e trilhas</string>
+    <string name="bookmarks_and_tracks">Favoritos</string>
     <!-- Add bookmark dialog - bookmark name -->
     <string name="name">Nome</string>
     <!-- Editor title above street and house number, duplicates [type.building.address] in types_strings.txt -->
@@ -899,4 +899,5 @@
     <string name="download_resources_custom_url_summary_none">Não definido</string>
     <string name="download_resources_custom_url_error_scheme">Insira uma URL começando com http:// ou https://</string>
     <string name="pref_maplanguage_local">Linguagem Local</string>
+    <string name="limit_map_language_alternatives_to_local">Utilizar apenas outros idiomas do sistema em sua região</string>
 </resources>

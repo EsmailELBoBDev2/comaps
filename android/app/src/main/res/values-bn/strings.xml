@@ -333,4 +333,14 @@
     <string name="app_tip_06">আপনি আমাদের অ্যাপটি আপনার ভাষায় অনুবাদ করতে সাহায্য করতে পারেন।</string>
     <string name="offline_explanation_title">অফলাইন মানচিত্র</string>
     <string name="offline_explanation_text">এলাকাটি দেখতে এবং নেভিগেট করতে একটি মানচিত্র ডাউনলোড করতে হবে।\nআপনি যেসব এলাকায় ভ্রমণ করতে চান সেগুলোর মানচিত্র ডাউনলোড করুন।</string>
+    <string name="privacy">গোপনীয়তা</string>
+    <string name="privacy_policy">গোপনীয়তা নীতি</string>
+    <string name="opens_day_at">%1$s %2$s খুলবে</string>
+    <string name="closes_day_at">%1$s %2$s বন্ধ হবে</string>
+    <plurals name="minutes_short">
+        <item quantity="one">%d মিন</item>
+        <item quantity="other">%d মিন</item>
+    </plurals>
+    <string name="hours_confirmed_time_ago">%s নিশ্চিত হয়েছে</string>
+    <string name="existence_confirmed_time_ago">%s অস্তিত্ব নিশ্চিত হয়েছে</string>
 </resources>

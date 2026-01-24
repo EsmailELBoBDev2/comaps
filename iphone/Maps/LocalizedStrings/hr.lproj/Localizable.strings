@@ -392,7 +392,6 @@
 "popular_place" = "Popular";
 "address" = "Address";
 "routing_add_finish_point" = "Koristite pretraživanje ili dodirnite kartu za dodavanje odredišne točke";
-"pref_calibration_title" = "Compass calibration";
 "editor_done_dialog_1" = "You’ve changed the world map! Don't keep it to yourself; tell your friends and edit it together.";
 "button_convert" = "Convert";
 "icloud_synchronization_error_quota_exceeded" = "Error: Failed to synchronize due to iCloud quota exceeded";
