@@ -171,4 +171,5 @@ app.comaps
 Licensed under the Apache License 2.0.  
 See [LICENSE](LICENSE), [NOTICE](NOTICE), and [data/copyright.html](data/copyright.html). 
 
-Our project is completely free and open source software; "[is it really FOSS?](https://isitreallyfoss.com/projects/comaps/)" lists CoMaps as a Free & Open Source project, [see what that means](https://isitreallyfoss.com/about/categorisation/)
+Our project is completely free and open source software. It had been reviewed by "[is it really FOSS?](https://isitreallyfoss.com/projects/comaps/)" and is listed as 100% FOSS, [see what that means](https://isitreallyfoss.com/about/categorisation/)
+
