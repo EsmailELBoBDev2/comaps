@@ -46,25 +46,41 @@
 
   <screenshots>
     <screenshot type="default" environment="plasma">
-      <image>https://www.comaps.app/images/screenshots/Desktop_light_routing.png</image>
-      <caption>Routing in light mode</caption>
+      <image>https://www.comaps.app/images/screenshots/desktop_international_breeze.png</image>
+      <caption>Route from Scotland to Belgium</caption>
     </screenshot>
     <screenshot environment="plasma:dark">
-      <image>https://www.comaps.app/images/screenshots/Desktop_dark_routing.png</image>
-      <caption>Routing in dark mode</caption>
+      <image>https://www.comaps.app/images/screenshots/desktop_international_breezedark_night.png</image>
+      <caption>Route from Scotland to Belgium</caption>
     </screenshot>
     <screenshot environment="plasma">
-      <image>https://www.comaps.app/images/screenshots/Desktop_light_overview.png</image>
-      <caption>Map overview in light mode</caption>
+      <image>https://www.comaps.app/images/screenshots/desktop_london_breeze.png</image>
+      <caption>Canada Water area</caption>
     </screenshot>
     <screenshot environment="plasma:dark">
-      <image>https://www.comaps.app/images/screenshots/Desktop_dark_overview.png</image>
-      <caption>Map overview in dark mode</caption>
+      <image>https://www.comaps.app/images/screenshots/desktop_london_breezedark_night.png</image>
+      <caption>Canada Water area</caption>
+    </screenshot>
+    <screenshot environment="plasma">
+      <image>https://www.comaps.app/images/screenshots/desktop_search_breeze.png</image>
+      <caption>Searching for Euston Station</caption>
+    </screenshot>
+    <screenshot environment="plasma:dark">
+      <image>https://www.comaps.app/images/screenshots/desktop_search_breezedark_night.png</image>
+      <caption>Searching for Euston Station</caption>
+    </screenshot>
+    <screenshot environment="plasma">
+      <image>https://www.comaps.app/images/screenshots/desktop_world_breeze.png</image>
+      <caption>World overview</caption>
+    </screenshot>
+    <screenshot environment="plasma:dark">
+      <image>https://www.comaps.app/images/screenshots/desktop_world_breezedark_night.png</image>
+      <caption>World overview</caption>
     </screenshot>
   </screenshots>
 
   <releases>
-   <release version="2026.01.24-1" date="2026-01-24">
+   <release version="2026.01.29-2" date="2026-01-29">
      <description>
        <p>CoMaps is now on Linux!</p>
      </description>
