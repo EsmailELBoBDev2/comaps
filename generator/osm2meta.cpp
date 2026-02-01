@@ -354,6 +354,11 @@ std::string MetadataTagProcessorImpl::ValidateAndFormat_panoramax(std::string v)
   return {};
 }
 
+std::string MetadataTagProcessorImpl::ValidateAndFormat_rooms(std::string const & v)
+{
+  return v;
+}
+
 std::string MetadataTagProcessorImpl::ValidateAndFormat_airport_iata(std::string const & v) const
 {
   if (!ftypes::IsAirportChecker::Instance()(m_params.m_types))
@@ -631,6 +636,7 @@ void MetadataTagProcessor::operator()(std::string const & k, std::string const &
   case Metadata::FMD_BRANCH: valid = ValidateAndFormat_text(v); break;
   case Metadata::FMD_DURATION: valid = ValidateAndFormat_duration(v); break;
   case Metadata::FMD_CAPACITY: valid = ValidateAndFormat_capacity(v); break;
+  case Metadata::FMD_ROOMS: valid = ValidateAndFormat_rooms(v); break;
   case Metadata::FMD_LOCAL_REF: valid = ValidateAndFormat_local_ref(v); break;
   case Metadata::FMD_DRIVE_THROUGH: valid = ValidateAndFormat_drive_through(v); break;
   case Metadata::FMD_SELF_SERVICE: valid = ValidateAndFormat_self_service(v); break;

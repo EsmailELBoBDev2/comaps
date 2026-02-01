@@ -125,6 +125,7 @@ public:
     FMD_CHECK_DATE_OPEN_HOURS = 54,
     FMD_BRANCH = 55,
     FMD_CHARGE_SOCKETS = 56,
+    FMD_ROOMS = 57,
     FMD_COUNT
   };
 
