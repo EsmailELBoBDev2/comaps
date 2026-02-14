@@ -19,6 +19,7 @@
 #include <memory>
 #include <string>
 #include <type_traits>
+#include <unordered_map>
 #include <vector>
 
 #include "3party/ankerl/unordered_dense.h"
@@ -142,7 +143,7 @@ public:
 
   private:
     std::unique_ptr<PointStorageReaderInterface> m_storageReader;
-    ankerl::unordered_dense::map<std::string, IndexFileReader> m_fileReaders;
+    std::unordered_map<std::string, IndexFileReader> m_fileReaders;
   };
 
   // It's thread-safe method.
