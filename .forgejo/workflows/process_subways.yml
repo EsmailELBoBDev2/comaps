@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           cd ~
-          git clone --depth 1 -b ${{ inputs.subways-branch }} --single-branch https://codeberg.org/comaps/subways.git
+          git clone --depth 1 -b ${{ inputs.subways-branch || 'master' }} --single-branch https://codeberg.org/comaps/subways.git
 
   update-planet-pbf:
     name: Update PBF Planet
