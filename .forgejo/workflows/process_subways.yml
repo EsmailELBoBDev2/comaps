@@ -17,11 +17,7 @@ on:
     - cron: '0 0 * * *'
 
 env:
-  #PLANET: /home/planet/planet/planet-latest.pbf
-  #TMPDIR: /tmp
   HTML_DIR: "/mnt/4tbexternal/osm-planet/subway/validator"
-  #DUMP: "$HTML_DIR"
-  #SKIP_PLANET_UPDATE: "1"
   SPREADSHEET_ID: "1SEW1-NiNOnA2qDwievcxYV1FOaQl1mb1fdeyqAxHu3k"
   DEBIAN_FRONTEND: nonnteractive
   TZ: Etc/UTC
@@ -37,7 +33,7 @@ jobs:
       volumes:
         - /mnt/4tbexternal:/mnt/4tbexternal
     concurrency:
-      group: ${{ github.workflow }}-compare-subways-${{ github.event.pull_request.number || github.ref }}
+      group: ${{ github.workflow }}-mapgen-subways-${{ github.event.pull_request.number || github.ref }}
       cancel-in-progress: true
     steps:
       - uses: actions/cache@v4
@@ -50,7 +46,6 @@ jobs:
           echo "Cloning $FORGEJO_SERVER_URL/$FORGEJO_REPOSITORY branch $FORGEJO_REF_NAME"
           cd ~
           git clone --depth 1 -b $FORGEJO_REF_NAME --single-branch $FORGEJO_SERVER_URL/$FORGEJO_REPOSITORY.git comaps
-          # --recurse-submodules --shallow-submodules
       - name: Checkout subways repo
         shell: bash
         run: |
@@ -67,7 +62,7 @@ jobs:
         - /mnt/4tbexternal/:/mnt/4tbexternal/
         - /mnt/4tbexternal/osm-planet:/home/planet
     concurrency:
-      group: ${{ github.workflow }}-compare-subways-${{ github.event.pull_request.number || github.ref }}
+      group: ${{ github.workflow }}-mapgen-subways-${{ github.event.pull_request.number || github.ref }}
       cancel-in-progress: true
     steps:
       - name: Download Planet File if Absent
@@ -92,8 +87,8 @@ jobs:
           mv planet-latest-new.osm.pbf planet-latest.osm.pbf
           echo "DONE"
 
-  compare-subways:
-    name: Compare Subways
+  process-subways:
+    name: Process and Compare Subways
     runs-on: mapfilemaker
     needs:
       - clone-repos
@@ -103,14 +98,14 @@ jobs:
         - /mnt/4tbexternal/:/mnt/4tbexternal/
         - /mnt/4tbexternal/osm-planet:/home/planet
     concurrency:
-      group: ${{ github.workflow }}-compare-subways-${{ github.event.pull_request.number || github.ref }}
+      group: ${{ github.workflow }}-mapgen-subways-${{ github.event.pull_request.number || github.ref }}
       cancel-in-progress: true
     steps:
       - uses: actions/cache@v4
         with:
           path: "~"
           key: cache-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Compare Subways
+      - name: Process Subways
         shell: bash
         run: |
           cd ~/comaps/
@@ -121,7 +116,6 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          #set -e
           cd ~/subways
           if [ -f "$HTML_DIR/cities.txt" ]; then
             echo "Comparing local validation with VK's validation..."
@@ -135,8 +129,6 @@ jobs:
       - name: Compare Google Sheets Data
         shell: bash
         run: |
-          #set -e
-
           cd ~/subways
 
           # Download the Google Sheets data
@@ -155,7 +147,6 @@ jobs:
 
           if diff -u /tmp/local_normalized.csv /tmp/google_normalized.csv > /tmp/full_diff.txt; then
             echo "No differences found! Local Rapid.csv is in sync with Google Sheets."
-            #exit 0
           else
             cat /tmp/full_diff.txt
 
@@ -163,5 +154,4 @@ jobs:
             echo "The above diff can be saved as a patch and applied with:"
             echo "  patch source_data/Rapid.csv < patch-file"
             echo "or by manually reviewing and applying the changes."
-            #exit 1
           fi
