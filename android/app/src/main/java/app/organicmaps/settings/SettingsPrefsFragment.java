@@ -236,12 +236,12 @@ public class SettingsPrefsFragment extends BaseXmlSettingsFragment implements La
   private void initOnlyUseSysLangsInTheirRegionCallbacks()
   {
     final Preference pref = getPreference(getString(R.string.pref_set_only_use_syslangs_in_their_region));
-    ((TwoStatePreference) pref).setChecked(Config.isOnlyUseSysLangsInTheirRegion());
+    ((TwoStatePreference) pref).setChecked(Config.isAlternativeMapLanguageHandling());
     pref.setOnPreferenceChangeListener((preference, newValue) -> {
-      final boolean oldVal = Config.isOnlyUseSysLangsInTheirRegion();
+      final boolean oldVal = Config.isAlternativeMapLanguageHandling();
       final boolean newVal = (Boolean) newValue;
       if (oldVal != newVal)
-        Config.setOnlyUseSysLangsInTheirRegion(newVal);
+        Config.setAlternativeMapLanguageHandling(newVal);
 
       return true;
     });

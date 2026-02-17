@@ -451,12 +451,12 @@ void Framework::Get3dMode(bool & allow3d, bool & allow3dBuildings)
 
 void Framework::SetMapLanguageCode(std::string const & languageCode)
 {
-  m_work.SetMapLanguageCode(languageCode);
+  m_work.SetCustomMapLanguageCode(languageCode);
 }
 
 std::string Framework::GetMapLanguageCode()
 {
-  return m_work.GetMapLanguageCode();
+  return m_work.GetCustomMapLanguageCode().value_or("auto");
 }
 
 void Framework::SetChoosePositionMode(ChoosePositionMode mode, bool isBusiness, m2::PointD const * optionalPosition)

@@ -108,21 +108,14 @@ JNIEXPORT void JNICALL Java_app_organicmaps_sdk_util_Config_nativeSetLargeFontsS
   frm()->SetLargeFontsSize(value);
 }
 
-JNIEXPORT jboolean JNICALL Java_app_organicmaps_sdk_util_Config_nativeGetOnlyUseSysLangsInTheirRegion(JNIEnv * env,
-                                                                                                      jclass thiz)
+JNIEXPORT jboolean JNICALL Java_app_organicmaps_sdk_util_Config_nativeGetAlternativeMapLanguageHandling(JNIEnv * env, jclass thiz)
 {
-  bool enabled = true;
-  UNUSED_VALUE(settings::Get(settings::kMapLanguageLimitAlternativesToLocal, enabled));
-  return enabled;
+  return frm()->GetAlternativeMapLanguageHandling();
 }
 
-JNIEXPORT void JNICALL Java_app_organicmaps_sdk_util_Config_nativeSetOnlyUseSysLangsInTheirRegion(JNIEnv * env,
-                                                                                                  jclass thiz,
-                                                                                                  jboolean value)
+JNIEXPORT void JNICALL Java_app_organicmaps_sdk_util_Config_nativeSetAlternativeMapLanguageHandling(JNIEnv * env, jclass thiz, jboolean value)
 {
-  settings::Set(settings::kMapLanguageLimitAlternativesToLocal, static_cast<bool>(value));
-  // reload render
-  frm()->InvalidateRect(frm()->GetCurrentViewport());
+  frm()->SetAlternativeMapLanguageHandling(localisation::AlternativeMapLanguageHandling(static_cast<bool>(value)));
 }
 
 JNIEXPORT jboolean JNICALL Java_app_organicmaps_sdk_util_Config_nativeGetTransliteration(JNIEnv * env, jclass thiz)
