@@ -620,9 +620,7 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
     // avoid repetition
     final Map<String, CountryItem> uniqueItems = new LinkedHashMap<>();
     for (CountryItem ci : mItems)
-    {
       uniqueItems.putIfAbsent(ci.id, ci);
-    }
     mItems.clear();
     mItems.addAll(uniqueItems.values());
 
