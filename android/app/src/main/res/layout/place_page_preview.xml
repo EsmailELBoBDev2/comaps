@@ -250,7 +250,7 @@
 
       <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv__osm_description"
-        style="@style/MwmTextAppearance.PlacePage"
+        android:textAppearance="@style/MwmTextAppearance.PlacePage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
