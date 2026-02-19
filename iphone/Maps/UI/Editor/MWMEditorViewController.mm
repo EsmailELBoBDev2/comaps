@@ -89,7 +89,7 @@ void cleanupAdditionalLanguages(std::vector<osm::LocalizedName> const & names,
   base::EraseIf(newAdditionalLanguages, [&names](NSInteger x)
                 {
                   auto it = find_if(names.begin(), names.end(),
-                                    [x](osm::LocalizedName const & name) { return name.m_code == x; });
+                                    [x](osm::LocalizedName const & name) { return name.m_languageIndex == x; });
                   return it != names.end();
                 });
 }
@@ -554,9 +554,9 @@ void registerCellsForTableView(std::vector<MWMEditorCellID> const & cells, UITab
     if (indexPath.row < localizedNames.size())
     {
       osm::LocalizedName const & name = localizedNames[indexPath.row];
-      NSString * langName = indexPath.row == localisation::kDefaultNameIndex ? L(@"editor_default_language_hint") : ToNSString(name.m_langName);
+      NSString * langName = indexPath.row == localisation::kDefaultNameIndex ? L(@"editor_default_language_hint") : ToNSString(name.m_languageName);
       [tCell configWithDelegate:self
-                       langCode:name.m_code
+                       langCode:name.m_languageIndex
                        langName:langName
                            name:@(name.m_name.c_str())
                    errorMessage:L(@"error_enter_correct_name")

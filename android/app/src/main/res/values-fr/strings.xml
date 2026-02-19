@@ -927,7 +927,6 @@
     <string name="download_resources_custom_url_error_scheme">Veuillez saisir une URL complète commençant par http:// ou https://</string>
     <string name="download_resources_custom_url_message">Serveur pour télécharger les cartes. Laissez vide pour utiliser le serveur par défaut CoMaps.</string>
     <string name="pref_maplanguage_local">Langue locale</string>
-    <string name="limit_map_language_alternatives_to_local">N\'utilisez que les autres langues système de leur région.</string>
     <string name="pref_speedlimit_title">Afficher les limites de vitesse</string>
     <string name="location_privacy_info">Les applications reçoivent des données de localisation provenant du service de localisation de votre système d\'exploitation, qui peut partager votre position avec Google et/ou le fabricant de votre appareil. Pour éviter cela, utilisez un système d\'exploitation Android préservant la confidentialité.</string>
     <string name="location_privacy">Confidentialité relative à la localisation</string>

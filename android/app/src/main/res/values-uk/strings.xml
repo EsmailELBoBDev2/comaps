@@ -922,7 +922,6 @@
     <string name="download_resources_custom_url_title">Власний сервер мап</string>
     <string name="download_resources_custom_url_message">Змінити типовий сервер для завантаження мап. Залиште порожнім, аби використовувати стандартний сервер CoMaps.</string>
     <string name="download_resources_custom_url_error_scheme">Введіть URL-адресу, що починається з http:// або https://</string>
-    <string name="limit_map_language_alternatives_to_local">Використовуйте інші системні мови лише у їхньому регіоні</string>
     <string name="pref_backup_now_summary_failed">Помилка резервного копіювання</string>
     <string name="route_type">Тип маршруту</string>
     <string name="pedestrian">Пішохід</string>

@@ -56,7 +56,7 @@ enum AlternativeMapLanguageHandling : uint8_t
 };
 
 // Order is important. Any reordering breaks backward compatibility.
-// Languages with code |StringUtf8Multilang::kReservedLang| may be used for another language after
+// Languages with code |kReservedLanguageCode| may be used for another language after
 // several data releases.
 // Note that it's not feasible to increase languages number here due to current encoding (6 bit to
 // store language code).

@@ -919,5 +919,4 @@
     <string name="navigation_start_tts_disabled_message">Ääniohjeistukset pois käytöstä: TTS-moottori ei saatavilla</string>
     <string name="charge_socket_schuko">EU</string>
     <string name="pref_speedlimit_title">Näytä nopeusrajoitukset</string>
-    <string name="limit_map_language_alternatives_to_local">Käytä vain muita järjestelmän kieliä niiden alueilla</string>
 </resources>

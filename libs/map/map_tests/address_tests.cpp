@@ -37,7 +37,8 @@ void TestAddress(ReverseGeocoder & coder, ms::LatLon const & ll, std::string_vie
 void TestAddress(ReverseGeocoder & coder, std::shared_ptr<MwmInfo> mwmInfo, ms::LatLon const & ll,
                  StringUtf8Multilang const & streetNames, std::string const & houseNumber)
 {
-  //TestAddress(coder, ll, out.primary, houseNumber);
+  // TODO: Update to something without `out`, probaly `localisation::TranslatedFeatureName()`
+  // TestAddress(coder, ll, out.primary, houseNumber);
 }
 
 UNIT_TEST(ReverseGeocoder_Smoke)

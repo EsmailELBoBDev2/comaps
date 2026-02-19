@@ -920,7 +920,6 @@
     <string name="download_resources_custom_url_summary_none">Није постављено</string>
     <string name="download_resources_custom_url_error_scheme">Унесите пуну УРЛ адресу која почиње са https:// и која се завршава са /</string>
     <string name="pref_maplanguage_local">Локални језик</string>
-    <string name="limit_map_language_alternatives_to_local">Ограничите алтернативне језике на локалне</string>
     <string name="location_privacy_info">Апликације добијају податке о локацији од услуге локације вашег ОС-а, која може да дели вашу локацију са Гугл-ом и/или продавцем вашег уређаја. Користите Андроид ОС који чува приватност да бисте ово избегли.</string>
     <string name="location_privacy">Локацијска приватност</string>
     <string name="pref_speedlimit_title">Прикажи ограничења брзине</string>

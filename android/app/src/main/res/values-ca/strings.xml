@@ -926,7 +926,6 @@
     <string name="download_resources_custom_url_summary_none">No establert</string>
     <string name="download_resources_custom_url_error_scheme">Per favor introdueix una URL que comence amb http:// o https://</string>
     <string name="pref_maplanguage_local">Idioma Local</string>
-    <string name="limit_map_language_alternatives_to_local">Fes servir altres idiomes del sistema només en la seua regió</string>
     <string name="location_privacy_info">Les aplicacions reben informació d\'ubicació del servei de localització del sistema, que pot compartir la teva ubicació amb Google i/o el proveïdor del teu dispositiu. Fes servir un SO Android respectuós amb la privacitat per evitar-ho.</string>
     <string name="location_privacy">Privacitat de Localització</string>
     <string name="pref_speedlimit_title">Mostra límits de velocitat</string>

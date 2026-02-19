@@ -663,7 +663,6 @@
     <string name="download_resources_custom_url_summary_none">Ni nastavljeno</string>
     <string name="download_resources_custom_url_error_scheme">Vnesite polni URL, ki se začne z http:// ali https://</string>
     <string name="pref_maplanguage_local">Krajevni jezik</string>
-    <string name="limit_map_language_alternatives_to_local">Druge sistemske jezike uporabljaj le v njihovem območju</string>
     <string name="location_privacy_info">Orodja prejemajo podatke o trenutnem položaju od položajnih storitev vašega operacijskega sistema, ki lahko vaš položaj deli z Googlom in/ali proizvajalcem vaše naprave. Da se temu izognete, uporabljajte tak operacijski sistem Android, ki varuje zasebnost.</string>
     <string name="location_privacy">Zasebnost položaja</string>
     <string name="pref_speedlimit_title">Pokaži hitrostne omejitve</string>

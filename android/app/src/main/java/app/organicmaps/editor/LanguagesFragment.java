@@ -1,6 +1,7 @@
 package app.organicmaps.editor;
 
 import static app.organicmaps.sdk.editor.data.Language.DEFAULT_LANG_CODE;
+import static app.organicmaps.sdk.editor.data.Language.AUTO_LANG_CODE;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -84,6 +85,10 @@ public class LanguagesFragment extends BaseMwmRecyclerFragment<LanguagesAdapter>
       String localLanguageLabel = getString(R.string.pref_maplanguage_local);
       Language localLanguage = new Language(DEFAULT_LANG_CODE, localLanguageLabel);
       languages.add(0, localLanguage);
+
+      String autoLanguageLabel = getString(R.string.auto);
+      Language autoLanguage = new Language(AUTO_LANG_CODE, autoLanguageLabel);
+      languages.add(0, autoLanguage);
     }
 
     return new LanguagesAdapter(this, languages.toArray(new Language[languages.size()]));

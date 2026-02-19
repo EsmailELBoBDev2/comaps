@@ -472,6 +472,7 @@ void CheckPlace(Framework const & fm, std::shared_ptr<MwmInfo> const & mwmInfo, 
 {
   auto const info = fm.GetAddressAtPoint(mercator::FromLatLon(lat, lon));
 
+  // TODO: Update to something without `out`, probaly `localisation::TranslatedFeatureName()`
   //TEST_EQUAL(info.GetStreetName(), out.primary, ());
   TEST_EQUAL(info.GetHouseNumber(), houseNumber, ());
 }

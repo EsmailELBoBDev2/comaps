@@ -899,7 +899,6 @@
     <string name="download_resources_custom_url_summary_none">Não definido</string>
     <string name="download_resources_custom_url_error_scheme">Insira uma URL começando com http:// ou https://</string>
     <string name="pref_maplanguage_local">Linguagem Local</string>
-    <string name="limit_map_language_alternatives_to_local">Utilizar apenas outros idiomas do sistema em sua região</string>
     <string name="location_privacy_info">Os aplicativos usam dados de localização do serviço de localização, que podem compartilhar sua localização com o Google e/ou com o fabricante do seu dispositivo. Use um sistema Android que preserve a sua privacidade para evitar isso.</string>
     <string name="location_privacy">Privacidade da localização</string>
     <string name="pref_speedlimit_title">Mostrar limites de velocidade</string>

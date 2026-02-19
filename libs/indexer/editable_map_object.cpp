@@ -31,14 +31,14 @@ bool ExtractName(StringUtf8Multilang const & names, localisation::LanguageIndex 
 
   // Exclude languages that are already present.
   auto const it = base::FindIf(
-      result, [languageIndex](osm::LocalizedName const & localizedName) { return localizedName.m_code == languageIndex; });
+      result, [languageIndex](osm::LocalizedName const & localizedName) { return localizedName.m_languageIndex == languageIndex; });
 
   if (result.end() != it)
     return false;
 
   string_view name;
   names.GetString(languageIndex, name);
-  result.emplace_back(languageIndex, name);
+  result.emplace_back(languageIndex, std::string{name});
 
   return true;
 }
@@ -54,17 +54,17 @@ std::string GetCurrentDate()
 
 // LocalizedName -----------------------------------------------------------------------------------
 
-LocalizedName::LocalizedName(localisation::LanguageIndex const languageIndex, string_view name)
-  : m_code(languageIndex)
-  , m_lang(std::string_view{localisation::ConvertLanguageIndexToLanguageCode(languageIndex)})
-  , m_langName(std::string_view{localisation::GetLanguageNameByLanguageIndex(languageIndex)})
+LocalizedName::LocalizedName(localisation::LanguageIndex languageIndex, std::string name)
+  : m_languageIndex(languageIndex)
+  , m_languageCode(localisation::ConvertLanguageIndexToLanguageCode(languageIndex))
+  , m_languageName(localisation::GetLanguageNameByLanguageIndex(languageIndex))
   , m_name(name)
 {}
 
-LocalizedName::LocalizedName(localisation::LanguageCode const & languageCode, string const & name)
-  : m_code(localisation::ConvertLanguageCodeToLanguageIndex(languageCode))
-  , m_lang(std::string_view{localisation::ConvertLanguageIndexToLanguageCode(m_code)})
-  , m_langName(std::string_view{localisation::GetLanguageNameByLanguageIndex(m_code)})
+LocalizedName::LocalizedName(localisation::LanguageCode const & languageCode, std::string const & name)
+  : m_languageIndex(localisation::ConvertLanguageCodeToLanguageIndex(languageCode))
+  , m_languageCode(languageCode)
+  , m_languageName(localisation::GetLanguageNameByLanguageCode(languageCode))
   , m_name(name)
 {}
 
@@ -146,15 +146,15 @@ NamesDataSource EditableMapObject::GetNamesDataSource()
   if (!mwmInfo)
     return NamesDataSource();
 
-  vector<int8_t> mwmLanguages;
+  vector<localisation::LanguageIndex> mwmLanguages;
   mwmInfo->GetRegionData().GetLanguages(mwmLanguages);
 
-  return GetNamesDataSource(m_name, mwmLanguages, localisation::GetMapLanguageIndex());
+  return GetNamesDataSource(m_name, mwmLanguages);
 }
 
 // static
 NamesDataSource EditableMapObject::GetNamesDataSource(StringUtf8Multilang const & source,
-                                                      vector<int8_t> const & mwmLanguages, int8_t const userLangCode)
+                                                      vector<localisation::LanguageIndex> const & mwmLanguages)
 {
   NamesDataSource result;
   auto & names = result.names;
@@ -165,15 +165,15 @@ NamesDataSource EditableMapObject::GetNamesDataSource(StringUtf8Multilang const 
     ++mandatoryCount;
 
   // Push other languages.
-  source.ForEach([&names, mandatoryCount](int8_t const code, string_view name)
+  source.ForEach([&names, mandatoryCount](localisation::LanguageIndex const languageIndex, string_view name)
   {
     auto const mandatoryNamesEnd = names.begin() + mandatoryCount;
     // Exclude languages which are already in container (languages with top priority).
     auto const it = find_if(names.begin(), mandatoryNamesEnd,
-                            [code](LocalizedName const & localizedName) { return localizedName.m_code == code; });
+                            [languageIndex](LocalizedName const & localizedName) { return localizedName.m_languageIndex == languageIndex; });
 
     if (mandatoryNamesEnd == it)
-      names.emplace_back(code, name);
+      names.emplace_back(languageIndex, string{name});
   });
 
   return result;
@@ -232,10 +232,10 @@ void EditableMapObject::SetName(StringUtf8Multilang const & name)
   m_name = name;
 }
 
-void EditableMapObject::SetName(string_view name, int8_t langCode)
+void EditableMapObject::SetName(string_view name, localisation::LanguageIndex languageIndex)
 {
   strings::Trim(name);
-  m_name.AddString(langCode, name);
+  m_name.AddString(languageIndex, name);
 }
 
 // static

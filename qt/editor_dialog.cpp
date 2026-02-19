@@ -56,11 +56,11 @@ EditorDialog::EditorDialog(QWidget * parent, osm::EditableMapObject & emo) : QDi
     int namesRow = 0;
     for (auto const & ln : emo.GetNamesDataSource().names)
     {
-      namesGrid->addWidget(new QLabel(QString::fromUtf8(ln.m_lang.data(), ln.m_lang.size())), namesRow, 0);
+      namesGrid->addWidget(new QLabel(QString::fromUtf8(ln.m_languageCode.data(), ln.m_languageCode.size())), namesRow, 0);
       QLineEdit * lineEditName = new QLineEdit(QString::fromStdString(ln.m_name));
       lineEditName->setReadOnly(!emo.IsNameEditable());
-      std::string_view const code = localisation::ConvertLanguageIndexToLanguageCode(ln.m_code);
-      lineEditName->setObjectName(QString::fromUtf8(code.data(), code.size()));
+      std::string_view const languageIndex = localisation::ConvertLanguageIndexToLanguageCode(ln.m_languageIndex);
+      lineEditName->setObjectName(QString::fromUtf8(languageIndex.data(), languageIndex.size()));
       namesGrid->addWidget(lineEditName, namesRow++, 1);
     }
 

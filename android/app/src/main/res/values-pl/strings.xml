@@ -931,7 +931,6 @@
     <string name="place_page_too_old_to_edit">Edytowanie OpenStreetMap jest wyłączone, ponieważ dane mapy są zbyt stare.</string>
     <string name="advanced">Zaawansowane</string>
     <string name="pref_maplanguage_local">Język lokalny</string>
-    <string name="limit_map_language_alternatives_to_local">Używaj innych języków systemowych tylko w ich regionach</string>
     <string name="pref_speedlimit_title">Pokazuj ograniczenia prędkości</string>
     <string name="location_privacy_info">Aplikacje otrzymują dane dotyczące lokalizacji z usługi lokalizacyjnej systemu operacyjnego, która może udostępniać Twoją lokalizację firmie Google i/lub producentowi urządzenia. Aby tego uniknąć, używaj systemu operacyjnego zapewniającego ochronę prywatności.</string>
     <string name="location_privacy">Lokalizacja Prywatność</string>

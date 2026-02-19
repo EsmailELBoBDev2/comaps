@@ -838,7 +838,6 @@
     <string name="editor_socket">عدِّل المقبس</string>
     <string name="edit_socket_info_tooltip">أنشئ مقابس جديدة أو عدِّل المقابس الموجودة.</string>
     <string name="pref_backup_now_summary">أنشئ نُسخة احتياطية فورًا</string>
-    <string name="limit_map_language_alternatives_to_local">استخدم لغات النظام الأخرى فقط في منطقتها</string>
     <string name="about_headline">مشروع مفتوح مدعوم من المجتمع</string>
     <string name="mb_downloaded">%1$d م.بايت / %2$d م.بايت</string>
     <string name="google_play_services">خدمة جوجل المدمجة لتحديد الموقع</string>

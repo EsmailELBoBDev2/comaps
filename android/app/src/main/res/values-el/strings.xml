@@ -878,7 +878,6 @@
     <string name="download_resources_custom_url_summary_none">Δεν έχει οριστεί</string>
     <string name="download_resources_custom_url_title">Προσαρμοσμένος διακομιστής χάρτη</string>
     <string name="download_resources_custom_url_message">Παρακάμπτει τον προεπιλεγμένο διακομιστή λήψης χάρτη για τις λήψεις χαρτών. Αφήστε το κενό για να χρησιμοποιήσετε τον προεπιλεγμένο διακομιστή του CoMaps.</string>
-    <string name="limit_map_language_alternatives_to_local">Να χρησιμοποιούνται μόνο άλλες γλώσσες του συστήματος για την περιοχή τους</string>
     <string name="navigation_start_tts_message">"Εκκίνηση Πλοήγησης, γλώσσα φωνητικών οδηγιών: "</string>
     <string name="navigation_start_tts_disabled_message">Φωνητικές οδηγίες απενεργοποιημένες: δεν υπάρχει διαθέσιμη μηχανή TTS</string>
     <string name="pref_tts_no_system_tts_short">Δεν βρέθηκε μηχανή κείμενο-σε-ομιλία, ελέγξτε τις ρυθμίσεις της εφαρμογής</string>

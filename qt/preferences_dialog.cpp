@@ -132,18 +132,19 @@ PreferencesDialog::PreferencesDialog(QWidget * parent, Framework & framework)
       languagesList << QString::fromStdString(pair.first);
       sortedIndices.push_back(pair.second + 2);
     }
-
     mapLanguageComboBox->addItems(languagesList);
-    std::optional<std::string> const mapLanguageCode = framework.GetCustomMapLanguageCode();
-    int8_t languageIndex = localisation::kDefaultNameIndex;
-    if (mapLanguageCode.has_value())
-    {
-      int8_t mapLanguageIndex = localisation::ConvertLanguageCodeToLanguageIndex(mapLanguageCode.value());
-      if (mapLanguageIndex != localisation::kUnsupportedLanguageIndex)
-        languageIndex = mapLanguageIndex;
-    }
 
-    mapLanguageComboBox->setCurrentText(QString::fromStdString(localisation::GetLanguageNameByLanguageIndex(languageIndex)));
+    std::optional<std::string> const mapLanguageCode = framework.GetCustomMapLanguageCode();
+    int8_t languageIndex = localisation::kUnsupportedLanguageIndex;
+    if (mapLanguageCode.has_value())
+      languageIndex = localisation::ConvertLanguageCodeToLanguageIndex(mapLanguageCode.value());
+    if (languageIndex == localisation::kUnsupportedLanguageIndex)
+      mapLanguageComboBox->setCurrentText(QString::fromStdString("Auto"));
+    else if (languageIndex == localisation::kDefaultNameIndex)
+      mapLanguageComboBox->setCurrentText(QString::fromStdString("Local Language"));
+    else
+      mapLanguageComboBox->setCurrentText(QString::fromStdString(localisation::GetLanguageNameByLanguageIndex(languageIndex)));
+
     connect(mapLanguageComboBox, &QComboBox::currentIndexChanged, [&framework, sortedIndices, supportedLanguages](int index) {
       if (index == 0)
         framework.SetCustomMapLanguageCode();

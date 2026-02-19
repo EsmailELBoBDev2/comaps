@@ -928,7 +928,6 @@
     <string name="download_resources_custom_url_summary_none">No establecido</string>
     <string name="download_resources_custom_url_error_scheme">Por favor introduce un URL empezando con http:// o https://</string>
     <string name="pref_maplanguage_local">Idioma local</string>
-    <string name="limit_map_language_alternatives_to_local">Usar otros idiomas del sistema solo en sus regiones</string>
     <string name="rooms">%s habitaciones</string>
     <string name="mb_downloaded">%1$d MB / %2$d MB</string>
     <string name="pref_speedlimit_title">Mostrar límites de velocidad</string>

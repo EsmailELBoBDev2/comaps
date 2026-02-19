@@ -11,6 +11,7 @@ public class Language
 {
   // localisation::GetLanguageNameByLanguageIndex(localisation::kDefaultNameIndex).
   public static final String DEFAULT_LANG_CODE = "default";
+  public static final String AUTO_LANG_CODE = "auto";
 
   public final String code;
   public final String name;

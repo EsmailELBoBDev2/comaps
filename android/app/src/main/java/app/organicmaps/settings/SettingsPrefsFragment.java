@@ -2,7 +2,9 @@ package app.organicmaps.settings;
 
 import static app.organicmaps.leftbutton.LeftButtonsHolder.DISABLE_BUTTON_CODE;
 import static app.organicmaps.sdk.editor.data.Language.DEFAULT_LANG_CODE;
+import static app.organicmaps.sdk.editor.data.Language.AUTO_LANG_CODE;
 
+import android.util.Log;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -68,7 +70,7 @@ public class SettingsPrefsFragment extends BaseXmlSettingsFragment implements La
     initAutoDownloadPrefsCallbacks();
     initLargeFontSizePrefsCallbacks();
     initTransliterationPrefsCallbacks();
-    initOnlyUseSysLangsInTheirRegionCallbacks();
+    initAlternativeMapLanguageHandlingCallbacks();
     init3dModePrefsCallbacks();
     initPerspectivePrefsCallbacks();
     initAutoZoomPrefsCallbacks();
@@ -143,7 +145,11 @@ public class SettingsPrefsFragment extends BaseXmlSettingsFragment implements La
   {
     final Preference pref = getPreference(getString(R.string.pref_map_locale));
     String mapLanguageCode = MapLanguageCode.getMapLanguageCode();
-    if (mapLanguageCode.equals(DEFAULT_LANG_CODE))
+    if (mapLanguageCode.equals(AUTO_LANG_CODE))
+    {
+      pref.setSummary(R.string.auto);
+    }
+    else if (mapLanguageCode.equals(DEFAULT_LANG_CODE))
     {
       pref.setSummary(R.string.pref_maplanguage_local);
     }
@@ -233,16 +239,16 @@ public class SettingsPrefsFragment extends BaseXmlSettingsFragment implements La
     });
   }
 
-  private void initOnlyUseSysLangsInTheirRegionCallbacks()
+  private void initAlternativeMapLanguageHandlingCallbacks()
   {
-    final Preference pref = getPreference(getString(R.string.pref_set_only_use_syslangs_in_their_region));
-    ((TwoStatePreference) pref).setChecked(Config.isAlternativeMapLanguageHandling());
-    pref.setOnPreferenceChangeListener((preference, newValue) -> {
-      final boolean oldVal = Config.isAlternativeMapLanguageHandling();
-      final boolean newVal = (Boolean) newValue;
-      if (oldVal != newVal)
-        Config.setAlternativeMapLanguageHandling(newVal);
+    final ListPreference pref = getPreference(getString(R.string.pref_alt_map_lang_handling_key));
 
+    pref.setValue(String.valueOf(Config.getAlternativeMapLanguageHandling()));
+    pref.setSummary(pref.getEntry());
+    pref.setOnPreferenceChangeListener((preference, newValue) -> {
+      final int alternativeMapLanguageHandling = Integer.parseInt((String) newValue);
+      Config.setAlternativeMapLanguageHandling(alternativeMapLanguageHandling);
+      preference.setSummary(pref.getEntries()[alternativeMapLanguageHandling]);
       return true;
     });
   }

@@ -903,7 +903,6 @@
     <string name="download_resources_custom_url_summary_none">Nenurodytas</string>
     <string name="download_resources_custom_url_error_scheme">Įveskite URL adresą, prasidedantį „http://“ arba „https://“</string>
     <string name="pref_maplanguage_local">Vietos kalba</string>
-    <string name="limit_map_language_alternatives_to_local">Kitas sistemos kalbas naudoti tik jų regione</string>
     <string name="location_privacy_info">Programos vietovės duomenis gauna iš jūsų įrenginio operacinės sistemos vietovės tarnybos, kuri šiuos duomenis gali taip pat bendrinti su „Google“ ir/ar jūsų įrenginio gamintoju. Jei norite to išvengti, naudokitės privatumą saugančia „Android“ operacinės sistemos atmaina.</string>
     <string name="location_privacy">Vietovės duomenų privatumas</string>
     <string name="pref_speedlimit_title">Rodyti greičio ribojimus</string>

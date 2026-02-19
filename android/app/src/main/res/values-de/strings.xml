@@ -921,7 +921,6 @@
     <string name="download_resources_custom_url_message">Standardserver für Kartendownloads überschreiben. Leer lassen, um den CoMaps-Standardserver zu nutzen.</string>
     <string name="download_resources_custom_url_error_scheme">Bitte eine vollständige URL eingeben, die mit https:// oder http:// anfängt</string>
     <string name="pref_maplanguage_local">Lokale Sprache</string>
-    <string name="limit_map_language_alternatives_to_local">Weitere Systemsprachen nur in deren jeweiligen Region verwenden</string>
     <string name="location_privacy_info">Apps erhalten Standortdaten von deinem Standortdienst des Betriebssystems, der deinen Standort möglicherweise an Google und/oder deinen Gerätehersteller weitergibt. Verwende ein datenschutzkonformes Android-Betriebssystem, um dies zu vermeiden.</string>
     <string name="location_privacy">Standort-Datenschutz</string>
     <string name="pref_speedlimit_title">Zeige Geschwindigkeitsbegrenzungen an</string>

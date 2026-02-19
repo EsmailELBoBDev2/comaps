@@ -96,9 +96,9 @@ public:
     while (i < sz)
     {
       size_t const next = GetNextIndex(i);
-      int8_t const code = m_s[i] & kLangCodeMask;
-      if (localisation::ConvertLanguageIndexToLanguageCode(code) != localisation::kReservedLanguageCode &&
-          wrapper(code, std::string_view(m_s).substr(i + 1, next - i - 1)) == base::ControlFlow::Break)
+      localisation::LanguageIndex const languageIndex = m_s[i] & kLangCodeMask;
+      if (localisation::ConvertLanguageIndexToLanguageCode(languageIndex) != localisation::kReservedLanguageCode &&
+          wrapper(languageIndex, std::string_view(m_s).substr(i + 1, next - i - 1)) == base::ControlFlow::Break)
       {
         break;
       }

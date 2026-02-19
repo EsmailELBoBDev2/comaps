@@ -921,7 +921,6 @@
     <string name="download_resources_custom_url_summary_none">Niet ingesteld</string>
     <string name="download_resources_custom_url_error_scheme">Voer een URL in beginnend met http:// of https://</string>
     <string name="pref_maplanguage_local">Plaatselijke taal</string>
-    <string name="limit_map_language_alternatives_to_local">Gebruik alleen andere systeemtalen in hun regio</string>
     <string name="location_privacy_info">Apps ontvangen locatiegegevens van uw OS-locatieservice die deze kunnen delen met Google en/of de leverancier van uw apparaat. Gebruik een privacyrespecterend Android OS om dit te voorkomen.</string>
     <string name="location_privacy">Privacy van locatie</string>
     <string name="pref_speedlimit_title">Snelheidslimieten tonen</string>

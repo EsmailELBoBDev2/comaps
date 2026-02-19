@@ -923,7 +923,6 @@
     <string name="download_resources_custom_url_message">覆寫下載地圖資料的預設地圖下載伺服器。留空則表示使用 CoMaps 預設伺服器。</string>
     <string name="download_resources_custom_url_summary_none">還沒設定</string>
     <string name="download_resources_custom_url_error_scheme">請輸入 http:// 或是 https:// 開頭的網址</string>
-    <string name="limit_map_language_alternatives_to_local">只有在他們的區域使用其他系統語言</string>
     <string name="building_route">建構導航…</string>
     <string name="route_not_started">還沒有開始導航</string>
     <string name="on_route">在路徑上</string>
