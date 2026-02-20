@@ -662,8 +662,7 @@ void Editor::UploadChanges(string const & oauthToken, ChangesetTags tags, Finish
             UpdateXMLFeatureTags(feature, journal, changeset);
 
             // Upload XMLFeature to OSM
-            LOG(LDEBUG, ("CREATE Feature (newEditor)", feature));
-            changeset.AddChangesetTag("info:new_editor", "yes");
+            LOG(LDEBUG, ("CREATE Feature", feature));
             if (!mergeSameLocation)
               changeset.Create(feature);
             else
@@ -680,8 +679,7 @@ void Editor::UploadChanges(string const & oauthToken, ChangesetTags tags, Finish
             UpdateXMLFeatureTags(feature, journal, changeset);
 
             // Upload XMLFeature to OSM
-            LOG(LDEBUG, ("MODIFIED Feature (newEditor)", feature));
-            changeset.AddChangesetTag("info:new_editor", "yes");
+            LOG(LDEBUG, ("MODIFIED Feature", feature));
             changeset.Modify(feature);
             break;
           }
