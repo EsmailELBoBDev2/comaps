@@ -329,7 +329,7 @@ class PlacePageInfoViewController: UIViewController {
     }
 
     if let charge = placePageInfoData.charge {
-        chargeView = createInfoItem(charge, icon: UIImage(named: "ic_placepage_charge"))
+        chargeView = createInfoItem(charge, icon: UIImage(systemName: "tag.fill"))
     }
 
     if let wheelchair = placePageInfoData.wheelchair {
