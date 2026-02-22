@@ -936,4 +936,8 @@
     <string name="rebuilding_route">Route opnieuw berekenen…</string>
     <string name="pref_openexternallinks_title">Links van derden automatisch openen</string>
     <string name="pref_openexternallinks_summary">Links van derden automatisch in CoMaps openen</string>
+    <string name="pref_alt_map_lang_handling">Alternatieve kaarttalen</string>
+    <string name="pref_alt_map_lang_handling_ignore_alternatives">Geen alternatieven gebruiken</string>
+    <string name="pref_alt_map_lang_handling_system_order">Gebruik in systeemvolgorde</string>
+    <string name="pref_alt_map_lang_handling_local_only">Voorkeur voor oorspronkelijk</string>
 </resources>

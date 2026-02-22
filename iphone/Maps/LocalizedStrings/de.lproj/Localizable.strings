@@ -1092,10 +1092,10 @@
 "edit_track" = "Track bearbeiten";
 "pref_mapappearance_title" = "Kartendarstellung";
 "pref_maplanguage_title" = "Karten-Sprache";
-"pref_alt_map_lang_handling" = "Alternative Karten-Sprachen";
-"pref_alt_map_lang_handling_ignore_alternatives" = "Keine Alternativen verwenden";
-"pref_alt_map_lang_handling_system_order" = "In Systemreihenfolge verwenden";
-"pref_alt_map_lang_handling_local_only" = "Bevorzugen und nur verwenden, wenn es lokale Sprache ist";
+"pref_alt_map_lang_handling" = "Alternative Kartensprachen";
+"pref_alt_map_lang_handling_ignore_alternatives" = "Verwende keine Alternativen";
+"pref_alt_map_lang_handling_system_order" = "Systemreihenfolge verwenden";
+"pref_alt_map_lang_handling_local_only" = "Bevorzugen und nur verwenden, wo es lokale Sprache ist";
 "transliteration_title_disabled_summary" = "Deaktiviert, wenn für die Karte immer die lokale Sprache verwendet wird";
 "pref_maplanguage_local" = "Lokale Sprache";
 "existence_confirmed_time_ago" = "Existenz bestätigt %@";

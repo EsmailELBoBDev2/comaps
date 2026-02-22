@@ -936,4 +936,8 @@
     <string name="mb_downloaded">%1$d MB / %2$d MB</string>
     <string name="pref_openexternallinks_title">Links Dritter automatisch öffnen</string>
     <string name="pref_openexternallinks_summary">Links Dritter standardmäßig in CoMaps öffnen</string>
+    <string name="pref_alt_map_lang_handling">Alternative Kartensprachen</string>
+    <string name="pref_alt_map_lang_handling_ignore_alternatives">Verwende keine Alternativen</string>
+    <string name="pref_alt_map_lang_handling_system_order">Systemreihenfolge verwenden</string>
+    <string name="pref_alt_map_lang_handling_local_only">Bevorzugen und nur verwenden, wo es lokale Sprache ist</string>
 </resources>

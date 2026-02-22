@@ -1104,7 +1104,7 @@
 "editor_place_doesnt_exist_description" = "Beschrijf hoe de plaats er nu uitziet om een foutbericht te sturen naar de OpenStreetMap-community";
 "avoid_steps" = "Trappen vermijden";
 "pref_alt_map_lang_handling" = "Alternatieve kaarttalen";
-"pref_alt_map_lang_handling_local_only" = "Gebruik lokale taal indien beschikbaar";
+"pref_alt_map_lang_handling_local_only" = "Voorkeur voor oorspronkelijk";
 "pref_alt_map_lang_handling_system_order" = "Gebruik in systeemvolgorde";
 "rooms" = "%@ kamers";
-"pref_alt_map_lang_handling_ignore_alternatives" = "Don't use alternatives";
+"pref_alt_map_lang_handling_ignore_alternatives" = "Geen alternatieven gebruiken";
