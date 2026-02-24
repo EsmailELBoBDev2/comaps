@@ -177,7 +177,7 @@ target_link_libraries(${PROJECT_NAME}
   openlocationcode
 )
 
-if(PLATFORM_DESKTOP)
+if(NOT (SKIP_TOOLS AND SKIP_TESTS))
   add_subdirectory(search_tests_support)
   add_subdirectory(search_quality)
 endif()
