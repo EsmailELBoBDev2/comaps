@@ -1690,7 +1690,7 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_Metadata)
     auto const mlStr = StringUtf8Multilang::FromBuffer(std::move(buffer));
 
     std::string_view desc;
-    mlStr.GetString(localisation::ConvertLanguageCodeToLanguageIndex(lang), desc);
+    mlStr.GetString(localisation::ConvertLanguageCodeToLanguageIndex(std::string{lang}), desc);
     return std::string(desc);
   };
 
