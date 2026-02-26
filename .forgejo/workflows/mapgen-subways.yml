@@ -74,17 +74,16 @@ jobs:
       group: ${{ github.workflow }}-mapgen-subways-${{ github.event.pull_request.number || github.ref }}
       cancel-in-progress: true
     steps:
-      - name: Checkout main repo
+      - name: Checkout subways and main repos
         shell: bash
         run: |
-          echo "Cloning $FORGEJO_SERVER_URL/$FORGEJO_REPOSITORY branch $FORGEJO_REF_NAME"
-          cd ~
-          git clone --depth 1 -b $FORGEJO_REF_NAME --single-branch $FORGEJO_SERVER_URL/$FORGEJO_REPOSITORY.git comaps
-      - name: Checkout subways repo
-        shell: bash
-        run: |
+          echo "Cloning comaps/subways repo branch ${{ inputs.subways-branch || 'master' }}"
           cd ~
           git clone --depth 1 -b ${{ inputs.subways-branch || 'master' }} --single-branch https://codeberg.org/comaps/subways.git
+          echo "Cloning $FORGEJO_SERVER_URL/$FORGEJO_REPOSITORY branch $FORGEJO_REF_NAME"
+          git clone --depth 1 --sparse --filter=blob:none -b $FORGEJO_REF_NAME --single-branch $FORGEJO_SERVER_URL/$FORGEJO_REPOSITORY.git comaps
+          cd comaps
+          git sparse-checkout set tools/unix/maps tools/python/transit data
 
       - name: Process Subways
         shell: bash
