@@ -1124,3 +1124,9 @@
 
 /* To indicate the number of rooms in hotel, hospital ... */
 "rooms" = "%@ rooms";
+
+/* Title of the general section in settings */
+"general" = "General";
+
+/* Title of the interface section in settings */
+"interface" = "Interface";
