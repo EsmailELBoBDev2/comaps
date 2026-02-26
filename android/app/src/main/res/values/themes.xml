@@ -26,7 +26,6 @@
     <item name="titleDialogTheme">@color/black_primary</item>
     <item name="textDialogTheme">@color/black_secondary</item>
     <item name="fullscreenDialogTheme">@style/MwmTheme.DialogFragment.Fullscreen</item>
-    <item name="colorControlNormal">?secondary</item>
     <item name="colorAccent">@color/base_accent</item>
     <item name="colorAccentTransparent">@color/base_accent_transparent</item>
     <item name="colorBtnHighlight">@color/white_38</item>
@@ -218,7 +217,6 @@
     <item name="colorPrimaryVariant">?statusBar</item>
     <item name="colorSecondary">@color/base_accent</item>
     <item name="clickableBackground">?selectableItemBackground</item>
-    <item name="colorControlNormal">@color/text_light_hint</item>
     <item name="android:windowIsFloating">false</item>
     <item name="android:textColorHint">@color/text_dark_hint</item>
     <item name="android:textViewStyle">@style/MwmWidget.TextView</item>

@@ -27,7 +27,6 @@
     <item name="titleDialogTheme">@color/white_primary</item>
     <item name="textDialogTheme">@color/white_secondary</item>
     <item name="fullscreenDialogTheme">@style/MwmTheme.DialogFragment.Fullscreen</item>
-    <item name="colorControlNormal">?secondary</item>
     <item name="colorAccent">@color/base_accent</item>
     <item name="colorAccentTransparent">@color/base_accent_transparent</item>
     <item name="colorBtnHighlight">@color/white_24</item>
@@ -157,7 +156,6 @@
   <style name="MwmTheme" parent="MwmTheme.Base"/>
 
   <style name="MwmTheme.DialogFragment.Fullscreen" parent="Theme.Material3.DayNight">
-    <item name="colorControlNormal">@color/text_dark_hint</item>
     <item name="android:textColorHint">@color/text_light_hint</item>
   </style>
 
