@@ -1,6 +1,5 @@
 #import "PlacePageData.h"
 
-#import "PlacePageButtonsData+Core.h"
 #import "PlacePagePreviewData+Core.h"
 #import "PlacePageInfoData+Core.h"
 #import "PlacePageBookmarkData+Core.h"

@@ -13,7 +13,7 @@
   self = [super init];
   if (self)
   {
-    if (!rawData.ShouldShowAddPlace() && !rawData.ShouldShowAddBusiness() && !rawData.ShouldShowEditPlace())
+    if (!rawData.ShouldShowAddPlace() && !rawData.ShouldShowEditPlace())
       return nil;
 
     switch (mapAttributes.nodeStatus)
@@ -21,7 +21,7 @@
     case MWMMapNodeStatusUndefined:
     case MWMMapNodeStatusOnDisk:
       _state = PlacePageOSMContributionStateCanAddOrEditPlace;
-      _showAddPlace = rawData.ShouldShowAddPlace() || rawData.ShouldShowAddBusiness();
+      _showAddPlace = rawData.ShouldShowAddPlace();
       _showEditPlace = rawData.ShouldShowEditPlace();
       break;
     case MWMMapNodeStatusDownloading:

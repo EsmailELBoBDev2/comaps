@@ -50,11 +50,13 @@ final class PlacePageOSMContributionViewController: UIViewController {
   private func setupView() {
     view.setStyle(.background)
 
-    osmHeaderView.iconButton.setImage(UIImage(resource: .osmLogo), for: .normal)
+    osmHeaderView.iconButton.isHidden = true
+    osmHeaderView.iconButton.widthAnchor.constraint(equalToConstant: Constants.horizontalPadding).isActive = true
     osmHeaderView.infoLabel.text = L("contribute_to_osm")
     osmHeaderView.infoLabel.setFontStyle(.regular16, color: .blackPrimary)
-    osmHeaderView.accessoryButton.setImage(UIImage(resource: .icQuestionmark), for: .normal)
+    osmHeaderView.accessoryButton.setImage(UIImage(systemName: "questionmark.circle"), for: .normal)
     osmHeaderView.accessoryButton.setStyle(.blue)
+    osmHeaderView.accessoryButton.contentHorizontalAlignment = .trailing
     osmHeaderView.accessoryImageTapHandler = { [weak self] in
       self?.onOSMInfo()
     }
@@ -77,7 +79,7 @@ final class PlacePageOSMContributionViewController: UIViewController {
       button.setTitle(disabledTitle, for: .disabled)
     }
     button.addTarget(self, action: action, for: .touchUpInside)
-    button.setStyle(.flatNormalGrayButtonBig)
+    button.setStyle(.ppButton)
     button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     button.titleLabel?.minimumScaleFactor = 0.5
     button.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -97,7 +99,7 @@ final class PlacePageOSMContributionViewController: UIViewController {
 
     NSLayoutConstraint.activate([
       osmHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      osmHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      osmHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.horizontalPadding),
       osmHeaderView.topAnchor.constraint(equalTo: view.topAnchor),
       osmHeaderView.heightAnchor.constraint(equalToConstant: Constants.headerHeight),
 
