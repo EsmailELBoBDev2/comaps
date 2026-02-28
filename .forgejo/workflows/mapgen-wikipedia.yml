@@ -11,7 +11,7 @@ on:
         description: 'Check out a different wikiparser repo branch?'
         required: true
         type: string
-        default: master
+        default: main
       force-download:
         description: 'Force download despite Wikimedia monthly limit?'
         required: true
@@ -106,7 +106,7 @@ jobs:
         shell: bash
         run: |
           cd ~
-          git clone --depth 1 -b ${{ inputs.wikiparser-branch || 'master' }} --single-branch https://codeberg.org/comaps/wikiparser.git
+          git clone --depth 1 -b ${{ inputs.wikiparser-branch || 'main' }} --single-branch https://codeberg.org/comaps/wikiparser.git
       - name: Update Wikipedia from Enterprise API
         shell: bash
         run: |
