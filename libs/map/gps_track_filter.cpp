@@ -6,6 +6,7 @@
 #include "platform/settings.hpp"
 
 #include "base/assert.hpp"
+#include "base/logging.hpp"
 #include "base/macros.hpp"
 #include "base/math.hpp"
 
