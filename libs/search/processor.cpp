@@ -248,6 +248,9 @@ void Processor::SetQuery(string const & query, bool categorialRequest /* = false
 
   FillCategories(tokenSlice, GetCategoryLocales(), m_categories, m_preferredTypes);
 
+  if (ftypes::IsNationalCuisineChecker::Instance()(m_preferredTypes))
+    m_isCategorialRequest = true;
+  
   if (!m_isCategorialRequest)
   {
     // Assign tokens and prefix to scorer.
@@ -804,8 +807,10 @@ void Processor::InitParams(QueryParams & params) const
   {
     ForEachCategoryTypeFuzzy(tokenSlice, [&c, &params](size_t i, uint32_t t)
     {
-      uint32_t const index = c.GetIndexForType(t);
-      params.GetTypeIndices(i).push_back(index);
+      if (!ftypes::IsNationalCuisineChecker::Instance()(t)) {
+        uint32_t const index = c.GetIndexForType(t);
+        params.GetTypeIndices(i).push_back(index);
+      }
     });
   }
 

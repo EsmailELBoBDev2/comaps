@@ -748,6 +748,53 @@ IsChristmasChecker::IsChristmasChecker()
   m_types.push_back(c.GetTypeByPath({"xmas", "tree"}));
 }
 
+IsNationalCuisineChecker::IsNationalCuisineChecker()
+{
+  Classificator const & c = classif();
+  m_types.push_back(c.GetTypeByPath({"cuisine", "vietnamese"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "turkish"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "thai"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "spanish"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "russian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "portuguese"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "polish"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "peruvian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "persian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "oriental"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "moroccan"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "mexican"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "mediterranean"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "malaysian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "malagasy"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "lebanese"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "lao"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "korean"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "japanese"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "italian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "irish"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "indonesian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "indian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "hungarian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "greek"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "german"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "georgian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "french"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "filipino"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "ethiopian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "croatian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "chinese"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "caribbean"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "brazilian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "bavarian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "balkan"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "asian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "austrian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "argentinian"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "arab"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "american"}));
+  m_types.push_back(c.GetTypeByPath({"cuisine", "african"}));
+}
+
 IsMotorwayJunctionChecker::IsMotorwayJunctionChecker()
 {
   m_types.push_back(classif().GetTypeByPath({"highway", "motorway_junction"}));

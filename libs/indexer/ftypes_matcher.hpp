@@ -526,6 +526,14 @@ public:
   DECLARE_CHECKER_INSTANCE(IsChristmasChecker);
 };
 
+class IsNationalCuisineChecker : public BaseChecker
+{
+  IsNationalCuisineChecker();
+
+public:
+  DECLARE_CHECKER_INSTANCE(IsNationalCuisineChecker);
+};
+
 class IsMotorwayJunctionChecker : public BaseChecker
 {
   IsMotorwayJunctionChecker();
