@@ -600,7 +600,7 @@
 "cuisine-georgian": "9Georgisches Essen|12Georgische Küche",
 "cuisine-french": "10Französisches Essen|13Französische Küche",
 "cuisine-filipino": "13Philippinisches Essen|16Philippinische Küche",
-"cuisine-ethiopian|@cuisine_all_asian": "9Äthiopisches Essen|12Äthiopische Küche",
+"cuisine-ethiopian": "9Äthiopisches Essen|12Äthiopische Küche",
 "cuisine-croatian": "9Kroatisches Essen|12Kroatische Küche",
 "cuisine-chinese|@cuisine_all_asian": "10Chinesisches Essen|13Chinesische Küche",
 "cuisine-caribbean": "9Karibisches Essen|12Karibische Küche",
@@ -611,5 +611,5 @@
 "cuisine-argentinian": "12Argentinisches Essen|15Argentinische Küche",
 "cuisine-arab": "8Arabisches Essen|11Arabische Küche",
 "cuisine-american": "14US-amerikanisches Essen|17US-amerikanische Küche",
-"cuisine-african|@cuisine_african": "11Afrikanisches Essen|14Afrikanische Küche"
+"cuisine-african": "11Afrikanisches Essen|14Afrikanische Küche"
 }

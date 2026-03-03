@@ -608,7 +608,7 @@
 "cuisine-georgian": "8Georgian Food|10Georgian Cuisine",
 "cuisine-french": "6French Food|8French Cuisine",
 "cuisine-filipino": "8Filipino Food|10Filipino Cuisine",
-"cuisine-ethiopian|@cuisine_all_asian": "9Ethiopian Food|11Ethiopian Cuisine",
+"cuisine-ethiopian": "9Ethiopian Food|11Ethiopian Cuisine",
 "cuisine-croatian": "8Croatian Food|10Croatian Cuisine",
 "cuisine-chinese|@cuisine_all_asian": "7Chinese Food|9Chinese Cuisine",
 "cuisine-caribbean": "9Caribbean Food|11Caribbean Cuisine",
@@ -620,5 +620,5 @@
 "cuisine-argentinian": "11Argentinian Food|13Argentinian Cuisine",
 "cuisine-arab": "4Arab Food|6Arab Cuisine",
 "cuisine-american": "8American Food|10American Cuisine",
-"cuisine-african|@cuisine_african": "7African Food|9African Cuisine"
+"cuisine-african": "7African Food|9African Cuisine"
 }
