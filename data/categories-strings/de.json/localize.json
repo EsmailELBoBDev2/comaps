@@ -611,8 +611,7 @@
 "cuisine-argentinian": "12Argentinisches Essen|15Argentinische Küche",
 "cuisine-arab": "8Arabisches Essen|11Arabische Küche",
 "cuisine-american": "14US-amerikanisches Essen|17US-amerikanische Küche",
-"cuisine-african|@cuisine_african": "11Afrikanisches Essen|14Afrikanische Küche",
+"cuisine-african": "11Afrikanisches Essen|14Afrikanische Küche",
 "shop-water|@category_water|@category_food|@shop": "4Trinkwasser|4Trinkwasserflaschen",
-"cuisine-bubble_tea": "3Bubble Tea|3Boba Tea",
-"cuisine-vegetarian|@cuisine_all_vegetarian": "Vegetarische Küche",
+"cuisine-bubble_tea": "3Bubble Tea|3Boba Tea"
 }
