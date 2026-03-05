@@ -45,7 +45,7 @@ env:
 
 jobs:
   copy-coasts:
-    # if: inputs.run-copy-coasts
+    if: inputs.run-copy-coasts
     name: Copy Previously Generated Coasts
     runs-on: mapfilemaker
     container:
@@ -102,7 +102,6 @@ jobs:
 
           if [ ! -f /home/planet/planet/planet-latest.osm.pbf ]; then
           echo "ERROR: No file at /home/planet/planet/planet-latest.osm.pbf"
-          ls -al /home/planet/
           ls -al /home/planet/planet/
           exit 1
           fi
@@ -133,7 +132,7 @@ jobs:
     if: inputs.run-mapgen
     name: Generate Maps
     runs-on: mapfilemaker
-    timeout-minutes: 40320
+    timeout-minutes: 3600 # 60hrs, usually takes ~35
     container:
       image: codeberg.org/comaps/maps_generator:f6d53d54f794
       volumes:
@@ -145,38 +144,38 @@ jobs:
       group: ${{ github.workflow }}-map-generator-${{ github.event.pull_request.number || github.ref }}
       cancel-in-progress: true
     steps:
-      - name: Make output folders if necessary
-        shell: bash
-        run: |
-          if [ ! -d /mnt/4tbexternal/osm-maps ]; then
-          mkdir -p /mnt/4tbexternal/osm-maps
-          fi
-      - name: Get SRTM if necessary
-        # TODO: it should be a separate step like Wiki or isolines
-        shell: bash
-        run: |
-          if [ ! -d /home/planet/SRTM-patched-europe/ ]; then
-          echo "ERROR: NO SRTM"
-          exit 1
-          fi
       - name: Checkout main repo
         shell: bash
         run: |
           echo "Cloning $FORGEJO_SERVER_URL/$FORGEJO_REPOSITORY branch $FORGEJO_REF_NAME"
           cd ~
           git clone --depth 1 --recurse-submodules --shallow-submodules -b $FORGEJO_REF_NAME --single-branch $FORGEJO_SERVER_URL/$FORGEJO_REPOSITORY.git comaps
-      - name: Run docker_maps_generator.sh
+      - name: Bootstrap boost C++ lib
         shell: bash
         run: |
+          cd ~/comaps/3party/boost/
+          ./bootstrap.sh
+          ./b2 headers
+      - name: Generate maps
+        shell: bash
+        run: |
+          if [ ! -d /home/planet/SRTM-patched-europe/ ]; then
+            # TODO: it should be a separate step like Wiki or isolines; still we don't check for isolines or wiki here?
+            echo "ERROR: NO SRTM"
+            exit 1
+          fi
+          mkdir -p /mnt/4tbexternal/osm-maps
           cd ~/comaps
           bash ./tools/unix/maps/docker_maps_generator.sh
-      - name: Symlink our maps to mapgen
+      - name: Publish (symlink) new maps to mapgen server
         shell: bash
         run: |
           buildfolder=$(find /mnt/4tbexternal/osm-maps/ -mindepth 1 -maxdepth 1 -iname "2*" -type d | sort -n -r | head -1 | cut -d/ -f5)
           builddate=$(find /mnt/4tbexternal/osm-maps/*/ -mindepth 1 -maxdepth 1 -iname "2*" -type d | sort -n -r | head -1 | cut -d/ -f6)
           cd /var/www/html/maps
           ln -s /mnt/4tbexternal/osm-maps/$buildfolder/$builddate $builddate
+          echo "All published maps versions:"
+          ls -lah ./
       - name: Sign countries.txt and copy to latest
         shell: bash
         run: |
