@@ -50,7 +50,7 @@ Here's a small template that can help writing feedback to first-time contributor
 
 > Thank you so much for this contribution - and welcome to CoMaps!
 > 
-> For CoMaps, we use the [_Developers Certficate of Origin_](https://codeberg.org/comaps/comaps/src/branch/main/docs/DCO.md) for contributors to certify that they wrote/have the right to submit their code to our project. This helps ensure that CoMaps can remain open source as it gives us some legal protection. You can sign it by signing your commit. The easiest way is to amend your existing commit with `git commit -s -m 'your commit message'`. If you are using the Codeberg interface you can also sign your commit by selection _"Add a Signed-off-by trailer by the committer at the end of the commit log message."_. 
+> For CoMaps, we use the [_Developers Certficate of Origin_](https://codeberg.org/comaps/Governance/src/branch/main/DCO.md) for contributors to certify that they wrote/have the right to submit their code to our project. This helps ensure that CoMaps can remain open source as it gives us some legal protection. You can sign it by signing your commit. The easiest way is to amend your existing commit with `git commit -s -m 'your commit message'`. If you are using the Codeberg interface you can also sign your commit by selection _"Add a Signed-off-by trailer by the committer at the end of the commit log message."_. 
 > 
 > If you haven't yet, you could also add yourself to our [CONTRIBUTOR](https://codeberg.org/comaps/comaps/src/branch/main/CONTRIBUTORS) file with your name or pseudonym if you want (that would also give you a chance to sign the commit if needed).
 

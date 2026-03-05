@@ -97,7 +97,7 @@ of the content, that you have the necessary rights to the content and that
 the content you contribute may be provided under the project license.
 
 To contribute you must assure that you have read and are following the rules
-stated in the [Developers Certificate of Origin](DCO.md) (DCO). We have
+stated in the [Developers Certificate of Origin](https://codeberg.org/comaps/Governance/src/branch/main/DCO.md) (DCO). We have
 borrowed this procedure from the Linux kernel project to improve tracking of
 who did what, and for legal reasons.
 
