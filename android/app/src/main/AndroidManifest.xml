@@ -397,7 +397,6 @@
         android:configChanges="orientation|screenLayout|screenSize"
         android:screenOrientation="fullUser"
         android:exported="true"
-        android:label="@string/settings"
         android:parentActivityName="app.organicmaps.MwmActivity" >
         <intent-filter>
             <action android:name="android.intent.action.APPLICATION_PREFERENCES"/>
@@ -407,7 +406,6 @@
 
     <activity
         android:name="app.organicmaps.help.HelpActivity"
-        android:label="@string/about_menu_title"
         android:parentActivityName="app.organicmaps.MwmActivity"
         android:exported="false">
       <intent-filter>
@@ -421,7 +419,6 @@
         android:theme="@style/MwmTheme.WindowBg"
         android:configChanges="orientation|screenLayout|screenSize"
         android:screenOrientation="fullUser"
-        android:label="@string/bookmarks_and_tracks"
         android:parentActivityName="app.organicmaps.MwmActivity"
         android:windowSoftInputMode="adjustResize" />
 
@@ -430,7 +427,6 @@
         android:theme="@style/MwmTheme.CardBg"
         android:configChanges="orientation|screenLayout|screenSize"
         android:screenOrientation="fullUser"
-        android:label="@string/bookmarks"
         android:parentActivityName="app.organicmaps.bookmarks.BookmarkCategoriesActivity"
         android:windowSoftInputMode="adjustResize" />
 
@@ -460,8 +456,7 @@
       android:label="@string/edit"
       android:windowSoftInputMode="stateVisible"/>
     <activity
-      android:name="app.organicmaps.widget.placepage.WikiArticleActivity"
-      android:label="@string/place_description_title"/>
+      android:name="app.organicmaps.widget.placepage.WikiArticleActivity"/>
     <activity
       android:name="app.organicmaps.settings.DrivingOptionsActivity"
       android:label="@string/driving_options_title"/>
