@@ -772,7 +772,7 @@
     <string name="browser_not_available">Przeglądarka internetowa jest niedostępna</string>
     <string name="volume">Głośność</string>
     <!-- Bookmark categories screen, button that opens share dialog to export all bookmarks and tracks -->
-    <string name="bookmarks_export">Eksportuj wszystkie miejsca i trasy</string>
+    <string name="bookmarks_export">Eksportuj wszystkie ulubione</string>
     <!-- button in (app) TTS settings, to open the system TTS settings. -->
     <string name="pref_tts_open_system_settings">Ustawienia systemu syntezy mowy</string>
     <!-- toast displayed when pressing the "Speech synthesis system settings" button, and the system settings aren't found. -->
@@ -944,4 +944,5 @@
     <string name="stop">Punkt pośredni</string>
     <string name="charge_socket_type1_combo">Typ 1 combo</string>
     <string name="route_recalculating">Ponowne obliczanie trasy…</string>
+    <string name="bookmark_share_email_subject">Przejdź pod %1$s lub skopiuj te koordynaty %2$s do swojej aplikacji mapowej, aby zobaczyć tę lokalizację.</string>
 </resources>
