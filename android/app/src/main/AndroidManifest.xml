@@ -64,10 +64,6 @@
     </intent>
   </queries>
 
-  <supports-screens
-      android:largeScreens="true"
-      android:xlargeScreens="true"/>
-
   <!-- "android:resizeableActivity" allows free-form and split-screen modes -->
   <application
       android:name=".MwmApplication"
