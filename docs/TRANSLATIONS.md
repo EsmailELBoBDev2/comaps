@@ -72,6 +72,12 @@ Searching for "магазин мебели" will also match the category name (1
 Exact threshold may be different for different languages. For Serbian, error correction
 kicks in only for 8-letter or longer words.
 
+#### Pre-defined UI search categories
+
+Categories explicitly listed in the "categories" tab in the app' search screen are special, because their exact displayed name is used as a search query.
+Hence a displayed name defined in UI strings should have a matching synonym defined in [Search keywords](https://translate.codeberg.org/projects/comaps/search-synonyms-aliases/).
+
+
 ### TTS translations
 
 #### Format string
@@ -120,6 +126,22 @@ When adding new strings, first check the base file of the component for existing
 1. Make sure Weblate has generated `strings.xml` for your language in this directory: [android/app/src/main/res/values\*/strings.xml][android_git]
 2. Add the language in `localeFilters` list in [build.gradle](https://codeberg.org/comaps/comaps/src/commit/e156d21eee7debd13ce9ec775cdcb264a97aad47/android/app/build.gradle#L258) (It's necessary to add the language in this file to be sure app translations and library translations are integrated in the app).
 3. Add the language in [locales_config.xml](https://codeberg.org/comaps/comaps/src/branch/main/android/app/src/main/res/xml/locales_config.xml) (It's necessary to allow users to change app language in Android settings on most recent devices).
+
+### Adding and changing search keywords
+
+Changing of existing category key in [data/categories-strings/en.json/localize.json](https://codeberg.org/comaps/comaps/src/branch/main/data/categories-strings/en.json/localize.json) (e.g. from `amenity-toilets` to `amenity-toilets|toilets-yes`) will effectively discard all existing original key translations in all other languages. So a key change had to be done for all languages simultaneously.
+
+Subtypes like `leisure-sports_centre-sport-golf` inherit parents' synonyms (i.e. `leisure-sports_centre`) only if their own synonyms are not defined explicitly.
+E.g. `leisure-swimming_pool-private` is defined explicitly to prevent matching by a `swimming pool` search.
+This also means that if e.g. `historic-memorial-statue` is to be matched by both specific (`statue`) and parent's (`monument`) keywords then the latter ones has to be duplicated explicitly or via use of `@` grouping.
+(see `generator/search_index_builder.cpp::GetCategoryTypes()`)
+
+Maps regeneration is required for new types added to [data/categories-strings/](https://codeberg.org/comaps/comaps/src/branch/main/data/categories-strings/) to become searchable.
+
+Some features won't be category-searchable unless they're tagged with a name, e.g. roads, rivers, chimneys (see `libs/search/types_skipper.cpp`).
+
+Categories listed in the app' search screen are hardcoded in `search/displayed_categories.cpp`.
+
 
 ## Maintaining
 
