@@ -37,7 +37,7 @@ Translations are managed through [Codeberg Translate][codeberg_translate]. Direc
 
 Android and iOS share most of the strings. Codeberg Translate automatically syncs translations between components (e.g., from Android to iOS and vice versa), so updating a string in one place is usually sufficient.
 
-### Categories strings
+### Search keywords
 
 Search categories synonyms/aliases usually should **not** just be direct translations from English, but rather adaptations as some specific terms could be used in your language to search for a certain feature and they might not have English equivalents. It's just a matter of "what would you type in the search in <language> to find shop=mall?" (As a concrete example, in regional German dialects, some types of corner/convenience stores or kiosks are called "Spätis". This has no direct translation into English, but would be a relevant search term when looking for `shop=kiosk`).
 
@@ -47,27 +47,26 @@ Syntax:
 
 - `|`   - used to separate synonyms.
 - `1`-`9` - a digit in front of a synonym indicate the number of characters that need to be typed in a search query to make this synonym appear in the list of suggestions. It is located immediately at the start of a synonym. At most one digit per synonym is allowed. This number doesn't need to be copied from the English string when translating.
- 
+
 It's also possible to use emoji codes as search synonyms, e.g. U+1F6B0 for potable water. You do not have to repeat/duplicate terms or emoji that are already listed in the English source, as those will always be searched as well.
 
 #### Example
 
-Look at the following category string: 
+Look at the following category string:
 
 `"shop-furniture|@shop": "4Furniture"`
 
 Here, `4Furniture` indicates that `Furniture` will be suggested after the user types `furn` and beyond.
-Furthermore, `@shop` in the key declaration indicate that translations from the `@shop` category will also be used to search for `shop=furniture` POIs. For this reason, translations that are already available in the categories keys do not have to be repeated.
+Furthermore, `@shop` in the key declaration indicate that translations from the `@shop` category (i.e. `shop`, `store`) will also be used to search for `shop-furniture` POIs. For this reason, translations that are already available in the categories keys do not have to be repeated.
 
 #### Typo matching
 
-For all languages with nominative and gentive cases (e.g. Slavic languagues like Russian,
+For all languages with nominative and genitive cases (e.g. Slavic languagues like Russian,
 Ukrainian, Belarus, Serbian), state _short_ nouns in nominative and genitive case, e.g. `Вино|вина`,
 so that both (e.g. Russian) searches for "вино" and "магазин вина" returns wine shops.
 
 For longer nouns (6 letters or longer) this is not necessary, because error correction
-can fix 1 or 2 letters, e.g `Мебель`
-
+can fix 1 or 2 letters, e.g `Мебель`.
 Searching for "магазин мебели" will also match the category name (1 letter difference).
 
 Exact threshold may be different for different languages. For Serbian, error correction
@@ -117,9 +116,14 @@ Android developers can utilize the built-in features of Android Studio to add an
 
 When adding new strings, first check the base file of the component for existing ones. If no relevant strings are found, look for them on the corresponding platform (e.g., iOS when adding Android strings or vice versa). To maintain consistency across platforms, always reuse the existing string key from the other platform with the same English base string.
 
+### Add support of new language in Android app
+1. Make sure Weblate has generated `strings.xml` for your language in this directory: [android/app/src/main/res/values\*/strings.xml][android_git]
+2. Add the language in `localeFilters` list in [build.gradle](https://codeberg.org/comaps/comaps/src/commit/e156d21eee7debd13ce9ec775cdcb264a97aad47/android/app/build.gradle#L258) (It's necessary to add the language in this file to be sure app translations and library translations are integrated in the app).
+3. Add the language in [locales_config.xml](https://codeberg.org/comaps/comaps/src/branch/main/android/app/src/main/res/xml/locales_config.xml) (It's necessary to allow users to change app language in Android settings on most recent devices).
+
 ## Maintaining
 
-## Under the Hood
+### Under the Hood
 
 Codeberg Translate maintains an internal copy of the Git repository. The repository URL can be found under _Manage → Repository Maintenance → Weblate Repository_. All components, except for the website, share the same internal Weblate repository.
 
@@ -144,17 +148,12 @@ The recommended approach for resolving conflicts is as follows:
 5. Now you can fetch the current state of the _Weblate_ remote: `git fetch weblate`
 6. To be able to rebase the Codeberg `main` into the Weblate one, you need to have an editable branch. You can create it using `git checkout -b resolve_translate weblate/main`. This creates a branch called `resolve_translate` off the Weblate remote, and also switches you to this newly created branch.
 7. You can now run `git rebase main`, to rebase the branch and resolve any conflicts that are between the two. (**Note: Make sure to run this command from your `resolve_translate` branch**)
-8. Once you have resolved the conflicts, you can push the `resolve_translate` branch to Codeberg: `git push` 
+8. Once you have resolved the conflicts, you can push the `resolve_translate` branch to Codeberg: `git push`
 9. Make a PR for merging your conflict-resolution-branch into `main` on Codeberg, and get it reviewed as usual
-10. Once the PR is merged into `main` on Codeberg and the merge conflict is gone, you can now unlock the translations on Weblate again. 
+10. Once the PR is merged into `main` on Codeberg and the merge conflict is gone, you can now unlock the translations on Weblate again.
 11. **Optionally if necessary**: If the conflict hasn't resolved through the steps, you can optionally reset the Weblate from the admin backend for the `website` component, this forces the current state from the Codeberg git repo into Weblate: _Manage → Repository Maintenance → Reset (button)_.
 
-Using these steps all existing translations can still be kept and rebased into the repo, without losing work. The important bit is that you need to ensure that all translations are in the Weblate-internal git repository before you rebase, so that they get into the _actual_ Codeberg repo. 
-
-### Add support of new language in Android app
-1. Make sure Weblate has generated `strings.xml` for your language in this directory: [android/app/src/main/res/values\*/strings.xml][android_git]
-2. Add the language in `localeFilters` list in [build.gradle](https://codeberg.org/comaps/comaps/src/commit/e156d21eee7debd13ce9ec775cdcb264a97aad47/android/app/build.gradle#L258) (It's necessary to add the language in this file to be sure app translations and library translations are integrated in the app).
-3. Add the language in [locales_config.xml](https://codeberg.org/comaps/comaps/src/branch/main/android/app/src/main/res/xml/locales_config.xml) (It's necessary to allow users to change app language in Android settings on most recent devices).
+Using these steps all existing translations can still be kept and rebased into the repo, without losing work. The important bit is that you need to ensure that all translations are in the Weblate-internal git repository before you rebase, so that they get into the _actual_ Codeberg repo.
 
 [codeberg_translate]: https://translate.codeberg.org/projects/comaps/
 [contribute]: https://docs.weblate.org/en/latest/workflows.html
