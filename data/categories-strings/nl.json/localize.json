@@ -615,5 +615,7 @@
 "cuisine-american": "10Amerikaans voedsel|10Amerikaanse keuken",
 "cuisine-african": "9Afrikaans voedsel|9Afrikaanse keuken",
 "cuisine-vegetarian|@cuisine_all_vegetarian": "11Vegetarisch voedsel|11Vegetarische keuken",
-"cuisine-asian|@cuisine_all_asian": "9Aziatisch voedsel|9Aziatische keuken"
+"cuisine-asian|@cuisine_all_asian": "9Aziatisch voedsel|9Aziatische keuken",
+"sport-boules": "Boules|Petanque|jeu de boules",
+"sport-four_square": "Four Square"
 }
