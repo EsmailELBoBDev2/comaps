@@ -141,7 +141,7 @@ bool Metadata::TypeFromString(string_view k, Metadata::EType & outType)
     outType = Metadata::FMD_CONTACT_BLUESKY;
   else if (k == "internet_access" || k == "wifi" || k == "internet")
     outType = Metadata::FMD_INTERNET;
-  else if (k == "ele" || k == "elevation" || k == "altitude")
+  else if (k == "ele")
     outType = Metadata::FMD_ELE;
   else if (k == "destination")
     outType = Metadata::FMD_DESTINATION;
