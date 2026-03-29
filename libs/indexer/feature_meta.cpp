@@ -90,7 +90,7 @@ void Metadata::EncodeWikiURL(int startIndex, std::string & url)
 {
   // Spaces and ? characters should be corrected to form a valid URL's path.
   // Standard percent encoding also encodes other characters like (), which lead to an unnecessary HTTP redirection.
-  for (auto i = startIndex; i < url.size(); ++i)
+  for (size_t i = startIndex; i < url.size(); ++i)
   {
     auto & c = url[i];
     if (c == ' ')
