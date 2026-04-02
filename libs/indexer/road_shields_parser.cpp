@@ -81,6 +81,7 @@ ankerl::unordered_dense::map<std::string, RoadShieldType> const kRoadNetworkShie
     {"ua:regional", RoadShieldType::Generic_Blue},
     {"ua:territorial", RoadShieldType::Generic_White_Bordered},
     {"ua:local", RoadShieldType::Generic_White_Bordered},
+    {"uy", RoadShieldType::UY_National},
     {"za:national", RoadShieldType::Generic_White_Bordered},
     {"za:regional", RoadShieldType::Generic_White_Bordered},
     {"my:federal", RoadShieldType::Generic_Orange_Bordered},
@@ -107,9 +108,9 @@ public:
       if (base::IsExist(kStatesCode, network.substr(3)))
         return RoadShieldType::Generic_White_Bordered;
     }
-
-    // Minimum length for the network tag is 4 (US:I).
-    if (network.size() >= 4)
+    
+    // Minimum length for network tag is 2 (UY). 
+    if (network.size() >= 2)
     {
       strings::AsciiToLower(network);
 
@@ -1029,6 +1030,7 @@ std::string DebugPrint(RoadShieldType shieldType)
   case RoadShieldType::US_Interstate: return "US interstate";
   case RoadShieldType::US_Highway: return "US highway";
   case RoadShieldType::UK_Highway: return "UK highway";
+  case RoadShieldType::UY_National: return "UY national";
   case RoadShieldType::Italy_Autostrada: return "Italy autostrada";
   case RoadShieldType::Hungary_Green: return "hungary green";
   case RoadShieldType::Hungary_Blue: return "hungary blue";
