@@ -139,7 +139,7 @@ jobs:
         shell: bash
         run: |
           cd ~/comaps
-          export SKIP_MAP_DOWNLOAD=1 SKIP_GENERATE_SYMBOLS=1 SKIP_GENERATE_STRINGS=1
+          export SKIP_MAP_DOWNLOAD=1 SKIP_GENERATE_SYMBOLS=1 SKIP_GENERATE_STRINGS=1 SKIP_GENERATE_SERBIAN_LATIN_STRINGS=1
           ./configure.sh
       - name: Check O5M planet file exists
         shell: bash
