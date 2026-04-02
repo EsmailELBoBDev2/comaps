@@ -572,5 +572,7 @@
 "@cuisine_all_vegetarian": "Cocina vegetariana",
 "cuisine-vegan|@cuisine_all_vegetarian": "Cocina vegana",
 "cuisine-brazilian": "brasilera|brasileña|comida brasilera|comida brasileña",
-"cuisine-bavarian": "bávara|comida bávara"
+"cuisine-bavarian": "bávara|comida bávara",
+"sport-boules": "Petanca|Lionesa|Bochas|Bochas volo|bolas criollas|Deportes de bolas|bola lionesa|bolos sobre hierba|boche|boulingrin|bolos|bolo andaluz|bolo|bowls",
+"shop-water|@category_water|@category_food|@shop": "agua potable|agua embotellada"
 }

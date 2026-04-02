@@ -1516,4 +1516,6 @@
     <string name="type.sport.four_square">Four Square</string>
     <string name="type.leisure.sports_centre.sport.boules">Centro Desportivo</string>
     <string name="type.sport.boules">Boules</string>
+    <string name="type.leisure.sports_centre.sport.pickleball">Centro Desportivo</string>
+    <string name="type.sport.pickleball">Pickleball</string>
 </resources>

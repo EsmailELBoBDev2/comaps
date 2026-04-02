@@ -602,7 +602,7 @@
 "error_enter_correct_name" = "Voer een geldige naam in";
 "bookmark_lists" = "Lijsten";
 /* Do not display all bookmark lists on the map */
-"bookmark_lists_hide_all" = "Ales verbergen";
+"bookmark_lists_hide_all" = "Alles verbergen";
 "bookmark_lists_show_all" = "Toon alles";
 "bookmarks_create_new_group" = "Nieuwe lijst aanmaken";
 /* Bookmark categories screen, button that opens folder selection dialog to import KML/KMZ/GPX/KMB files */
@@ -658,7 +658,7 @@
 "avoid_paved" = "Verharde wegen vermijden";
 /* Recommended length for CarPlay and Android Auto is around 25-27 characters */
 "avoid_steps" = "Trappen vermijden";
-"avoid_ferry" = "Veerboten verbinden";
+"avoid_ferry" = "Veerboten vermijden";
 "avoid_motorways" = "Snelwegen vermijden";
 "unable_to_calc_alert_title" = "Kan route niet berekenen";
 "unable_to_calc_alert_subtitle" = "Een route kon niet worden gevonden. Dit kan worden veroorzaakt door uw routeringsopties of onvolledige OpenStreetMap-gegevens. Wijzig uw routeringsopties en probeer het opnieuw.";
