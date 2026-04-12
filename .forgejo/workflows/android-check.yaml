@@ -75,10 +75,15 @@ jobs:
           path: data/world_mwm
           key: world-mwm
 
+      - name: Calculate submodules cache key
+        id: submodules_cache_key
+        shell: bash
+        run: echo value=`git submodule status | sha256sum | head -c64` >> $FORGEJO_OUTPUT
+
       - uses: actions/cache@v4
         with:
           path: ${{ env.SUBMODULE_CACHE_PATHS }}
-          key: submodules-${{ hashFiles('.gitmodules') }}
+          key: submodules-${{ steps.submodules_cache_key.outputs.value }}
           restore-keys: |
             submodules-
 
@@ -122,10 +127,15 @@ jobs:
           path: data/world_mwm
           key: world-mwm
 
+      - name: Calculate submodules cache key
+        id: submodules_cache_key
+        shell: bash
+        run: echo value=`git submodule status | sha256sum | head -c64` >> $FORGEJO_OUTPUT
+
       - uses: actions/cache@v4
         with:
           path: ${{ env.SUBMODULE_CACHE_PATHS }}
-          key: submodules-${{ hashFiles('.gitmodules') }}
+          key: submodules-${{ steps.submodules_cache_key.outputs.value }}
           restore-keys: |
             submodules-
 
