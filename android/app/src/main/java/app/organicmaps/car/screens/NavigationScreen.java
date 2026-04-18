@@ -73,7 +73,6 @@ public class NavigationScreen extends BaseMapScreen implements RoutingController
   protected Template onGetTemplateImpl()
   {
     final NavigationTemplate.Builder builder = new NavigationTemplate.Builder();
-    builder.setBackgroundColor(Colors.NAVIGATION_TEMPLATE_BACKGROUND);
     builder.setActionStrip(createActionStrip());
     builder.setMapActionStrip(UiHelpers.createMapActionStrip(getCarContext(), getSurfaceRenderer()));
 
