@@ -1589,7 +1589,7 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_CuisineType)
     auto const params = GetFeatureBuilderParams(tags);
 
     TEST_EQUAL(params.m_types.size(), 3, (params));
-    TEST(params.IsTypeExist(GetType({"cuisine", "italian_pizza"})), (params));
+    TEST(params.IsTypeExist(GetType({"cuisine", "pizza"})), (params));
     TEST(params.IsTypeExist(GetType({"cuisine", "mediterranean"})), (params));
     TEST(params.IsTypeExist(GetType({"cuisine", "international"})), (params));
   }
