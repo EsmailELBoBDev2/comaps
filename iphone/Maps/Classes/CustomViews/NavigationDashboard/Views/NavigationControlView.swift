@@ -20,9 +20,9 @@ final class NavigationControlView: SolidTouchView, MWMTextToSpeechObserver, MapO
 
   @IBOutlet private weak var ttsButton: UIButton! {
     didSet {
-      ttsButton.setImage(#imageLiteral(resourceName: "ic_voice_off"), for: .normal)
-      ttsButton.setImage(#imageLiteral(resourceName: "ic_voice_on"), for: .selected)
-      ttsButton.setImage(#imageLiteral(resourceName: "ic_voice_on"), for: [.selected, .highlighted])
+      ttsButton.setImage(UIImage(systemName: "speaker.slash"), for: .normal)
+      ttsButton.setImage(UIImage(systemName: "speaker.wave.2"), for: .selected)
+      ttsButton.setImage(UIImage(systemName: "speaker.wave.2"), for: [.selected, .highlighted])
       onTTSStatusUpdated()
     }
   }
