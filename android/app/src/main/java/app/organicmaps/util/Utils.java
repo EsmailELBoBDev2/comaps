@@ -49,6 +49,7 @@ import app.organicmaps.sdk.util.log.LogsManager;
 import com.google.android.material.snackbar.Snackbar;
 import java.lang.ref.WeakReference;
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Keep
@@ -479,5 +480,28 @@ public class Utils
         || url.endsWith("comaps.app/donate/"))
       return context.getString(R.string.app_site_url) + "donate/";
     return url;
+  }
+
+  public static boolean isAndroidAutoSupported(Context context)
+  {
+    String appID = BuildConfig.APPLICATION_ID;
+    String googlePlayID = "com.android.vending";
+    String sourceInstaller = null;
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+    {
+      try
+      {
+        sourceInstaller = context.getPackageManager().getInstallSourceInfo(appID).getInstallingPackageName();
+      }
+      catch (PackageManager.NameNotFoundException e)
+      {
+        Logger.i(TAG, "Unable to get package name installer");
+      }
+    }
+    else
+    {
+      sourceInstaller = context.getPackageManager().getInstallerPackageName(appID);
+    }
+    return Objects.equals(sourceInstaller, googlePlayID);
   }
 }

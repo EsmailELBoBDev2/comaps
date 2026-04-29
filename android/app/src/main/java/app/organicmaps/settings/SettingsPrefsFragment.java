@@ -3,6 +3,7 @@ package app.organicmaps.settings;
 import static app.organicmaps.leftbutton.LeftButtonsHolder.DISABLE_BUTTON_CODE;
 import static app.organicmaps.sdk.editor.data.Language.DEFAULT_LANG_CODE;
 import static app.organicmaps.sdk.editor.data.Language.AUTO_LANG_CODE;
+import static app.organicmaps.util.Utils.isAndroidAutoSupported;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -88,6 +89,7 @@ public class SettingsPrefsFragment extends BaseXmlSettingsFragment
     initCustomMapDownloadUrlPrefsCallbacks();
     initOpenExternalLinksPrefsCallback();
     initIncognitoModePrefsCallback();
+    initAndroidAutoSupportPrefsCallback();
   }
 
   private void initLeftButtonPrefs()
@@ -253,6 +255,10 @@ public class SettingsPrefsFragment extends BaseXmlSettingsFragment
         final Intent intent = new Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS);
         intent.setData(Uri.fromParts("package", requireContext().getPackageName(), null));
         startActivity(intent);
+      } else if (key.equals(getString(R.string.pref_android_auto_support)))
+      {
+        if (!isAndroidAutoSupported(requireContext()))
+          Utils.openUrl(requireContext(), "https://www.comaps.app/support/how-to-use-android-auto/");
       }
     }
     return super.onPreferenceTreeClick(preference);
@@ -670,6 +676,22 @@ public class SettingsPrefsFragment extends BaseXmlSettingsFragment
   public void onAppLanguageSelected()
   {
     getSettingsActivity().onBackPressed();
+  }
+
+  private void initAndroidAutoSupportPrefsCallback()
+  {
+    Preference aASupportPref = getPreference(getString(R.string.pref_android_auto_support));
+    boolean androidAutoState;
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+    {
+      androidAutoState = isAndroidAutoSupported(requireContext());
+      aASupportPref.setSummary(androidAutoState ? R.string.pref_aa_support_summary_yes: R.string.pref_aa_support_summary_no);
+      aASupportPref.setIcon(androidAutoState ? R.drawable.ic_car_enabled: R.drawable.ic_car_disabled);
+    }
+    else
+    {
+      aASupportPref.setVisible(false);
+    }
   }
 
   enum ThemeMode
