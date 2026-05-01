@@ -12,6 +12,7 @@
 #include "platform/location.hpp"
 #include "platform/measurement_utils.hpp"
 
+#include "base/logging.hpp"
 #include "base/math.hpp"
 
 #include <algorithm>

@@ -7,6 +7,8 @@
 
 #include "drape/utils/vertex_decl.hpp"
 
+#include "geometry/screenbase.hpp"
+
 #include <functional>
 #include <utility>
 

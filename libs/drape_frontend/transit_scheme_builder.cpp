@@ -15,6 +15,7 @@
 
 #include "drape/batcher.hpp"
 #include "drape/glsl_types.hpp"
+#include "drape/overlay_handle.hpp"
 #include "drape/render_bucket.hpp"
 
 #include "transit/transit_entities.hpp"

@@ -8,6 +8,8 @@
 #include "shaders/programs.hpp"
 
 #include "drape/batcher.hpp"
+#include "drape/glsl_func.hpp"
+#include "drape/overlay_handle.hpp"
 #include "drape/texture_manager.hpp"
 
 #include "indexer/feature.hpp"
