@@ -8,6 +8,7 @@
 #include "storage/storage.hpp"
 
 #include "base/localisation_translation.hpp"
+#include "base/string_utils.hpp"
 
 #include <vector>
 
