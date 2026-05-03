@@ -62,6 +62,10 @@
       <category android:name="android.intent.category.BROWSABLE" />
       <data android:scheme="https" />
     </intent>
+    <intent>
+      <action android:name="android.intent.action.PICK" />
+      <data android:mimeType="vnd.android.cursor.dir/postal-address_v2" />
+    </intent>
   </queries>
 
   <!-- "android:resizeableActivity" allows free-form and split-screen modes -->

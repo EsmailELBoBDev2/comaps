@@ -10,9 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -503,5 +505,21 @@ public class Utils
       sourceInstaller = context.getPackageManager().getInstallerPackageName(appID);
     }
     return Objects.equals(sourceInstaller, googlePlayID);
+  }
+
+  public static String getContactAddress(Context context, Uri contactUri)
+  {
+    String[] typeData = {ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS};
+    try (Cursor cursor = context.getContentResolver().query(contactUri, typeData, null, null, null))
+    {
+      if (cursor != null && cursor.moveToFirst()) {
+        return cursor.getString(0);
+      }
+    }
+    return null;
+  }
+  public static Intent openContactPicker()
+  {
+    return new Intent(Intent.ACTION_PICK).setType(ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_TYPE);
   }
 }
