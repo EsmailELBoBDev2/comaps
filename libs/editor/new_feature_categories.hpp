@@ -1,13 +1,16 @@
 #pragma once
 
-#include "editor/editor_config.hpp"
-
 #include "base/macros.hpp"
 
 #include <string>
 #include <vector>
 
 #include "3party/ankerl/unordered_dense.h"
+
+namespace editor
+{
+class EditorConfig;
+}  // namespace editor
 
 namespace osm
 {

@@ -1,11 +1,12 @@
 #include "new_feature_categories.hpp"
 
+#include "editor/editor_config.hpp"
+
 #include "indexer/categories_holder.hpp"
 #include "indexer/classificator.hpp"
 #include "indexer/search_string_utils.hpp"
 
 #include "platform/localization.hpp"
-#include "platform/platform.hpp"
 
 #include "base/logging.hpp"
 #include "base/string_utils.hpp"
