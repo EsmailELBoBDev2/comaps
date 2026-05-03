@@ -4,6 +4,7 @@
 
 #include "kml/serdes.hpp"
 #include "kml/serdes_binary.hpp"
+#include "kml/serdes_common.hpp"
 #include "kml/serdes_gpx.hpp"
 
 #include "indexer/classificator.hpp"

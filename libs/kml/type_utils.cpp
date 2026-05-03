@@ -3,12 +3,11 @@
 
 #include "indexer/classificator.hpp"
 #include "indexer/feature_region_locator.hpp"
-#include "indexer/feature_utils.hpp"
 
-#include "platform/localization.hpp"
-#include "platform/preferred_languages.hpp"
-
+#include "coding/point_coding.hpp"
 #include "coding/string_utf8_multilang.hpp"
+
+#include "geometry/point_with_altitude.hpp"
 
 #include "base/localisation_translation.hpp"
 

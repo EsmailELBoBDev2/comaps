@@ -4,6 +4,7 @@
 
 #include "kml/serdes.hpp"
 #include "kml/serdes_binary.hpp"
+#include "kml/serdes_common.hpp"
 
 #include "map/bookmark_helpers.hpp"
 

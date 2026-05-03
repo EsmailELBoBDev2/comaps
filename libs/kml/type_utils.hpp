@@ -1,6 +1,6 @@
 #pragma once
 
-#include "geometry/point_with_altitude.hpp"
+#include "geometry/point2d.hpp"
 
 #include "base/localisation.hpp"
 
@@ -16,7 +16,12 @@
 namespace feature
 {
 class RegionData;
-}
+}  // namespace feature
+
+namespace geometry
+{
+class PointWithAltitude;
+}  // namespace geometry
 
 namespace kml
 {
