@@ -2,7 +2,8 @@
 
 #include "geometry/point2d.hpp"
 
-#include "base/matrix.hpp"
+#include "base/assert.hpp"
+#include "base/math.hpp"
 
 #include <cmath>
 #include <string>
