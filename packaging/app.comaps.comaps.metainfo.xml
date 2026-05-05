@@ -80,8 +80,17 @@
   </screenshots>
 
   <releases>
-    <release version="2026.04.07" date="2026-04-07">
+    <release version="2026.05.04" date="2026-05-04">
      <url type="details">https://comaps.app/latest/</url>
+	 <description><ul>
+<li>OpenStreetMap data as of May 4</li>
+<li>"Check for updates" button in the download screen to get new maps without updating the app (weekly map updates are planned)</li>
+<li>Added Slovenia specific road shields</li>
+<li>Added Indonesian Wikipedia articles</li>
+     </ul></description>
+    </release>
+    <release version="2026.04.23" date="2026-04-23">
+     <url type="details">https://codeberg.org/comaps/comaps/releases/tag/v2026.04.23-19</url>
      <description><ul>
 <li>OpenStreetMap data as of April 21</li>
 <li>Show results for viewport search</li>
