@@ -1,5 +1,6 @@
 #include "routing/routing_integration_tests/routing_test_tools.hpp"
 
+#include "routing/checkpoints.hpp"
 #include "routing/routing_tests/index_graph_tools.hpp"
 
 #include "testing/testing.hpp"

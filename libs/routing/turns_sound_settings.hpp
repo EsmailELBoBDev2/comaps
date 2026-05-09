@@ -5,6 +5,8 @@
 
 #include "platform/measurement_utils.hpp"
 
+#include "base/assert.hpp"
+
 #include <cstdint>
 #include <utility>
 #include <vector>

@@ -1,10 +1,15 @@
 #include "routing/turns_tts_text.hpp"
 
+#include "routing/route.hpp"
+#include "routing/turns.hpp"
 #include "routing/turns_sound_settings.hpp"
 #include "routing/turns_tts_text_i18n.hpp"
 
 #include "indexer/road_shields_parser.hpp"
 
+#include "platform/measurement_utils.hpp"
+
+#include "base/assert.hpp"
 #include "base/string_utils.hpp"
 
 #include <string>

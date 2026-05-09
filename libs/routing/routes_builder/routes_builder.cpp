@@ -1,14 +1,23 @@
 #include "routing/routes_builder/routes_builder.hpp"
 
+#include "routing/index_router.hpp"
+#include "routing/route.hpp"
 #include "routing/vehicle_mask.hpp"
 
 #include "storage/routing_helpers.hpp"
+#include "storage/storage.hpp"
 
 #include "indexer/classificator_loader.hpp"
+#include "indexer/data_source.hpp"
+#include "indexer/mwm_set.hpp"
 
+#include "platform/country_file.hpp"
 #include "platform/local_country_file.hpp"
 #include "platform/local_country_file_utils.hpp"
 
+#include "coding/file_reader.hpp"
+#include "coding/file_writer.hpp"
+#include "coding/reader.hpp"
 #include "coding/write_to_sink.hpp"
 
 #include "geometry/mercator.hpp"
@@ -16,6 +25,7 @@
 #include "base/assert.hpp"
 #include "base/logging.hpp"
 #include "base/scope_guard.hpp"
+#include "base/timer.hpp"
 
 #include <limits>
 
@@ -236,6 +246,8 @@ RoutesBuilder::Processor::Processor(std::shared_ptr<NumMwmIds> numMwmIds, DataSo
   , m_cpg(std::move(cpg))
   , m_cig(std::move(cig))
 {}
+
+RoutesBuilder::Processor::~Processor() = default;
 
 RoutesBuilder::Processor::Processor(Processor && rhs) noexcept : m_dataSourceStorage(rhs.m_dataSourceStorage)
 {

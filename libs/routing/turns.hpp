@@ -1,9 +1,6 @@
 #pragma once
 
 #include "routing/lanes/lane_info.hpp"
-#include "routing/segment.hpp"
-
-#include "routing_common/num_mwm_id.hpp"
 
 #include "indexer/feature_decl.hpp"
 
@@ -15,6 +12,9 @@
 
 namespace routing
 {
+class NumMwmIds;
+class Segment;
+
 /// \brief Unique identification for a road edge between two junctions (joints). The identifier
 /// is represented by an mwm id, a feature id, a range of segment ids [|m_startSegId|, |m_endSegId|],
 /// a direction and type.

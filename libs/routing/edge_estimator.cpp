@@ -1,7 +1,8 @@
 #include "routing/edge_estimator.hpp"
+
 #include "routing/geometry.hpp"
 #include "routing/latlon_with_altitude.hpp"
-#include "routing/routing_helpers.hpp"
+#include "routing/segment.hpp"
 #include "routing/traffic_stash.hpp"
 
 #include "traffic/speed_groups.hpp"
@@ -9,11 +10,10 @@
 #include "geometry/distance_on_sphere.hpp"
 #include "geometry/point_with_altitude.hpp"
 
-#include "coding/csv_reader.hpp"
+#include "platform/measurement_utils.hpp"
 
 #include "base/assert.hpp"
 #include "base/logging.hpp"
-#include "platform/platform.hpp"
 
 namespace routing
 {

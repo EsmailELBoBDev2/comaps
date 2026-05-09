@@ -5,13 +5,22 @@
 
 #include "indexer/altitude_loader.hpp"
 #include "indexer/feature.hpp"
+#include "indexer/feature_data.hpp"
+#include "indexer/feature_meta.hpp"
 #include "indexer/feature_source.hpp"
+#include "indexer/features_vector.hpp"
+
+#include "coding/files_container.hpp"
 
 #include "geometry/distance_on_sphere.hpp"
+#include "geometry/latlon.hpp"
 #include "geometry/mercator.hpp"
 
-#include "base/assert.hpp"
+#include "base/logging.hpp"
+#include "base/math.hpp"
 #include "base/string_utils.hpp"
+
+#include "defines.hpp"
 
 #include <string>
 

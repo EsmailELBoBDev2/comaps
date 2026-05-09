@@ -2,6 +2,8 @@
 
 #include "platform/measurement_utils.hpp"
 
+#include "base/math.hpp"
+
 #include <algorithm>
 
 namespace routing

@@ -1,10 +1,12 @@
 #pragma once
 
-#include "geometry/mercator.hpp"
+#include "geometry/parametrized_segment.hpp"
 
 #include "geometry/point2d.hpp"
 #include "geometry/polyline2d.hpp"
 #include "geometry/rect2d.hpp"
+
+#include "base/assert.hpp"
 
 #include <cstddef>
 #include <limits>

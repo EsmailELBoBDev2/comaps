@@ -6,6 +6,7 @@
 #include "routing/segment.hpp"
 #include "routing/transit_info.hpp"
 #include "routing/turns.hpp"
+#include "routing/vehicle_mask.hpp"
 
 #include "routing/base/followed_polyline.hpp"
 
@@ -15,6 +16,7 @@
 
 #include "platform/country_file.hpp"
 
+#include "geometry/point2d.hpp"
 #include "geometry/point_with_altitude.hpp"
 #include "geometry/polyline2d.hpp"
 

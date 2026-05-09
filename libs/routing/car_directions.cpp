@@ -1,11 +1,27 @@
 #include "routing/car_directions.hpp"
 
 #include "routing/lanes/lanes_recommendation.hpp"
+#include "routing/loaded_path_segment.hpp"
+#include "routing/route.hpp"
+#include "routing/routing_result_graph.hpp"
+#include "routing/routing_settings.hpp"
+#include "routing/segment.hpp"
+#include "routing/turn_candidate.hpp"
 #include "routing/turns.hpp"
 #include "routing/turns_generator.hpp"
 #include "routing/turns_generator_utils.hpp"
 
+#include "indexer/ftypes_matcher.hpp"
+
 #include "geometry/angles.hpp"
+#include "geometry/mercator.hpp"
+#include "geometry/point2d.hpp"
+#include "geometry/point_with_altitude.hpp"
+
+#include "base/assert.hpp"
+#include "base/logging.hpp"
+#include "base/math.hpp"
+#include "base/stl_helpers.hpp"
 
 namespace routing
 {

@@ -6,6 +6,8 @@
 
 #include "map/routing_manager.hpp"
 
+#include "routing/following_info.hpp"
+
 jobject CreateRoutingInfo(JNIEnv * env, routing::FollowingInfo const & info, RoutingManager & rm)
 {
   static jclass const klass = jni::GetGlobalClassRef(env, "app/organicmaps/sdk/routing/RoutingInfo");

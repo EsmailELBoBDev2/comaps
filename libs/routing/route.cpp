@@ -1,8 +1,8 @@
 #include "routing/route.hpp"
 
-#include "traffic/speed_groups.hpp"
-
+#include "geometry/latlon.hpp"
 #include "geometry/mercator.hpp"
+#include "geometry/rect2d.hpp"
 
 #include "platform/location.hpp"
 

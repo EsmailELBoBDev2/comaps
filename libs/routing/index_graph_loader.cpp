@@ -1,6 +1,7 @@
 #include "routing/index_graph_loader.hpp"
 
 #include "routing/data_source.hpp"
+#include "routing/geometry.hpp"
 #include "routing/index_graph_serialization.hpp"
 #include "routing/restriction_loader.hpp"
 #include "routing/road_access.hpp"
@@ -8,12 +9,21 @@
 #include "routing/road_penalty.hpp"
 #include "routing/road_penalty_serialization.hpp"
 #include "routing/route.hpp"
+#include "routing/segment.hpp"
 #include "routing/speed_camera_ser_des.hpp"
 
+#include "indexer/mwm_set.hpp"
+
 #include "coding/files_container.hpp"
+#include "coding/reader.hpp"
 
 #include "base/assert.hpp"
+#include "base/exception.hpp"
+#include "base/logging.hpp"
+#include "base/stl_helpers.hpp"
 #include "base/timer.hpp"
+
+#include "defines.hpp"
 
 #include <algorithm>
 #include <map>

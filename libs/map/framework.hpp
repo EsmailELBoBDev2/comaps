@@ -98,8 +98,9 @@ class Settings;
 
 namespace platform
 {
+class Distance;
 class NetworkPolicy;
-}
+}  // namespace platform
 
 namespace descriptions
 {

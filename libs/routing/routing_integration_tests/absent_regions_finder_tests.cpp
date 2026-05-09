@@ -6,6 +6,9 @@
 #include "storage/routing_helpers.hpp"
 #include "storage/storage.hpp"
 
+#include "routing/absent_regions_finder.hpp"
+#include "routing/regions_decl.hpp"
+
 #include "routing_common/num_mwm_id.hpp"
 
 #include "geometry/mercator.hpp"

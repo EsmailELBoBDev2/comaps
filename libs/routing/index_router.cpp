@@ -1,25 +1,33 @@
 #include "routing/index_router.hpp"
 
 #include "routing/base/astar_progress.hpp"
-
 #include "routing/car_directions.hpp"
+#include "routing/checkpoints.hpp"
+#include "routing/cross_mwm_graph.hpp"
+#include "routing/directions_engine.hpp"
+#include "routing/edge_estimator.hpp"
+#include "routing/fake_edges_container.hpp"
 #include "routing/fake_ending.hpp"
-#include "routing/index_graph.hpp"
+#include "routing/fake_feature_ids.hpp"
+#include "routing/fake_vertex.hpp"
 #include "routing/index_graph_loader.hpp"
 #include "routing/index_graph_starter.hpp"
 #include "routing/index_graph_starter_joints.hpp"
 #include "routing/index_road_graph.hpp"
+#include "routing/joint_segment.hpp"
 #include "routing/junction_visitor.hpp"
+#include "routing/latlon_with_altitude.hpp"
 #include "routing/leaps_graph.hpp"
-#include "routing/leaps_postprocessor.hpp"
 #include "routing/mwm_hierarchy_handler.hpp"
 #include "routing/pedestrian_directions.hpp"
 #include "routing/route.hpp"
+#include "routing/router_delegate.hpp"
 #include "routing/routing_helpers.hpp"
 #include "routing/routing_options.hpp"
 #include "routing/single_vehicle_world_graph.hpp"
 #include "routing/speed_camera_prohibition.hpp"
 #include "routing/traffic_stash.hpp"
+#include "routing/transit_graph_loader.hpp"
 #include "routing/transit_world_graph.hpp"
 #include "routing/vehicle_mask.hpp"
 
@@ -27,23 +35,30 @@
 
 #include "routing_common/bicycle_model.hpp"
 #include "routing_common/car_model.hpp"
+#include "routing_common/num_mwm_id.hpp"
 #include "routing_common/pedestrian_model.hpp"
 
-#include "indexer/data_source.hpp"
-
+#include "platform/country_file.hpp"
+#include "platform/local_country_file.hpp"
 #include "platform/settings.hpp"
 
 #include "geometry/distance_on_sphere.hpp"
 #include "geometry/mercator.hpp"
 #include "geometry/parametrized_segment.hpp"
+#include "geometry/point_with_altitude.hpp"
 #include "geometry/polyline2d.hpp"
+#include "geometry/rect2d.hpp"
 #include "geometry/segment2d.hpp"
 
 #include "base/assert.hpp"
+#include "base/buffer_vector.hpp"
+#include "base/cancellable.hpp"
 #include "base/exception.hpp"
 #include "base/logging.hpp"
+#include "base/math.hpp"
 #include "base/scope_guard.hpp"
 #include "base/stl_helpers.hpp"
+#include "base/timer.hpp"
 
 #include "defines.hpp"
 
@@ -261,6 +276,8 @@ IndexRouter::IndexRouter(VehicleType vehicleType, bool loadAltitudes,
   CHECK(m_estimator, ());
   CHECK(m_directionsEngine, ());
 }
+
+IndexRouter::~IndexRouter() = default;
 
 unique_ptr<WorldGraph> IndexRouter::MakeSingleMwmWorldGraph()
 {

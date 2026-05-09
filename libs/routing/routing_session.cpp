@@ -1,5 +1,14 @@
 #include "routing/routing_session.hpp"
 
+#include "routing/base/followed_polyline.hpp"
+#include "routing/following_info.hpp"
+#include "routing/route.hpp"
+#include "routing/router_delegate.hpp"
+#include "routing/turns.hpp"
+#include "routing/vehicle_mask.hpp"
+
+#include "routing_common/maxspeed_conversion.hpp"
+
 #include "platform/distance.hpp"
 #include "platform/location.hpp"
 #include "platform/measurement_utils.hpp"
@@ -9,6 +18,10 @@
 #include "geometry/mercator.hpp"
 
 #include "indexer/road_shields_parser.hpp"
+
+#include "base/assert.hpp"
+#include "base/logging.hpp"
+#include "base/math.hpp"
 
 #include <utility>
 

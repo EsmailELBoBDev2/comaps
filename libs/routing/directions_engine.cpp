@@ -3,12 +3,26 @@
 #include "routing/data_source.hpp"
 #include "routing/fake_feature_ids.hpp"
 #include "routing/lanes/lanes_parser.hpp"
+#include "routing/route.hpp"
 #include "routing/routing_helpers.hpp"
+#include "routing/routing_settings.hpp"
+#include "routing/segment.hpp"
+#include "routing/turn_candidate.hpp"
 #include "routing/turns.hpp"
 
+#include "indexer/feature_data.hpp"
+#include "indexer/feature_meta.hpp"
 #include "indexer/ftypes_matcher.hpp"
 
-#include "coding/string_utf8_multilang.hpp"
+#include "geometry/mercator.hpp"
+#include "geometry/point_with_altitude.hpp"
+
+#include "base/assert.hpp"
+#include "base/cancellable.hpp"
+#include "base/checked_cast.hpp"
+#include "base/localisation.hpp"
+#include "base/math.hpp"
+#include "base/stl_helpers.hpp"
 
 #include "geometry/point2d.hpp"
 

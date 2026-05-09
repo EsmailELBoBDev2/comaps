@@ -1,27 +1,22 @@
 #pragma once
 
 #include "routing/async_router.hpp"
-#include "routing/following_info.hpp"
+#include "routing/checkpoints.hpp"
 #include "routing/position_accumulator.hpp"
-#include "routing/route.hpp"
 #include "routing/router.hpp"
 #include "routing/routing_callbacks.hpp"
-#include "routing/routing_exceptions.hpp"
-#include "routing/speed_camera.hpp"
+#include "routing/routing_settings.hpp"
 #include "routing/speed_camera_manager.hpp"
-#include "routing/turns.hpp"
 #include "routing/turns_notification_manager.hpp"
 
 #include "traffic/speed_groups.hpp"
 #include "traffic/traffic_cache.hpp"
 #include "traffic/traffic_info.hpp"
 
-#include "platform/location.hpp"
-#include "platform/measurement_utils.hpp"
+#include "indexer/mwm_set.hpp"
 
 #include "geometry/point2d.hpp"
 #include "geometry/point_with_altitude.hpp"
-#include "geometry/polyline2d.hpp"
 
 #include "base/thread_checker.hpp"
 
@@ -40,6 +35,8 @@ class RouteMatchingInfo;
 
 namespace routing
 {
+class FollowingInfo;
+
 /// \breaf This class is responsible for the route built in the program.
 /// \note All method of this class should be called from ui thread if there's no
 /// a special note near a method.
