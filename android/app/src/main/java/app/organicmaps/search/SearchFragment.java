@@ -142,6 +142,7 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
   }
 
   private View mResultsFrame;
+  private View mTabFrame;
   private PlaceholderView mResultsPlaceholder;
   private ExtendedFloatingActionButton mShowOnMapFab;
 
@@ -225,6 +226,11 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
 
     UiUtils.showIf(hasQuery, mResultsFrame);
     UiUtils.showIf(hasQuery, mShowOnMapFab);
+
+    if (hasQuery)
+      mTabFrame.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+    else
+      mTabFrame.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
     if (hasQuery)
       hideDownloadSuggest();
     else if (doShowDownloadSuggest())
@@ -255,7 +261,7 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
     readArguments();
 
     ViewGroup root = (ViewGroup) view;
-    View mTabFrame = root.findViewById(R.id.tab_frame);
+    mTabFrame = root.findViewById(R.id.tab_frame);
     ViewPager2 pager = mTabFrame.findViewById(R.id.pages);
 
     mToolbarController = new ToolbarController(view);
