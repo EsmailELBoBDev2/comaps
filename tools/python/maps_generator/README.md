@@ -189,6 +189,8 @@ In this folder the map file is in a YYMMDD subfolder
 
 > TODO: this section is a work in progress and is probably missing parts.
 
+See also: [HOW_TO_EDIT_HIERARCHY.TXT.md](https://codeberg.org/comaps/comaps/src/branch/main/data/HOW_TO_EDIT_HIERARCHY.TXT.md)
+
 - Edit the various `data/borders/*.poly` files as needed, ideally sharing nodes between polygons to avoid gaps.
   - These are Osmosis Polygon "osmpoly" files and there are multiple tools and editing options available: https://wiki.openstreetmap.org/wiki/Osmosis/Polygon_Filter_File_Format
 - Compile and run `generator_tool --generate_packed_borders` to generate `data/packed_polygons.bin` which is compiled into the app to define each "country" (MWM) name and perimeter.
