@@ -1,7 +1,7 @@
 # Reviews
 
-This file documents how place reviews are handled in CoMaps. It contains both the ops instructions as well as pointers
-to the relevant parts of codebase. If you're primarily interested in generating MWM files with reviews, see
+This file documents how place reviews are handled in CoMaps. It contains both the ops instructions and pointers
+to the relevant parts of the codebase. If you're primarily interested in generating MWM files with reviews, see
 the [Operation](#operation) section. If you'd like to make changes to where the reviews are sourced, how they are stored
 or displayed, head to [Development](#development).
 
@@ -28,18 +28,18 @@ git repository.
 The review pipeline: a mangrove.reviews [JSON dump](https://docs.mangrove.reviews/#tag/Dump) is processed
 by [mangrove-osm-coder](https://codeberg.org/mmakowski/mangrove-osm-coder) which produces a [
 `reviews.json` file](https://codeberg.org/mmakowski/mangrove-osm-coder/src/branch/main/README.md#reviews-.son). That
-file is then read by the `Reviews` stage of the [maps_generator](../../tools/python/maps_generator/README.md).
+file is then read by the `Reviews` stage of the [maps_generator](../tools/python/maps_generator/README.md).
 
 ### Running in Codeberg
 
 The map generation workflow expects the `reviews.json` file to be present in a specific path. To generate that file,
-run [mapgen-reviews](../../.forgejo/workflows/mapgen-reviews.yml)
+run [mapgen-reviews](../.forgejo/workflows/mapgen-reviews.yml)
 workflow [in Codeberg](https://codeberg.org/comaps/comaps/actions). The workflow takes one optional flag: _reload
 postgis_. When selected, the workflow will re-import the OSM data existing `planet.o5m` file into the postgis database
 used for spatial resolution. Otherwise, new Mangrove data will be downloaded and processed, but the OSM data from the
 previous run will be used.
 
-The full workflow with postgis reload can take around 2 hours to run. Without reload it should take no more than a
+The full workflow with postgis reload can take around 2 hours to run. Without a reload, it should take no more than a
 couple of minutes.
 
 ### Running Locally
@@ -50,23 +50,25 @@ See the [manual end-to-end testing section](#manual-end-to-end-testing).
 
 The code to support reviews is split into three categories:
 
-1. the review library with shared functionality;
+1. the core library with the model and serialisation/deserialisation logic;
 2. the map generator stage;
 3. the app code that reads and displays the reviews.
 
 ### The Library
 
-The library resides in `libs/reviews` and contains:
+The `libs/indexer/reviews_*` files contain:
 
 * the logical model of reviews;
 * the serialisation/deserialisation logic.
 
-To test the library run in the root of the project:
+They reside in the `reviews` namespace.
+
+To test the library code, run in the root of the project:
 
 ```shell
-tools/unix/build_omim.sh -d reviews_tests && \
+tools/unix/build_omim.sh -d indexer_tests && \                    
   pushd ../omim-build-debug && \
-  ./reviews_tests; \
+  ./indexer_tests --filter="Reviews"; \  
   popd
 ```
 
@@ -89,7 +91,7 @@ tools/unix/build_omim.sh -d generator_tests && \
 #### Common
 
 The review information is stored as a part of `place_page::Info` object defined in the `libs/map` library. The library
-depends on [`libs/reviews`](#the-library) for loading the review data.
+depends on [`libs/indexer`](#the-library) for loading the review data.
 
 #### Android
 
@@ -118,7 +120,7 @@ The review summaries are displayed in `PlacePageDialogUser` and `PlacePageDialog
     tools/unix/build_omim.sh -r generator_tool mwm_diff_tool
     ```
 3. configure the generator by following the instructions
-   in [tools/python/maps_generator/README.md](../../tools/python/maps_generator/README.md), with the following changes:
+   in [tools/python/maps_generator/README.md](../tools/python/maps_generator/README.md), with the following changes:
     1. create and activate a `venv` (for example, with `uv venv`) before running `pip install`
     2. in the `map_generator.ini`, set:
         1. `PLANET_URL: https://download.geofabrik.de/europe/poland/mazowieckie-latest.osm.pbf` to use a region with
@@ -144,9 +146,8 @@ The review summaries are displayed in `PlacePageDialogUser` and `PlacePageDialog
        `ln -s /home/me/Projects/OSS/comaps/maps_build/2026_05_01__10_04_46/260501 data/260421`; whatever map was used
        by the generator, the date in `data` must be on or before the one used by `World.mwm`, otherwise the app won't
        pick up the map.
-7. start the app: `../omim-build-debug/CoMaps`, then search for `Tekla`; the top result should be a cafe with at least
-   one
-   review.
+7. start the app: `../omim-build-debug/CoMaps`, then search for `Tekla`; the top result should be a café with at least
+   one review.
 
 ### Debugging
 
@@ -166,7 +167,7 @@ And build the debug versions of the tools:
 tools/unix/build_omim.sh -d generator_tool mwm_diff_tool
 ```
 
-To rerun just the reviews stage of the generator, we can use using the python tool:
+To rerun just the _reviews_ stage of the generator, we can use using the python tool:
 
 ```shell
 python3 -m maps_generator \
@@ -176,7 +177,7 @@ python3 -m maps_generator \
   --from_stage=Reviews
 ```
 
-Alternatively, the `generator_tool` can be run directly to just process the reviews data (set the `BASE` and `TS`
+Alternatively, the `generator_tool` can be run directly to just process the review data (set the `BASE` and `TS`
 variables as appropriate for your system and maps build):
 
 ```shell

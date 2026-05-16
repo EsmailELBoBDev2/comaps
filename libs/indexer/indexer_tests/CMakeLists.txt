@@ -30,6 +30,8 @@ set(SRC
   postcodes_matcher_tests.cpp
   rank_table_test.cpp
   read_features_tests.cpp
+  reviews_display_tests.cpp
+  reviews_serdes_tests.cpp
   road_shields_parser_tests.cpp
   scale_index_reading_tests.cpp
   search_string_utils_test.cpp

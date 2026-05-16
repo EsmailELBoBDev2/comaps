@@ -117,6 +117,11 @@ set(SRC
   postcodes_matcher.hpp  # it's in indexer EditableMapObject depends on postcodes_matcher
   rank_table.cpp
   rank_table.hpp
+  reviews_display.hpp
+  reviews_loader.cpp
+  reviews_loader.hpp
+  reviews_model.hpp
+  reviews_serdes.hpp
   route_relation.hpp
   road_shields_parser.cpp
   road_shields_parser.hpp

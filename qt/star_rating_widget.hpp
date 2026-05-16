@@ -1,6 +1,6 @@
 #pragma once
 
-#include "reviews/display.hpp"
+#include "indexer/reviews_display.hpp"
 
 #include <QtWidgets/QWidget>
 

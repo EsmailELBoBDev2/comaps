@@ -3,7 +3,7 @@
 #include "3party/ankerl/unordered_dense.h"
 #include "3party/jansson/jansson/src/jansson.h"
 #include "boost/container/flat_map.hpp"
-#include "reviews/model.hpp"
+#include "indexer/reviews_model.hpp"
 
 namespace generator
 {

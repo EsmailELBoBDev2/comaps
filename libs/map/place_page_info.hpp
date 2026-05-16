@@ -1,7 +1,6 @@
 #pragma once
 
 #include "map/routing_mark.hpp"
-#include "reviews/model.hpp"
 #include "storage/storage_defines.hpp"
 
 #include "drape_frontend/frontend_renderer.hpp"
@@ -15,6 +14,7 @@
 #include "indexer/feature_source.hpp"
 #include "indexer/feature_utils.hpp"
 #include "indexer/map_object.hpp"
+#include "indexer/reviews_model.hpp"
 
 #include "geometry/point2d.hpp"
 

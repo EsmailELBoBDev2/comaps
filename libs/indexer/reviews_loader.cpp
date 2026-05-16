@@ -1,4 +1,4 @@
-#include "reviews/loader.hpp"
+#include "indexer/reviews_loader.hpp"
 
 #include "indexer/data_source.hpp"
 

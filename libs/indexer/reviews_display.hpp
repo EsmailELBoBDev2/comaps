@@ -1,6 +1,6 @@
 #pragma once
 
-#include "reviews/model.hpp"
+#include "indexer/reviews_model.hpp"
 
 namespace reviews
 {

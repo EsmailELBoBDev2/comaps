@@ -4,8 +4,8 @@
 
 #include "qt/qt_common/text_dialog.hpp"
 
+#include "indexer/reviews_display.hpp"
 #include "map/place_page_info.hpp"
-#include "reviews/display.hpp"
 
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QGridLayout>

@@ -2,7 +2,7 @@
 
 #include "coding/writer.hpp"
 
-#include "reviews/display.hpp"
+#include "indexer/reviews_display.hpp"
 
 using namespace ::reviews;
 

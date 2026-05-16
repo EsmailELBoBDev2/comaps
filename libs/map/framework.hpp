@@ -38,8 +38,7 @@
 #include "indexer/map_object.hpp"
 #include "indexer/map_style.hpp"
 #include "indexer/mwm_set.hpp"
-
-#include "reviews/loader.hpp"
+#include "indexer/reviews_loader.hpp"
 
 #include "search/reverse_geocoder.hpp"
 

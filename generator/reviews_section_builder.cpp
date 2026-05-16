@@ -3,7 +3,7 @@
 #include "base/logging.hpp"
 #include "cppjansson/cppjansson.hpp"
 #include "defines.hpp"
-#include "reviews/serdes.hpp"
+#include "indexer/reviews_serdes.hpp"
 #include "utils.hpp"
 
 namespace generator

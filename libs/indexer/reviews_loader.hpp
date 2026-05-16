@@ -1,7 +1,7 @@
 #pragma once
 
-#include "reviews/model.hpp"
-#include "reviews/serdes.hpp"
+#include "indexer/reviews_model.hpp"
+#include "indexer/reviews_serdes.hpp"
 
 #include "indexer/feature_decl.hpp"
 #include "indexer/mwm_set.hpp"

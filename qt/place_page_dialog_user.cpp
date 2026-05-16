@@ -4,9 +4,9 @@
 
 #include "qt/qt_common/text_dialog.hpp"
 
+#include "indexer/reviews_display.hpp"
 #include "indexer/validate_and_format_contacts.hpp"
 #include "map/place_page_info.hpp"
-#include "reviews/display.hpp"
 
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>

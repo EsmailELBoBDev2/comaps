@@ -254,7 +254,6 @@ target_link_libraries(${PROJECT_NAME}
     i18n
     indexer
     platform
-    reviews
     routing
     routing_common
     search

@@ -31,7 +31,7 @@
 #include "defines.hpp"
 
 #include "coding/dd_vector.hpp"
-#include "reviews/model.hpp"
+#include "indexer/reviews_model.hpp"
 
 namespace reviews
 {
