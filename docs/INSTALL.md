@@ -83,7 +83,9 @@ If you plan to publish the app privately in stores check [special options](#spec
 <details>
   <summary><span style="font-size: 1.5em; font-weight: bold;">Windows</span></summary>
   
-You need to have [Git for Windows](https://git-scm.com/download/win) installed and Git bash available in the PATH.
+It's probably best to have [Git for Windows](https://git-scm.com/download/win) installed and Git Bash available in the PATH.
+
+[optipng](http://optipng.sourceforge.net/) should be installed and available in the PATH (e.g. via [Chocolatey](https://chocolatey.org/): `choco install optipng`).
 
 It's necessary to enable symlink support:
 1. Activate _Windows Development Mode_ to enable symlinks globally:
@@ -101,7 +103,7 @@ Clone the repository
 git clone --recurse-submodules --shallow-submodules https://codeberg.org/comaps/comaps.git
 ```
 
-For _Windows 10_:  You should be able to build the project by following either of these setup methods:
+For _Windows 10/11_:  You should be able to build the project by following either of these setup methods:
 
 **Setup 1: Using WSL**
 1. Install [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) on your machine.

@@ -5,6 +5,8 @@
 
 echo "Configuring the repository for development..."
 
+export PYTHONUTF8=1
+
 SKIP_MAP_DOWNLOAD="${SKIP_MAP_DOWNLOAD:-}"
 SKIP_GENERATE_SYMBOLS="${SKIP_GENERATE_SYMBOLS:-}"
 SKIP_GENERATE_DRULES="${SKIP_GENERATE_DRULES:-}"
