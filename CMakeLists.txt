@@ -199,11 +199,18 @@ endif()
 # Fix for #include <boost/regex.hpp>
 include_directories("${OMIM_ROOT}/3party/boost")
 
-# without this, cmake might ignore the Python Virtual Environment when defined 
-set(Python3_FIND_VIRTUALENV FIRST)
 
 # Used in qt/ and shaders/
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
+
+# If a Python Virtual Environement is active,  take python command from it, rather than from the standard package
+# Check if a virtual env is activated 
+if(DEFINED ENV{VIRTUAL_ENV})
+  set(PYTHON_VENV_PATH "$ENV{VIRTUAL_ENV}")
+  # Take Python from the path, which is set by the virtual environment
+  set(Python3_EXECUTABLE "python3")
+  message(STATUS "==> Python Virtual Environment detected : ${PYTHON_VENV_PATH}"  "  ==>  "  "Using python command: ${Python3_EXECUTABLE}" )
+endif()
 
 execute_process(
     COMMAND ${Python3_EXECUTABLE} -c "import google.protobuf; 
