@@ -171,9 +171,9 @@
 /* A message in Settings/Preferences explaining why is it not possible to enable 3D buildings when max power saving mode is enabled */
 "pref_map_3d_buildings_disabled_summary" = "3D 建筑在省电模式下处于关闭状态";
 /* Settings «Route» category: «Tts enabled» title */
-"pref_tts_title" = "语音指导";
+"pref_tts_title" = "语音提示";
 /* Settings «Route» category: «Tts enable» title */
-"pref_tts_enable_title" = "启用语音指导";
+"pref_tts_enable_title" = "启用语音提示";
 /* Settings «Route» category: «Tts announce street names» title */
 "pref_tts_street_names_title" = "播报街道名称";
 /* Settings «Route» category: «Tts announce street names» description */
@@ -876,3 +876,4 @@
 "downloader_check_updates_no_updates" = "没有可用更新";
 "downloader_check_updates_eol" = "此应用版本不再有地图更新。请更新应用！";
 "downloader_check_updates_error" = "检查更新时出错";
+"editor_add_select_category_recent_subtitle" = "最近用过";

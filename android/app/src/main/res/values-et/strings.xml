@@ -942,4 +942,9 @@
     <string name="pref_keyboard_typing_history_title">Klahvistiku privaatne režiim</string>
     <string name="pref_keyboard_typing_history_summary">Palu, et süsteemne klahvistik ei salvestaks sisestuste ajalugu</string>
     <string name="downloader_check_updates_no_updates">Uuendusi pole saadaval</string>
+    <string name="pref_aa_support_title">Android Auto liidestus</string>
+    <string name="pref_aa_support_summary_yes">Rakendus on paigaldatud Google Play rakendustepoest ja saad seda oma autos kasutada Android Auto liidestusega.</string>
+    <string name="pref_aa_support_summary_no">Rakendus pole paigaldatud Google Play rakendustepoest ja saad seda oma autos ei saa kasutada Android Auto liidestusega. Vajuta seadistuste nuppu ja loe lisateavet meie KKK lehelt.</string>
+    <string name="tts_toggle_enable">Lülita hääljuhised sisse</string>
+    <string name="tts_toggle_disable">Lülita hääljuhised välja</string>
 </resources>

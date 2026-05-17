@@ -925,7 +925,7 @@
     <string name="pref_alt_map_lang_handling">Алтернативни језици мапе</string>
     <string name="pref_alt_map_lang_handling_ignore_alternatives">Не користите алтернативе</string>
     <string name="pref_alt_map_lang_handling_system_order">Користите системски редослед</string>
-    <string name="pref_alt_map_lang_handling_local_only">Преферирају и користе само тамо где матерњи</string>
+    <string name="pref_alt_map_lang_handling_local_only">Преферирај и користи само ако је локални језик</string>
     <string name="pref_openexternallinks_title">Аутоматски отворите линкове независних произвођача</string>
     <string name="pref_openexternallinks_summary">Отворите линкове независних произвођача у CoMaps-у по дефаулту</string>
     <string name="bookmark_share_email_subject">Кликните на овај линк %1$s или копирајте ове координате %2$s у вашу апликацију за мапе, да бисте видели локацију.</string>
@@ -935,6 +935,14 @@
     <string name="charge_socket_type1_combo">Тип 1 комбо</string>
     <string name="route_recalculating">Прерачунавање руте…</string>
     <string name="population">Становника: %s</string>
-    <string name="setting_value_system_default">Подразумеван системски</string>
+    <string name="setting_value_system_default">Подразумевано</string>
     <string name="change_app_locale">Тренутни језик апликације</string>
+    <string name="downloader_check_updates_button">Провери ажурирања</string>
+    <string name="downloader_check_updates_checking">Проверавам ажурирања...</string>
+    <string name="downloader_check_updates_updated">Доступна су ажурирања мапе!</string>
+    <string name="downloader_check_updates_no_updates">Нема доступних ажурирања</string>
+    <string name="downloader_check_updates_eol">За ову верзију апликације више нема ажурирања мапе. Молим Вас, ажурирајте апликацију!</string>
+    <string name="downloader_check_updates_error">Грешка при провери ажурирања</string>
+    <string name="pref_keyboard_typing_history_title">Инкогнито режим тастатуре</string>
+    <string name="pref_keyboard_typing_history_summary">Захтева од системске тастатуре да не бележи историју куцања</string>
 </resources>

@@ -437,7 +437,7 @@
 "Greece_Decentralized Administration of Epirus - Western Macedonia":"Decentraliseret administration for Epiros og Vestmakedonien",
 "Greece_Decentralized Administration of Macedonia and Thrace":"Decentraliseret administration for Makedonien og Thrakien",
 "Greece_Decentralized Administration of Thessaly - Central Greece":"Decentraliseret administration for Thessalien og Centralgrækenland",
-"Greece_Decentralized Administration of West Greece":"Peloponnes",
+"Greece_Decentralized Administration of West Greece":"Peloponnes, Vestgrækenland og de Joniske Øer",
 "Greenland":"Grønland",
 "Grenada":"Grenada",
 "Guadeloupe":"Guadeloupe",
@@ -2542,5 +2542,10 @@
 "Spain_Galicia_South Short":"Galicien",
 "Switzerland_Espace Mittelland_East Short":"Espace Mittelland",
 "France_Normandy":"Normandiet",
-"Germany_Saxony":"Sachsen"
+"Germany_Saxony":"Sachsen",
+"France_Auvergne-Rhone-Alpes":"Auvergne-Rhône-Alpes",
+"France_Bourgogne-Franche-Comte":"Bourgogne-Franche-Comté",
+"France_Hauts-de-France":"Hauts-de-France",
+"France_Nouvelle-Aquitaine":"Nouvelle-Aquitaine",
+"France_Occitania":"Occitania"
 }

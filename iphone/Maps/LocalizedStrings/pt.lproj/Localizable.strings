@@ -107,7 +107,7 @@
 "category_water" = "Água";
 /* Search category for RV facilities; any changes should be duplicated in categories.txt @category_rv! */
 "category_rv" = "Para trailers";
-"share_bookmarks_email_body" = "Olá!\n\nSegue em anexo os meus favoritos da aplicação CoMaps. Por favor abra-os se tiver o CoMaps instalado. Caso não tenha, descarregue a aplicação para o seu dispositivo iOS ou Android com a hiperligação https://www.comaps.app/download/\n\nDivirta-se a viajar com o CoMaps!";
+"share_bookmarks_email_body" = "Olá!\n\nSegue em anexo os meus favoritos; por favor, abra-os com o CoMaps. Caso não tenha, descarregue a aplicação aqui: https://www.comaps.app/download/\n\nDivirta-se a viajar com o CoMaps!";
 /* message title of loading file */
 "load_kmz_title" = "A Carregar Favoritos";
 /* Kmz file successful loading */
@@ -870,9 +870,10 @@
 "contribute_to_osm_add_place" = "Adicionar Local";
 "contribute_to_osm_update_map" = "Atualize o Mapa para Contribuir";
 "contribute_to_osm_update_map_description" = "Precisa de atualizar o mapa %@ para a última versão antes de contribuir para os dados do OpenStreetMap";
-"downloader_check_updates_button" = "Check for updates";
-"downloader_check_updates_checking" = "Checking for updates...";
-"downloader_check_updates_updated" = "Map updates available!";
-"downloader_check_updates_no_updates" = "No updates available";
-"downloader_check_updates_eol" = "No more map updates for this app version. Please update the app!";
-"downloader_check_updates_error" = "Error checking for updates";
+"downloader_check_updates_button" = "Procurar atualizações";
+"downloader_check_updates_checking" = "Procurando atualizações...";
+"downloader_check_updates_updated" = "Atualizações do mapa disponíveis!";
+"downloader_check_updates_no_updates" = "Nenhuma atualização disponível";
+"downloader_check_updates_eol" = "Não existirão mais atualizações do mapa para esta versão. Por favor, atualize a aplicação!";
+"downloader_check_updates_error" = "Erro ao procurar atualizações";
+"editor_add_select_category_recent_subtitle" = "Usados Recentemente";

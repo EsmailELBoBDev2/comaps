@@ -581,7 +581,7 @@
 "pref_alt_map_lang_handling" = "Алтернативни језици мапе";
 "pref_alt_map_lang_handling_ignore_alternatives" = "Не користите алтернативе";
 "pref_alt_map_lang_handling_system_order" = "Користите системски редослед";
-"pref_alt_map_lang_handling_local_only" = "Преферирају и користе само тамо где матерњи";
+"pref_alt_map_lang_handling_local_only" = "Преферирај и користи само ако је локални језик";
 "transliteration_title" = "Транслитерација у латиницу";
 "transliteration_title_disabled_summary" = "Онемогућено када увек користите локални језик за мапу";
 /* Subway exits for public transport marks on the map */
@@ -870,9 +870,10 @@
 "contribute_to_osm_add_place" = "Додај место";
 "contribute_to_osm_update_map" = "Ажурирајте мапу ради доприноса";
 "contribute_to_osm_update_map_description" = "Морате да ажурирате мапу %@ на најновију верзију да бисте могли да допринесете подацима OpenStreetMap";
-"downloader_check_updates_button" = "Check for updates";
-"downloader_check_updates_checking" = "Checking for updates...";
-"downloader_check_updates_updated" = "Map updates available!";
-"downloader_check_updates_no_updates" = "No updates available";
-"downloader_check_updates_eol" = "No more map updates for this app version. Please update the app!";
-"downloader_check_updates_error" = "Error checking for updates";
+"downloader_check_updates_button" = "Провери ажурирања";
+"downloader_check_updates_checking" = "Проверавам ажурирања...";
+"downloader_check_updates_updated" = "Доступна су ажурирања мапе!";
+"downloader_check_updates_no_updates" = "Нема доступних ажурирања";
+"downloader_check_updates_eol" = "За ову верзију апликације више нема ажурирања мапе. Молим Вас, ажурирајте апликацију!";
+"downloader_check_updates_error" = "Грешка при провери ажурирања";
+"editor_add_select_category_recent_subtitle" = "Recently Used";

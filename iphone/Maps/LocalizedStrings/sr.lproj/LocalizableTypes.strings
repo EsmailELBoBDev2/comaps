@@ -12,7 +12,7 @@
 "type.aeroway.aerodrome" = "Аеродром";
 "type.aeroway.aerodrome.international" = "Интернационални аеродром";
 "type.aeroway.apron" = "Перон";
-"type.aeroway.gate" = "Капија";
+"type.aeroway.gate" = "Гејт";
 "type.aeroway.helipad" = "Хелиодром";
 "type.aeroway.runway" = "Писта";
 "type.aeroway.taxiway" = "Такси стаза";

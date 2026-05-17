@@ -209,7 +209,7 @@
     <!-- A message in Settings/Preferences explaining why is it not possible to enable 3D buildings when max power saving mode is enabled -->
     <string name="pref_map_3d_buildings_disabled_summary">3D-bygninger er slått av i strømsparingsmodus</string>
     <!-- Settings «Route» category: «Tts enabled» title -->
-    <string name="pref_tts_enable_title">Taleinstrukser</string>
+    <string name="pref_tts_enable_title">Taleveiledning</string>
     <!-- Settings «Route» category: «Tts announce street names» title -->
     <string name="pref_tts_street_names_title">Kunngjør gatenavn</string>
     <!-- Settings «Route» category: «Tts announce street names» description -->
@@ -939,4 +939,9 @@
     <string name="downloader_check_updates_eol">Ingen flere kartoppdateringer for denne app-versjonen. Oppdater appen!</string>
     <string name="downloader_check_updates_updated">Kartoppdateringer er tilgjengelige!</string>
     <string name="downloader_check_updates_button">Se etter oppdateringer</string>
+    <string name="tts_toggle_enable">Slå på taleveiledning</string>
+    <string name="tts_toggle_disable">Slå av taleveiledning</string>
+    <string name="pref_aa_support_summary_no">Appen er ikke installert fra Google Play så du kan ikke bruke den i bilen. Trykk på innstillingen for å få mer informasjon i vår FAQ (Ofte stilte spørsmål).</string>
+    <string name="pref_aa_support_summary_yes">Appen er installert fra Google Play, og du kan bruke den i bilen din.</string>
+    <string name="pref_aa_support_title">Android Auto</string>
 </resources>

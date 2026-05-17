@@ -768,7 +768,7 @@
 /* edit track screen title */
 "track_title" = "Spor";
 /* Translated CoMaps site */
-"translated_om_site_url" = "https://www.comaps.app/";
+"translated_om_site_url" = "https://www.comaps.app/da/";
 /* App Tip #00 */
 "app_tip_00" = "Tak, fordi du bruger vores fællesskabsskabte kort!";
 /* App tip #01 */
@@ -870,9 +870,10 @@
 "contribute_to_osm_add_place" = "Tilføj sted";
 "contribute_to_osm_update_map" = "Opdater kortet for at bidrage";
 "contribute_to_osm_update_map_description" = "Du skal opdatere %@-kortet til den nyeste version, før du kan bidrage til OpenStreetMap-dataene";
-"downloader_check_updates_button" = "Check for updates";
-"downloader_check_updates_checking" = "Checking for updates...";
-"downloader_check_updates_updated" = "Map updates available!";
-"downloader_check_updates_no_updates" = "No updates available";
-"downloader_check_updates_eol" = "No more map updates for this app version. Please update the app!";
-"downloader_check_updates_error" = "Error checking for updates";
+"downloader_check_updates_button" = "Søg efter opdateringer";
+"downloader_check_updates_checking" = "Søger efter opdateringer...";
+"downloader_check_updates_updated" = "Kortopdateringer tilgængelige!";
+"downloader_check_updates_no_updates" = "Ingen opdateringer tilgængelige";
+"downloader_check_updates_eol" = "Der kommer ikke flere kortopdateringer til denne version af appen. Opdater appen!";
+"downloader_check_updates_error" = "Fejl ved søgning efter opdateringer";
+"editor_add_select_category_recent_subtitle" = "Nyligt anvendt";

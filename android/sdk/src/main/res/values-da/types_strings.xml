@@ -1274,8 +1274,8 @@
     <string name="type.military.bunker">Bunker</string>
     <string name="type.mountain_pass">Bjergpas</string>
     <string name="type.noexit">Blind vej</string>
-    <string name="type.organic.only">Økologisk</string>
-    <string name="type.organic.yes">Økologisk</string>
+    <string name="type.organic.only">Kun økologisk</string>
+    <string name="type.organic.yes">Økologiske valgmuligheder</string>
     <string name="type.railway.platform">Jernbaneperron</string>
     <string name="type.railway">Jernbane</string>
     <string name="type.railway.crossing">Jernbaneovergang</string>
@@ -1498,4 +1498,6 @@
     <string name="type.leisure.sports_centre.sport.field_hockey">Sportscenter</string>
     <string name="type.leisure.sports_centre.sport.futsal">Sportscenter</string>
     <string name="type.leisure.sports_centre.sport.handball">Sportscenter</string>
+    <string name="type.organic.no">Ingen økologiske valgmuligheder</string>
+    <string name="type.sport.pickleball">Pickleball</string>
 </resources>

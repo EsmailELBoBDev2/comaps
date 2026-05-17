@@ -675,7 +675,7 @@
     <string name="money">Geld</string>
     <string name="shops">Winkels</string>
     <string name="parkings">Parkeerplaatsen</string>
-    <string name="fuel_places">Benzinestations</string>
+    <string name="fuel_places">Tankstations</string>
     <string name="medicine">Geneeskunde</string>
     <string name="search_in_the_list">Zoek in de lijst</string>
     <string name="religious_places">Religieuze plaatsen</string>
@@ -683,11 +683,11 @@
     <string name="transit_not_found">Metro-navigatie is nog niet beschikbaar in deze regio</string>
     <string name="dialog_pedestrian_route_is_long_header">Geen metroroute gevonden</string>
     <string name="dialog_pedestrian_route_is_long_message">Kies een begin- of eindpunt dichter bij het metrostation</string>
-    <string name="button_layer_isolines">Hoogtes</string>
-    <string name="isolines_activation_error_dialog">Als u gebruik wilt maken van hoogtelijnen, moet u de kaart van het gewenste gebied bijwerken of downloaden</string>
+    <string name="button_layer_isolines">Hoogtelijnen</string>
+    <string name="isolines_activation_error_dialog">Om hoogtelijnen weer te geven, moeten kaartgegevens voor dit gebied worden gedownload</string>
     <string name="isolines_location_error_dialog">Hoogtelijnen zijn nog niet beschikbaar in deze regio</string>
     <string name="elevation_profile_ascent">Stijging</string>
-    <string name="elevation_profile_descent">Afdaling</string>
+    <string name="elevation_profile_descent">Daling</string>
     <string name="elevation_profile_min_elevation">Min. hoogte</string>
     <string name="elevation_profile_max_elevation">Max. hoogte</string>
     <string name="elevation_profile_difficulty">Moeilijkheid</string>
@@ -699,14 +699,14 @@
     <!-- Used in DownloadResources startup screen -->
     <string name="disk_error">Het lukt niet om een map aan te maken en bestanden naar het interne geheugen of een SD-kaart te verplaatsen</string>
     <!-- Used in DownloadResources startup screen -->
-    <string name="disk_error_title">Schijffout</string>
+    <string name="disk_error_title">Opslagfout</string>
     <!-- Used in DownloadResources startup screen -->
     <string name="connection_failure">Verbindingsfout</string>
     <!-- Used in DownloadResources startup screen -->
     <string name="disconnect_usb_cable_title">USB-kabel losmaken</string>
     <string name="enable_keep_screen_on">Scherm ingeschakeld houden</string>
     <!-- Description in preferences -->
-    <string name="enable_keep_screen_on_description">Als deze optie is ingeschakeld, staat het scherm altijd aan als de kaart wordt weergegeven.</string>
+    <string name="enable_keep_screen_on_description">Als deze optie is ingeschakeld, blijft het scherm altijd aan als de kaart wordt weergegeven.</string>
     <!-- A preference title; keep short! -->
     <string name="enable_show_on_lock_screen">Toon op vergrendelscherm</string>
     <!-- Description in preferences -->
@@ -726,7 +726,7 @@
     <!-- App tip #02 -->
     <string name="app_tip_02">Bevalt onze app? Doneer alstublieft om de ontwikkeling te ondersteunen! Bevalt het nog niet? Laat ons weten waarom, dan lossen we het op!</string>
     <!-- App tip #03 -->
-    <string name="app_tip_03">Als u een softwareontwikkelaar kent, kunt u deze vragen om een functie te maken die u nodig heeft.</string>
+    <string name="app_tip_03">Als u een softwareontwikkelaar kent, kunt u deze vragen om een functie te implementeren die u nodig heeft.</string>
     <!-- App tip #04 -->
     <string name="app_tip_04">Tik ergens op de kaart om iets te selecteren. Tik lang om de interface te verbergen en weer te geven.</string>
     <!-- App tip #05 -->
@@ -897,7 +897,7 @@
     <string name="editor_mark_business_vacant_description">Gebruik dit als het bedrijf is verhuisd en de ruimte leeg is en klaar is voor een nieuwe huurder.</string>
     <string name="power_management">Energiebeheer</string>
     <string name="charge_socket_schuko">EU-stekker (Schuko)</string>
-    <string name="navigation_start_tts_message">"Navigatie starten, taal voor steminstructie: "</string>
+    <string name="navigation_start_tts_message">"Navigatie wordt gestart, taal voor gesproken instructies: "</string>
     <string name="prefs_speed_cameras_information">Waarschuwingen voor flitsers zijn uitgeschakeld in landen waar deze wettelijk zijn verboden.</string>
     <string name="navigation_start_tts_disabled_message">Spraakinstructies uitgeschakeld: TTS-engine niet beschikbaar</string>
     <string name="place_page_map_too_old_title">Kaartgegevens verouderd</string>
@@ -909,7 +909,7 @@
     <string name="download_resources_custom_url_title">Aangepaste kaartserver</string>
     <string name="download_resources_custom_url_message">Overschrijf de standaard server voor het downloaden van kaarten. Laat leeg om de standaardserver van CoMaps te gebruiken.</string>
     <string name="download_resources_custom_url_summary_none">Niet ingesteld</string>
-    <string name="download_resources_custom_url_error_scheme">Voer een URL in beginnend met http:// of https://</string>
+    <string name="download_resources_custom_url_error_scheme">Voer een URL in beginnend met https:// of http://</string>
     <string name="pref_maplanguage_local">Plaatselijke taal</string>
     <string name="location_privacy_info">Apps ontvangen locatiegegevens van de locatiedienst van uw besturingssysteem, die deze gegevens kan delen met Google en/of de leverancier van uw apparaat. Gebruik een privacyvriendelijk Android-besturingssysteem om dit te voorkomen.</string>
     <string name="location_privacy">Privacy van locatie</string>
@@ -942,8 +942,13 @@
     <string name="downloader_check_updates_checking">Controleren op updates...</string>
     <string name="downloader_check_updates_updated">Kaartupdates beschikbaar!</string>
     <string name="downloader_check_updates_no_updates">Geen updates beschikbaar</string>
-    <string name="downloader_check_updates_eol">Geen kaartupdates meer voor deze appversie. Update de app.</string>
+    <string name="downloader_check_updates_eol">Geen kaartupdates meer voor deze appversie. Update de app!</string>
     <string name="downloader_check_updates_error">Fout bij het controleren op updates</string>
     <string name="pref_keyboard_typing_history_title">Incognitomodus voor toetsenbord</string>
     <string name="pref_keyboard_typing_history_summary">Vraag het systeemtoetsenbord om geen typgeschiedenis bij te houden</string>
+    <string name="pref_aa_support_title">Android Auto</string>
+    <string name="pref_aa_support_summary_yes">De app is geïnstalleerd vanuit Google Play, u kunt hem gebruiken in uw auto.</string>
+    <string name="pref_aa_support_summary_no">De app is niet geïnstalleerd vanuit Google Play en daarom kunt u hem niet gebruiken in uw auto. Tik op de instelling voor meer informatie in onze FAQ.</string>
+    <string name="tts_toggle_enable">Gesproken instructies inschakelen</string>
+    <string name="tts_toggle_disable">Gesproken instructies uitschakelen</string>
 </resources>

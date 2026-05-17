@@ -174,7 +174,7 @@
 /* A weather shelter by the public transport stop. */
 "type.amenity.shelter.public_transport" = "Abrigo";
 /* Compared to wilderness_hut its smaller and simpler, without a fireplace. */
-"type.amenity.shelter.basic_hut" = "Cabana Básica";
+"type.amenity.shelter.basic_hut" = "Cabana básica";
 /* A traditional 3-walled shelter (one side open), suitable for overnight camping. */
 "type.amenity.shelter.lean_to" = "Abrigo tipo alpendre";
 "type.amenity.public_bath" = "Banho público";
@@ -622,7 +622,7 @@
 "type.historic.castle.palace" = "Palácio";
 "type.historic.castle.shiro" = "Castelo japonês";
 "type.historic.castle.stately" = "Castelo";
-"type.historic.city_gate" = "Portões da Cidade";
+"type.historic.city_gate" = "Portões da cidade";
 "type.historic.citywalls" = "Muro da cidade";
 "type.historic.fort" = "Forte";
 "type.historic.gallows" = "Galo";
@@ -696,7 +696,7 @@
 "type.leisure.bandstand" = "Coreto";
 "type.leisure.common" = "Terreno baldio";
 "type.leisure.dog_park" = "Parque para cachorros";
-"type.leisure.escape_game" = "Sala de Fuga";
+"type.leisure.escape_game" = "Escape room";
 "type.leisure.fitness_centre" = "Academia de ginástica";
 "type.leisure.fitness_station" = "Estação de fitness";
 "type.leisure.dance" = "Salão de dança";
@@ -837,8 +837,8 @@
 "type.natural.saddle" = "Sela de montanha";
 "type.natural.rock" = "Pedra";
 "type.natural.scrub" = "Esfregar";
-"type.natural.spring" = "Fonte Natural";
-"type.natural.spring.drinking_water_no" = "Fonte Natural";
+"type.natural.spring" = "Nascente";
+"type.natural.spring.drinking_water_no" = "Nascente";
 "type.natural.strait" = "Estreito";
 "type.natural.tree" = "Árvore";
 "type.natural.tree_row" = "Fileira de árvores";
@@ -1311,7 +1311,7 @@
 "type.shop.supermarket" = "Supermercado";
 "type.shop.tattoo" = "Estúdio de tatuagens";
 "type.shop.tea" = "Loja de chás";
-"type.shop.telecommunication" = "Loja de Telecomunicação";
+"type.shop.telecommunication" = "Loja de telecomunicações";
 "type.shop.ticket" = "Bilheteria";
 "type.shop.toys" = "Loja de brinquedos";
 "type.shop.travel_agency" = "Agência de viagem";

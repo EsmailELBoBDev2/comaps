@@ -91,7 +91,7 @@
 "type.amenity.grave_yard" = "Bãi tha ma";
 /* In most (European) countries, сemeteries are usually independent of places of worship (e.g. military cemeteries), while grave yards are usually the yard of a place of worship. */
 "type.amenity.grave_yard.christian" = "Bãi tha ma";
-"type.amenity.hospital" = "Bệnhviện";
+"type.amenity.hospital" = "Bệnh viện";
 "type.amenity.hunting_stand" = "Điểm săn bắn";
 "type.amenity.ice_cream" = "Quầy kem";
 "type.amenity.internet_cafe" = "Quán Internet";
@@ -105,8 +105,8 @@
 "type.amenity.motorcycle_parking" = "Bãi đỗ xe máy";
 "type.amenity.nightclub" = "Câu lạc bộ đêm";
 "type.amenity.nursing_home" = "Nhà dưỡng lão";
-"type.amenity.parking" = "đỗ xe";
-"type.amenity.parking.fee" = "đỗ xe";
+"type.amenity.parking" = "Đỗ xe";
+"type.amenity.parking.fee" = "Đỗ xe";
 "type.amenity.parking.multi.storey" = "Bãi đậu xe nhiều tầng";
 "type.amenity.parking.multi.storey.fee" = "Bãi đậu xe nhiều tầng";
 "type.amenity.parking.no.access" = "Bãi đậu xe tư nhân";
@@ -115,20 +115,20 @@
 "type.amenity.parking.park_and_ride" = "Bãi đỗ xe kết nối giao thông công cộng";
 "type.amenity.parking.underground" = "Bãi đậu xe ngầm";
 "type.amenity.parking.underground.fee" = "Bãi đậu xe ngầm";
-"type.amenity.parking.underground.private" = "Bãi đậu xe ngầm riêng";
+"type.amenity.parking.underground.private" = "Bãi đậu xe ngầm tư nhân";
 "type.amenity.parking.street_side" = "Bãi đậu xe bên đường";
 "type.amenity.parking.street_side.fee" = "Bãi đậu xe bên đường";
-"type.amenity.parking.street_side.private" = "Bãi đậu xe riêng bên đường";
+"type.amenity.parking.street_side.private" = "Bãi đậu xe bên đường tư nhân";
 "type.amenity.parking.lane" = "Làn đường đỗ xe";
 "type.amenity.parking.lane.fee" = "Làn đường đỗ xe";
-"type.amenity.parking.lane.private" = "Bãi đậu xe làn đường riêng";
+"type.amenity.parking.lane.private" = "Làn đường đỗ xe tư nhân";
 "type.amenity.parking_entrance" = "Lối vào bãi đậu xe";
-"type.amenity.parking_entrance.private" = "Lối vào bãi đậu xe riêng";
+"type.amenity.parking_entrance.private" = "Lối vào bãi đậu xe tư nhân";
 "type.amenity.parking_entrance.permissive" = "Lối vào bãi đậu xe";
-"type.amenity.parking_space" = "Chỗ để xe";
-"type.amenity.parking_space.permissive" = "Chỗ để xe";
-"type.amenity.parking_space.private" = "Chỗ để xe";
-"type.amenity.parking_space.underground" = "Chỗ để xe";
+"type.amenity.parking_space" = "Chỗ đỗ xe";
+"type.amenity.parking_space.permissive" = "Chỗ đỗ xe";
+"type.amenity.parking_space.private" = "Chỗ đỗ xe";
+"type.amenity.parking_space.underground" = "Chỗ đỗ xe";
 "type.amenity.parking_space.disabled" = "Chỗ đậu xe dành cho người khuyết tật";
 "type.amenity.car_pooling" = "Điểm dừng dịch vụ đi chung xe";
 "type.amenity.payment_terminal" = "Máy thanh toán";
@@ -177,7 +177,7 @@
 "type.amenity.shelter.basic_hut" = "Túp lều Bivouac";
 /* A traditional 3-walled shelter (one side open), suitable for overnight camping. */
 "type.amenity.shelter.lean_to" = "Lán trú ẩn kiểu mái dốc";
-"type.amenity.public_bath" = "Nhà tắm công cộng";
+"type.amenity.public_bath" = "Bể tắm công cộng";
 "type.amenity.shower" = "Nhà tắm";
 "type.amenity.stripclub" = "Câu lạc bộ thoát y";
 "type.amenity.taxi" = "Bãi đón taxi";
@@ -226,21 +226,21 @@
 "type.barrier.hedge" = "Hàng rào cây xanh";
 "type.barrier.kissing_gate" = "Cổng hôn";
 "type.barrier.lift_gate" = "Thanh Chắn";
-"type.barrier.retaining_wall" = "Retaining Wall";
-"type.barrier.stile" = "Trụ chắn";
+"type.barrier.retaining_wall" = "Tường chắn đất";
+"type.barrier.stile" = "Bậc vượt rào";
 "type.barrier.turnstile" = "Cửa quay";
-"type.barrier.wicket_gate" = "Wicket gate";
-"type.barrier.swing_gate" = "Thanh Chắn";
+"type.barrier.wicket_gate" = "Cửa phụ";
+"type.barrier.swing_gate" = "Barie quay ngang";
 "type.barrier.toll_booth" = "Quầy Soát Vé";
-"type.barrier.wall" = "Wall";
-"type.boundary" = "Boundary";
-"type.boundary.administrative" = "Administrative Boundary";
+"type.barrier.wall" = "Tường";
+"type.boundary" = "Biên giới";
+"type.boundary.administrative" = "Ranh giới hành chính";
 /* Borders between countries. */
-"type.boundary.administrative.2" = "National Border";
+"type.boundary.administrative.2" = "Biên giới quốc gia";
 /* Country's primary subdivision borders, e.g. between regions, provinces, states.. */
-"type.boundary.administrative.3" = "Regional Boundary";
+"type.boundary.administrative.3" = "Ranh giới vùng";
 /* Country's primary subdivision borders, e.g. between regions, provinces, states.. */
-"type.boundary.administrative.4" = "Regional Boundary";
+"type.boundary.administrative.4" = "Ranh giới vùng";
 "type.boundary.national_park" = "Công viên quốc gia";
 "type.boundary.aboriginal_lands" = "Đất bản địa";
 "type.boundary.protected_area" = "Khu bảo tồn";
@@ -257,9 +257,9 @@
 "type.building_part" = "Tòa nhà";
 "type.building.garage" = "Gara";
 "type.building.train_station" = "Tòa nhà ga";
-"type.building.warehouse" = "Warehouse";
+"type.building.warehouse" = "Nhà kho";
 "type.cemetery.grave" = "Phần mộ";
-"type.craft" = "Thủ công";
+"type.craft" = "Xưởng chế tạo đồ thủ công";
 "type.craft.beekeeper" = "Người nuôi ong";
 "type.craft.blacksmith" = "Thợ rèn";
 "type.craft.brewery" = "Nhà máy bia";
@@ -273,7 +273,7 @@
 "type.craft.handicraft" = "Thủ công mỹ nghệ";
 /* Heating, Ventilation, and Air Conditioning */
 "type.craft.hvac" = "Điều hòa nhiệt độ";
-"type.craft.key_cutter" = "Cắt chính";
+"type.craft.key_cutter" = "Sao chép khóa";
 "type.craft.locksmith" = "Thợ khóa";
 "type.craft.metal_construction" = "Nhà kim khí";
 "type.craft.painter" = "Họa sỹ";
@@ -297,7 +297,7 @@
 "type.cuisine.beef_bowl" = "Tô thịt bò";
 "type.cuisine.brazilian" = "Ẩm thực brazil";
 "type.cuisine.breakfast" = "Bữa ăn sáng";
-"type.cuisine.bubble_tea" = "Bubble Tea";
+"type.cuisine.bubble_tea" = "Trà sữa";
 "type.cuisine.burger" = "Bánh hamburger";
 "type.cuisine.buschenschank" = "Buschenschank";
 "type.cuisine.cake" = "Bánh ngọt";
@@ -309,7 +309,7 @@
 "type.cuisine.croatian" = "Ẩm thực croatia";
 "type.cuisine.curry" = "Món cà ri";
 "type.cuisine.deli" = "Món ăn ngon";
-"type.cuisine.diner" = "Bữa tối";
+"type.cuisine.diner" = "Quán ăn";
 "type.cuisine.donut" = "Bánh rán";
 "type.cuisine.ethiopian" = "Ẩm thực ethiopia";
 "type.cuisine.filipino" = "Ẩm thực philipin";
@@ -369,25 +369,25 @@
 "type.cuisine.vegan" = "Ẩm thực chay";
 "type.cuisine.vegetarian" = "Ẩm thực chay";
 "type.cuisine.vietnamese" = "Ẩm thực việt";
-"type.emergency" = "Emergency";
-"type.emergency.access_point" = "Emergency Rescue Point";
-"type.emergency.access_point.address" = "Emergency Rescue Address";
+"type.emergency" = "Cấp cứu";
+"type.emergency.access_point" = "Điểm cần cứu hộ";
+"type.emergency.access_point.address" = "Địa chỉ cần cứu hộ";
 "type.emergency.assembly_point" = "Điểm tập hợp khẩn cấp";
-"type.emergency.disaster_help_point" = "Emergency Disaster Help Point";
-"type.emergency.life_ring" = "Lifebuoy";
+"type.emergency.disaster_help_point" = "Điểm trợ giúp thảm họa khẩn cấp";
+"type.emergency.life_ring" = "Phao cứu sinh";
 "type.emergency.defibrillator" = "Máy khử rung tim";
 "type.emergency.fire_hydrant" = "Vòi chữa cháy";
 "type.amenity.hydrant" = "Irrigation Hydrant";
 "type.emergency.phone" = "Điện thoại khẩn cấp";
 /* A place where a lifeguard is on duty. */
 "type.emergency.lifeguard" = "Nhân viên cứu hộ";
-"type.beacon.cardinal.east" = "Cardinal Beacon";
-"type.beacon.cardinal.north" = "Cardinal Beacon";
-"type.beacon.cardinal.south" = "Cardinal Beacon";
-"type.beacon.cardinal.west" = "Cardinal Beacon";
-"type.beacon.isolated_danger" = "Isolated Danger Beacon";
-"type.beacon.lateral.port" = "Lateral Beacon";
-"type.beacon.lateral.starboard" = "Lateral Beacon";
+"type.beacon.cardinal.east" = "Phao tiêu hàng hải chỉ hướng";
+"type.beacon.cardinal.north" = "Phao tiêu hàng hải chỉ hướng";
+"type.beacon.cardinal.south" = "Phao tiêu hàng hải chỉ hướng";
+"type.beacon.cardinal.west" = "Phao tiêu hàng hải chỉ hướng";
+"type.beacon.isolated_danger" = "Phao tiêu cảnh báo chướng ngại vật cô lập";
+"type.beacon.lateral.port" = "Phao tiêu hàng hải chỉ giới hạn luồng";
+"type.beacon.lateral.starboard" = "Phao tiêu hàng hải chỉ giới hạn luồng";
 "type.beacon.safe_water" = "Safe Water Beacon";
 "type.beacon.special_purpose" = "Special Purpose Beacon";
 "type.buoy.cardinal.east" = "Cardinal Buoy";
@@ -420,12 +420,12 @@
 "type.entrance" = "Lối vào";
 /* This is for main/primary entrances, for secondary entrances see type.entrance */
 "type.entrance.main" = "Lối vào chính";
-"type.entrance.house" = "House Entrance";
-"type.entrance.garage" = "Garage Entrance";
-"type.entrance.service" = "Service Entrance";
-"type.entrance.entry" = "Entry (Only)";
-"type.entrance.exit" = "Lối ra";
-"type.entrance.emergency" = "Emergency Exit";
+"type.entrance.house" = "Lối vào nhà";
+"type.entrance.garage" = "Lối vào ga-ra";
+"type.entrance.service" = "Lối ra vào dịch vụ";
+"type.entrance.entry" = "Lối vào (Chỉ vào)";
+"type.entrance.exit" = "Lối ra (Chỉ ra)";
+"type.entrance.emergency" = "Lối thoát hiểm";
 "type.fee.yes" = "$";
 "type.fee.no" = "Miễn phí";
 "type.healthcare.laboratory" = "Phòng thí nghiệm y tế";
@@ -452,15 +452,15 @@
 "type.highway.busway.tunnel" = "Đường hầm";
 "type.highway.bus_stop" = "Bến xe buýt";
 "type.highway.construction" = "Đường đang thi công";
-"type.highway.cycleway" = "Cycle Path";
+"type.highway.cycleway" = "Đường dành cho xe đạp";
 /* These translations are used for all type.highway.*.bridge. */
 "type.highway.cycleway.bridge" = "Cầu";
 "type.highway.cycleway.permissive" = "Cycle Path";
 /* These translations are used for all type.highway.*.tunnel. */
 "type.highway.cycleway.tunnel" = "Đường hầm";
 "type.highway.elevator" = "Elevator";
-"type.highway.footway" = "Đường";
-"type.highway.footway.sidewalk" = "Đường đi bộ";
+"type.highway.footway" = "Lối đi bộ";
+"type.highway.footway.sidewalk" = "Vỉa hè";
 "type.highway.footway.crossing" = "Vạch qua đường";
 "type.highway.footway.area" = "Đường";
 /* These translations are used for all type.highway.*.bridge. */

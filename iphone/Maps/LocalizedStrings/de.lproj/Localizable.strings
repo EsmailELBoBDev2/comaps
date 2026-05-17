@@ -870,9 +870,10 @@
 "contribute_to_osm_add_place" = "Ort hinzufügen";
 "contribute_to_osm_update_map" = "Karte updaten, um Beizutragen";
 "contribute_to_osm_update_map_description" = "Du musst die %@ Karte auf die letzte Version aktualisieren, bevor du etwas zu den OpenStreetMap-Daten beitragen kannst";
-"downloader_check_updates_button" = "Check for updates";
-"downloader_check_updates_checking" = "Checking for updates...";
-"downloader_check_updates_updated" = "Map updates available!";
-"downloader_check_updates_no_updates" = "No updates available";
-"downloader_check_updates_eol" = "No more map updates for this app version. Please update the app!";
-"downloader_check_updates_error" = "Error checking for updates";
+"downloader_check_updates_button" = "Auf Updates überprüfen";
+"downloader_check_updates_checking" = "Suche nach Updates...";
+"downloader_check_updates_updated" = "Karten-Updates verfügbar!";
+"downloader_check_updates_no_updates" = "Keine Updates verfügbar";
+"downloader_check_updates_eol" = "Kartenaktualisierungen wurden für diese App-Version eingestellt. Bitte die App aktualisieren!";
+"downloader_check_updates_error" = "Fehler beim Prüfen auf Updates";
+"editor_add_select_category_recent_subtitle" = "Recently Used";

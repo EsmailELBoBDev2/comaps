@@ -728,22 +728,22 @@
 "money" = "Geld";
 "shops" = "Winkels";
 "parkings" = "Parkeerplaatsen";
-"fuel_places" = "Benzinestations";
+"fuel_places" = "Tankstations";
 "medicine" = "Geneeskunde";
 "search_in_the_list" = "Zoek in de lijst";
 "religious_places" = "Religieuze plaatsen";
 "transit_not_found" = "Metro-navigatie is nog niet beschikbaar in deze regio";
 "dialog_pedestrian_route_is_long_header" = "Geen metroroute gevonden";
 "dialog_pedestrian_route_is_long_message" = "Kies een begin- of eindpunt dichter bij het metrostation";
-"button_layer_isolines" = "Hoogtes";
-"isolines_activation_error_dialog" = "Als u gebruik wilt maken van hoogtelijnen, moet u de kaart van het gewenste gebied bijwerken of downloaden";
+"button_layer_isolines" = "Hoogtelijnen";
+"isolines_activation_error_dialog" = "Om hoogtelijnen weer te geven, moeten kaartgegevens voor dit gebied worden gedownload";
 "isolines_location_error_dialog" = "Hoogtelijnen zijn nog niet beschikbaar in deze regio";
 "elevation_profile_diff_level" = "Moeilijkheidsgraad";
 "elevation_profile_diff_level_easy" = "Gemakkelijk";
 "elevation_profile_diff_level_moderate" = "Middelmatig";
 "elevation_profile_diff_level_hard" = "Moeilijk";
 "elevation_profile_ascent" = "Stijging";
-"elevation_profile_descent" = "Afdaling";
+"elevation_profile_descent" = "Daling";
 "elevation_profile_min_elevation" = "Min. hoogte";
 "elevation_profile_max_elevation" = "Max. hoogte";
 "isolines_toast_zooms_1_10" = "Zoom in om hoogtelijnen te bekijken";
@@ -776,7 +776,7 @@
 /* App tip #02 */
 "app_tip_02" = "Bevalt onze app? Doneer alstublieft om de ontwikkeling te ondersteunen! Bevalt het nog niet? Laat ons weten waarom, dan lossen we het op!";
 /* App tip #03 */
-"app_tip_03" = "Als u een softwareontwikkelaar kent, kunt u deze vragen om een functie te maken die u nodig heeft.";
+"app_tip_03" = "Als u een softwareontwikkelaar kent, kunt u deze vragen om een functie te implementeren die u nodig heeft.";
 /* App tip #04 */
 "app_tip_04" = "Tik ergens op de kaart om iets te selecteren. Tik lang om de interface te verbergen en weer te geven.";
 /* App tip #05 */
@@ -870,9 +870,10 @@
 "contribute_to_osm_add_place" = "Voeg plaats toe";
 "contribute_to_osm_update_map" = "Update de kaart om bij te dragen";
 "contribute_to_osm_update_map_description" = "U moet de kaart %@ bijwerken naar de nieuwste versie voordat u kunt bijdragen aan de OpenStreetMap-gegevens";
-"downloader_check_updates_button" = "Check for updates";
-"downloader_check_updates_checking" = "Checking for updates...";
-"downloader_check_updates_updated" = "Map updates available!";
-"downloader_check_updates_no_updates" = "No updates available";
-"downloader_check_updates_eol" = "No more map updates for this app version. Please update the app!";
-"downloader_check_updates_error" = "Error checking for updates";
+"downloader_check_updates_button" = "Controleren op updates";
+"downloader_check_updates_checking" = "Controleren op updates...";
+"downloader_check_updates_updated" = "Kaartupdates beschikbaar!";
+"downloader_check_updates_no_updates" = "Geen updates beschikbaar";
+"downloader_check_updates_eol" = "Geen kaartupdates meer voor deze appversie. Update de app!";
+"downloader_check_updates_error" = "Fout bij het controleren op updates";
+"editor_add_select_category_recent_subtitle" = "Onlangs gebruikt";

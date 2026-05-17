@@ -102,4 +102,11 @@
     <string name="delete_list">Forigi liston</string>
     <string name="category_rv">Lokoj por loĝaŭtoj</string>
     <string name="dialog_routing_location_unknown_turn_on">Ne povas trovi viajn nunajn koordinatojn per GPS. Enŝaltu poziciajn servojn por krei vojon.</string>
+    <string name="downloader_check_updates_button">Eltrovi ĉu povas aktualigi</string>
+    <string name="downloader_check_updates_checking">Eltrovado de aktualigaĵoj...</string>
+    <string name="downloader_check_updates_updated">Map-aktualigaĵoj ekzistas!</string>
+    <string name="downloader_check_updates_no_updates">Map-aktualigaĵoj ne ekzistas</string>
+    <string name="downloader_check_updates_eol">Map-aktualigaĵojn ne plu disponigas por tiu ĉi versio de la apo. Bonvolu aktualigi la apon!</string>
+    <string name="downloader_check_updates_error">Eraro okazis dum eltrovado de aktualigaĵoj</string>
+    <string name="description">Notoj</string>
 </resources>

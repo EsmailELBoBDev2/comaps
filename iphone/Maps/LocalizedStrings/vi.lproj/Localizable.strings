@@ -870,9 +870,10 @@
 "contribute_to_osm_add_place" = "Add Place";
 "contribute_to_osm_update_map" = "Update the Map to Contribute";
 "contribute_to_osm_update_map_description" = "You need to update the %@ map to the latest version before you can contribute to the OpenStreetMap data";
-"downloader_check_updates_button" = "Check for updates";
-"downloader_check_updates_checking" = "Checking for updates...";
-"downloader_check_updates_updated" = "Map updates available!";
-"downloader_check_updates_no_updates" = "No updates available";
-"downloader_check_updates_eol" = "No more map updates for this app version. Please update the app!";
-"downloader_check_updates_error" = "Error checking for updates";
+"downloader_check_updates_button" = "Kiểm tra cập nhật";
+"downloader_check_updates_checking" = "Đang tìm bản cập nhật...";
+"downloader_check_updates_updated" = "Có bản cập nhật mới!";
+"downloader_check_updates_no_updates" = "Không có bản cập nhật mới";
+"downloader_check_updates_eol" = "Phiên bản ứng dụng này không còn nhận được các bản cập nhật bản đồ. Vui lòng cập nhật ứng dụng!";
+"downloader_check_updates_error" = "Xảy ra lỗi khi kiểm tra cập nhật";
+"editor_add_select_category_recent_subtitle" = "Recently Used";

@@ -916,7 +916,7 @@
     <string name="population">População: %s</string>
     <string name="setting_value_system_default">Padrão do sistema</string>
     <string name="change_app_locale">Idioma do app</string>
-    <string name="downloader_check_updates_button">Verifique se há atualizações</string>
+    <string name="downloader_check_updates_button">Buscar atualizações</string>
     <string name="downloader_check_updates_checking">Buscando atualizações...</string>
     <string name="downloader_check_updates_updated">Atualizações do mapa disponíveis!</string>
     <string name="downloader_check_updates_no_updates">Nenhuma atualização disponível</string>

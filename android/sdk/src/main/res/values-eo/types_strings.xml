@@ -113,4 +113,8 @@
     <string name="type.amenity.marketplace">Foirejo</string>
     <string name="type.amenity.motorcycle_parking">Parkumejo por motocikloj</string>
     <string name="type.amenity.nightclub">Noktoklubo</string>
+    <string name="type.leisure.sports_centre.sport.pickleball">Sportejo</string>
+    <string name="type.sport.golf">Golfo</string>
+    <string name="type.sport.gymnastics">Gimnastiko</string>
+    <string name="type.sport.handball">Manpilko</string>
 </resources>

@@ -947,4 +947,12 @@
     <string name="bookmark_share_email_subject">Przejdź pod %1$s lub skopiuj te koordynaty %2$s do swojej aplikacji mapowej, aby zobaczyć tę lokalizację.</string>
     <string name="my_position_share_email">Przejdź pod %1$s lub skopiuj te koordynaty %2$s do swojej aplikacji mapowej, aby zobaczyć moją lokalizację.</string>
     <string name="change_app_locale">Język aplikacji</string>
+    <string name="downloader_check_updates_button">Sprawdź aktualizacje</string>
+    <string name="downloader_check_updates_checking">Sprawdzanie dostępności aktualizacji…</string>
+    <string name="downloader_check_updates_updated">Aktualizacje map są dostępne!</string>
+    <string name="downloader_check_updates_no_updates">Brak dostępnych aktualizacji</string>
+    <string name="downloader_check_updates_eol">Nowe aktualizacje map nie są już dostępne dla tej wersji aplikacji. Zaktualizuj aplikację!</string>
+    <string name="downloader_check_updates_error">Sprawdzanie dostępności aktualizacji nie powiodło się</string>
+    <string name="pref_keyboard_typing_history_title">Tryb incognito klawiatury</string>
+    <string name="pref_keyboard_typing_history_summary">Poproś klawiaturę systemową, aby nie zapisywała historii wpisywania</string>
 </resources>

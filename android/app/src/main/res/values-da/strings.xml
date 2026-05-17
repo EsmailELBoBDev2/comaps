@@ -927,10 +927,15 @@
     <string name="change_app_locale">App-sprog</string>
     <string name="downloader_check_updates_button">Søg efter opdateringer</string>
     <string name="downloader_check_updates_checking">Søger efter opdateringer...</string>
-    <string name="downloader_check_updates_eol">Ingen flere kortopdateringer for denne appversion. Opdater appen.</string>
+    <string name="downloader_check_updates_eol">Der kommer ikke flere kortopdateringer til denne version af appen. Opdater appen!</string>
     <string name="downloader_check_updates_error">Fejl ved søgning efter opdateringer</string>
     <string name="downloader_check_updates_no_updates">Ingen opdateringer tilgængelige</string>
     <string name="downloader_check_updates_updated">Kortopdateringer tilgængelige!</string>
     <string name="pref_keyboard_typing_history_title">Inkognitotilstand på tastatur</string>
     <string name="pref_keyboard_typing_history_summary">Anmod systemtastatur om ikke at gemme tastetrykhistorik</string>
+    <string name="tts_toggle_enable">Aktivér stemmeinstruktioner</string>
+    <string name="tts_toggle_disable">Deaktivér stemmeinstruktioner</string>
+    <string name="pref_aa_support_title">Android Auto</string>
+    <string name="pref_aa_support_summary_yes">Appen er installeret fra Google Play, du kan bruge den i din bil.</string>
+    <string name="pref_aa_support_summary_no">Appen er ikke installeret fra Google Play, du kan ikke bruge den i din bil. Tryk på indstillingen for flere oplysninger i vores FAQ.</string>
 </resources>

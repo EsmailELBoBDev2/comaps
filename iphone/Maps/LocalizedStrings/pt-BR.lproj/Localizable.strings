@@ -6,7 +6,7 @@
 "delete" = "Apagar";
 /* Download/update Maps page */
 "download_maps" = "Baixar mapas";
-"downloader_check_updates_button" = "Verifique se há atualizações";
+"downloader_check_updates_button" = "Buscar atualizações";
 "downloader_check_updates_checking" = "Buscando atualizações...";
 "downloader_check_updates_updated" = "Atualizações do mapa disponíveis!";
 "downloader_check_updates_no_updates" = "Nenhuma atualização disponível";
@@ -368,8 +368,8 @@
 "wikimedia_commons" = "Wikimedia Commons";
 "p2p_your_location" = "Localização atual";
 "p2p_start" = "Iniciar";
-"p2p_from_here" = "De";
-"p2p_to_here" = "Para";
+"p2p_from_here" = "Rota de";
+"p2p_to_here" = "Rota para";
 "p2p_only_from_current" = "Só é possível navegar a partir da sua localização atual.";
 "p2p_reroute_from_current" = "Deseja planejar uma rota a partir da sua localização atual?";
 "editor_time_add" = "Adicionar horário";
@@ -877,3 +877,4 @@
 "contribute_to_osm_add_place" = "Adicionar um local";
 "contribute_to_osm_update_map" = "Atualize o mapa para contribuir";
 "contribute_to_osm_update_map_description" = "Você precisa atualizar o mapa %@ para a versão mais recente antes de poder contribuir para os dados do OpenStreetMap";
+"editor_add_select_category_recent_subtitle" = "Recently Used";

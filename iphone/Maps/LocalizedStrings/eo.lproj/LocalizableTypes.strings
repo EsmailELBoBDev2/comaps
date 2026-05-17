@@ -1371,9 +1371,9 @@
 "type.sport.equestrian" = "Equestrian Sports";
 "type.sport.field_hockey" = "Field Hockey";
 "type.sport.futsal" = "Futsal";
-"type.sport.golf" = "Golf";
-"type.sport.gymnastics" = "Gymnastics";
-"type.sport.handball" = "Handball";
+"type.sport.golf" = "Golfo";
+"type.sport.gymnastics" = "Gimnastiko";
+"type.sport.handball" = "Manpilko";
 "type.sport.ice_hockey" = "Ice Hockey";
 "type.sport.padel" = "Padel";
 "type.sport.pelota" = "Basque Pelota";
@@ -1514,4 +1514,4 @@
 "type.sport.boules" = "Boules";
 "type.leisure.sports_centre.sport.boules" = "Sportejo";
 "type.sport.pickleball" = "Pickleball";
-"type.leisure.sports_centre.sport.pickleball" = "Sports Centre";
+"type.leisure.sports_centre.sport.pickleball" = "Sportejo";

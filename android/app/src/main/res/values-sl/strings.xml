@@ -682,4 +682,5 @@
     <string name="route_recalculating">Ponovno preračunavanje poti …</string>
     <string name="setting_value_system_default">Privzeto sistemsko</string>
     <string name="change_app_locale">Jezik orodja</string>
+    <string name="downloader_check_updates_no_updates">Posodobitev ni na voljo</string>
 </resources>

@@ -614,8 +614,8 @@
     <string name="type.office.lawyer">Laghyas</string>
     <string name="type.office.ngo">Buro Aluseneth</string>
     <string name="type.office.telecommunication">Kowethyans Pellgomunyans</string>
-    <string name="type.organic.only">Organek</string>
-    <string name="type.organic.yes">Organek</string>
+    <string name="type.organic.only">Organek hepken</string>
+    <string name="type.organic.yes">Dewisyow organek</string>
     <string name="type.place.city">Cita</string>
     <string name="type.place.city.capital">Chifcita</string>
     <string name="type.place.city.capital.10">Cita</string>
@@ -1423,4 +1423,5 @@
     <string name="type.sport.four_square">Peswar Pedrek</string>
     <string name="type.leisure.sports_centre.sport.pickleball">Kresen Sportys</string>
     <string name="type.sport.pickleball">Pel Pyckel</string>
+    <string name="type.organic.no">Dewisyow organek vyth</string>
 </resources>

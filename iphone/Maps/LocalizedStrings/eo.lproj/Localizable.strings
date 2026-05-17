@@ -870,9 +870,10 @@
 "contribute_to_osm_add_place" = "Aldoni lokon";
 "contribute_to_osm_update_map" = "Ĝisdatigu tiun ĉi mapon por kontribui";
 "contribute_to_osm_update_map_description" = "Vi devas ĝisdatigi la mapon %@ antaŭ vi kontribui ŝangojn al OpenStreetMap";
-"downloader_check_updates_button" = "Check for updates";
-"downloader_check_updates_checking" = "Checking for updates...";
-"downloader_check_updates_updated" = "Map updates available!";
-"downloader_check_updates_no_updates" = "No updates available";
-"downloader_check_updates_eol" = "No more map updates for this app version. Please update the app!";
-"downloader_check_updates_error" = "Error checking for updates";
+"downloader_check_updates_button" = "Eltrovi ĉu povas aktualigi";
+"downloader_check_updates_checking" = "Eltrovado de aktualigaĵoj...";
+"downloader_check_updates_updated" = "Map-aktualigaĵoj ekzistas!";
+"downloader_check_updates_no_updates" = "Map-aktualigaĵoj ne ekzistas";
+"downloader_check_updates_eol" = "Map-aktualigaĵojn ne plu disponigas por tiu ĉi versio de la apo. Bonvolu aktualigi la apon!";
+"downloader_check_updates_error" = "Eraro okazis dum eltrovado de aktualigaĵoj";
+"editor_add_select_category_recent_subtitle" = "Recently Used";

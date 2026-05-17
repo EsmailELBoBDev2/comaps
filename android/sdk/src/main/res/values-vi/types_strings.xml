@@ -61,7 +61,7 @@
     <string name="type.amenity.grave_yard">Bãi tha ma</string>
     <!-- In most (European) countries, сemeteries are usually independent of places of worship (e.g. military cemeteries), while grave yards are usually the yard of a place of worship. -->
     <string name="type.amenity.grave_yard.christian">Bãi tha ma</string>
-    <string name="type.amenity.hospital">Bệnhviện</string>
+    <string name="type.amenity.hospital">Bệnh viện</string>
     <string name="type.amenity.hunting_stand">Điểm săn bắn</string>
     <string name="type.amenity.ice_cream">Quầy kem</string>
     <string name="type.amenity.internet_cafe">Quán Internet</string>
@@ -72,8 +72,8 @@
     <string name="type.amenity.motorcycle_parking">Bãi đỗ xe máy</string>
     <string name="type.amenity.nightclub">Câu lạc bộ đêm</string>
     <string name="type.amenity.nursing_home">Nhà dưỡng lão</string>
-    <string name="type.amenity.parking">đỗ xe</string>
-    <string name="type.amenity.parking.fee">đỗ xe</string>
+    <string name="type.amenity.parking">Đỗ xe</string>
+    <string name="type.amenity.parking.fee">Đỗ xe</string>
     <string name="type.amenity.parking.multi.storey">Bãi đậu xe nhiều tầng</string>
     <string name="type.amenity.parking.multi.storey.fee">Bãi đậu xe nhiều tầng</string>
     <string name="type.amenity.parking.no.access">Bãi đậu xe tư nhân</string>
@@ -82,20 +82,20 @@
     <string name="type.amenity.parking.park_and_ride">Bãi đỗ xe kết nối giao thông công cộng</string>
     <string name="type.amenity.parking.underground">Bãi đậu xe ngầm</string>
     <string name="type.amenity.parking.underground.fee">Bãi đậu xe ngầm</string>
-    <string name="type.amenity.parking.underground.private">Bãi đậu xe ngầm riêng</string>
+    <string name="type.amenity.parking.underground.private">Bãi đậu xe ngầm tư nhân</string>
     <string name="type.amenity.parking.street_side">Bãi đậu xe bên đường</string>
     <string name="type.amenity.parking.street_side.fee">Bãi đậu xe bên đường</string>
-    <string name="type.amenity.parking.street_side.private">Bãi đậu xe riêng bên đường</string>
+    <string name="type.amenity.parking.street_side.private">Bãi đậu xe bên đường tư nhân</string>
     <string name="type.amenity.parking.lane">Làn đường đỗ xe</string>
     <string name="type.amenity.parking.lane.fee">Làn đường đỗ xe</string>
-    <string name="type.amenity.parking.lane.private">Bãi đậu xe làn đường riêng</string>
+    <string name="type.amenity.parking.lane.private">Làn đường đỗ xe tư nhân</string>
     <string name="type.amenity.parking_entrance">Lối vào bãi đậu xe</string>
-    <string name="type.amenity.parking_entrance.private">Lối vào bãi đậu xe riêng</string>
+    <string name="type.amenity.parking_entrance.private">Lối vào bãi đậu xe tư nhân</string>
     <string name="type.amenity.parking_entrance.permissive">Lối vào bãi đậu xe</string>
-    <string name="type.amenity.parking_space">Chỗ để xe</string>
-    <string name="type.amenity.parking_space.permissive">Chỗ để xe</string>
-    <string name="type.amenity.parking_space.private">Chỗ để xe</string>
-    <string name="type.amenity.parking_space.underground">Chỗ để xe</string>
+    <string name="type.amenity.parking_space">Chỗ đỗ xe</string>
+    <string name="type.amenity.parking_space.permissive">Chỗ đỗ xe</string>
+    <string name="type.amenity.parking_space.private">Chỗ đỗ xe</string>
+    <string name="type.amenity.parking_space.underground">Chỗ đỗ xe</string>
     <string name="type.amenity.parking_space.disabled">Chỗ đậu xe dành cho người khuyết tật</string>
     <string name="type.amenity.payment_terminal">Máy thanh toán</string>
     <string name="type.amenity.pharmacy">Hiệu thuốc</string>
@@ -134,7 +134,7 @@
     <string name="type.amenity.shelter.public_transport">Nơi trú</string>
     <!-- Compared to wilderness_hut its smaller and simpler, without a fireplace. -->
     <string name="type.amenity.shelter.basic_hut">Túp lều Bivouac</string>
-    <string name="type.amenity.public_bath">Nhà tắm công cộng</string>
+    <string name="type.amenity.public_bath">Bể tắm công cộng</string>
     <string name="type.amenity.shower">Nhà tắm</string>
     <string name="type.amenity.stripclub">Câu lạc bộ thoát y</string>
     <string name="type.amenity.telephone">Điện thoại</string>
@@ -164,9 +164,9 @@
     <string name="type.barrier.gate">Cổng</string>
     <string name="type.barrier.kissing_gate">Cổng hôn</string>
     <string name="type.barrier.lift_gate">Thanh Chắn</string>
-    <string name="type.barrier.stile">Trụ chắn</string>
+    <string name="type.barrier.stile">Bậc vượt rào</string>
     <string name="type.barrier.turnstile">Cửa quay</string>
-    <string name="type.barrier.swing_gate">Thanh Chắn</string>
+    <string name="type.barrier.swing_gate">Barie quay ngang</string>
     <string name="type.barrier.toll_booth">Quầy Soát Vé</string>
     <string name="type.boundary.national_park">Công viên quốc gia</string>
     <string name="type.boundary.aboriginal_lands">Đất bản địa</string>
@@ -185,7 +185,7 @@
     <string name="type.building.garage">Gara</string>
     <string name="type.building.train_station">Tòa nhà ga</string>
     <string name="type.cemetery.grave">Phần mộ</string>
-    <string name="type.craft">Thủ công</string>
+    <string name="type.craft">Xưởng chế tạo đồ thủ công</string>
     <string name="type.craft.beekeeper">Người nuôi ong</string>
     <string name="type.craft.blacksmith">Thợ rèn</string>
     <string name="type.craft.brewery">Nhà máy bia</string>
@@ -199,7 +199,7 @@
     <string name="type.craft.handicraft">Thủ công mỹ nghệ</string>
     <!-- Heating, Ventilation, and Air Conditioning -->
     <string name="type.craft.hvac">Điều hòa nhiệt độ</string>
-    <string name="type.craft.key_cutter">Cắt chính</string>
+    <string name="type.craft.key_cutter">Sao chép khóa</string>
     <string name="type.craft.locksmith">Thợ khóa</string>
     <string name="type.craft.metal_construction">Nhà kim khí</string>
     <string name="type.craft.painter">Họa sỹ</string>
@@ -234,7 +234,7 @@
     <string name="type.cuisine.croatian">Ẩm thực croatia</string>
     <string name="type.cuisine.curry">Món cà ri</string>
     <string name="type.cuisine.deli">Món ăn ngon</string>
-    <string name="type.cuisine.diner">Bữa tối</string>
+    <string name="type.cuisine.diner">Quán ăn</string>
     <string name="type.cuisine.donut">Bánh rán</string>
     <string name="type.cuisine.ethiopian">Ẩm thực ethiopia</string>
     <string name="type.cuisine.filipino">Ẩm thực philipin</string>
@@ -306,7 +306,7 @@
     <string name="type.entrance">Lối vào</string>
     <!-- This is for main/primary entrances, for secondary entrances see type.entrance -->
     <string name="type.entrance.main">Lối vào chính</string>
-    <string name="type.entrance.exit">Lối ra</string>
+    <string name="type.entrance.exit">Lối ra (Chỉ ra)</string>
     <string name="type.fee.no">Miễn phí</string>
     <string name="type.healthcare.laboratory">Phòng thí nghiệm y tế</string>
     <string name="type.healthcare.physiotherapist">Nhà vật lý trị liệu</string>
@@ -334,8 +334,8 @@
     <string name="type.highway.cycleway.bridge">Cầu</string>
     <!-- These translations are used for all type.highway.*.tunnel. -->
     <string name="type.highway.cycleway.tunnel">Đường hầm</string>
-    <string name="type.highway.footway">Đường</string>
-    <string name="type.highway.footway.sidewalk">Đường đi bộ</string>
+    <string name="type.highway.footway">Lối đi bộ</string>
+    <string name="type.highway.footway.sidewalk">Vỉa hè</string>
     <string name="type.highway.footway.crossing">Vạch qua đường</string>
     <string name="type.highway.footway.area">Đường</string>
     <!-- These translations are used for all type.highway.*.bridge. -->
@@ -1243,4 +1243,32 @@
     <string name="type.barrier.fence">Hàng rào</string>
     <string name="type.barrier.guard_rail">Lan can phòng hộ</string>
     <string name="type.barrier.hedge">Hàng rào cây xanh</string>
+    <string name="type.barrier.retaining_wall">Tường chắn đất</string>
+    <string name="type.barrier.wicket_gate">Cửa phụ</string>
+    <string name="type.barrier.wall">Tường</string>
+    <string name="type.boundary">Biên giới</string>
+    <string name="type.boundary.administrative">Ranh giới hành chính</string>
+    <string name="type.boundary.administrative.2">Biên giới quốc gia</string>
+    <string name="type.boundary.administrative.3">Ranh giới vùng</string>
+    <string name="type.boundary.administrative.4">Ranh giới vùng</string>
+    <string name="type.building.warehouse">Nhà kho</string>
+    <string name="type.cuisine.bubble_tea">Trà sữa</string>
+    <string name="type.emergency">Cấp cứu</string>
+    <string name="type.emergency.access_point">Điểm cần cứu hộ</string>
+    <string name="type.emergency.access_point.address">Địa chỉ cần cứu hộ</string>
+    <string name="type.emergency.disaster_help_point">Điểm trợ giúp thảm họa khẩn cấp</string>
+    <string name="type.emergency.life_ring">Phao cứu sinh</string>
+    <string name="type.beacon.cardinal.east">Phao tiêu hàng hải chỉ hướng</string>
+    <string name="type.beacon.cardinal.north">Phao tiêu hàng hải chỉ hướng</string>
+    <string name="type.beacon.cardinal.south">Phao tiêu hàng hải chỉ hướng</string>
+    <string name="type.beacon.cardinal.west">Phao tiêu hàng hải chỉ hướng</string>
+    <string name="type.beacon.isolated_danger">Phao tiêu cảnh báo chướng ngại vật cô lập</string>
+    <string name="type.beacon.lateral.port">Phao tiêu hàng hải chỉ giới hạn luồng</string>
+    <string name="type.beacon.lateral.starboard">Phao tiêu hàng hải chỉ giới hạn luồng</string>
+    <string name="type.entrance.house">Lối vào nhà</string>
+    <string name="type.entrance.garage">Lối vào ga-ra</string>
+    <string name="type.entrance.service">Lối ra vào dịch vụ</string>
+    <string name="type.entrance.entry">Lối vào (Chỉ vào)</string>
+    <string name="type.entrance.emergency">Lối thoát hiểm</string>
+    <string name="type.highway.cycleway">Đường dành cho xe đạp</string>
 </resources>

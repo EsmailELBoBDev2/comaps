@@ -958,4 +958,9 @@
     <string name="downloader_check_updates_error">خطأ أثناء التحقق من وجود تحديثات</string>
     <string name="pref_keyboard_typing_history_title">وضع لوحة المفاتيح المتخفي</string>
     <string name="pref_keyboard_typing_history_summary">اطلب لوحة مفاتيح النظام لكي لا تُسجل تاريخ الكتابة</string>
+    <string name="tts_toggle_enable">فعِّل التعليمات الصوتية</string>
+    <string name="tts_toggle_disable">عطِّل التعليمات الصوتية</string>
+    <string name="pref_aa_support_title">Android Auto</string>
+    <string name="pref_aa_support_summary_yes">ثُبّت التطبيق من متجر جوجل Play، ويمكنك استخدامه في سيارتك.</string>
+    <string name="pref_aa_support_summary_no">لم يُثبّت التطبيق من متجر جوجل Play، لذا لا يمكنك استخدامه في سيارتك. اضغط على الإعدادات للحصول على مزيد من التفاصيل من خلال الأسئلة الشائعة.</string>
 </resources>

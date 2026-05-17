@@ -795,7 +795,7 @@
     <string name="editor_building_levels">Pisos (inc. rés de chão, excl. telhado)</string>
     <string name="error_enter_correct_level">Introduza um número de piso válido</string>
     <string name="saved">Guardado</string>
-    <string name="disk_error">Não foi possível criar a pasta e mover os ficheiros no Armazenamento Interno do dispositivo ou no Cartão SD</string>
+    <string name="disk_error">Não foi possível criar a pasta e mover os ficheiros no armazenamento interno do dispositivo ou no cartão SD</string>
     <string name="enable_show_on_lock_screen_description">Quando ativado, a aplicação irá funcionar sobre o ecrã de bloqueio mesmo quando o dispositivo estiver bloqueado.</string>
     <string name="pref_left_button_disable">Desativar</string>
     <string name="error_enter_correct_facebook_page">Introduza um endereço web válido para uma conta ou página de Facebook</string>
@@ -932,4 +932,17 @@
     <string name="population">População: %s</string>
     <string name="setting_value_system_default">Predefinição do Sistema</string>
     <string name="change_app_locale">Idioma da Aplicação</string>
+    <string name="downloader_check_updates_button">Procurar atualizações</string>
+    <string name="downloader_check_updates_checking">Procurando atualizações...</string>
+    <string name="downloader_check_updates_updated">Atualizações do mapa disponíveis!</string>
+    <string name="downloader_check_updates_no_updates">Nenhuma atualização disponível</string>
+    <string name="downloader_check_updates_eol">Não existirão mais atualizações do mapa para esta versão. Por favor, atualize a aplicação!</string>
+    <string name="downloader_check_updates_error">Erro ao procurar atualizações</string>
+    <string name="pref_keyboard_typing_history_title">Modo de teclado anónimo</string>
+    <string name="pref_keyboard_typing_history_summary">Solicitar ao teclado do sistema que não registe o histórico de escrita</string>
+    <string name="pref_aa_support_title">Android Auto</string>
+    <string name="pref_aa_support_summary_yes">A aplicação foi instalada pela Google Play, pode utilizá-la no seu carro.</string>
+    <string name="pref_aa_support_summary_no">A aplicação não foi instalada pela Google Play, não pode utilizá-la no seu carro. Pressione as definições para obter mais detalhes nas nossas perguntas frequentes.</string>
+    <string name="tts_toggle_enable">Ativar instruções por voz</string>
+    <string name="tts_toggle_disable">Desativar instruções por voz</string>
 </resources>

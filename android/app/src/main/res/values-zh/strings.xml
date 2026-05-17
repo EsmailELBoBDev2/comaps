@@ -209,7 +209,7 @@
     <!-- A message in Settings/Preferences explaining why is it not possible to enable 3D buildings when max power saving mode is enabled -->
     <string name="pref_map_3d_buildings_disabled_summary">3D 建筑在省电模式下处于关闭状态</string>
     <!-- Settings «Route» category: «Tts enabled» title -->
-    <string name="pref_tts_enable_title">语音指导</string>
+    <string name="pref_tts_enable_title">语音提示</string>
     <!-- Settings «Route» category: «Tts announce street names» title -->
     <string name="pref_tts_street_names_title">播报街道名称</string>
     <!-- Settings «Route» category: «Tts announce street names» description -->
@@ -546,7 +546,7 @@
     <string name="enable_logging">启用日志记录</string>
     <!-- Settings: "Send general feedback" button -->
     <string name="feedback_general">常规反馈</string>
-    <string name="prefs_languages_information">我们的语音导航使用“文本转语音”系统。许多 Android 设备使用 Google 的文本转语音系统，您可以从 Google Play 商店下载或更新此功能 (https://play.google.com/store/apps/details?id=com.google.android.tts)</string>
+    <string name="prefs_languages_information">我们使用系统文本转语音功能提供语音提示。许多 Android 设备使用 Google 的文本转语音系统，您可以从 Google Play 商店下载或更新此功能 (https://play.google.com/store/apps/details?id=com.google.android.tts)</string>
     <string name="prefs_languages_information_off">部分语言需要特意从应用商店（Google Play、三星 Galaxy Store、华为应用市场、F-Droid）中安装相关的语音合成器或语言包，才能使用该功能。\n打开您的设备的设置 → 语言和输入法 → 语音 → 文字转语音 (TTS) 输出。\n您可以在此处管理语音合成的设置（例如，下载语言包供离线使用）和选择其他 TTS 引擎。</string>
     <string name="prefs_languages_information_off_link">如需了解详情，请查阅此指南</string>
     <string name="transliteration_title">拉丁字母音译</string>
@@ -899,9 +899,9 @@
     <string name="avoid_paved">避开铺装道路</string>
     <string name="power_management">电源管理</string>
     <string name="charge_socket_schuko">欧盟标准</string>
-    <string name="navigation_start_tts_message">"启动导航，语音指令语言： "</string>
+    <string name="navigation_start_tts_message">"启动导航，语音提示语言： "</string>
     <string name="prefs_speed_cameras_information">在当地法律禁止发出警报的国家/地区，测速摄像头警告功能将被禁用。</string>
-    <string name="navigation_start_tts_disabled_message">语音指令已禁用：TTS 引擎不可用</string>
+    <string name="navigation_start_tts_disabled_message">语音提示已禁用：TTS 引擎不可用</string>
     <string name="place_page_map_too_old_title">地图数据已过时</string>
     <string name="place_page_map_too_old_description">您当前的地图数据非常旧，请更新地图。</string>
     <string name="place_page_app_too_old_description">您当前的地图数据非常旧，请更新 CoMaps 应用。</string>
@@ -948,4 +948,9 @@
     <string name="downloader_check_updates_error">检查更新时出错</string>
     <string name="pref_keyboard_typing_history_title">键盘隐身模式</string>
     <string name="pref_keyboard_typing_history_summary">请求系统键盘不记录输入历史记录</string>
+    <string name="pref_aa_support_title">Android Auto</string>
+    <string name="pref_aa_support_summary_yes">该应用已从 Google Play 安装，您可以在车内使用它。</string>
+    <string name="pref_aa_support_summary_no">该应用未从 Google Play 安装，您无法在车内使用它。点击设置查看常见问题中的更多详情。</string>
+    <string name="tts_toggle_enable">启用语音提示</string>
+    <string name="tts_toggle_disable">禁用语音提示</string>
 </resources>

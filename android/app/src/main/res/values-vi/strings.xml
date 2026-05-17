@@ -916,4 +916,19 @@
     <string name="route_recalculating">Đang tính lại tuyến đường…</string>
     <string name="pref_openexternallinks_title">Tự động mở các đường dẫn bên thứ ba</string>
     <string name="pref_openexternallinks_summary">Mặc định mở các đường dẫn bên thứ ba trong CoMaps</string>
+    <string name="tts_toggle_enable">Bật chỉ dẫn bằng giọng nói</string>
+    <string name="tts_toggle_disable">Tắt chỉ dẫn bằng giọng nói</string>
+    <string name="downloader_check_updates_button">Kiểm tra cập nhật</string>
+    <string name="downloader_check_updates_checking">Đang tìm bản cập nhật...</string>
+    <string name="downloader_check_updates_updated">Có bản cập nhật mới!</string>
+    <string name="downloader_check_updates_no_updates">Không có bản cập nhật mới</string>
+    <string name="downloader_check_updates_eol">Phiên bản ứng dụng này không còn nhận được các bản cập nhật bản đồ. Vui lòng cập nhật ứng dụng!</string>
+    <string name="downloader_check_updates_error">Xảy ra lỗi khi kiểm tra cập nhật</string>
+    <string name="setting_value_system_default">Mặc định hệ thống</string>
+    <string name="change_app_locale">Ngôn ngữ ứng dụng</string>
+    <string name="pref_keyboard_typing_history_title">Chế độ ẩn danh bàn phím</string>
+    <string name="pref_keyboard_typing_history_summary">Yêu cầu bàn phím hệ thống không lưu lại lịch sử nhập</string>
+    <string name="pref_aa_support_title">Android Auto</string>
+    <string name="pref_aa_support_summary_yes">Ứng dụng đã được cài đặt từ Google Play, bạn có thể dùng nó trong ô tô của mình.</string>
+    <string name="pref_aa_support_summary_no">Ứng dụng chưa được cài đặt từ Google Play, bạn không thể dùng nó trong ô tô của mình. Nhấn vào phần cài đặt để tìm hiểu thêm trên trang FAQ của chúng tôi.</string>
 </resources>
