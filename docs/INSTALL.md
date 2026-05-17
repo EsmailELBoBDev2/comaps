@@ -62,11 +62,43 @@ sudo dnf install @development-tools cmake qt6-qtbase qt6-qtsvg qt6-qtpositioning
 
 </details>
 
-```bash
+You must also install a specific version of the python protobuf package, which is not the one provided by the python standard installation.    
+Note: If the system can't find `pip`, try `pip3` instead  
+
+##### Solution1 ( break-system-packages )
+This simple method is adequate if you work in a temporary Virtual Machine, or do not fear troubles to system packages   
+
+```bash   
 pip install "protobuf<3.21" --break-system-packages
 ```
 
-Note: If the system can't find `pip`, try `pip3` instead
+##### Solution2 ( python venv )   
+The venv python package allows to set a "Virtual Environment" and install specific packages inside a specific directory, without impacting standard packages.   
+[more details](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments) 
+
+```bash   
+# Setup the venv ( do this only once )
+# /path/to/venv can be for example  a "venv" directory inside your home directory 
+python3 -m venv --system-site-packages /path/to/venv
+
+# Activate the venv 
+# ( if you don't use bash shell,  "source" command does not exist and must be replaced by "." )
+source /path/to/venv/bin/activate
+
+# You can now install protobuf specific version inside the venv
+pip install "protobuf<3.21"
+```
+   
+Notes about venv:
+- using "--system-site-packages" is important: otherwise all previously installed system packages will mysteriously disappear
+- IMPORTANT: before running any Comaps generation command, check that the venv is activated, so that the right version of protobuf is used
+- if you find the activation command too tedious, you can setup an alias in your shell profile `alias venv='source /path/to/venv/bin/activate'`
+
+
+
+
+
+
 
 ### Configure running bash script
 
