@@ -559,6 +559,28 @@ void GetTurnDirectionBasic(IRoutingResult const & result, size_t const outgoingS
 
   if (turnCandidates.size() >= 2 && nodes.isCandidatesAngleValid)
     CorrectRightmostAndLeftmost(turnCandidates, firstOutgoingSeg, turnAngle, turn);
+
+  // At crossroads where all alternative arms are clear left/right turns, a slight geometric
+  // deviation on the route is effectively "go straight". Promote TurnSlightLeft/Right to
+  // GoStraight in that case to avoid announcing a turn the driver wouldn't perceive.
+  if ((turn.m_turn == CarDirection::TurnSlightLeft || turn.m_turn == CarDirection::TurnSlightRight) &&
+      turnCandidates.size() >= 2 && nodes.isCandidatesAngleValid)
+  {
+    double constexpr kMinOtherAngleForStraightPromotion = 50.0;
+    bool allOthersClearTurns = true;
+    for (auto const & candidate : turnCandidates)
+    {
+      if (candidate.m_segment == firstOutgoingSeg)
+        continue;
+      if (abs(candidate.m_angle) < kMinOtherAngleForStraightPromotion)
+      {
+        allOthersClearTurns = false;
+        break;
+      }
+    }
+    if (allOthersClearTurns)
+      turn.m_turn = CarDirection::GoStraight;
+  }
 }
 
 size_t CheckUTurnOnRoute(IRoutingResult const & result, size_t const outgoingSegmentIndex, NumMwmIds const & numMwmIds,
