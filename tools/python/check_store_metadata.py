@@ -7,6 +7,7 @@ import os
 import sys
 import glob
 import shutil
+from argparse import ArgumentParser
 from urllib.parse import urlparse
 
 os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", ".."))
@@ -107,14 +108,16 @@ APPSTORE_LOCALES = [
     "ar-SA", "ca", "cs", "da", "de-DE", "el", "en-AU", "en-CA", "en-GB", "en-US", "es-ES", "es-MX", "fi", "fr-CA", "fr-FR", "he", "hi", "hr", "hu", "id", "it", "ja", "ko", "ms", "nl-NL", "no", "pl", "pt-BR", "pt-PT", "ro", "ru", "sk", "sv", "th", "tr", "uk", "vi", "zh-Hans", "zh-Hant"
 ]
 
+verbose = False
+
 def error(path, message, *args, **kwargs):
-    print("❌", path + ":", message.format(*args, **kwargs), file=sys.stderr)
+    print(f'ERROR: {path}', message.format(*args, **kwargs), file=sys.stderr)
     return False
 
 
 def done(path, ok):
-    if ok:
-        print("✅", path)
+    if ok and verbose:
+        print("OK", path)
     return ok
 
 def check_raw(path, max_length, ignoreEmptyFilesAndNewLines=False):
@@ -133,7 +136,7 @@ def check_raw(path, max_length, ignoreEmptyFilesAndNewLines=False):
 
         cur_length = len(text)
         if cur_length > max_length:
-            ok = error(path, "too long: got={}, expected={}", cur_length, max_length)
+            ok = error(path, f'too long {cur_length} (max {max_length})')
         return ok, text
 
 def check_text(path, max, optional=False, ignoreEmptyFilesAndNewLines=False):
@@ -142,7 +145,7 @@ def check_text(path, max, optional=False, ignoreEmptyFilesAndNewLines=False):
     except FileNotFoundError as e:
         if optional:
             return True,
-        print("🚫", path)
+        error(path, "NOT EXISTS")
         return False,
 
 def check_url(path, ignoreEmptyFilesAndNewLines=False):
@@ -214,19 +217,14 @@ def check_ios():
     return ok
 
 if __name__ == "__main__":
-    ok = True
-    if len(sys.argv) == 2 and sys.argv[1] == 'gplay':
-        if check_android(is_gplay=True):
-            sys.exit(0)
-        sys.exit(2)
-    if len(sys.argv) == 2 and sys.argv[1] == 'fdroid':
-        if check_android(is_gplay=False):
-            sys.exit(0)
-        sys.exit(2)
-    elif len(sys.argv) == 2 and sys.argv[1] == "ios":
-        if check_ios():
-            sys.exit(0)
-        sys.exit(2)
-    else:
-       print("Usage:", sys.argv[0], "gplay|fdroid|ios", file=sys.stderr)
-       sys.exit(1)
+    parser = ArgumentParser(description="Check AppStore / Google Play / F-Droid metadata")
+    parser.add_argument("platform", choices=["gplay", "fdroid", "ios"], help="store metadata to check")
+    parser.add_argument("-v", "--verbose", action="store_true", help="verbose output")
+    args = parser.parse_args()
+    verbose = args.verbose
+    if args.platform == 'gplay':
+        sys.exit(0 if check_android(is_gplay=True) else 2)
+    elif args.platform == 'fdroid':
+        sys.exit(0 if check_android(is_gplay=False) else 2)
+    elif args.platform == "ios":
+        sys.exit(0 if check_ios() else 2)
