@@ -119,7 +119,7 @@ def error(path, message, *args, **kwargs):
 
 def done(path, ok):
     if ok and verbose:
-        print("OK", path)
+        print(f'OK: {path}')
     return ok
 
 def check_raw(path, max_length, ignoreEmptyFilesAndNewLines=False):
@@ -171,8 +171,12 @@ def check_exact(path, expected):
         ok = error(path, "invalid value: got={}, expected={}", value, expected)
     return done(path, ok)
 
+def drop_locale(locale_path):
+    shutil.rmtree(locale_path)
+    print(f'REMOVED invalid locale {locale_path}')
 
-def check_android(is_gplay):
+
+def check_android(is_gplay, fix=False):
     ok = True
     flavor = "google" if is_gplay else "fdroid"
     flavor = f'{ANDROID_META_PATH}/{flavor}/play/'
@@ -181,15 +185,21 @@ def check_android(is_gplay):
     ok = check_exact(flavor + 'default-language.txt', 'en-US') and ok
     for locale in glob.glob(flavor + 'listings/*/'):
         if is_gplay and locale.split('/')[-2] not in GPLAY_LOCALES:
-            ok = error(locale, 'unsupported locale') and ok
-            continue
-        locale_ok = check_text(locale + 'title.txt', 30 if is_gplay else 50)
-        locale_ok = check_text(locale + 'short-description.txt', 80) and locale_ok
-        locale_ok = check_text(locale + 'full-description.txt', 4000) and locale_ok
-        locale_ok = check_text(locale + 'release-notes.txt', 499, optional=True) and locale_ok
-        if not locale_ok:
-            error(locale, 'locale is INVALID or INCOMPLETE')
-        ok = locale_ok and ok
+            error(locale, 'unsupported locale')
+            if fix:
+                drop_locale(locale)
+            ok = False
+        else:
+            locale_ok = check_text(locale + 'title.txt', 30 if is_gplay else 50)
+            locale_ok = check_text(locale + 'short-description.txt', 80) and locale_ok
+            locale_ok = check_text(locale + 'full-description.txt', 4000) and locale_ok
+            locale_ok = check_text(locale + 'release-notes.txt', 499, optional=True) and locale_ok
+            done(locale, locale_ok)
+            if not locale_ok:
+                error(locale, 'locale is INVALID or INCOMPLETE')
+                if fix:
+                    drop_locale(locale)
+                ok = False
     ''' TODO: relnotes not necessary exist for all languages, but symlinks are made for all
     for locale in glob.glob(flavor + 'release-notes/*/'):
         if locale.split('/')[-2] not in GPLAY_LOCALES:
@@ -198,15 +208,25 @@ def check_android(is_gplay):
         ok = check_text(locale + 'default.txt', 499) and ok
     '''
     if not ok:
-        error(flavor, 'HAS INVALID LOCALES')
-    return ok
+        if fix:
+            print(f'FIXED by removing invalid locales from {flavor}')
+            return True
+        else:
+            error(flavor, 'HAS INVALID LOCALES')
+            return False
+    else:
+        print(f'metadata is OK {flavor}')
+        return True
 
 
-def check_ios():
+def check_ios(fix=False):
     ok = True
     for locale in glob.glob(f'{IOS_META_PATH}/*/'):
         if locale.split('/')[-2] not in APPSTORE_LOCALES:
-            ok = error(locale, "unsupported locale") and ok
+            error(locale, "unsupported locale")
+            if fix:
+                drop_locale(locale)
+            ok = False
         else:
             locale_ok = check_text(locale + "subtitle.txt", 30, False, True)
             locale_ok = check_text(locale + "description.txt", 4000, False, True) and locale_ok
@@ -215,23 +235,35 @@ def check_ios():
             locale_ok = check_url(locale + "support_url.txt", True) and locale_ok
             locale_ok = check_url(locale + "marketing_url.txt", True) and locale_ok
             locale_ok = check_url(locale + "privacy_url.txt", True) and locale_ok
+            done(locale, locale_ok)
             if not locale_ok:
                 error(locale, 'locale is INVALID or INCOMPLETE')
-            ok = locale_ok and ok
+                if fix:
+                    drop_locale(locale)
+                ok = False
 
     if not ok:
-        error(IOS_META_PATH, 'HAS INVALID LOCALES')
-    return ok
+        if fix:
+            print(f'FIXED by removing invalid locales from {IOS_META_PATH}')
+            return True
+        else:
+            error(IOS_META_PATH, 'HAS INVALID LOCALES')
+            return False
+    else:
+        print(f'metadata is OK {IOS_META_PATH}')
+        return True
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Check AppStore / Google Play / F-Droid metadata")
     parser.add_argument("platform", choices=["gplay", "fdroid", "ios"], help="store metadata to check")
     parser.add_argument("-v", "--verbose", action="store_true", help="verbose output")
+    parser.add_argument("-f", "--fix", action="store_true", help="remove invalid/incomplete locales")
     args = parser.parse_args()
     verbose = args.verbose
+    to_fix = args.fix
     if args.platform == 'gplay':
-        sys.exit(0 if check_android(is_gplay=True) else 2)
+        sys.exit(0 if check_android(is_gplay=True, fix=to_fix) else 2)
     elif args.platform == 'fdroid':
-        sys.exit(0 if check_android(is_gplay=False) else 2)
+        sys.exit(0 if check_android(is_gplay=False, fix=to_fix) else 2)
     elif args.platform == "ios":
-        sys.exit(0 if check_ios() else 2)
+        sys.exit(0 if check_ios(fix=to_fix) else 2)
