@@ -191,7 +191,17 @@ def check_android(is_gplay, fix=False):
             ok = False
         else:
             locale_ok = check_text(locale + 'title.txt', 30 if is_gplay else 50)
-            locale_ok = check_text(locale + 'short-description.txt', 80) and locale_ok
+            desc_path = locale + 'short-description.txt'
+            locale_ok = check_text(desc_path, 80) and locale_ok
+            if is_gplay and os.path.exists(desc_path):
+                desc = open(desc_path, 'r').read()
+                if '--' in desc or '–' in desc:
+                    # The app may not be promoted on Google Play because of the following
+                    print(f'WARN: {desc_path} should use em dashes instead of double hyphens or en dashes')
+                    if fix:
+                        desc = desc.replace('--', '—').replace('–', '—')
+                        open(desc_path, 'w').write(desc)
+                        print(f'REPLACED wrong dashes in {desc_path}')
             locale_ok = check_text(locale + 'full-description.txt', 4000) and locale_ok
             locale_ok = check_text(locale + 'release-notes.txt', 499, optional=True) and locale_ok
             done(locale, locale_ok)
