@@ -162,7 +162,7 @@ class DownloadMapsViewController: MWMViewController {
     actionSheet.popoverPresentationController?.sourceView = cell
     actionSheet.popoverPresentationController?.sourceRect = cell.bounds
 
-    let actions: [NodeAction]
+    var actions: [NodeAction]
     switch nodeAttrs.nodeStatus {
     case .undefined:
       actions = []
@@ -180,6 +180,12 @@ class DownloadMapsViewController: MWMViewController {
       actions = [.download, .delete]
     @unknown default:
       fatalError()
+    }
+
+    if nodeAttrs.countryId == "World" || nodeAttrs.countryId == "WorldCoasts" {
+      actions.removeAll { action in
+        action == .delete || action == .showOnMap
+      }
     }
 
     addActions(actions, for: nodeAttrs, to: actionSheet)
@@ -373,6 +379,10 @@ extension DownloadMapsViewController: UITableViewDataSource {
       return false
     }
     let nodeAttrs = dataSource.item(at: indexPath)
+    if nodeAttrs.countryId == "World" || nodeAttrs.countryId == "WorldCoasts" {
+      return false
+    }
+      
     switch nodeAttrs.nodeStatus {
     case .onDisk, .onDiskOutOfDate, .partly:
       return true
