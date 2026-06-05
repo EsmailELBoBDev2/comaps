@@ -100,7 +100,7 @@
     <string name="donate">Dhuro</string>
     <string name="copyright">Të drejtat e autorit</string>
     <string name="report_a_bug">Raporto një gabim</string>
-    <string name="long_tap_toast">Mbaj shtypur gjatë përsëri mbi ekran për të parë opsionet</string>
+    <string name="enable_long_tap_fullscreen_description">Mbaj shtypur gjatë përsëri mbi ekran për të parë opsionet</string>
     <string name="downloader_update_all_button">Përditëso të gjitha</string>
     <string name="downloader_downloaded_subtitle">Të shkarkuara</string>
     <string name="downloader_queued">Në rradhë</string>
