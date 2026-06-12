@@ -964,4 +964,6 @@
     <string name="sort_categories">Ordenar favoritos</string>
     <string name="by_recently_used">Por los más recientes</string>
     <string name="by_custom">Personalizado</string>
+    <string name="enable_long_tap_fullscreen">Mantén pulsado para ocultar la interfaz de usuario.</string>
+    <string name="long_tap_disabled_toast">Para ocultar la interfaz, active la opción de pulsación larga en los ajustes</string>
 </resources>

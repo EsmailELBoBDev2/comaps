@@ -965,4 +965,6 @@
     <string name="sort_categories">Trier les listes de favoris</string>
     <string name="by_recently_used">Par récemment utilisé</string>
     <string name="by_custom">Par ordre personnalisé</string>
+    <string name="enable_long_tap_fullscreen">Appuyez longuement pour masquer l\'interface utilisateur</string>
+    <string name="long_tap_disabled_toast">Pour masquer l\'interface, activez la fonction « Appuyer longuement » dans les paramètres</string>
 </resources>
