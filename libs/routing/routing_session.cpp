@@ -450,6 +450,14 @@ void RoutingSession::GetRouteFollowingInfo(FollowingInfo & info) const
   GetFullRoadName(currentRoadNameInfo, info.m_currentStreetName);
   m_route->GetNextTurnStreetName(nextRoadNameInfo);
   GetFullRoadName(nextRoadNameInfo, info.m_nextStreetName);
+  // Carry the structured (now shield-resolved) components so platform UIs can build their own
+  // instruction variants instead of parsing m_nextStreetName.
+  info.m_nextName = nextRoadNameInfo.m_name;
+  info.m_nextRef = nextRoadNameInfo.m_ref;
+  info.m_nextJunctionRef = nextRoadNameInfo.m_junction_ref;
+  info.m_nextDestinationRef = nextRoadNameInfo.m_destination_ref;
+  info.m_nextDestination = nextRoadNameInfo.m_destination;
+  info.m_nextIsLink = nextRoadNameInfo.m_isLink;
   m_route->GetNextNextTurnStreetName(nextNextRoadNameInfo);
   GetFullRoadName(nextNextRoadNameInfo, info.m_nextNextStreetName);
 

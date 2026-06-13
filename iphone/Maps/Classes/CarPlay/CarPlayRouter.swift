@@ -268,15 +268,17 @@ extension CarPlayRouter {
     var maneuvers = [CPManeuver]()
     let primaryManeuver = CPManeuver()
     primaryManeuver.userInfo = CPConstants.Maneuvers.primary
-    var instructionVariant = routeInfo.streetName
+    var variants = instructionVariants(for: routeInfo)
+    // On a roundabout, prefix each variant with the exit to take, e.g. "3rd exit, Main Street"
+    // (or "3rd exit" alone when there's no road name).
     if routeInfo.roundExitNumber != 0 {
       let ordinalExitNumber = NumberFormatter.localizedString(from: NSNumber(value: routeInfo.roundExitNumber),
                                                               number: .ordinal)
-      let exitNumber = String(format: L("carplay_roundabout_exit"),
-                              arguments: [ordinalExitNumber])
-      instructionVariant = instructionVariant.isEmpty ? exitNumber : (exitNumber + ", " + instructionVariant)
+      let exitNumber = String(format: L("carplay_roundabout_exit"), arguments: [ordinalExitNumber])
+      variants = variants.isEmpty ? [exitNumber] : variants.map { "\(exitNumber), \($0)" }
     }
-    primaryManeuver.instructionVariants = [instructionVariant]
+    // CarPlay requires at least one variant; use "" when the turn has no road name.
+    primaryManeuver.instructionVariants = variants.isEmpty ? [""] : variants
     if let imageName = routeInfo.turnImageName,
       let symbol = UIImage(named: imageName) {
       primaryManeuver.symbolImage = symbol
@@ -287,6 +289,16 @@ extension CarPlayRouter {
     // Lane guidance for the instrument cluster / any surface that consumes it (not the app screen).
     if #available(iOS 18.0, *), !routeInfo.lanes.isEmpty {
       primaryManeuver.linkedLaneGuidance = laneGuidance(for: routeInfo)
+    }
+    // Structured metadata for the instrument cluster / HUD on supported vehicles.
+    if #available(iOS 17.4, *) {
+      primaryManeuver.maneuverType = routeInfo.carDirection.cpManeuverType
+      primaryManeuver.junctionType = routeInfo.carDirection.cpJunctionType
+      // Route-level driving side (from the route's start region)
+      primaryManeuver.trafficSide = routeInfo.isLeftHandTraffic ? .left : .right
+      if !routeInfo.junctionRef.isEmpty {
+        primaryManeuver.highwayExitLabel = routeInfo.junctionRef
+      }
     }
     maneuvers.append(primaryManeuver)
     // Lanes must always be the second maneuver supplied to CarPlay, per Developer guidance 2026
@@ -308,6 +320,61 @@ extension CarPlayRouter {
       maneuvers.append(secondaryManeuver)
     }
     return maneuvers
+  }
+
+  /// Instruction strings for the upcoming maneuver, ordered longest-first so CarPlay can pick the
+  /// one that best fits the available width (per Apple's guidance the array must be descending in
+  /// length). Built from the structured, shield-resolved road components (roadName, roadRef,
+  /// junctionRef, ...)
+  private func instructionVariants(for info: RouteInfo) -> [String] {
+    func clean(_ s: String) -> String { s.trimmingCharacters(in: .whitespacesAndNewlines) }
+    /// Joins a leading label and a trailing destination with an arrow, tolerating empty sides.
+    func compose(_ lead: String, _ tail: String) -> String {
+      if lead.isEmpty { return tail }
+      if tail.isEmpty { return lead }
+      return "\(lead) → \(tail)"
+    }
+
+    let name = clean(info.roadName)
+    let ref = clean(info.roadRef)
+    let junctionRef = clean(info.junctionRef)
+    let destinationRef = clean(info.destinationRef)
+    let destination = clean(info.destination)
+
+    var candidates: [String]
+    let hasExitInfo = !junctionRef.isEmpty || !destinationRef.isEmpty || !destination.isEmpty
+    if info.isLink || hasExitInfo {
+      let exitLabel = junctionRef.isEmpty ? "" : String(format: L("carplay_highway_exit"), junctionRef)
+      // "Exit 6A: US 101 South"
+      let lead = [exitLabel, destinationRef].filter { !$0.isEmpty }.joined(separator: ": ")
+      // Destinations are "; "-separated; the first one is the primary place.
+      let firstDestination = clean(String(destination.split(separator: ";", maxSplits: 1).first ?? ""))
+      // Switch out ";" with a nicer separator.
+      let destinationList = destination.split(separator: ";").map { clean(String($0)) }.filter { !$0.isEmpty }.joined(separator: " / ")
+      candidates = [
+        compose(lead, destinationList),
+        firstDestination == destination ? "" : compose(lead, firstDestination),
+        lead,
+        exitLabel,
+        // A link with no exit data at all (no junction/destination/ref) would otherwise produce
+        // nothing here, so fall back to its plain road name/ref.
+        [ref, name].filter { !$0.isEmpty }.joined(separator: " "),
+        name,
+      ]
+    } else {
+      candidates = [
+        [ref, name].filter { !$0.isEmpty }.joined(separator: " "),
+        name,
+        ref,
+      ]
+    }
+
+    // Drop empties, dedupe preserving order, then enforce descending length.
+    var seen = Set<String>()
+    return candidates
+      .map(clean)
+      .filter { !$0.isEmpty && seen.insert($0).inserted }
+      .sorted { $0.count > $1.count }
   }
 
   /// Lane strip for the symbol-only second maneuver, as a `CPImageSet`.
@@ -358,7 +425,8 @@ extension CarPlayRouter {
       }
       return CPLane(angles: safeAngles)
     }
-    guidance.instructionVariants = [routeInfo.streetName]
+    let variants = instructionVariants(for: routeInfo)
+    guidance.instructionVariants = variants.isEmpty ? [""] : variants
     return guidance
   }
 

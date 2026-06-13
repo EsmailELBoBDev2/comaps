@@ -9,6 +9,7 @@
 #include "routing/absent_regions_finder.hpp"
 #include "routing/checkpoint_predictor.hpp"
 #include "routing/checkpoints.hpp"
+#include "routing/following_info.hpp"
 #include "routing/index_router.hpp"
 #include "routing/route.hpp"
 #include "routing/routing_callbacks.hpp"
@@ -28,6 +29,7 @@
 #include "routing_common/num_mwm_id.hpp"
 
 #include "indexer/data_source.hpp"
+#include "indexer/feature_meta.hpp"
 #include "indexer/map_style_reader.hpp"
 #include "indexer/feature_algo.hpp"
 
@@ -864,6 +866,27 @@ bool RoutingManager::InsertRoute(Route const & route)
     CreateTrafficLightMarks(std::move(trafficLights));
 
   return hasWarnings;
+}
+
+void RoutingManager::GetRouteFollowingInfo(routing::FollowingInfo & info) const
+{
+  m_routingSession.GetRouteFollowingInfo(info);
+  if (!info.IsValid())
+    return;
+
+  // Driving side is route-level: read from the region of the route's start point. This is correct
+  // for any route that does not cross a left/right-driving border.
+  // Per-maneuver L/R (routes crossing such a border) would need the driving side stamped on
+  // each RouteSegment.
+  auto const countryId = m_callbacks.m_countryInfoGetter().GetRegionCountryId(m_routingSession.GetStartPoint());
+  if (countryId.empty())
+    return;
+
+  auto const mwmId =
+      m_callbacks.m_dataSourceGetter().GetMwmIdByCountryFile(platform::CountryFile(countryId));
+  if (mwmId.IsAlive())
+    info.m_isLeftHandTraffic =
+        mwmId.GetInfo()->GetRegionData().Get(feature::RegionData::RD_DRIVING) == "l";
 }
 
 void RoutingManager::FollowRoute()

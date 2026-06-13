@@ -112,13 +112,20 @@
                                                      targetUnitsIndex:static_cast<UInt8>(info.m_distToTarget.GetUnits())
                                                        distanceToTurn:info.m_distToTurn.GetDistance()
                                                        turnUnitsIndex:static_cast<UInt8>(info.m_distToTurn.GetUnits())
-                                                           streetName:@(info.m_nextStreetName.c_str())
                                                         turnImageName:[self turnImageName:info.m_turn isPrimary:YES]
                                                     nextTurnImageName:[self turnImageName:info.m_nextTurn isPrimary:NO]
                                                              speedMps:speedMps
                                                         speedLimitMps:info.m_speedLimitMps
                                                       roundExitNumber:roundExitNumber
-                                                                lanes:lanes];
+                                                                lanes:lanes
+                                                             roadName:@(info.m_nextName.c_str())
+                                                              roadRef:@(info.m_nextRef.c_str())
+                                                          junctionRef:@(info.m_nextJunctionRef.c_str())
+                                                       destinationRef:@(info.m_nextDestinationRef.c_str())
+                                                          destination:@(info.m_nextDestination.c_str())
+                                                               isLink:info.m_nextIsLink
+                                                    carDirectionIndex:static_cast<UInt8>(info.m_turn)
+                                                    isLeftHandTraffic:info.m_isLeftHandTraffic];
   return objCInfo;
 }
 

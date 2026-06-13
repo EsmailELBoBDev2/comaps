@@ -711,6 +711,8 @@
 "speedcams_alert_title_carplay_2" = "Speed warnings";
 "download_map_carplay" = "Please download maps in the app on your mobile device";
 "carplay_roundabout_exit" = "%@ exit";
+/* CarPlay navigation: highway exit label, e.g. "Exit 6A". %@ is the junction/exit number. */
+"carplay_highway_exit" = "Exit %@";
 /* max. 10 symbols, both iOS and Android */
 "sort" = "Sort…";
 /* iOS */

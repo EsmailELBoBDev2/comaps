@@ -190,7 +190,7 @@ public:
   }
   void FollowRoute();
   void CloseRouting(bool removeRoutePoints);
-  void GetRouteFollowingInfo(routing::FollowingInfo & info) const { m_routingSession.GetRouteFollowingInfo(info); }
+  void GetRouteFollowingInfo(routing::FollowingInfo & info) const;
 
   TransitRouteInfo GetTransitRouteInfo() const;
 

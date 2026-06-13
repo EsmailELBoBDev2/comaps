@@ -54,6 +54,20 @@ public:
   // The next next street name. May be empty.
   std::string m_nextNextStreetName;
 
+  // Structured (shield-resolved) components of the next turn's road, mirroring
+  // RouteSegment::RoadNameInfo. Unlike m_nextStreetName these are not pre-formatted, letting
+  // platform UIs (e.g. CarPlay) build their own width-appropriate instruction variants.
+  // All may be empty.
+  std::string m_nextName;             // E.g. "Bayshore Freeway".
+  std::string m_nextRef;              // Road number, e.g. "CA 85".
+  std::string m_nextJunctionRef;      // Junction/exit number, e.g. "6A".
+  std::string m_nextDestinationRef;   // Number of the road the exit leads to, e.g. "US 101 South".
+  std::string m_nextDestination;      // E.g. "San Jose; San Francisco International Airport".
+  bool m_nextIsLink = false;          // True when the next segment is a link (ramp).
+
+  // True in left-hand-driving regions (e.g. UK, Japan)
+  bool m_isLeftHandTraffic = false;
+
   // Percentage of the route completion.
   double m_completionPercent;
 
