@@ -95,7 +95,7 @@ public final class OrganicMaps implements DefaultLifecycleObserver
     nativeSetSettingsDir(settingsPath);
 
     Config.init(mContext, mPreferences, flavor, applicationId, versionCode, versionName, fileProviderAuthority);
-    OsmOAuth.init(mPreferences);
+    OsmOAuth.init(mContext, mPreferences);
     SharedPropertiesUtils.init(mPreferences);
     LogsManager.INSTANCE.initFileLogging(mContext, mPreferences);
 
