@@ -19,6 +19,8 @@ set(SRC
   downloader_utils.cpp
   downloader_utils.hpp
   gui_thread.hpp
+  helpers.cpp
+  helpers.hpp
   http_client.cpp
   http_client.hpp
   http_payload.cpp

@@ -11,8 +11,7 @@
 #include "indexer/feature_algo.hpp"
 #include "indexer/ftypes_matcher.hpp"
 
-#include "platform/platform_tests_support/helpers.hpp"
-
+#include "platform/helpers.hpp"
 #include "platform/platform.hpp"
 
 #include "geometry/mercator.hpp"
@@ -385,7 +384,7 @@ ankerl::unordered_dense::map<uint32_t, StringUtf8Multilang> ParseStrings()
 
 int main(int argc, char * argv[])
 {
-  platform::tests_support::ChangeMaxNumberOfOpenFiles(kMaxOpenFiles);
+  platform::ChangeMaxNumberOfOpenFiles(kMaxOpenFiles);
 
   gflags::SetUsageMessage("Samples generation tool.");
   gflags::ParseCommandLineFlags(&argc, &argv, true);

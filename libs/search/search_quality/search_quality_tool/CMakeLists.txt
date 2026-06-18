@@ -10,7 +10,6 @@ target_link_libraries(${PROJECT_NAME}
     geometry
     indexer
     platform
-    platform_tests_support
     search
     search_quality
     search_tests_support

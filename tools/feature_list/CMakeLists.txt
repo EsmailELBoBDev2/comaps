@@ -12,7 +12,6 @@ target_link_libraries(${PROJECT_NAME}
     i18n
     indexer
     platform
-    platform_tests_support
     search
     search_quality
     storage

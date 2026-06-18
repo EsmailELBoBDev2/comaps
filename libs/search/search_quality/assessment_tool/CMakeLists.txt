@@ -45,7 +45,6 @@ target_link_libraries(${PROJECT_NAME}
   PRIVATE
     i18n
     platform
-    platform_tests_support
     qt_common
 )
 

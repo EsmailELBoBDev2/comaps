@@ -18,8 +18,7 @@
 
 #include "indexer/data_source.hpp"
 
-#include "platform/platform_tests_support/helpers.hpp"
-
+#include "platform/helpers.hpp"
 #include "platform/local_country_file.hpp"
 #include "platform/local_country_file_utils.hpp"
 #include "platform/platform.hpp"
@@ -44,7 +43,7 @@ double constexpr kErrorSeconds = 1.0;
 shared_ptr<FeaturesFetcher> CreateFeaturesFetcher(vector<LocalCountryFile> const & localFiles)
 {
   size_t const maxOpenFileNumber = 4096;
-  platform::tests_support::ChangeMaxNumberOfOpenFiles(maxOpenFileNumber);
+  platform::ChangeMaxNumberOfOpenFiles(maxOpenFileNumber);
   shared_ptr<FeaturesFetcher> featuresFetcher(new FeaturesFetcher);
   featuresFetcher->InitClassificator();
 

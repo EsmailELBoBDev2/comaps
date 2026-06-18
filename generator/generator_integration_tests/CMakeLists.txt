@@ -19,6 +19,5 @@ target_link_libraries(${PROJECT_NAME}
     geometry
     indexer
     platform
-    platform_tests_support
     routing
 )
