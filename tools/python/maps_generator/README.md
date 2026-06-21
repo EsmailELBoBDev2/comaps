@@ -7,8 +7,15 @@ maps built by a generator_tool newer than the app.**
 
 ## What are maps?
 
-Maps are `.mwm` binary files with special meta-information for rendering, searching, routing, and other use cases.
-Files from [data/borders](https://codeberg.org/comaps/comaps/src/branch/main/data/borders) define map boundaries for each individual file. The world is segmented into separate files by these boundaries, with the intent of having manageably small files to download. These files are referred to as *maps* or *countries*. A country is referring to one of these files, not necessarily a geographic country. Also note that there are two special countries called *World* and *WorldCoasts*. These are small simplified maps of the world and coastlines (sea and ocean watercover) used when other maps have not yet been downloaded.
+Maps are `.mwm` binary files with special meta-information for rendering, searching, routing, and other use cases.   
+
+Files from [data/borders](https://codeberg.org/comaps/comaps/src/branch/main/data/borders) define map boundaries for each individual file.   
+
+The world is segmented into separate files by these boundaries, with the intent of having manageably small files to download. These files are referred to as *maps* or *countries*.   
+ 
+A country is referring to one of these files, not necessarily a geographic country.    
+
+Also note that there are two special countries called *World* and *WorldCoasts*. These are small simplified maps of the world and coastlines (sea and ocean watercover) used when other maps have not yet been downloaded.
 
 ## Setup
 
@@ -22,13 +29,16 @@ git checkout 2023.06.04-13-android
 
 The app version can be found in the "About" section of CoMaps.
 
-2. Build the `generator_tool` binary (run from the root of the repo):
+2. Build the `generator_tool` binary  ( From the root of the repo):
 
 ```sh
 ./tools/unix/build_omim.sh -r generator_tool
 ./tools/unix/build_omim.sh -r world_roads_builder_tool
 ./tools/unix/build_omim.sh -r mwm_diff_tool
+
 ```
+If you intend to generate isolines, you must also build the topography_generator_tool.  See instructions in [ISOLINES.md](../../../docs/ISOLINES.md)  
+
 
 3. Go to the `python` directory:
 
@@ -48,10 +58,16 @@ pip install -r maps_generator/requirements_dev.txt
 cp maps_generator/var/etc/map_generator.ini.default maps_generator/var/etc/map_generator.ini
 ```
 
+
 6. Read through and edit the configuration file.
 
 Ensure that `OMIM_PATH` is set correctly.
 The default `PLANET_URL` setting makes the generator to download an OpenStreetMap dump file for the North Macedonia from [Geofabrik](http://download.geofabrik.de/index.html). Change `PLANET_URL` and `PLANET_MD5_URL` to get a region you want.
+
+Note: You don't need to download osm data file at each generation. You can put it in a local directory, without forgetting the .md5 checksum file. ( see the default .ini file for detailed syntax )
+
+*Caution! On Unix do not use ~ to replace the home directory. It may work, but not in all cases ...*
+
 
 ## Basic Usage
 
@@ -60,8 +76,17 @@ Make sure you are in the `tools/python` repo directory for starting the generato
 ```sh
 cd tools/python
 ```
+#### Generating isolines (optional)
+If you want the map to contain isolines, you must:
+* First, generate them.  This work is to do only once.
+* Second, modify the configuration file `map_generator.ini` : declare directories used for isolines generation
 
+See the instructions in [ISOLINES.md](../../../docs/ISOLINES.md)
+
+
+#### Building the map
 Build a `.mwm` map file for North Macedonia without using coastlines (it's a land-locked country anyway):
+
 ```sh
 python3 -m maps_generator --countries="Macedonia" --skip="Coastline"
 ```
