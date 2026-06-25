@@ -279,9 +279,13 @@ extension CarPlayRouter {
     }
     // CarPlay requires at least one variant; use "" when the turn has no road name.
     primaryManeuver.instructionVariants = variants.isEmpty ? [""] : variants
-    if let imageName = routeInfo.turnImageName,
-      let symbol = UIImage(named: imageName) {
-      primaryManeuver.symbolImage = symbol
+    if let imageName = routeInfo.turnImageName {
+      if routeInfo.roundExitNumber != 0,
+        let symbol = roundaboutSymbol(named: imageName, exitNumber: routeInfo.roundExitNumber) {
+        primaryManeuver.symbolImage = symbol
+      } else if let symbol = UIImage(named: imageName) {
+        primaryManeuver.symbolImage = symbol
+      }
     }
     if let estimates = createEstimates(routeInfo) {
       primaryManeuver.initialTravelEstimates = estimates
@@ -330,6 +334,26 @@ extension CarPlayRouter {
                                                               destinationRef: info.destinationRef,
                                                               destination: info.destination,
                                                               isLink: info.isLink)
+  }
+
+  /// Draw the roundabout symbol with `exitNumber` in its centre
+  private func roundaboutSymbol(named name: String, exitNumber: Int) -> UIImage? {
+    guard exitNumber > 0, let base = UIImage(named: name) else { return nil }
+    let size = base.size
+    let renderer = UIGraphicsImageRenderer(size: size)
+    let image = renderer.image { _ in
+      base.withRenderingMode(.alwaysTemplate).withTintColor(.white, renderingMode: .alwaysOriginal)
+        .draw(in: CGRect(origin: .zero, size: size))
+      let text = String(exitNumber) as NSString
+      let font = UIFont.systemFont(ofSize: size.height * 0.30, weight: .bold)
+      let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.white]
+      let textSize = text.size(withAttributes: attrs)
+      // Centre on the cap height (not the line box) so the digit is optically centred
+      let origin = CGPoint(x: (size.width - textSize.width) / 2,
+                           y: size.height / 2 - font.ascender + font.capHeight / 2)
+      text.draw(at: origin, withAttributes: attrs)
+    }
+    return image.withRenderingMode(.alwaysOriginal)
   }
 
   /// Lane strip for the symbol-only second maneuver, as a `CPImageSet`.
