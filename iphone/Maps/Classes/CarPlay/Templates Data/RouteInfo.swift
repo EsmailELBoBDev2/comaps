@@ -51,6 +51,21 @@ enum LaneWay: UInt8 {
     case .reverseRight: return "arrow.uturn.right"
     }
   }
+
+  /// Name of the turn-arrow asset (NavigationDashboard/Turn/*) used to draw lane guidance
+  var turnImageName: String {
+    switch self {
+    case .none, .through: return "straight"
+    case .slightLeft, .mergeToLeft: return "slight_left"
+    case .left: return "simple_left"
+    case .sharpLeft: return "sharp_left"
+    case .reverseLeft: return "uturn_left"
+    case .slightRight, .mergeToRight: return "slight_right"
+    case .right: return "simple_right"
+    case .sharpRight: return "sharp_right"
+    case .reverseRight: return "uturn_right"
+    }
+  }
 }
 
 /// High-level driving maneuver for the upcoming turn.

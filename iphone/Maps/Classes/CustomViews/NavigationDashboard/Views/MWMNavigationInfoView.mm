@@ -65,6 +65,7 @@ BOOL defaultOrientation(CGSize const &size) {
 @property(weak, nonatomic) IBOutlet UIView *secondTurnView;
 @property(weak, nonatomic) IBOutlet UIImageView *secondTurnImageView;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *turnsWidth;
+@property(nonatomic) NavigationLanesView *lanesView;
 
 @property(weak, nonatomic) IBOutlet UIView *searchButtonsView;
 @property(weak, nonatomic) IBOutlet MWMButton *searchMainButton;
@@ -254,6 +255,8 @@ BOOL defaultOrientation(CGSize const &size) {
   }
   if (info.turnImage) {
     [self setTurnsViewVisible:YES];
+    [self setupLanesViewIfNeeded];
+    [self.lanesView setLanes:info.lanes];
     self.nextTurnImageView.image = info.turnImage;
 
     if (info.roundExitNumber == 0) {
@@ -283,6 +286,7 @@ BOOL defaultOrientation(CGSize const &size) {
     }
   } else {
     [self setTurnsViewVisible:NO];
+    [self.lanesView setLanes:@[]];
   }
   [self setNeedsLayout];
 }
@@ -441,6 +445,22 @@ BOOL defaultOrientation(CGSize const &size) {
 - (void)setTurnsViewVisible:(BOOL)isVisible {
   self.turnsView.hidden = !isVisible;
   self.turnsViewHideOffset.priority = isVisible ? UILayoutPriorityDefaultLow : UILayoutPriorityDefaultHigh;
+}
+
+- (void)setupLanesViewIfNeeded {
+  if (self.lanesView)
+    return;
+  NavigationLanesView *lanesView = [[NavigationLanesView alloc] initWithFrame:CGRectZero];
+  lanesView.translatesAutoresizingMaskIntoConstraints = NO;
+  lanesView.hidden = YES;
+  [self addSubview:lanesView];
+  [NSLayoutConstraint activateConstraints:@[
+    [lanesView.leadingAnchor constraintEqualToAnchor:self.turnsView.trailingAnchor constant:12],
+    [lanesView.topAnchor constraintEqualToAnchor:self.streetNameView.bottomAnchor constant:8],
+    [lanesView.heightAnchor constraintEqualToConstant:68],
+    [lanesView.trailingAnchor constraintLessThanOrEqualToAnchor:self.trailingAnchor constant:-12],
+  ]];
+  self.lanesView = lanesView;
 }
 
 - (void)setIsVisible:(BOOL)isVisible {

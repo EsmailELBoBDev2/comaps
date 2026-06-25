@@ -45,4 +45,19 @@ final class CarPlayServiceTests: XCTestCase {
     XCTAssertEqual(estimates.distanceRemaining, Measurement<UnitLength>(value: 25.2, unit: .kilometers))
     XCTAssertEqual(estimates.timeRemaining, 100)
   }
+
+  func testLaneWayTurnImageNames() {
+    XCTAssertEqual(LaneWay.through.turnImageName, "straight")
+    XCTAssertEqual(LaneWay.none.turnImageName, "straight")
+    XCTAssertEqual(LaneWay.left.turnImageName, "simple_left")
+    XCTAssertEqual(LaneWay.sharpLeft.turnImageName, "sharp_left")
+    XCTAssertEqual(LaneWay.slightLeft.turnImageName, "slight_left")
+    XCTAssertEqual(LaneWay.mergeToLeft.turnImageName, "slight_left")
+    XCTAssertEqual(LaneWay.reverseLeft.turnImageName, "uturn_left")
+    XCTAssertEqual(LaneWay.right.turnImageName, "simple_right")
+    XCTAssertEqual(LaneWay.sharpRight.turnImageName, "sharp_right")
+    XCTAssertEqual(LaneWay.slightRight.turnImageName, "slight_right")
+    XCTAssertEqual(LaneWay.mergeToRight.turnImageName, "slight_right")
+    XCTAssertEqual(LaneWay.reverseRight.turnImageName, "uturn_right")
+  }
 }

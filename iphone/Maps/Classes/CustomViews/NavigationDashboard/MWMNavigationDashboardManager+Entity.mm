@@ -10,6 +10,7 @@
 #import <CoreApi/DurationFormatter.h>
 
 #include "routing/following_info.hpp"
+#include "routing/lanes/lane_info.hpp"
 #include "routing/turns.hpp"
 
 #include "map/routing_manager.hpp"
@@ -95,11 +96,25 @@ NSArray<MWMRouterTransitStepInfo *> *buildRouteTransitSteps(NSArray<MWMRoutePoin
 
   return steps;
 }
+
+NSArray<MWMLaneInfo *> *buildLanes(routing::turns::lanes::LanesInfo const & info) {
+  NSMutableArray<MWMLaneInfo *> * lanes = [NSMutableArray arrayWithCapacity:info.size()];
+  for (auto const & lane : info) {
+    auto const activeWays = lane.laneWays.GetActiveLaneWays();
+    NSMutableArray<NSNumber *> * laneWays = [NSMutableArray arrayWithCapacity:activeWays.size()];
+    for (auto const way : activeWays)
+      [laneWays addObject:@(static_cast<uint8_t>(way))];
+    [lanes addObject:[[MWMLaneInfo alloc] initWithLaneWays:laneWays
+                                            recommendedWay:static_cast<uint8_t>(lane.recommendedWay)]];
+  }
+  return lanes;
+}
 }  // namespace
 
 @interface MWMNavigationDashboardEntity ()
 
 @property(copy, nonatomic, readwrite) NSArray<MWMRouterTransitStepInfo *> * transitSteps;
+@property(copy, nonatomic, readwrite) NSArray<MWMLaneInfo *> * lanes;
 @property(copy, nonatomic, readwrite) NSString * distanceToTurn;
 @property(copy, nonatomic, readwrite) NSString * streetName;
 @property(copy, nonatomic, readwrite) NSString * targetDistance;
@@ -219,6 +234,7 @@ NSArray<MWMRouterTransitStepInfo *> *buildRouteTransitSteps(NSArray<MWMRoutePoin
 
     if (type == MWMRouterTypePedestrian) {
       entity.turnImage = image(info.m_pedestrianTurn);
+      entity.lanes = @[];
     } else {
       using namespace routing::turns;
       CarDirection const turn = info.m_turn;
@@ -230,6 +246,7 @@ NSArray<MWMRouterTransitStepInfo *> *buildRouteTransitSteps(NSArray<MWMRoutePoin
         entity.roundExitNumber = info.m_exitNum;
       else
         entity.roundExitNumber = 0;
+      entity.lanes = buildLanes(info.m_lanes);
     }
   }
 
