@@ -639,7 +639,7 @@
     <!-- To indicate the network of ATMs, bicycle rentals, electric vehicle charging stations... -->
     <string name="network">Δίκτυο: %s</string>
     <string name="trip_finished">Μόλις φτάσατε!</string>
-    <string name="ok">Οκ</string>
+    <string name="ok">OK</string>
     <!-- max. 10 symbols, both iOS and Android -->
     <string name="sort">Ταξινόμηση…</string>
     <!-- Android, title, max 20-22 symbols -->
@@ -668,7 +668,7 @@
     <string name="swim_places">Κολύμβηση</string>
     <string name="mountains">Βουνά</string>
     <string name="animals">Ζώα</string>
-    <string name="hotels">Διαμονή</string>
+    <string name="hotels">Ξενοδοχεία</string>
     <string name="buildings">Κτήρια</string>
     <string name="money">Χρήματα</string>
     <string name="shops">Καταστήματα</string>
@@ -676,14 +676,14 @@
     <string name="fuel_places">Πρατήρια βενζίνης</string>
     <string name="medicine">Φαρμακεία</string>
     <string name="search_in_the_list">Αναζήτηση στη λίστα</string>
-    <string name="religious_places">Χώροι Λατρείας</string>
+    <string name="religious_places">Χώροι λατρείας</string>
     <string name="select_list">Επιλογή λίστας</string>
-    <string name="transit_not_found">Η πλοήγηση με μετρό γι\' αυτή την περιοχή δεν είναι ακόμα διαθέσιμη</string>
+    <string name="transit_not_found">Η πλοήγηση με μετρό σ\' αυτήν την περιοχή δεν είναι ακόμη διαθέσιμη</string>
     <string name="dialog_pedestrian_route_is_long_header">Δεν βρέθηκε διαδρομή του μετρό</string>
-    <string name="dialog_pedestrian_route_is_long_message">Επιλέξτε το σημείο εκκίνησης ή τέλους διαδρομής πιο κοντά στο σταθμό του μετρό</string>
-    <string name="button_layer_isolines">Υψομετρικά</string>
-    <string name="isolines_activation_error_dialog">Για να χρησιμοποιήσετε υψομετρικές γραμμές, ενημερώστε ή κατεβάστε τον χάρτη της επιθυμητής περιοχής</string>
-    <string name="isolines_location_error_dialog">Οι υψομετρικές γραμμές δεν είναι ακόμα διαθέσιμες σε αυτή την περιοχή</string>
+    <string name="dialog_pedestrian_route_is_long_message">Επιλέξτε το σημείο εκκίνησης ή τέλους διαδρομής πιο κοντά σε σταθμό του μετρό</string>
+    <string name="button_layer_isolines">Υψοομετρικές γραμμές</string>
+    <string name="isolines_activation_error_dialog">Η ενεργοποίηση των υψομετρικών γραμμών απαιτεί τη λήψη των δεδομένων χάρτη αυτής της περιοχής</string>
+    <string name="isolines_location_error_dialog">Οι υψομετρικές γραμμές δεν είναι ακόμη διαθέσιμες σε αυτήν την περιοχή</string>
     <string name="elevation_profile_ascent">Ανάβαση</string>
     <string name="elevation_profile_descent">Κατάβαση</string>
     <string name="elevation_profile_min_elevation">Ελάχ. υψόμετρο</string>
@@ -691,7 +691,7 @@
     <string name="elevation_profile_difficulty">Δυσκολία</string>
     <string name="elevation_profile_distance">Απόστ.:</string>
     <string name="elevation_profile_time">Διάρκ:</string>
-    <string name="isolines_toast_zooms_1_10">Μεγεθύνετε για να δείτε περιγράμματα</string>
+    <string name="isolines_toast_zooms_1_10">Μεγεθύνετε για να δείτε ισογραμμές</string>
     <string name="downloader_loading_ios">Κατέβασμα</string>
     <string name="download_map_title">Κατεβάστε τον παγκόσμιο χάρτη επισκόπησης</string>
     <!-- Used in DownloadResources startup screen -->
@@ -708,7 +708,7 @@
     <!-- A preference title; keep short! -->
     <string name="enable_show_on_lock_screen">Εμφάνιση στην Οθόνη Κλειδώματος</string>
     <!-- Description in preferences -->
-    <string name="enable_show_on_lock_screen_description">Αν ενεργοποιηθεί, η εφαρμογή θα λειτουργεί και στην Οθόνη Κλειδώματος ακόμα και αν η συσκευή είναι κλειδωμένη.</string>
+    <string name="enable_show_on_lock_screen_description">Αν ενεργοποιηθεί, η εφαρμογή θα λειτουργεί και στην Οθόνη Κλειδώματος ακόμη και αν η συσκευή είναι κλειδωμένη.</string>
     <!-- Current language of the map! -->
     <string name="change_map_locale">Γλώσσα χάρτη</string>
     <!-- OpenStreetMap text on splash screen -->
@@ -720,7 +720,7 @@
     <!-- App tip #01 -->
     <string name="app_tip_01">Με τις δωρεές και την υποστήριξή σας, μπορούμε να δημιουργήσουμε τους καλύτερους χάρτες στον κόσμο!</string>
     <!-- App tip #02 -->
-    <string name="app_tip_02">Σας αρέσει η εφαρμογή μας; Παρακαλούμε κάντε μια δωρεά για να στηρίξετε την ανάπτυξη! Ακόμα δεν σας αρέσει; Ενημερώστε μας και θα το διορθώσουμε!</string>
+    <string name="app_tip_02">Σας αρέσει η εφαρμογή μας; Παρακαλούμε κάντε μια δωρεά για να στηρίξετε την ανάπτυξη! Ακόμη δεν σας αρέσει; Ενημερώστε μας γιατί, και θα το διορθώσουμε!</string>
     <!-- App tip #03 -->
     <string name="app_tip_03">Εάν γνωρίζετε έναν προγραμματιστή λογισμικού, μπορείτε να του ζητήσετε να υλοποιήσει μια λειτουργία που χρειάζεστε.</string>
     <!-- App tip #04 -->

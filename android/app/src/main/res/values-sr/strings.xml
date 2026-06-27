@@ -273,7 +273,7 @@
     <!-- Preference title -->
     <string name="google_play_services">Google Fused локацијски сервис</string>
     <!-- Preference text -->
-    <string name="pref_use_google_play">Услуга локације која комбинује GPS, Wi-Fi, мобилну мрежу и друге податке како би се локација открила што је прецизније. Такође се можете повезати са Google серверима.</string>
+    <string name="pref_use_google_play">Услуга локације која комбинује GPS, Wi-Fi, мобилну мрежу и друге податке како би се локација открила што је прецизније. Може комуницирати са Google серверима.</string>
     <!-- Preference title -->
     <!-- Preference description -->
     <!-- Text for routing error dialog -->
@@ -912,7 +912,7 @@
     <string name="pref_maplanguage_local">Локални језик</string>
     <string name="location_privacy_info">Апликације добијају податке о локацији од услуге локације вашег ОС-а, која може да дели вашу локацију са Гугл-ом и/или продавцем вашег уређаја. Користите Андроид ОС који чува приватност да бисте ово избегли.</string>
     <string name="location_privacy">Локацијска приватност</string>
-    <string name="pref_speedlimit_title">Прикажи ограничења брзине</string>
+    <string name="pref_speedlimit_title">Приказ ограничења брзине</string>
     <string name="rooms">%s собе</string>
     <string name="invalid_route">Непостојећа рута</string>
     <string name="building_route">Израчунавање руте…</string>

@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "アップデート確認中のエラー";
 "editor_add_select_category_recent_subtitle" = "Recently Used";
 "oh_unknown" = "営業時間不明";
+"carplay_highway_exit" = "Exit %@";

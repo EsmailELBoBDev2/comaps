@@ -1518,4 +1518,5 @@
     <string name="type.sport.pickleball">Pickleball</string>
     <string name="type.leisure.sports_centre.sport.pickleball">Pickleballi keskus</string>
     <string name="type.organic.no">Valikus pole mahetooteid</string>
+    <string name="type.amenity.stage">Lava</string>
 </resources>

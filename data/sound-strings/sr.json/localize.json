@@ -6,7 +6,7 @@
 "make_a_right_turn_street":"NULL",
 "make_a_sharp_right_turn":"Скрените оштро десно.",
 "make_a_sharp_right_turn_street":"NULL",
-"enter_the_roundabout":"Уђите у кружни ток.",
+"enter_the_roundabout":"На кружном току.",
 "enter_the_roundabout_street":"NULL",
 "enter_the_roundabout_street_verb":"NULL",
 "leave_the_roundabout":"Изађите из кружног тока.",
@@ -104,5 +104,6 @@
 "in_1_mile":"За једну миљу",
 "in_1_5_miles":"За једну и по миљу",
 "in_2_miles":"За две миље",
-"unknown_camera":"Пажња, прекршајна камера"
+"unknown_camera":"Пажња, прекршајна камера",
+"at_the_end_of_the_road":"На крају улице,"
 }

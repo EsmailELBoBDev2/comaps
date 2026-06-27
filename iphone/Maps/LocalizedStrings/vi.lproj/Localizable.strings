@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "Xảy ra lỗi khi kiểm tra cập nhật";
 "editor_add_select_category_recent_subtitle" = "Đã dùng gần đây";
 "oh_unknown" = "Giờ mở cửa không được biết";
+"carplay_highway_exit" = "Exit %@";

@@ -1409,7 +1409,7 @@
     <string name="type.amenity.boat_rental">Изнајмљивање чамаца</string>
     <string name="type.amenity.lounger">Лежаљка</string>
     <string name="type.amenity.mobile_money_agent">Мобилни посредник за плаћање</string>
-    <string name="type.leisure.bandstand">Бина</string>
+    <string name="type.leisure.bandstand">Музички павиљон</string>
     <string name="type.leisure.indoor_play">Играоница</string>
     <string name="type.leisure.sports_centre.sport.multi">Спортски центар</string>
     <string name="type.leisure.sports_centre.sport.american_football">Спортски центар</string>
@@ -1518,4 +1518,5 @@
     <string name="type.leisure.sports_centre.sport.pickleball">Спортски центар</string>
     <string name="type.sport.pickleball">Пиклбол</string>
     <string name="type.organic.no">Нема органску храну</string>
+    <string name="type.amenity.stage">Бина</string>
 </resources>

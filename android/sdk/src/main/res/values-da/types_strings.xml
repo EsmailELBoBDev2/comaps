@@ -1413,7 +1413,7 @@
     <string name="type.amenity.give_box">Bytteboks</string>
     <string name="type.amenity.sailing_school">Sejlerskole</string>
     <string name="type.amenity.flight_school">Flyveskole</string>
-    <string name="type.power.portal">Kraftværksportal</string>
+    <string name="type.power.portal">Elportal</string>
     <string name="type.emergency.access_point">Samlingspunkt</string>
     <string name="type.emergency.life_ring">Redningskrans</string>
     <string name="type.beacon.cardinal.east">Kompasafmærkningsbåke</string>
@@ -1498,7 +1498,7 @@
     <string name="type.leisure.sports_centre.sport.field_hockey">Idrætscenter</string>
     <string name="type.leisure.sports_centre.sport.futsal">Idrætscenter</string>
     <string name="type.leisure.sports_centre.sport.handball">Idrætscenter</string>
-    <string name="type.organic.no">Ingen økologiske valgmuligheder</string>
+    <string name="type.organic.no">Ikke økologisk</string>
     <string name="type.sport.pickleball">Pickleball</string>
     <string name="type.leisure.sports_centre.sport.ice_hockey">Idrætscenter</string>
     <string name="type.leisure.sports_centre.sport.pelota">Idrætscenter</string>

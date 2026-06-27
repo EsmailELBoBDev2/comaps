@@ -1516,3 +1516,4 @@
 "type.sport.pickleball" = "Pickleball";
 "type.leisure.sports_centre.sport.pickleball" = "Pickleballi keskus";
 "type.organic.no" = "Valikus pole mahetooteid";
+"type.amenity.stage" = "Lava";

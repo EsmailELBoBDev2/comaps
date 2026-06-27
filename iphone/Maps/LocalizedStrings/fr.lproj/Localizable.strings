@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "Erreur lors de la recherche de mises à jour";
 "editor_add_select_category_recent_subtitle" = "Récemment utilisés";
 "oh_unknown" = "Horaires d'ouverture inconnus";
+"carplay_highway_exit" = "Sortie %@";

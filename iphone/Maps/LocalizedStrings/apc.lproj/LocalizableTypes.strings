@@ -1423,3 +1423,4 @@
 "type.leisure.sports_hall" = "Sports hall";
 "type.xmas.tree" = "Christmas Tree";
 "type.organic.no" = "No organic options";
+"type.amenity.stage" = "Stage";

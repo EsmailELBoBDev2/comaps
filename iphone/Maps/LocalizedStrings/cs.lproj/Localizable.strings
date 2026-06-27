@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "Chyba při kontrole aktualizací";
 "editor_add_select_category_recent_subtitle" = "Naposledy použito";
 "oh_unknown" = "Neznámá otevírací doba";
+"carplay_highway_exit" = "Výjezd %@";

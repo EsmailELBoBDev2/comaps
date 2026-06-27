@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "Fejl ved søgning efter opdateringer";
 "editor_add_select_category_recent_subtitle" = "Nyligt anvendt";
 "oh_unknown" = "Åbningstider ukendt";
+"carplay_highway_exit" = "Afkørsel %@";

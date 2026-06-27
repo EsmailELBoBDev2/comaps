@@ -695,7 +695,7 @@
 "dialog_routing_rebuild_for_vehicle_carplay" = "Η διαδρομή θα μετατραπεί σε διαδρομή με αυτοκίνητο";
 "not_all_shown_bookmarks_carplay" = "Δεν εμφανίζονται όλοι οι σελιδοδείκτες";
 "switch_to_phone_bookmarks_carplay" = "Μεταβείτε στο τηλέφωνο για να δείτε όλους τους σελιδοδείκτες";
-"ok" = "Οκ";
+"ok" = "OK";
 "speedcams_alert_title_carplay_1" = "Κάμερες ταχύτητας";
 "speedcams_alert_title_carplay_2" = "Ειδοποιήσεις ταχύτητας";
 "download_map_carplay" = "Κάντε λήψη χαρτών στην εφαρμογή, στη συσκευή σας";
@@ -704,10 +704,10 @@
 "sort" = "Ταξινόμηση…";
 /* iOS */
 "sort_default" = "Ταξινόμηση κατά προεπιλογή";
-"sort_type" = "Ταξινόμηση ανά τύπο";
+"sort_type" = "Ταξινόμηση κατά τύπο";
 "sort_distance" = "Ταξινόμηση κατά απόσταση";
 "sort_date" = "Ταξινόμηση κατά ημερομηνία";
-"sort_name" = "Ταξινόμηση με βάση το όνομα";
+"sort_name" = "Ταξινόμηση κατά όνομα";
 "week_ago_sorttype" = "Μια βδομάδα πριν";
 "month_ago_sorttype" = "Ένα μήνα πριν";
 "moremonth_ago_sorttype" = "Περισσότερο από έναν μήνα πριν";
@@ -721,7 +721,7 @@
 "swim_places" = "Κολύμβηση";
 "mountains" = "Βουνά";
 "animals" = "Ζώα";
-"hotels" = "Διαμονή";
+"hotels" = "Ξενοδοχεία";
 "buildings" = "Κτήρια";
 "money" = "Χρήματα";
 "shops" = "Καταστήματα";
@@ -729,13 +729,13 @@
 "fuel_places" = "Πρατήρια βενζίνης";
 "medicine" = "Φαρμακεία";
 "search_in_the_list" = "Αναζήτηση στη λίστα";
-"religious_places" = "Χώροι Λατρείας";
-"transit_not_found" = "Η πλοήγηση με μετρό γι' αυτή την περιοχή δεν είναι ακόμα διαθέσιμη";
+"religious_places" = "Χώροι λατρείας";
+"transit_not_found" = "Η πλοήγηση με μετρό σ' αυτήν την περιοχή δεν είναι ακόμη διαθέσιμη";
 "dialog_pedestrian_route_is_long_header" = "Δεν βρέθηκε διαδρομή του μετρό";
-"dialog_pedestrian_route_is_long_message" = "Επιλέξτε το σημείο εκκίνησης ή τέλους διαδρομής πιο κοντά στο σταθμό του μετρό";
-"button_layer_isolines" = "Υψομετρικά";
-"isolines_activation_error_dialog" = "Για να χρησιμοποιήσετε υψομετρικές γραμμές, ενημερώστε ή κατεβάστε τον χάρτη της επιθυμητής περιοχής";
-"isolines_location_error_dialog" = "Οι υψομετρικές γραμμές δεν είναι ακόμα διαθέσιμες σε αυτή την περιοχή";
+"dialog_pedestrian_route_is_long_message" = "Επιλέξτε το σημείο εκκίνησης ή τέλους διαδρομής πιο κοντά σε σταθμό του μετρό";
+"button_layer_isolines" = "Υψοομετρικές γραμμές";
+"isolines_activation_error_dialog" = "Η ενεργοποίηση των υψομετρικών γραμμών απαιτεί τη λήψη των δεδομένων χάρτη αυτής της περιοχής";
+"isolines_location_error_dialog" = "Οι υψομετρικές γραμμές δεν είναι ακόμη διαθέσιμες σε αυτήν την περιοχή";
 "elevation_profile_diff_level" = "Επίπεδο δυσκολίας";
 "elevation_profile_diff_level_easy" = "Εύκολο";
 "elevation_profile_diff_level_moderate" = "Μέτριο";
@@ -744,7 +744,7 @@
 "elevation_profile_descent" = "Κατάβαση";
 "elevation_profile_min_elevation" = "Ελάχ. υψόμετρο";
 "elevation_profile_max_elevation" = "Μέγ. υψόμετρο";
-"isolines_toast_zooms_1_10" = "Μεγεθύνετε για να δείτε περιγράμματα";
+"isolines_toast_zooms_1_10" = "Μεγεθύνετε για να δείτε ισογραμμές";
 "downloader_updating_ios" = "Γίνεται ενημέρωση";
 "downloader_loading_ios" = "Κατέβασμα";
 /* Autoupdate dialog on start */
@@ -772,7 +772,7 @@
 /* App tip #01 */
 "app_tip_01" = "Με τις δωρεές και την υποστήριξή σας, μπορούμε να δημιουργήσουμε τους καλύτερους χάρτες στον κόσμο!";
 /* App tip #02 */
-"app_tip_02" = "Σας αρέσει η εφαρμογή μας; Παρακαλούμε κάντε μια δωρεά για να στηρίξετε την ανάπτυξη! Ακόμα δεν σας αρέσει; Ενημερώστε μας και θα το διορθώσουμε!";
+"app_tip_02" = "Σας αρέσει η εφαρμογή μας; Παρακαλούμε κάντε μια δωρεά για να στηρίξετε την ανάπτυξη! Ακόμη δεν σας αρέσει; Ενημερώστε μας γιατί, και θα το διορθώσουμε!";
 /* App tip #03 */
 "app_tip_03" = "Εάν γνωρίζετε έναν προγραμματιστή λογισμικού, μπορείτε να του ζητήσετε να υλοποιήσει μια λειτουργία που χρειάζεστε.";
 /* App tip #04 */
@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "Σφάλμα κατά τον έλεγχο για ενημερώσεις";
 "editor_add_select_category_recent_subtitle" = "Πρόσφατα χρησιμοποιημένα";
 "oh_unknown" = "Άγνωστο ωράριο λειτουργίας";
+"carplay_highway_exit" = "Έξοδος %@";

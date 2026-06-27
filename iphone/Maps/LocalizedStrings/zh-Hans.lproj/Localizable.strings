@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "检查更新时出错";
 "editor_add_select_category_recent_subtitle" = "最近用过";
 "oh_unknown" = "营业时间未知";
+"carplay_highway_exit" = "出口 %@";

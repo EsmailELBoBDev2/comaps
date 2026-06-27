@@ -959,4 +959,9 @@
     <string name="oh_unknown">Hores d\'opertura desconegudes</string>
     <string name="editor_add_select_category_all_subtitle">Totes les Categories</string>
     <string name="editor_add_select_category_recent_subtitle">Usades Recentment</string>
+    <string name="enable_long_tap_fullscreen">Toca i manté per amagar la interfície</string>
+    <string name="long_tap_disabled_toast">Per amagar la interfície habilita el toc llarg a la configuració</string>
+    <string name="sort_categories">Ordena les llistes de favorits</string>
+    <string name="by_recently_used">Per usades recentment</string>
+    <string name="by_custom">Per ordre personalitzat</string>
 </resources>

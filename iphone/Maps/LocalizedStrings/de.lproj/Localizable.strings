@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "Fehler beim Prüfen auf Aktualisierungen";
 "editor_add_select_category_recent_subtitle" = "Kürzlich verwendet";
 "oh_unknown" = "Unbekannte Öffnungszeiten";
+"carplay_highway_exit" = "Ausfahrt %@";

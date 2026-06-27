@@ -1518,4 +1518,5 @@
     <string name="type.leisure.sports_centre.sport.pickleball">Sportcentrum</string>
     <string name="type.sport.pickleball">Pickleball</string>
     <string name="type.organic.no">Geen biologisch</string>
+    <string name="type.amenity.stage">Podium</string>
 </resources>

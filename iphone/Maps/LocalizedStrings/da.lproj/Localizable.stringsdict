@@ -31,9 +31,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%lld fil blev fundet. Du vil se det efter konvertering.</string>
+			<string>%lld fil blev fundet. Du vil kunne se den efter konvertering.</string>
 			<key>other</key>
-			<string>%lld filer blev fundet. Du vil se dem efter konvertering.</string>
+			<string>%lld filer blev fundet. Du vil kunne se dem efter konvertering.</string>
 		</dict>
 	</dict>
 	<key>tracks</key>

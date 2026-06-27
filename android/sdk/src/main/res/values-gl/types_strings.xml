@@ -531,7 +531,7 @@
     <string name="type.landuse.construction">Construción</string>
     <string name="type.landuse.education">Instalacións educativas</string>
     <string name="type.landuse.farmland">Terras agrícolas</string>
-    <string name="type.landuse.farmyard">Granja</string>
+    <string name="type.landuse.farmyard">Granxa</string>
     <string name="type.landuse.flowerbed">Cama de flores</string>
     <string name="type.landuse.forest">Bosque</string>
     <string name="type.landuse.forest.coniferous">Bosque de coníferas</string>
@@ -690,7 +690,7 @@
     <string name="type.place.continent">Continente</string>
     <string name="type.place.country">País</string>
     <string name="type.place.county">Condado</string>
-    <string name="type.place.farm">Granja</string>
+    <string name="type.place.farm">Granxa</string>
     <string name="type.place.hamlet">Aldea</string>
     <string name="type.place.island">Isla</string>
     <string name="type.place.islet">Illote</string>
@@ -705,8 +705,8 @@
     <string name="type.place.state">Estado</string>
     <string name="type.place.state.USA">Estado</string>
     <string name="type.place.suburb">Barrio</string>
-    <string name="type.place.town">Poboo</string>
-    <string name="type.place.village">Poboo</string>
+    <string name="type.place.town">Vila</string>
+    <string name="type.place.village">Vila</string>
     <string name="type.power">Enerxía</string>
     <string name="type.power.generator">Xerador</string>
     <string name="type.power.generator.solar">Xerador solar</string>
@@ -1309,4 +1309,5 @@
     <string name="type.emergency.access_point.address">Enderezo de rescate de emerxencia</string>
     <string name="type.emergency.disaster_help_point">Punto de axuda de emerxencia en desastres</string>
     <string name="type.emergency.life_ring">Salvavidas</string>
+    <string name="type.amenity.stage">Escenario</string>
 </resources>

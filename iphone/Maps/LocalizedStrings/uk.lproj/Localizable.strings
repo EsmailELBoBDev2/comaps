@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "Error checking for updates";
 "editor_add_select_category_recent_subtitle" = "Recently Used";
 "oh_unknown" = "Opening hours unknown";
+"carplay_highway_exit" = "Exit %@";

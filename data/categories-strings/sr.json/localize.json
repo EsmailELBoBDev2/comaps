@@ -617,5 +617,6 @@
 "cuisine-american": "8Америчка храна|10Америчка кухиња|8Američka hrana|10Američka kuhinja",
 "cuisine-african": "7Афричка храна|9Афричка кухиња|7Afrička hrana|9Afrička kuhinja",
 "cuisine-vegetarian|@cuisine_all_vegetarian": "4Вегетаријанска храна|16Вегетаријанска кухиња|4Vegetarijanska kuhinja|16Vegetarijanska hrana",
-"cuisine-asian|@cuisine_all_asian": "4Азијска храна|9Азијска кухиња|4Azijska hrana|9Azijska kuhinja"
+"cuisine-asian|@cuisine_all_asian": "4Азијска храна|9Азијска кухиња|4Azijska hrana|9Azijska kuhinja",
+"amenity-stage": "Бина|Bina"
 }
