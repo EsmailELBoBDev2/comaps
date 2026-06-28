@@ -23,8 +23,17 @@
 
   <SwitchPreferenceCompat
     android:defaultValue="false"
-    android:key="@string/pref_cairodrive_dev_overlay"
+    android:key="@string/pref_cairodrive_headlight"
     android:order="3"
+    android:summary="@string/cairodrive_headlight_summary"
+    android:title="@string/cairodrive_headlight_title"
+    android:widgetLayout="@layout/preference_switch"
+    app:singleLineTitle="false" />
+
+  <SwitchPreferenceCompat
+    android:defaultValue="false"
+    android:key="@string/pref_cairodrive_dev_overlay"
+    android:order="4"
     android:summary="@string/cairodrive_dev_overlay_summary"
     android:title="@string/cairodrive_dev_overlay_title"
     android:widgetLayout="@layout/preference_switch"

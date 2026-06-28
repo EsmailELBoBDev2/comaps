@@ -31,6 +31,8 @@ public class CairoDriveSettingsFragment extends BaseXmlSettingsFragment
           CairoConfig.setOnlineEnabled(requireContext(), value);
         else if (key.equals(getString(R.string.pref_cairodrive_dev_overlay)))
           CairoConfig.setDevOverlayEnabled(requireContext(), value);
+        else if (key.equals(getString(R.string.pref_cairodrive_headlight)))
+          CairoConfig.setHeadlightMode(requireContext(), value);
       }
 
       @Override
@@ -40,6 +42,8 @@ public class CairoDriveSettingsFragment extends BaseXmlSettingsFragment
           return CairoConfig.isOnlineEnabled(requireContext());
         if (key.equals(getString(R.string.pref_cairodrive_dev_overlay)))
           return CairoConfig.isDevOverlayEnabled(requireContext());
+        if (key.equals(getString(R.string.pref_cairodrive_headlight)))
+          return CairoConfig.isHeadlightMode(requireContext());
         return defValue;
       }
 

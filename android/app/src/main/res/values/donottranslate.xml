@@ -57,6 +57,9 @@
   <string name="pref_cairodrive_screen" translatable="false">CairoDriveScreen</string>
   <string name="pref_cairodrive_online" translatable="false">CairoDriveOnline</string>
   <string name="pref_cairodrive_dev_overlay" translatable="false">CairoDriveDevOverlay</string>
+  <string name="pref_cairodrive_headlight" translatable="false">CairoDriveHeadlight</string>
+  <string name="cairodrive_headlight_title" translatable="false">Headlight ambient mode</string>
+  <string name="cairodrive_headlight_summary" translatable="false">Force the dark map theme while navigating, regardless of time of day</string>
   <string name="cairodrive_settings_title" translatable="false">CairoDrive</string>
   <string name="cairodrive_online_title" translatable="false">Online features</string>
   <string name="cairodrive_online_summary" translatable="false">Enable online routing, search, traffic and live cameras (requires network; off keeps the app fully offline)</string>

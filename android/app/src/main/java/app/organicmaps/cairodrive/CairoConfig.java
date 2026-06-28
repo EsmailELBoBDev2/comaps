@@ -16,6 +16,7 @@ public final class CairoConfig
   private static final String KEY_ONLINE = "online_features_enabled";
   private static final String KEY_DEV_OVERLAY = "dev_log_overlay_enabled";
   private static final String KEY_PREFERRED_ROUTER = "preferred_router";
+  private static final String KEY_HEADLIGHT = "headlight_mode";
 
   /// Preferred online navigation engine. AUTO = let the route-compare manager
   /// pick the fastest across all providers; otherwise the named engine's route
@@ -74,6 +75,18 @@ public final class CairoConfig
   public static void setPreferredRouter(@NonNull Context ctx, @NonNull Router router)
   {
     prefs(ctx).edit().putString(KEY_PREFERRED_ROUTER, router.name()).apply();
+  }
+
+  /// Headlight ambient mode: force the dark/vehicle-dark theme while navigating,
+  /// regardless of time of day (default off).
+  public static boolean isHeadlightMode(@NonNull Context ctx)
+  {
+    return prefs(ctx).getBoolean(KEY_HEADLIGHT, false);
+  }
+
+  public static void setHeadlightMode(@NonNull Context ctx, boolean enabled)
+  {
+    prefs(ctx).edit().putBoolean(KEY_HEADLIGHT, enabled).apply();
   }
 
   /// CairoDrive ships with pro features unlocked.
