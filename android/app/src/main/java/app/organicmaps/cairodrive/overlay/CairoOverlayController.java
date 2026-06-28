@@ -12,6 +12,7 @@ import app.organicmaps.cairodrive.model.GeoPoint;
 import app.organicmaps.cairodrive.reports.CairoReport;
 import app.organicmaps.cairodrive.reports.CairoReportStore;
 import app.organicmaps.cairodrive.routing.OnlineRoute;
+import app.organicmaps.cairodrive.routing.RouteCameraRanker;
 import app.organicmaps.cairodrive.routing.RouteCompareManager;
 import app.organicmaps.cairodrive.safety.Hazard;
 import app.organicmaps.cairodrive.safety.HazardAggregator;
@@ -155,6 +156,16 @@ public final class CairoOverlayController
       {
         CairoLog.w(SUB, "route compare failed: " + t.getMessage());
         return;
+      }
+      // "Fewer cameras" ranking: count cameras near each alternative.
+      try
+      {
+        final GeoPoint mid = new GeoPoint((from.lat + to.lat) / 2, (from.lon + to.lon) / 2);
+        RouteCameraRanker.annotateFewest(routes, mCameras.collect(mid, FETCH_RADIUS_M));
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "camera ranking failed: " + t.getMessage());
       }
       final List<OnlineRoute> fr = routes;
       mUi.post(() -> mOverlay.showRoutes(fr));

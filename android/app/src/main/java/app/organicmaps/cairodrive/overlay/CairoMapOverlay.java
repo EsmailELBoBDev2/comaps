@@ -15,7 +15,9 @@ import app.organicmaps.sdk.bookmarks.data.BookmarkManager;
 import app.organicmaps.sdk.bookmarks.data.PredefinedColors;
 import app.organicmaps.sdk.util.log.CairoLog;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /// Draws CairoDrive's online camera + traffic points on the core map by reusing
 /// the existing bookmark/mark infrastructure (the same path the app already
@@ -40,7 +42,12 @@ public final class CairoMapOverlay
   // Route line colours (ARGB): fastest = green, alternatives = blue.
   private static final int COLOR_FASTEST = 0xFF2E7D32;
   private static final int COLOR_ALT = 0xFF1565C0;
+  private static final int COLOR_FEWEST = 0xFF00838F;  // teal: fewest speed cameras
   private static final double ROUTE_WIDTH_PX = 6.0;
+  // Above this many cameras in view, draw grid clusters instead of individual dots.
+  private static final int CLUSTER_THRESHOLD = 60;
+  private static final double CLUSTER_GRID_DEG = 0.01;  // ~1 km cells
+  private static final int CLUSTER_COLOR = 0xFFEF6C00;
 
   private long mCatId = -1;
   private final List<Long> mMarkIds = new ArrayList<>();
@@ -225,8 +232,8 @@ public final class CairoMapOverlay
       }
       try
       {
-        final long id = BookmarkManager.INSTANCE.createTrack(latLon, r.isFastest ? COLOR_FASTEST : COLOR_ALT,
-                                                             ROUTE_WIDTH_PX, cat);
+        final int color = r.isFastest ? COLOR_FASTEST : (r.isFewestCameras ? COLOR_FEWEST : COLOR_ALT);
+        final long id = BookmarkManager.INSTANCE.createTrack(latLon, color, ROUTE_WIDTH_PX, cat);
         if (id != INVALID_TRACK)
           mTrackIds.add(id);
       }
@@ -249,13 +256,21 @@ public final class CairoMapOverlay
       return 0;
 
     int cameraCount = 0;
-    for (OverpassCamera c : cameras)
+    if (cameras.size() > CLUSTER_THRESHOLD)
     {
-      final Long id = addMarkId(cat, c.location.lat, c.location.lon, c.type.label(), c.type.colorArgb());
-      if (id != null)
+      drawCameraClusters(cat, cameras);
+      cameraCount = cameras.size();  // badge reflects the true total
+    }
+    else
+    {
+      for (OverpassCamera c : cameras)
       {
-        mMarkIds.add(id);
-        cameraCount++;
+        final Long id = addMarkId(cat, c.location.lat, c.location.lon, c.type.label(), c.type.colorArgb());
+        if (id != null)
+        {
+          mMarkIds.add(id);
+          cameraCount++;
+        }
       }
     }
     for (TrafficIncident i : incidents)
@@ -267,6 +282,35 @@ public final class CairoMapOverlay
 
     CairoLog.i(SUB, "render cameras=" + cameraCount + " incidents=" + incidents.size());
     return cameraCount;
+  }
+
+  /// Grid-cluster dense cameras into one mark per ~1 km cell labelled with the
+  /// count, so the map stays readable and BookmarkManager isn't flooded.
+  private void drawCameraClusters(long cat, @NonNull List<OverpassCamera> cameras)
+  {
+    final Map<String, double[]> cells = new HashMap<>();  // key -> [sumLat, sumLon, count]
+    for (OverpassCamera c : cameras)
+    {
+      final long latCell = Math.round(c.location.lat / CLUSTER_GRID_DEG);
+      final long lonCell = Math.round(c.location.lon / CLUSTER_GRID_DEG);
+      final String key = latCell + ":" + lonCell;
+      final double[] acc = cells.get(key);
+      if (acc == null)
+        cells.put(key, new double[] {c.location.lat, c.location.lon, 1});
+      else
+      {
+        acc[0] += c.location.lat;
+        acc[1] += c.location.lon;
+        acc[2] += 1;
+      }
+    }
+    for (double[] acc : cells.values())
+    {
+      final int n = (int) acc[2];
+      final Long id = addMarkId(cat, acc[0] / n, acc[1] / n, n + " cameras", CLUSTER_COLOR);
+      if (id != null)
+        mMarkIds.add(id);
+    }
   }
 
   /// Add one bookmark mark in the given category; returns its id, or null on

@@ -21,6 +21,8 @@ public final class OnlineRoute
   /// Set by RouteCompareManager during ranking (Waze-style comparison).
   public boolean isFastest;
   public boolean isShortest;
+  /// Set by RouteCameraRanker: the route passing the fewest speed cameras.
+  public boolean isFewestCameras;
 
   public OnlineRoute(@NonNull String provider, double distanceMeters, double durationSeconds,
                      @NonNull List<GeoPoint> polyline)

@@ -34,6 +34,8 @@ public class CairoDriveSettingsFragment extends BaseXmlSettingsFragment
           CairoConfig.setDevOverlayEnabled(requireContext(), value);
         else if (key.equals(getString(R.string.pref_cairodrive_headlight)))
           CairoConfig.setHeadlightMode(requireContext(), value);
+        else if (key.equals(getString(R.string.pref_cairodrive_bt)))
+          CairoConfig.setBluetoothAutoStart(requireContext(), value);
       }
 
       @Override
@@ -45,6 +47,8 @@ public class CairoDriveSettingsFragment extends BaseXmlSettingsFragment
           return CairoConfig.isDevOverlayEnabled(requireContext());
         if (key.equals(getString(R.string.pref_cairodrive_headlight)))
           return CairoConfig.isHeadlightMode(requireContext());
+        if (key.equals(getString(R.string.pref_cairodrive_bt)))
+          return CairoConfig.isBluetoothAutoStart(requireContext());
         return defValue;
       }
 

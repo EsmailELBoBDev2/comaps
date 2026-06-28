@@ -42,8 +42,17 @@
 
   <SwitchPreferenceCompat
     android:defaultValue="false"
-    android:key="@string/pref_cairodrive_dev_overlay"
+    android:key="@string/pref_cairodrive_bt"
     android:order="5"
+    android:summary="@string/cairodrive_bt_summary"
+    android:title="@string/cairodrive_bt_title"
+    android:widgetLayout="@layout/preference_switch"
+    app:singleLineTitle="false" />
+
+  <SwitchPreferenceCompat
+    android:defaultValue="false"
+    android:key="@string/pref_cairodrive_dev_overlay"
+    android:order="6"
     android:summary="@string/cairodrive_dev_overlay_summary"
     android:title="@string/cairodrive_dev_overlay_title"
     android:widgetLayout="@layout/preference_switch"

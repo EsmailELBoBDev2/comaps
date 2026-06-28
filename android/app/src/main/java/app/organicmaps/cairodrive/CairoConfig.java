@@ -17,6 +17,7 @@ public final class CairoConfig
   private static final String KEY_DEV_OVERLAY = "dev_log_overlay_enabled";
   private static final String KEY_PREFERRED_ROUTER = "preferred_router";
   private static final String KEY_HEADLIGHT = "headlight_mode";
+  private static final String KEY_BT_AUTOSTART = "bluetooth_autostart";
 
   /// Preferred online navigation engine. AUTO = let the route-compare manager
   /// pick the fastest across all providers; otherwise the named engine's route
@@ -87,6 +88,18 @@ public final class CairoConfig
   public static void setHeadlightMode(@NonNull Context ctx, boolean enabled)
   {
     prefs(ctx).edit().putBoolean(KEY_HEADLIGHT, enabled).apply();
+  }
+
+  /// Launch the app when a Bluetooth device (car) connects (default off). Note:
+  /// modern Android restricts background activity launch, so this is best-effort.
+  public static boolean isBluetoothAutoStart(@NonNull Context ctx)
+  {
+    return prefs(ctx).getBoolean(KEY_BT_AUTOSTART, false);
+  }
+
+  public static void setBluetoothAutoStart(@NonNull Context ctx, boolean enabled)
+  {
+    prefs(ctx).edit().putBoolean(KEY_BT_AUTOSTART, enabled).apply();
   }
 
   /// CairoDrive ships with pro features unlocked.

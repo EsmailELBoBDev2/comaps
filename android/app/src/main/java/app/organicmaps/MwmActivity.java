@@ -66,6 +66,7 @@ import app.organicmaps.cairodrive.overlay.CamerasBadge;
 import app.organicmaps.cairodrive.speed.AverageSpeedTracker;
 import app.organicmaps.cairodrive.speed.OverspeedMonitor;
 import app.organicmaps.cairodrive.speed.SpeedometerView;
+import app.organicmaps.cairodrive.trip.ShareEta;
 import app.organicmaps.cairodrive.trip.TripRecorder;
 import app.organicmaps.downloader.DownloaderActivity;
 import app.organicmaps.downloader.DownloaderFragment;
@@ -113,6 +114,7 @@ import app.organicmaps.sdk.location.TrackRecorder;
 import app.organicmaps.sdk.maplayer.isolines.IsolinesState;
 import app.organicmaps.sdk.routing.RouteMarkType;
 import app.organicmaps.sdk.routing.RoutingController;
+import app.organicmaps.sdk.routing.RoutingInfo;
 import app.organicmaps.sdk.routing.RoutingOptions;
 import app.organicmaps.sdk.search.SearchEngine;
 import app.organicmaps.sdk.settings.RoadType;
@@ -1232,7 +1234,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
       final double rlat = l != null ? l.getLatitude() : CairoConfig.CAIRO_LAT;
       final double rlon = l != null ? l.getLongitude() : CairoConfig.CAIRO_LON;
       mCairoOverlay.report(this, kind, rlat, rlon);
-    });
+    }, this::shareCairoEta);
 
     // CairoDrive: parking - tap saves the current spot, long-press clears it.
     CairoParkingButton.show(this, () -> {
@@ -2017,6 +2019,24 @@ public class MwmActivity extends BaseMwmFragmentActivity
       mTripRecorder.start();
 
     mNavigationController.update(Framework.nativeGetRouteFollowingInfo());
+  }
+
+  // CairoDrive: share the current navigation ETA via the Android share sheet
+  // (long-press the Report button). No-op with a toast when not navigating.
+  private void shareCairoEta()
+  {
+    final RoutingController rc = RoutingController.get();
+    final RoutingInfo info = Framework.nativeGetRouteFollowingInfo();
+    final MapObject end = rc.getEndPoint();
+    if (!rc.isNavigating() || info == null || end == null)
+    {
+      android.widget.Toast.makeText(this, "Start navigation to share an ETA", android.widget.Toast.LENGTH_SHORT)
+          .show();
+      return;
+    }
+    final long etaMs = System.currentTimeMillis() + info.totalTimeInSeconds * 1000L;
+    final String name = end.getName() != null && !end.getName().isEmpty() ? end.getName() : "Destination";
+    ShareEta.shareEta(this, end.getLat(), end.getLon(), etaMs, name);
   }
 
   // CairoDrive: drive the speedometer + over-speed alarm + trip/average-speed

@@ -58,6 +58,9 @@
   <string name="pref_cairodrive_online" translatable="false">CairoDriveOnline</string>
   <string name="pref_cairodrive_dev_overlay" translatable="false">CairoDriveDevOverlay</string>
   <string name="pref_cairodrive_headlight" translatable="false">CairoDriveHeadlight</string>
+  <string name="pref_cairodrive_bt" translatable="false">CairoDriveBluetooth</string>
+  <string name="cairodrive_bt_title" translatable="false">Auto-start on Bluetooth</string>
+  <string name="cairodrive_bt_summary" translatable="false">Launch the app when the car\'s Bluetooth connects (best-effort on modern Android)</string>
   <string name="cairodrive_headlight_title" translatable="false">Headlight ambient mode</string>
   <string name="cairodrive_headlight_summary" translatable="false">Force the dark map theme while navigating, regardless of time of day</string>
   <string name="cairodrive_settings_title" translatable="false">CairoDrive</string>

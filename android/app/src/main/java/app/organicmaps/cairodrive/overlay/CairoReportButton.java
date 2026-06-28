@@ -26,7 +26,7 @@ public final class CairoReportButton
 
   private CairoReportButton() {}
 
-  public static void show(@NonNull Activity activity, @NonNull Sink sink)
+  public static void show(@NonNull Activity activity, @NonNull Sink sink, @NonNull Runnable onLongPress)
   {
     final View content = activity.findViewById(android.R.id.content);
     if (!(content instanceof ViewGroup))
@@ -48,6 +48,10 @@ public final class CairoReportButton
     lp.leftMargin = (int) (12 * d);
     lp.bottomMargin = (int) (96 * d);
     button.setOnClickListener(v -> showChooser(activity, sink));
+    button.setOnLongClickListener(v -> {
+      onLongPress.run();  // long-press = share ETA
+      return true;
+    });
     root.addView(button, lp);
   }
 

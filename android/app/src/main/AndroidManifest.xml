@@ -28,6 +28,8 @@
   <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <!-- CairoDrive: auto-start when the car's Bluetooth connects (optional). -->
+  <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
   <!--
     https://developer.android.com/reference/androidx/core/app/JobIntentService:
     When running on Android O, the JobScheduler will take care of wake locks
@@ -541,6 +543,15 @@
     <meta-data
         android:name="androidx.car.app.minCarApiLevel"
         android:value="5"/>
+
+    <!-- CairoDrive: launch on Bluetooth (car) connect when enabled in settings. -->
+    <receiver
+        android:name="app.organicmaps.cairodrive.bt.CairoBluetoothReceiver"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="android.bluetooth.device.action.ACL_CONNECTED"/>
+      </intent-filter>
+    </receiver>
 
   </application>
 </manifest>
