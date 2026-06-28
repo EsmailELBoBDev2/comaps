@@ -14,22 +14,27 @@ public final class CairoReport
 {
   public enum Kind
   {
-    CAMERA(0xFFD32F2F, "Camera", 0),          // fixed - never expires
-    RADAR(0xFF1565C0, "Mobile radar", 60),    // ~1h
-    POLICE(0xFF6A1B9A, "Police (كمين)", 60),
-    BUMP(0xFFF9A825, "Speed bump", 0),
-    POTHOLE(0xFF5D4037, "Pothole", 0),
-    HAZARD(0xFFE65100, "Hazard", 30);
+    // submitsToOsm = true for permanent, mappable OSM features (a public OSM Note
+    // is created). Transient crowd data (mobile radar, police, generic hazard)
+    // is NOT mappable in OSM, so it stays local only.
+    CAMERA(0xFFD32F2F, "Camera", 0, true),       // highway=speed_camera
+    RADAR(0xFF1565C0, "Mobile radar", 60, false),
+    POLICE(0xFF6A1B9A, "Police (كمين)", 60, false),
+    BUMP(0xFFF9A825, "Speed bump", 0, true),      // traffic_calming=bump
+    POTHOLE(0xFF5D4037, "Pothole", 0, true),      // note (no standard tag)
+    HAZARD(0xFFE65100, "Hazard", 30, false);
 
     public final int colorArgb;
     @NonNull public final String label;
     public final int ttlMinutes;  // 0 = permanent
+    public final boolean submitsToOsm;
 
-    Kind(int colorArgb, @NonNull String label, int ttlMinutes)
+    Kind(int colorArgb, @NonNull String label, int ttlMinutes, boolean submitsToOsm)
     {
       this.colorArgb = colorArgb;
       this.label = label;
       this.ttlMinutes = ttlMinutes;
+      this.submitsToOsm = submitsToOsm;
     }
 
     @NonNull

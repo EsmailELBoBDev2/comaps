@@ -62,13 +62,15 @@ public final class CairoMapOverlay
       return mCatId;
     try
     {
-      // Reuse an existing category from a previous run if present.
+      // A category from a previous run holds stale marks we no longer track
+      // (our id lists start empty each process). Delete it and start fresh so
+      // marks don't accumulate across restarts.
       for (BookmarkCategory c : BookmarkManager.INSTANCE.getCategories())
       {
         if (CATEGORY.equals(c.getName()))
         {
-          mCatId = c.getId();
-          return mCatId;
+          BookmarkManager.INSTANCE.deleteCategory(c.getId());
+          break;
         }
       }
       mCatId = BookmarkManager.INSTANCE.createCategory(CATEGORY);
@@ -318,21 +320,59 @@ public final class CairoMapOverlay
   @Nullable
   private Long addMarkId(long cat, double lat, double lon, @NonNull String title, int argb)
   {
+    long bookmarkId = -1L;
     try
     {
       final Bookmark b = BookmarkManager.INSTANCE.addNewBookmark(lat, lon);
       if (b == null)
         return null;
+      bookmarkId = b.getBookmarkId();
       // addNewBookmark targets the last-edited category; move it to ours.
       BookmarkManager.INSTANCE.notifyCategoryChanging(b, cat);
-      final int colorIndex = PredefinedColors.getPredefinedColorIndex(argb);
-      BookmarkManager.INSTANCE.setBookmarkParams(b.getBookmarkId(), title, colorIndex, "");
-      return b.getBookmarkId();
+      // NOTE: setBookmarkParams takes a predefined-palette INDEX, not an ARGB.
+      // getPredefinedColorIndex returns -1 for non-palette colours (all of ours),
+      // and a -1 index is read out-of-bounds natively. Map to the nearest palette
+      // colour's index instead.
+      BookmarkManager.INSTANCE.setBookmarkParams(bookmarkId, title, nearestColorIndex(argb), "");
+      return bookmarkId;
     }
     catch (Throwable t)
     {
       CairoLog.w(SUB, "addMark failed: " + t.getMessage());
+      // The bookmark may have been created before the failure; don't leak it.
+      if (bookmarkId >= 0)
+      {
+        try
+        {
+          BookmarkManager.INSTANCE.deleteBookmark(bookmarkId);
+        }
+        catch (Throwable ignored)
+        {
+        }
+      }
       return null;
     }
+  }
+
+  /// Index of the predefined palette colour closest (RGB distance) to the given
+  /// ARGB. Always returns a valid index, never -1.
+  private static int nearestColorIndex(int argb)
+  {
+    int best = 0;
+    long bestDist = Long.MAX_VALUE;
+    for (int idx : PredefinedColors.getAllPredefinedColors())
+    {
+      final int c = PredefinedColors.getColor(idx);
+      final int dr = ((argb >> 16) & 0xFF) - ((c >> 16) & 0xFF);
+      final int dg = ((argb >> 8) & 0xFF) - ((c >> 8) & 0xFF);
+      final int db = (argb & 0xFF) - (c & 0xFF);
+      final long dist = (long) dr * dr + (long) dg * dg + (long) db * db;
+      if (dist < bestDist)
+      {
+        bestDist = dist;
+        best = idx;
+      }
+    }
+    return best;
   }
 }

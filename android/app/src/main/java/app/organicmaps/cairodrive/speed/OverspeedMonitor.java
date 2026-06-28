@@ -23,22 +23,32 @@ public final class OverspeedMonitor
   private int mCurrentKmh = 0;
   private boolean mOver = false;
   @Nullable private Listener mListener;
+  // Cached config so the GPS hot path (~1 Hz) never reads SharedPreferences.
+  private boolean mEnabled = false;
+  private int mThresholdKmh = 0;
 
   public void setListener(@Nullable Listener listener)
   {
     mListener = listener;
   }
 
-  /// Feeds a new speed sample (metres per second). Negative or NaN speeds are
-  /// treated as zero so a bad GPS fix cannot raise a false alarm.
-  public void onSpeed(@NonNull Context ctx, double speedMps)
+  /// Refresh the cached threshold from settings. Call from onResume, not per fix.
+  public void configure(@NonNull Context ctx)
+  {
+    mEnabled = OverspeedConfig.isEnabled(ctx);
+    mThresholdKmh = OverspeedConfig.getThresholdKmh(ctx);
+  }
+
+  /// Feeds a new speed sample (metres per second) using the cached config.
+  /// Negative or NaN speeds are treated as zero so a bad GPS fix can't alarm.
+  public void onSpeed(double speedMps)
   {
     if (Double.isNaN(speedMps) || speedMps < 0.0)
       speedMps = 0.0;
 
     final int kmh = (int) Math.round(speedMps * MPS_TO_KMH);
-    final boolean enabled = OverspeedConfig.isEnabled(ctx);
-    final int threshold = OverspeedConfig.getThresholdKmh(ctx);
+    final boolean enabled = mEnabled;
+    final int threshold = mThresholdKmh;
     final boolean over = enabled && kmh > threshold;
 
     final boolean transition = over && !mOver;

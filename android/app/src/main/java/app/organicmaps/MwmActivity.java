@@ -202,6 +202,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
   private final TripRecorder mTripRecorder = new TripRecorder();
   private final OverspeedMonitor mOverspeed = new OverspeedMonitor();
   private final AverageSpeedTracker mAvgSpeed = new AverageSpeedTracker();
+  @Nullable
+  private SpeedometerView mSpeedometer;
   private boolean mIsTabletLayout;
   @SuppressWarnings("NotNullFieldNotInitialized")
   @NonNull
@@ -1254,11 +1256,14 @@ public class MwmActivity extends BaseMwmFragmentActivity
     });
 
     // CairoDrive: over-speed alarm (fires once on crossing the user threshold).
+    mOverspeed.configure(this);  // cache threshold; avoids prefs reads per GPS fix
     mOverspeed.setListener((kmh, threshold) ->
         android.widget.Toast
             .makeText(this, "Over speed: " + kmh + " km/h (limit " + threshold + ")",
                       android.widget.Toast.LENGTH_SHORT)
             .show());
+    // Attach the speedometer once (cached); telemetry updates it per fix.
+    mSpeedometer = SpeedometerView.attach(this);
   }
 
   @Override
@@ -1334,6 +1339,17 @@ public class MwmActivity extends BaseMwmFragmentActivity
     mPowerSaveSettings = null;
     if (mRemoveDisplayListener && !isChangingConfigurations())
       mDisplayManager.removeListener(DisplayType.Device);
+
+    // CairoDrive: release the overlay executor and detach our views/buttons so
+    // nothing leaks across activity recreation.
+    mCairoOverlay.shutdown();
+    if (mTripRecorder.isRecording())
+      mTripRecorder.stop();
+    SpeedometerView.detach(this);
+    CamerasBadge.hide(this);
+    CairoReportButton.hide(this);
+    CairoParkingButton.hide(this);
+    mSpeedometer = null;
   }
 
   @Override
@@ -2046,10 +2062,9 @@ public class MwmActivity extends BaseMwmFragmentActivity
     try
     {
       final double speedMps = location.hasSpeed() ? location.getSpeed() : 0.0;
-      mOverspeed.onSpeed(this, speedMps);
-      final SpeedometerView speedo = SpeedometerView.attach(this);
-      if (speedo != null)
-        speedo.update(mOverspeed.currentKmh(), mOverspeed.isOver());
+      mOverspeed.onSpeed(speedMps);  // uses cached config (no SharedPreferences on the hot path)
+      if (mSpeedometer != null)
+        mSpeedometer.update(mOverspeed.currentKmh(), mOverspeed.isOver());
 
       if (mTripRecorder.isRecording())
         mTripRecorder.onLocation(location.getLatitude(), location.getLongitude(), speedMps, location.getTime());

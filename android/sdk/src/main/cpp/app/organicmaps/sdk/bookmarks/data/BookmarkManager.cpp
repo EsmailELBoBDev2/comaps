@@ -816,6 +816,8 @@ JNIEXPORT jlong JNICALL Java_app_organicmaps_sdk_bookmarks_data_BookmarkManager_
     return static_cast<jlong>(kml::kInvalidTrackId);
 
   jdouble * coords = env->GetDoubleArrayElements(latLon, nullptr);
+  if (coords == nullptr)
+    return static_cast<jlong>(kml::kInvalidTrackId);
   std::vector<geometry::PointWithAltitude> points;
   points.reserve(len / 2);
   for (jsize i = 0; i + 1 < len; i += 2)
@@ -839,6 +841,8 @@ JNIEXPORT jlong JNICALL Java_app_organicmaps_sdk_bookmarks_data_BookmarkManager_
   {
     auto es = bm.GetEditSession();
     auto const * track = es.CreateTrack(std::move(trackData));
+    if (track == nullptr)
+      return static_cast<jlong>(kml::kInvalidTrackId);
     trackId = track->GetId();
     es.AttachTrack(trackId, groupId);
   }

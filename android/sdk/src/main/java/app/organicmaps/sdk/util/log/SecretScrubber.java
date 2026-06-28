@@ -17,10 +17,17 @@ public final class SecretScrubber
 
   // key/token names followed by '=' or ':' and a run of non-space value chars.
   // Longer names are listed first so they win the alternation.
+  // key/token names followed by '=' or ':' and a run of non-space value chars.
+  // "apikey" (camelCase apiKey, used by HERE/Geoapify) is listed explicitly
+  // because \bkey would not match inside "apiKey" (no word boundary before key).
   private static final Pattern KEY_VALUE =
-      Pattern.compile("(?i)\\b(access_token|api_key|token|key)\\s*[=:]\\s*[^\\s&\"',;]+");
+      Pattern.compile("(?i)\\b(access_token|api_key|apikey|token|key)\\s*[=:]\\s*[^\\s&\"',;]+");
 
   private static final Pattern BEARER = Pattern.compile("(?i)\\bBearer\\s+[A-Za-z0-9._\\-]+");
+
+  // Catches raw "Authorization: <token>" header dumps (e.g. ORS uses the key as
+  // the bare Authorization value, not a Bearer token).
+  private static final Pattern AUTH_HEADER = Pattern.compile("(?i)\\bAuthorization\\s*:\\s*\\S+");
 
   private SecretScrubber() {}
 
@@ -31,6 +38,7 @@ public final class SecretScrubber
       return message;
     String scrubbed = KEY_VALUE.matcher(message).replaceAll("$1=" + REDACTED);
     scrubbed = BEARER.matcher(scrubbed).replaceAll("Bearer " + REDACTED);
+    scrubbed = AUTH_HEADER.matcher(scrubbed).replaceAll("Authorization: " + REDACTED);
     return scrubbed;
   }
 }

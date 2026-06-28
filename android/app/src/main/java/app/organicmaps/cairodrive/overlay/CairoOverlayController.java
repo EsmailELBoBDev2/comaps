@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.cairodrive.cameras.CameraAggregator;
+import app.organicmaps.cairodrive.cameras.CameraTileTracker;
 import app.organicmaps.cairodrive.cameras.OverpassCamera;
 import app.organicmaps.cairodrive.model.GeoPoint;
 import app.organicmaps.cairodrive.reports.CairoReport;
@@ -18,6 +19,7 @@ import app.organicmaps.cairodrive.safety.Hazard;
 import app.organicmaps.cairodrive.safety.HazardAggregator;
 import app.organicmaps.cairodrive.traffic.TrafficAggregator;
 import app.organicmaps.cairodrive.trip.ParkingStore;
+import app.organicmaps.sdk.editor.Editor;
 import app.organicmaps.cairodrive.traffic.TrafficIncident;
 import app.organicmaps.sdk.util.log.CairoLog;
 import java.util.ArrayList;
@@ -35,12 +37,19 @@ public final class CairoOverlayController
   private static final double FETCH_RADIUS_M = 10_000;  // ~10 km, matches the spec's pan-to-load box.
   // ~0.09 deg latitude ~= 10 km; longitude scaled by cos(lat) at use time.
   private static final double BBOX_HALF_DEG = 0.09;
+  // Don't re-hit the network more than once a minute even if the user moved.
+  private static final long MIN_REFETCH_INTERVAL_MS = 60_000;
 
   private final CairoMapOverlay mOverlay = new CairoMapOverlay();
   private final CameraAggregator mCameras = new CameraAggregator();
   private final TrafficAggregator mTraffic = new TrafficAggregator();
   private final HazardAggregator mHazards = new HazardAggregator();
   private final RouteCompareManager mRouter = new RouteCompareManager();
+  // Pan-to-load gate: only refetch when the map centre moved > ~2 km.
+  private final CameraTileTracker mTracker = new CameraTileTracker();
+  private long mLastFetchMs = 0;
+  // Force one fetch on first run and after online is (re)enabled, bypassing the gate.
+  private boolean mForceFetch = true;
   private final ExecutorService mIo = Executors.newSingleThreadExecutor();
   private final Handler mUi = new Handler(Looper.getMainLooper());
 
@@ -61,6 +70,7 @@ public final class CairoOverlayController
 
     if (!CairoConfig.isOnlineEnabled(ctx))
     {
+      mForceFetch = true;  // re-enabling online should refetch immediately
       mUi.post(() -> {
         mOverlay.render(new ArrayList<>(), new ArrayList<>());  // clears any online marks
         mOverlay.showReports(reports);
@@ -70,6 +80,25 @@ public final class CairoOverlayController
       });
       return;
     }
+
+    // Pan-to-load + min-interval gate: skip the network fetch when we haven't
+    // moved > ~2 km and fetched recently. Existing online marks stay; only the
+    // local report/parking layers are repainted.
+    final GeoPoint center = new GeoPoint(lat, lon);
+    final long now = System.currentTimeMillis();
+    final boolean doNetwork =
+        mForceFetch || (mTracker.needsRefetch(center) && (now - mLastFetchMs >= MIN_REFETCH_INTERVAL_MS));
+    if (!doNetwork)
+    {
+      mUi.post(() -> {
+        mOverlay.showReports(reports);
+        mOverlay.showParking(hasPark, pLat, pLon);
+      });
+      return;
+    }
+    mForceFetch = false;
+    mTracker.markFetched(center);
+    mLastFetchMs = now;
 
     mIo.execute(() -> {
       List<OverpassCamera> cams = new ArrayList<>();
@@ -130,13 +159,29 @@ public final class CairoOverlayController
   }
 
   /// Add a one-tap community report at (lat,lon) and repaint the report marks.
-  /// Works offline (stored locally).
+  /// Works offline (stored locally). Permanent, mappable kinds (camera, speed
+  /// bump, pothole) ALSO create a public OSM Note so the report reaches the
+  /// shared OpenStreetMap map directly -- not a private database. Transient
+  /// kinds (mobile radar, police, hazard) stay local, since OSM doesn't map them.
   public void report(@NonNull Context ctx, @NonNull CairoReport.Kind kind, double lat, double lon)
   {
     final long now = System.currentTimeMillis();
     CairoReportStore.add(ctx, new CairoReport(kind, lat, lon, now), now);
     final List<CairoReport> reports = CairoReportStore.active(ctx, now);
     mUi.post(() -> mOverlay.showReports(reports));
+
+    if (kind.submitsToOsm)
+    {
+      try
+      {
+        Editor.nativeCreateStandaloneNote(lat, lon, "CairoDrive: " + kind.label + " reported here.");
+        CairoLog.i(SUB, "OSM note queued for " + kind.name());
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "OSM note failed: " + t.getMessage());
+      }
+    }
   }
 
   /// Run the multi-provider route comparison from->to (off the UI thread) and
@@ -175,6 +220,14 @@ public final class CairoOverlayController
   public void clear()
   {
     mUi.post(mOverlay::clear);
+  }
+
+  /// Release the background executor and drop pending UI callbacks. Call from
+  /// the host activity's onDestroy to avoid leaking the worker thread.
+  public void shutdown()
+  {
+    mIo.shutdownNow();
+    mUi.removeCallbacksAndMessages(null);
   }
 }
 
