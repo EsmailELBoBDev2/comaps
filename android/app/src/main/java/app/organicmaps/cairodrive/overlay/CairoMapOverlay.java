@@ -1,9 +1,11 @@
 package app.organicmaps.cairodrive.overlay;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import app.organicmaps.cairodrive.cameras.OverpassCamera;
 import app.organicmaps.cairodrive.model.GeoPoint;
+import app.organicmaps.cairodrive.reports.CairoReport;
 import app.organicmaps.cairodrive.routing.OnlineRoute;
 import app.organicmaps.cairodrive.traffic.TrafficIncident;
 import app.organicmaps.sdk.bookmarks.data.Bookmark;
@@ -42,6 +44,7 @@ public final class CairoMapOverlay
   private long mCatId = -1;
   private final List<Long> mMarkIds = new ArrayList<>();
   private final List<Long> mTrackIds = new ArrayList<>();
+  private final List<Long> mReportIds = new ArrayList<>();
 
   private long category()
   {
@@ -68,11 +71,44 @@ public final class CairoMapOverlay
     return mCatId;
   }
 
-  /// Remove all marks and route lines previously added by this overlay.
+  /// Remove all marks, route lines and report marks previously added.
   public void clear()
   {
     clearMarks();
     clearTracks();
+    clearReports();
+  }
+
+  private void clearReports()
+  {
+    for (long id : mReportIds)
+    {
+      try
+      {
+        BookmarkManager.INSTANCE.deleteBookmark(id);
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "deleteReport failed: " + t.getMessage());
+      }
+    }
+    mReportIds.clear();
+  }
+
+  /// Draw the locally-stored community reports as colour-coded marks.
+  public void showReports(@NonNull List<CairoReport> reports)
+  {
+    clearReports();
+    final long cat = category();
+    if (cat < 0)
+      return;
+    for (CairoReport r : reports)
+    {
+      final Long id = addMarkId(cat, r.lat, r.lon, r.kind.label, r.kind.colorArgb);
+      if (id != null)
+        mReportIds.add(id);
+    }
+    CairoLog.i(SUB, "reports drawn=" + mReportIds.size());
   }
 
   private void clearMarks()
@@ -154,34 +190,44 @@ public final class CairoMapOverlay
     int cameraCount = 0;
     for (OverpassCamera c : cameras)
     {
-      if (addMark(cat, c.location.lat, c.location.lon, c.type.label(), c.type.colorArgb()))
+      final Long id = addMarkId(cat, c.location.lat, c.location.lon, c.type.label(), c.type.colorArgb());
+      if (id != null)
+      {
+        mMarkIds.add(id);
         cameraCount++;
+      }
     }
     for (TrafficIncident i : incidents)
-      addMark(cat, i.location.lat, i.location.lon, i.description, i.severity.color());
+    {
+      final Long id = addMarkId(cat, i.location.lat, i.location.lon, i.description, i.severity.color());
+      if (id != null)
+        mMarkIds.add(id);
+    }
 
     CairoLog.i(SUB, "render cameras=" + cameraCount + " incidents=" + incidents.size());
     return cameraCount;
   }
 
-  private boolean addMark(long cat, double lat, double lon, @NonNull String title, int argb)
+  /// Add one bookmark mark in the given category; returns its id, or null on
+  /// failure. The caller decides which id list it belongs to.
+  @Nullable
+  private Long addMarkId(long cat, double lat, double lon, @NonNull String title, int argb)
   {
     try
     {
       final Bookmark b = BookmarkManager.INSTANCE.addNewBookmark(lat, lon);
       if (b == null)
-        return false;
+        return null;
       // addNewBookmark targets the last-edited category; move it to ours.
       BookmarkManager.INSTANCE.notifyCategoryChanging(b, cat);
       final int colorIndex = PredefinedColors.getPredefinedColorIndex(argb);
       BookmarkManager.INSTANCE.setBookmarkParams(b.getBookmarkId(), title, colorIndex, "");
-      mMarkIds.add(b.getBookmarkId());
-      return true;
+      return b.getBookmarkId();
     }
     catch (Throwable t)
     {
       CairoLog.w(SUB, "addMark failed: " + t.getMessage());
-      return false;
+      return null;
     }
   }
 }

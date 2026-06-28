@@ -60,6 +60,7 @@ import app.organicmaps.bookmarks.BookmarkCategoriesActivity;
 import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.cairodrive.devtools.DevLogOverlay;
 import app.organicmaps.cairodrive.overlay.CairoOverlayController;
+import app.organicmaps.cairodrive.overlay.CairoReportButton;
 import app.organicmaps.cairodrive.overlay.CamerasBadge;
 import app.organicmaps.downloader.DownloaderActivity;
 import app.organicmaps.downloader.DownloaderFragment;
@@ -1209,18 +1210,20 @@ public class MwmActivity extends BaseMwmFragmentActivity
 
     // CairoDrive: refresh the online camera/traffic overlay + badge when online
     // features are enabled; otherwise clear them (offline-first default).
-    if (CairoConfig.isOnlineEnabled(this))
-    {
-      final Location cairoLoc = MwmApplication.from(this).getLocationHelper().getSavedLocation();
-      final double lat = cairoLoc != null ? cairoLoc.getLatitude() : CairoConfig.CAIRO_LAT;
-      final double lon = cairoLoc != null ? cairoLoc.getLongitude() : CairoConfig.CAIRO_LON;
-      mCairoOverlay.refresh(this, lat, lon, count -> CamerasBadge.show(this, count));
-    }
-    else
-    {
-      mCairoOverlay.clear();
-      CamerasBadge.hide(this);
-    }
+    final Location cairoLoc = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+    final double lat = cairoLoc != null ? cairoLoc.getLatitude() : CairoConfig.CAIRO_LAT;
+    final double lon = cairoLoc != null ? cairoLoc.getLongitude() : CairoConfig.CAIRO_LON;
+    // Overlay refresh draws community reports always, online cameras/traffic when enabled.
+    mCairoOverlay.refresh(this, lat, lon, count -> CamerasBadge.show(this, count));
+
+    // CairoDrive: one-tap community reporting (works offline; reports the current
+    // location, falling back to Cairo when no fix yet).
+    CairoReportButton.show(this, kind -> {
+      final Location l = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+      final double rlat = l != null ? l.getLatitude() : CairoConfig.CAIRO_LAT;
+      final double rlon = l != null ? l.getLongitude() : CairoConfig.CAIRO_LON;
+      mCairoOverlay.report(this, kind, rlat, rlon);
+    });
   }
 
   @Override

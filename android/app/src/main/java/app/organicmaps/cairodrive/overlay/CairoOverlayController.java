@@ -9,6 +9,8 @@ import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.cairodrive.cameras.CameraAggregator;
 import app.organicmaps.cairodrive.cameras.OverpassCamera;
 import app.organicmaps.cairodrive.model.GeoPoint;
+import app.organicmaps.cairodrive.reports.CairoReport;
+import app.organicmaps.cairodrive.reports.CairoReportStore;
 import app.organicmaps.cairodrive.routing.OnlineRoute;
 import app.organicmaps.cairodrive.routing.RouteCompareManager;
 import app.organicmaps.cairodrive.traffic.TrafficAggregator;
@@ -46,11 +48,17 @@ public final class CairoOverlayController
   /// features are disabled. Safe to call from the UI thread.
   public void refresh(@NonNull Context ctx, double lat, double lon, @Nullable BadgeListener badge)
   {
+    // Community reports are local: always shown, even fully offline.
+    final List<CairoReport> reports = CairoReportStore.active(ctx, System.currentTimeMillis());
+
     if (!CairoConfig.isOnlineEnabled(ctx))
     {
-      clear();
-      if (badge != null)
-        badge.onCameraCount(0);
+      mUi.post(() -> {
+        mOverlay.render(new ArrayList<>(), new ArrayList<>());  // clears any online marks
+        mOverlay.showReports(reports);
+        if (badge != null)
+          badge.onCameraCount(0);
+      });
       return;
     }
 
@@ -79,10 +87,21 @@ public final class CairoOverlayController
       final List<TrafficIncident> fincidents = incidents;
       mUi.post(() -> {
         final int count = mOverlay.render(fcams, fincidents);
+        mOverlay.showReports(reports);
         if (badge != null)
           badge.onCameraCount(count);
       });
     });
+  }
+
+  /// Add a one-tap community report at (lat,lon) and repaint the report marks.
+  /// Works offline (stored locally).
+  public void report(@NonNull Context ctx, @NonNull CairoReport.Kind kind, double lat, double lon)
+  {
+    final long now = System.currentTimeMillis();
+    CairoReportStore.add(ctx, new CairoReport(kind, lat, lon, now), now);
+    final List<CairoReport> reports = CairoReportStore.active(ctx, now);
+    mUi.post(() -> mOverlay.showReports(reports));
   }
 
   /// Run the multi-provider route comparison from->to (off the UI thread) and
