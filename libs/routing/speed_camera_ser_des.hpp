@@ -61,16 +61,21 @@ struct SpeedCameraMetadata
   uint8_t m_maxSpeedKmPH = 0;
   std::vector<routing::SpeedCameraMwmPosition> m_ways;
   SpeedCameraDirection m_direction = SpeedCameraDirection::Unknown;
+  // CairoDrive: camera kind, serialized in format version >= 1.
+  SpeedCameraType m_type = SpeedCameraType::Unknown;
 };
 
 class SpeedCameraMwmHeader
 {
 public:
-  static uint32_t constexpr kLatestVersion = 0;
+  // CairoDrive: v1 adds a per-camera type byte (SpeedCameraType) after the
+  // direction byte. v0 sections (existing maps) are read unchanged.
+  static uint32_t constexpr kLatestVersion = 1;
 
   void SetVersion(uint32_t version) { m_version = version; }
   void SetAmount(uint32_t amount) { m_amount = amount; }
   uint32_t GetAmount() const { return m_amount; }
+  uint32_t GetVersion() const { return m_version; }
 
   template <typename T>
   void Serialize(T & sink) const
@@ -101,7 +106,8 @@ void SerializeSpeedCamera(FileWriter & writer, SpeedCameraMetadata const & data,
 
 template <typename Reader>
 std::pair<SegmentCoord, RouteSegment::SpeedCamera> DeserializeSpeedCamera(ReaderSource<Reader> & src,
-                                                                          uint32_t & prevFeatureId)
+                                                                          uint32_t & prevFeatureId,
+                                                                          uint32_t version = SpeedCameraMwmHeader::kLatestVersion)
 {
   auto featureId = ReadVarUint<uint32_t>(src);
   featureId += prevFeatureId;  // delta coding
@@ -122,11 +128,22 @@ std::pair<SegmentCoord, RouteSegment::SpeedCamera> DeserializeSpeedCamera(Reader
   // We don't use direction of camera, because of bad data in OSM.
   UNUSED_VALUE(ReadPrimitiveFromSource<uint8_t>(src));  // direction
 
+  // CairoDrive: camera type byte exists only in format version >= 1. Older
+  // sections have no type byte, so default to Unknown and don't read.
+  SpeedCameraType type = SpeedCameraType::Unknown;
+  if (version >= 1)
+  {
+    uint8_t typeByte = 0;
+    ReadPrimitiveFromSource(src, typeByte);
+    if (typeByte < static_cast<uint8_t>(SpeedCameraType::Count))
+      type = static_cast<SpeedCameraType>(typeByte);
+  }
+
   // Number of time conditions of camera.
   auto const conditionsNumber = ReadVarUint<uint32_t>(src);
   CHECK_EQUAL(conditionsNumber, 0, ("Number of conditions should be 0, non zero number is not implemented now"));
 
-  return {{featureId, segmentId} /* SegmentCoord */, {coef, speed} /* RouteSegment::SpeedCamera */};
+  return {{featureId, segmentId} /* SegmentCoord */, {coef, speed, type} /* RouteSegment::SpeedCamera */};
 }
 
 using SpeedCamerasMapT = std::map<SegmentCoord, std::vector<RouteSegment::SpeedCamera>>;
@@ -137,11 +154,12 @@ void DeserializeSpeedCamsFromMwm(ReaderSource<Reader> & src, SpeedCamerasMapT & 
   header.Deserialize(src);
   CHECK(header.IsValid(), ("Bad header of speed cam section"));
   uint32_t const amount = header.GetAmount();
+  uint32_t const version = header.GetVersion();
 
   uint32_t prevFeatureId = 0;
   for (uint32_t i = 0; i < amount; ++i)
   {
-    auto const res = DeserializeSpeedCamera(src, prevFeatureId);
+    auto const res = DeserializeSpeedCamera(src, prevFeatureId, version);
     map[res.first].emplace_back(res.second);
   }
 }

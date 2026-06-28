@@ -33,6 +33,12 @@ void SerializeSpeedCamera(FileWriter & writer, routing::SpeedCameraMetadata cons
   auto const direction = static_cast<uint8_t>(data.m_direction);
   WriteToSink(writer, direction);
 
+  // CairoDrive: camera type byte (mwm format version >= 1). The generator always
+  // writes the latest header version (camera_info_collector.cpp), so the matching
+  // version-aware reader in DeserializeSpeedCamera will consume this byte.
+  auto const type = static_cast<uint8_t>(data.m_type);
+  WriteToSink(writer, type);
+
   // TODO (@gmoryes) add implementation of this feature
   // List of time conditions will be saved here. For example:
   //    "maxspeed:conditional": "60 @ (23:00-05:00)"

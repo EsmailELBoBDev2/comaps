@@ -4,6 +4,7 @@
 #include "routing/routing_options.hpp"
 #include "routing/routing_settings.hpp"
 #include "routing/segment.hpp"
+#include "routing/speed_camera.hpp"
 #include "routing/transit_info.hpp"
 #include "routing/turns.hpp"
 #include "routing/vehicle_mask.hpp"
@@ -49,7 +50,11 @@ public:
   struct SpeedCamera
   {
     SpeedCamera() = default;
-    SpeedCamera(double coef, uint8_t maxSpeedKmPH) : m_coef(coef), m_maxSpeedKmPH(maxSpeedKmPH) {}
+    SpeedCamera(double coef, uint8_t maxSpeedKmPH, SpeedCameraType type = SpeedCameraType::Unknown)
+      : m_coef(coef)
+      , m_maxSpeedKmPH(maxSpeedKmPH)
+      , m_type(type)
+    {}
 
     bool EqualCoef(SpeedCamera const & rhs) const { return AlmostEqualAbs(m_coef, rhs.m_coef, 1.0E-5); }
 
@@ -69,6 +74,8 @@ public:
     double m_coef = 0.0;
     // Max speed
     uint8_t m_maxSpeedKmPH = 0;
+    // CairoDrive: camera kind (read from mwm format version >= 1; Unknown otherwise).
+    SpeedCameraType m_type = SpeedCameraType::Unknown;
   };
 
   struct RoadNameInfo
