@@ -117,6 +117,10 @@ bool CamerasInfoCollector::ParseIntermediateInfo(std::string const & camerasInfo
     lon = Uint32ToDouble(lonInt, ms::LatLon::kMinLon, ms::LatLon::kMaxLon, kPointCoordBits);
 
     ReadPrimitiveFromSource(src, maxSpeedKmPH);
+
+    uint8_t typeByte = 0;
+    ReadPrimitiveFromSource(src, typeByte);  // CairoDrive: type byte (after speed)
+
     ReadPrimitiveFromSource(src, relatedWaysNumber);
 
     center = mercator::FromLatLon(lat, lon);
@@ -153,7 +157,12 @@ bool CamerasInfoCollector::ParseIntermediateInfo(std::string const & camerasInfo
 
     auto const speed = base::asserted_cast<uint8_t>(maxSpeedKmPH);
     if (!badCamera)
+    {
       m_cameras.emplace_back(center, speed, std::move(ways));
+      // CairoDrive: carry the OSM-classified type into the mwm metadata.
+      if (typeByte < static_cast<uint8_t>(routing::SpeedCameraType::Count))
+        m_cameras.back().m_data.m_type = static_cast<routing::SpeedCameraType>(typeByte);
+    }
   }
 
   return true;
