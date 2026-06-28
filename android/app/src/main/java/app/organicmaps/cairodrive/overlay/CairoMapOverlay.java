@@ -3,6 +3,8 @@ package app.organicmaps.cairodrive.overlay;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import app.organicmaps.cairodrive.cameras.OverpassCamera;
+import app.organicmaps.cairodrive.model.GeoPoint;
+import app.organicmaps.cairodrive.routing.OnlineRoute;
 import app.organicmaps.cairodrive.traffic.TrafficIncident;
 import app.organicmaps.sdk.bookmarks.data.Bookmark;
 import app.organicmaps.sdk.bookmarks.data.BookmarkCategory;
@@ -31,8 +33,15 @@ public final class CairoMapOverlay
   private static final String SUB = "overlay";
   private static final String CATEGORY = "CairoDrive Live (auto)";
 
+  private static final long INVALID_TRACK = -1L;  // kml::kInvalidTrackId (uint64 max) as a jlong.
+  // Route line colours (ARGB): fastest = green, alternatives = blue.
+  private static final int COLOR_FASTEST = 0xFF2E7D32;
+  private static final int COLOR_ALT = 0xFF1565C0;
+  private static final double ROUTE_WIDTH_PX = 6.0;
+
   private long mCatId = -1;
   private final List<Long> mMarkIds = new ArrayList<>();
+  private final List<Long> mTrackIds = new ArrayList<>();
 
   private long category()
   {
@@ -59,8 +68,14 @@ public final class CairoMapOverlay
     return mCatId;
   }
 
-  /// Remove all marks previously added by this overlay.
+  /// Remove all marks and route lines previously added by this overlay.
   public void clear()
+  {
+    clearMarks();
+    clearTracks();
+  }
+
+  private void clearMarks()
   {
     for (long id : mMarkIds)
     {
@@ -76,12 +91,62 @@ public final class CairoMapOverlay
     mMarkIds.clear();
   }
 
+  private void clearTracks()
+  {
+    for (long id : mTrackIds)
+    {
+      try
+      {
+        BookmarkManager.INSTANCE.deleteTrack(id);
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "deleteTrack failed: " + t.getMessage());
+      }
+    }
+    mTrackIds.clear();
+  }
+
+  /// Draw the route-compare polylines: the fastest route in green, the rest in
+  /// blue. Call after render() (which clears previous overlay state).
+  public void showRoutes(@NonNull List<OnlineRoute> routes)
+  {
+    clearTracks();  // replace any previous route lines
+    final long cat = category();
+    if (cat < 0)
+      return;
+    for (OnlineRoute r : routes)
+    {
+      if (r.polyline.size() < 2)
+        continue;
+      final double[] latLon = new double[r.polyline.size() * 2];
+      int j = 0;
+      for (GeoPoint p : r.polyline)
+      {
+        latLon[j++] = p.lat;
+        latLon[j++] = p.lon;
+      }
+      try
+      {
+        final long id = BookmarkManager.INSTANCE.createTrack(latLon, r.isFastest ? COLOR_FASTEST : COLOR_ALT,
+                                                             ROUTE_WIDTH_PX, cat);
+        if (id != INVALID_TRACK)
+          mTrackIds.add(id);
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "createTrack failed: " + t.getMessage());
+      }
+    }
+    CairoLog.i(SUB, "routes drawn=" + mTrackIds.size());
+  }
+
   /// Replace the overlay with the given cameras (colour by type) and incidents
   /// (colour by severity). Returns the number of camera marks drawn (for the
   /// in-view badge).
   public int render(@NonNull List<OverpassCamera> cameras, @NonNull List<TrafficIncident> incidents)
   {
-    clear();
+    clearMarks();  // points only; leaves any route lines intact
     final long cat = category();
     if (cat < 0)
       return 0;

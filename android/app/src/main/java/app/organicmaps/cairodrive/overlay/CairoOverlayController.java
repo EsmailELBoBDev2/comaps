@@ -9,6 +9,8 @@ import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.cairodrive.cameras.CameraAggregator;
 import app.organicmaps.cairodrive.cameras.OverpassCamera;
 import app.organicmaps.cairodrive.model.GeoPoint;
+import app.organicmaps.cairodrive.routing.OnlineRoute;
+import app.organicmaps.cairodrive.routing.RouteCompareManager;
 import app.organicmaps.cairodrive.traffic.TrafficAggregator;
 import app.organicmaps.cairodrive.traffic.TrafficIncident;
 import app.organicmaps.sdk.util.log.CairoLog;
@@ -31,6 +33,7 @@ public final class CairoOverlayController
   private final CairoMapOverlay mOverlay = new CairoMapOverlay();
   private final CameraAggregator mCameras = new CameraAggregator();
   private final TrafficAggregator mTraffic = new TrafficAggregator();
+  private final RouteCompareManager mRouter = new RouteCompareManager();
   private final ExecutorService mIo = Executors.newSingleThreadExecutor();
   private final Handler mUi = new Handler(Looper.getMainLooper());
 
@@ -82,8 +85,32 @@ public final class CairoOverlayController
     });
   }
 
+  /// Run the multi-provider route comparison from->to (off the UI thread) and
+  /// draw the resulting polylines (fastest green, alternatives blue) on the map.
+  /// No-op when online features are disabled.
+  public void showRouteCompare(@NonNull Context ctx, @NonNull GeoPoint from, @NonNull GeoPoint to)
+  {
+    if (!CairoConfig.isOnlineEnabled(ctx))
+      return;
+    mIo.execute(() -> {
+      List<OnlineRoute> routes;
+      try
+      {
+        routes = mRouter.compare(from, to, CairoConfig.getPreferredRouter(ctx));
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "route compare failed: " + t.getMessage());
+        return;
+      }
+      final List<OnlineRoute> fr = routes;
+      mUi.post(() -> mOverlay.showRoutes(fr));
+    });
+  }
+
   public void clear()
   {
     mUi.post(mOverlay::clear);
   }
 }
+

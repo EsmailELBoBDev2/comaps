@@ -8,6 +8,10 @@
 
 #include "coding/zip_creator.hpp"
 
+// CairoDrive: for building track polylines from lat/lon point arrays.
+#include "geometry/mercator.hpp"
+#include "geometry/point_with_altitude.hpp"
+
 #include "platform/localization.hpp"
 #include "platform/preferred_languages.hpp"
 
@@ -799,6 +803,46 @@ JNIEXPORT void JNICALL Java_app_organicmaps_sdk_bookmarks_data_BookmarkManager_n
 {
   uint8_t alpha = ExtractByte(color, 3);
   g_framework->ChangeTrackColor(static_cast<kml::TrackId>(trackId), static_cast<dp::Color>(shift(color, 8) + alpha));
+}
+
+// CairoDrive: create a renderable track (polyline) from a flat [lat0,lon0,lat1,lon1,...]
+// array with an ARGB colour and line width, attached to the given category so it
+// renders. Mirrors BookmarkManager::SaveRoute but uses the public EditSession API.
+JNIEXPORT jlong JNICALL Java_app_organicmaps_sdk_bookmarks_data_BookmarkManager_nativeCreateTrack(
+    JNIEnv * env, jclass, jdoubleArray latLon, jint color, jdouble lineWidth, jlong categoryId)
+{
+  jsize const len = env->GetArrayLength(latLon);
+  if (len < 4)  // need at least two points (4 doubles)
+    return static_cast<jlong>(kml::kInvalidTrackId);
+
+  jdouble * coords = env->GetDoubleArrayElements(latLon, nullptr);
+  std::vector<geometry::PointWithAltitude> points;
+  points.reserve(len / 2);
+  for (jsize i = 0; i + 1 < len; i += 2)
+    points.emplace_back(mercator::FromLatLon(coords[i], coords[i + 1]));
+  env->ReleaseDoubleArrayElements(latLon, coords, JNI_ABORT);
+
+  kml::TrackData trackData;
+  trackData.m_geometry.m_lines.push_back(std::move(points));
+  trackData.m_geometry.m_timestamps.emplace_back();
+
+  uint8_t const alpha = ExtractByte(static_cast<uint32_t>(color), 3);
+  kml::TrackLayer layer;
+  layer.m_lineWidth = static_cast<double>(lineWidth);
+  layer.m_color.m_rgba = static_cast<uint32_t>(shift(static_cast<uint32_t>(color), 8) + alpha);
+  trackData.m_layers.push_back(std::move(layer));
+
+  auto & bm = frm()->GetBookmarkManager();
+  auto const groupId = categoryId >= 0 ? static_cast<kml::MarkGroupId>(categoryId) : bm.LastEditedBMCategory();
+
+  kml::TrackId trackId = kml::kInvalidTrackId;
+  {
+    auto es = bm.GetEditSession();
+    auto const * track = es.CreateTrack(std::move(trackData));
+    trackId = track->GetId();
+    es.AttachTrack(trackId, groupId);
+  }
+  return static_cast<jlong>(trackId);
 }
 
 JNIEXPORT jobject JNICALL Java_app_organicmaps_sdk_bookmarks_data_BookmarkManager_nativeGetBookmarkXY(JNIEnv * env,

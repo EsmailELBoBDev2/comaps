@@ -316,6 +316,14 @@ public enum BookmarkManager {
     nativeDeleteTrack(trackId);
   }
 
+  /// CairoDrive: create a renderable track (polyline) from a flat
+  /// [lat0,lon0,lat1,lon1,...] array with an ARGB colour and pixel line width,
+  /// attached to the given category so it renders. Returns the new track id.
+  public long createTrack(@NonNull double[] latLon, int colorArgb, double lineWidthPx, long categoryId)
+  {
+    return nativeCreateTrack(latLon, colorArgb, lineWidthPx, categoryId);
+  }
+
   public void deleteBookmark(long bmkId)
   {
     nativeDeleteBookmark(bmkId);
@@ -806,6 +814,9 @@ public enum BookmarkManager {
   private static native void nativeLoadBookmarks();
 
   private native boolean nativeDeleteCategory(long catId);
+
+  // CairoDrive: static native (matches the jclass JNI signature).
+  private static native long nativeCreateTrack(double[] latLon, int color, double lineWidth, long categoryId);
 
   private native void nativeDeleteTrack(long trackId);
 
