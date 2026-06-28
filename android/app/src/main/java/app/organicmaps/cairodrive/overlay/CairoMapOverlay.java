@@ -8,6 +8,7 @@ import app.organicmaps.cairodrive.model.GeoPoint;
 import app.organicmaps.cairodrive.reports.CairoReport;
 import app.organicmaps.cairodrive.routing.OnlineRoute;
 import app.organicmaps.cairodrive.safety.Hazard;
+import app.organicmaps.cairodrive.search.OnlinePlace;
 import app.organicmaps.cairodrive.traffic.TrafficIncident;
 import app.organicmaps.sdk.bookmarks.data.Bookmark;
 import app.organicmaps.sdk.bookmarks.data.BookmarkCategory;
@@ -54,7 +55,9 @@ public final class CairoMapOverlay
   private final List<Long> mTrackIds = new ArrayList<>();
   private final List<Long> mReportIds = new ArrayList<>();
   private final List<Long> mHazardIds = new ArrayList<>();
+  private final List<Long> mSearchIds = new ArrayList<>();
   private long mParkingId = -1L;
+  private static final int COLOR_SEARCH = 0xFF6A1B9A;  // purple
 
   private long category()
   {
@@ -90,6 +93,39 @@ public final class CairoMapOverlay
     clearTracks();
     clearReports();
     clearHazards();
+    clearSearch();
+  }
+
+  private void clearSearch()
+  {
+    for (long id : mSearchIds)
+    {
+      try
+      {
+        BookmarkManager.INSTANCE.deleteBookmark(id);
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "deleteSearch failed: " + t.getMessage());
+      }
+    }
+    mSearchIds.clear();
+  }
+
+  /// Draw online place-search results as purple marks (own id list).
+  public void showSearchResults(@NonNull List<OnlinePlace> places)
+  {
+    clearSearch();
+    final long cat = category();
+    if (cat < 0)
+      return;
+    for (OnlinePlace p : places)
+    {
+      final Long id = addMarkId(cat, p.location.lat, p.location.lon, p.name + " (" + p.provider + ")", COLOR_SEARCH);
+      if (id != null)
+        mSearchIds.add(id);
+    }
+    CairoLog.i(SUB, "search results drawn=" + mSearchIds.size());
   }
 
   private void clearHazards()

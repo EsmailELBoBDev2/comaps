@@ -15,8 +15,12 @@ import app.organicmaps.cairodrive.reports.CairoReportStore;
 import app.organicmaps.cairodrive.routing.OnlineRoute;
 import app.organicmaps.cairodrive.routing.RouteCameraRanker;
 import app.organicmaps.cairodrive.routing.RouteCompareManager;
+import app.organicmaps.cairodrive.mapillary.MapillaryClient;
+import app.organicmaps.cairodrive.mapillary.MapillaryImage;
 import app.organicmaps.cairodrive.safety.Hazard;
 import app.organicmaps.cairodrive.safety.HazardAggregator;
+import app.organicmaps.cairodrive.search.OnlinePlace;
+import app.organicmaps.cairodrive.search.OnlineSearchManager;
 import app.organicmaps.cairodrive.traffic.TrafficAggregator;
 import app.organicmaps.cairodrive.trip.ParkingStore;
 import app.organicmaps.sdk.editor.Editor;
@@ -45,6 +49,8 @@ public final class CairoOverlayController
   private final TrafficAggregator mTraffic = new TrafficAggregator();
   private final HazardAggregator mHazards = new HazardAggregator();
   private final RouteCompareManager mRouter = new RouteCompareManager();
+  private final OnlineSearchManager mSearch = new OnlineSearchManager();
+  private final MapillaryClient mMapillary = new MapillaryClient();
   // Pan-to-load gate: only refetch when the map centre moved > ~2 km.
   private final CameraTileTracker mTracker = new CameraTileTracker();
   private long mLastFetchMs = 0;
@@ -222,6 +228,54 @@ public final class CairoOverlayController
   public void onTrackTapped(long trackId)
   {
     mUi.post(() -> mOverlay.setActiveRoute(trackId));
+  }
+
+  public interface UrlSink
+  {
+    void onUrl(@Nullable String url);
+  }
+
+  /// Run the aggregated online place search (off the UI thread) and drop the
+  /// results as purple marks on the map. Requires the online toggle + keys.
+  public void onlineSearch(@NonNull Context ctx, @NonNull String query, @Nullable GeoPoint near)
+  {
+    if (!CairoConfig.isOnlineEnabled(ctx))
+      return;
+    mIo.execute(() -> {
+      List<OnlinePlace> places;
+      try
+      {
+        places = mSearch.search(query, near);
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "online search failed: " + t.getMessage());
+        return;
+      }
+      final List<OnlinePlace> fp = places;
+      mUi.post(() -> mOverlay.showSearchResults(fp));
+    });
+  }
+
+  /// Fetch the nearest Mapillary street-level image and hand its URL to the sink
+  /// (on the UI thread), or null if none/unavailable.
+  public void mapillaryHere(@NonNull GeoPoint center, @NonNull UrlSink sink)
+  {
+    mIo.execute(() -> {
+      String url = null;
+      try
+      {
+        final List<MapillaryImage> images = mMapillary.imagesNear(center, 150);
+        if (!images.isEmpty())
+          url = images.get(0).thumbUrl;
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "mapillary fetch failed: " + t.getMessage());
+      }
+      final String furl = url;
+      mUi.post(() -> sink.onUrl(furl));
+    });
   }
 
   public void clear()

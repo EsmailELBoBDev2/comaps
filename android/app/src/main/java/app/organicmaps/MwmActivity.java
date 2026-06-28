@@ -61,7 +61,9 @@ import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.cairodrive.devtools.DevLogOverlay;
 import app.organicmaps.cairodrive.overlay.CairoOverlayController;
 import app.organicmaps.cairodrive.overlay.CairoParkingButton;
+import app.organicmaps.cairodrive.overlay.CairoToolsButton;
 import app.organicmaps.cairodrive.overlay.CameraHudView;
+import app.organicmaps.cairodrive.model.GeoPoint;
 import app.organicmaps.cairodrive.overlay.CairoReportButton;
 import app.organicmaps.cairodrive.overlay.CamerasBadge;
 import app.organicmaps.cairodrive.speed.AverageSpeedTracker;
@@ -1266,6 +1268,69 @@ public class MwmActivity extends BaseMwmFragmentActivity
             .show());
     // Attach the speedometer once (cached); telemetry updates it per fix.
     mSpeedometer = SpeedometerView.attach(this);
+
+    // CairoDrive: tools chooser (route compare / online search / street view).
+    CairoToolsButton.show(this, this::showCairoToolsDialog);
+  }
+
+  private GeoPoint cairoCurrentPoint()
+  {
+    final Location l = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+    final double lat = l != null ? l.getLatitude() : CairoConfig.CAIRO_LAT;
+    final double lon = l != null ? l.getLongitude() : CairoConfig.CAIRO_LON;
+    return new GeoPoint(lat, lon);
+  }
+
+  private void showCairoToolsDialog()
+  {
+    final String[] items = {"Compare routes (online)", "Online search", "Street view here (Mapillary)"};
+    new android.app.AlertDialog.Builder(this).setTitle("CairoDrive tools").setItems(items, (dialog, which) -> {
+      if (which == 0)
+        cairoCompareRoutes();
+      else if (which == 1)
+        cairoOnlineSearchDialog();
+      else
+        cairoStreetViewHere();
+    }).show();
+  }
+
+  private void cairoCompareRoutes()
+  {
+    final MapObject end = RoutingController.get().getEndPoint();
+    if (end == null)
+    {
+      android.widget.Toast.makeText(this, "Plan a route first (set a destination)", android.widget.Toast.LENGTH_SHORT)
+          .show();
+      return;
+    }
+    mCairoOverlay.showRouteCompare(this, cairoCurrentPoint(), new GeoPoint(end.getLat(), end.getLon()));
+    android.widget.Toast.makeText(this, "Fetching online routes…", android.widget.Toast.LENGTH_SHORT).show();
+  }
+
+  private void cairoOnlineSearchDialog()
+  {
+    final android.widget.EditText input = new android.widget.EditText(this);
+    input.setHint("Search places online");
+    new android.app.AlertDialog.Builder(this)
+        .setTitle("Online search")
+        .setView(input)
+        .setPositiveButton("Search", (d, w) -> {
+          final String q = input.getText().toString().trim();
+          if (!q.isEmpty())
+            mCairoOverlay.onlineSearch(this, q, cairoCurrentPoint());
+        })
+        .setNegativeButton("Cancel", null)
+        .show();
+  }
+
+  private void cairoStreetViewHere()
+  {
+    mCairoOverlay.mapillaryHere(cairoCurrentPoint(), url -> {
+      if (url == null)
+        android.widget.Toast.makeText(this, "No street image nearby", android.widget.Toast.LENGTH_SHORT).show();
+      else
+        startActivity(new android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url)));
+    });
   }
 
   @Override
@@ -1352,6 +1417,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
     CameraHudView.hide(this);
     CairoReportButton.hide(this);
     CairoParkingButton.hide(this);
+    CairoToolsButton.hide(this);
     mSpeedometer = null;
   }
 

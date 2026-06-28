@@ -65,8 +65,11 @@ android {
   compileSdk = propCompileSdkVersion.toInteger()
 
   defaultConfig {
-    versionCode = rootProject.ext.versionCode
-    versionName = rootProject.ext.versionName
+    // CairoDrive: +1 over the auto-generated (git/date based) code so each
+    // CairoDrive build installs cleanly over a previous one. Bump this constant
+    // again for any later test build that must update over this one.
+    versionCode = rootProject.ext.versionCode + 1
+    versionName = rootProject.ext.versionName + '-cairodrive'
     println('Version: ' + versionName)
     println('VersionCode: ' + versionCode)
     minSdk = propMinSdkVersion.toInteger()
