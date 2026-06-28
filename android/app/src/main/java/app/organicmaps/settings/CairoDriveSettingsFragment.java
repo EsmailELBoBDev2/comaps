@@ -1,6 +1,7 @@
 package app.organicmaps.settings;
 
 import android.os.Bundle;
+import androidx.annotation.Nullable;
 import androidx.annotation.XmlRes;
 import androidx.preference.PreferenceDataStore;
 import app.organicmaps.R;
@@ -39,6 +40,30 @@ public class CairoDriveSettingsFragment extends BaseXmlSettingsFragment
           return CairoConfig.isOnlineEnabled(requireContext());
         if (key.equals(getString(R.string.pref_cairodrive_dev_overlay)))
           return CairoConfig.isDevOverlayEnabled(requireContext());
+        return defValue;
+      }
+
+      @Override
+      public void putString(String key, @Nullable String value)
+      {
+        if (key.equals(getString(R.string.pref_cairodrive_router)) && value != null)
+        {
+          try
+          {
+            CairoConfig.setPreferredRouter(requireContext(), CairoConfig.Router.valueOf(value));
+          }
+          catch (IllegalArgumentException ignored)
+          {
+          }
+        }
+      }
+
+      @Nullable
+      @Override
+      public String getString(String key, @Nullable String defValue)
+      {
+        if (key.equals(getString(R.string.pref_cairodrive_router)))
+          return CairoConfig.getPreferredRouter(requireContext()).name();
         return defValue;
       }
     };

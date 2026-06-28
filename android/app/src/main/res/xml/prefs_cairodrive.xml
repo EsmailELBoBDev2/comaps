@@ -11,10 +11,20 @@
     android:widgetLayout="@layout/preference_switch"
     app:singleLineTitle="false" />
 
+  <ListPreference
+    android:defaultValue="AUTO"
+    android:entries="@array/cairodrive_router_entries"
+    android:entryValues="@array/cairodrive_router_values"
+    android:key="@string/pref_cairodrive_router"
+    android:order="2"
+    android:summary="%s"
+    android:title="@string/cairodrive_router_title"
+    app:singleLineTitle="false" />
+
   <SwitchPreferenceCompat
     android:defaultValue="false"
     android:key="@string/pref_cairodrive_dev_overlay"
-    android:order="2"
+    android:order="3"
     android:summary="@string/cairodrive_dev_overlay_summary"
     android:title="@string/cairodrive_dev_overlay_title"
     android:widgetLayout="@layout/preference_switch"

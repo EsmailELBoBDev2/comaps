@@ -62,6 +62,26 @@
   <string name="cairodrive_online_summary" translatable="false">Enable online routing, search, traffic and live cameras (requires network; off keeps the app fully offline)</string>
   <string name="cairodrive_dev_overlay_title" translatable="false">Developer log overlay</string>
   <string name="cairodrive_dev_overlay_summary" translatable="false">Show the on-screen CairoDrive log panel (mirrored to logcat tag CairoDrive)</string>
+  <string name="pref_cairodrive_router" translatable="false">CairoDriveRouter</string>
+  <string name="cairodrive_router_title" translatable="false">Preferred navigation engine</string>
+  <string-array name="cairodrive_router_entries" translatable="false">
+    <item>Auto (fastest of all)</item>
+    <item>Magic Lane</item>
+    <item>TomTom</item>
+    <item>Mapbox</item>
+    <item>OpenRouteService</item>
+    <item>HERE</item>
+    <item>Geoapify</item>
+  </string-array>
+  <string-array name="cairodrive_router_values" translatable="false">
+    <item>AUTO</item>
+    <item>MAGIC_LANE</item>
+    <item>TOMTOM</item>
+    <item>MAPBOX</item>
+    <item>OPENROUTESERVICE</item>
+    <item>HERE</item>
+    <item>GEOAPIFY</item>
+  </string-array>
 
   <string name="notification_ticker_ltr" translatable="false">%1$s: %2$s</string>
   <string name="notification_ticker_rtl" translatable="false">%2$s :%1$s</string>
