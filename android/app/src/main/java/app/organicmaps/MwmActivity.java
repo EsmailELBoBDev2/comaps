@@ -62,6 +62,10 @@ import app.organicmaps.cairodrive.devtools.DevLogOverlay;
 import app.organicmaps.cairodrive.overlay.CairoOverlayController;
 import app.organicmaps.cairodrive.overlay.CairoReportButton;
 import app.organicmaps.cairodrive.overlay.CamerasBadge;
+import app.organicmaps.cairodrive.speed.AverageSpeedTracker;
+import app.organicmaps.cairodrive.speed.OverspeedMonitor;
+import app.organicmaps.cairodrive.speed.SpeedometerView;
+import app.organicmaps.cairodrive.trip.TripRecorder;
 import app.organicmaps.downloader.DownloaderActivity;
 import app.organicmaps.downloader.DownloaderFragment;
 import app.organicmaps.downloader.OnmapDownloader;
@@ -191,6 +195,10 @@ public class MwmActivity extends BaseMwmFragmentActivity
   private OnmapDownloader mOnmapDownloader;
   // CairoDrive: online camera/traffic map overlay + "N cameras" badge.
   private final CairoOverlayController mCairoOverlay = new CairoOverlayController();
+  // CairoDrive: driving telemetry (speedometer, over-speed alarm, trip stats, محور avg).
+  private final TripRecorder mTripRecorder = new TripRecorder();
+  private final OverspeedMonitor mOverspeed = new OverspeedMonitor();
+  private final AverageSpeedTracker mAvgSpeed = new AverageSpeedTracker();
   private boolean mIsTabletLayout;
   @SuppressWarnings("NotNullFieldNotInitialized")
   @NonNull
@@ -1224,6 +1232,13 @@ public class MwmActivity extends BaseMwmFragmentActivity
       final double rlon = l != null ? l.getLongitude() : CairoConfig.CAIRO_LON;
       mCairoOverlay.report(this, kind, rlat, rlon);
     });
+
+    // CairoDrive: over-speed alarm (fires once on crossing the user threshold).
+    mOverspeed.setListener((kmh, threshold) ->
+        android.widget.Toast
+            .makeText(this, "Over speed: " + kmh + " km/h (limit " + threshold + ")",
+                      android.widget.Toast.LENGTH_SHORT)
+            .show());
   }
 
   @Override
@@ -1969,11 +1984,44 @@ public class MwmActivity extends BaseMwmFragmentActivity
   {
     dismissLocationErrorDialog();
 
+    // CairoDrive: feed speedometer / over-speed alarm / trip recorder on every fix.
+    updateCairoDriveTelemetry(location);
+
     final RoutingController routing = RoutingController.get();
     if (!routing.isNavigating())
+    {
+      if (mTripRecorder.isRecording())
+        mTripRecorder.stop();
       return;
+    }
+
+    if (!mTripRecorder.isRecording())
+      mTripRecorder.start();
 
     mNavigationController.update(Framework.nativeGetRouteFollowingInfo());
+  }
+
+  // CairoDrive: drive the speedometer + over-speed alarm + trip/average-speed
+  // trackers from each GPS fix. Never throws into the location pipeline.
+  private void updateCairoDriveTelemetry(@NonNull Location location)
+  {
+    try
+    {
+      final double speedMps = location.hasSpeed() ? location.getSpeed() : 0.0;
+      mOverspeed.onSpeed(this, speedMps);
+      final SpeedometerView speedo = SpeedometerView.attach(this);
+      if (speedo != null)
+        speedo.update(mOverspeed.currentKmh(), mOverspeed.isOver());
+
+      if (mTripRecorder.isRecording())
+        mTripRecorder.onLocation(location.getLatitude(), location.getLongitude(), speedMps, location.getTime());
+      if (mAvgSpeed.inZone())
+        mAvgSpeed.onSample(speedMps, location.getTime());
+    }
+    catch (Throwable t)
+    {
+      app.organicmaps.sdk.util.log.CairoLog.w("telemetry", "update failed: " + t.getMessage());
+    }
   }
 
   @Override

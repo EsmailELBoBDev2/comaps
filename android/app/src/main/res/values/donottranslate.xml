@@ -66,6 +66,25 @@
   <string name="cairodrive_dev_overlay_title" translatable="false">Developer log overlay</string>
   <string name="cairodrive_dev_overlay_summary" translatable="false">Show the on-screen CairoDrive log panel (mirrored to logcat tag CairoDrive)</string>
   <string name="pref_cairodrive_router" translatable="false">CairoDriveRouter</string>
+  <string name="pref_cairodrive_overspeed" translatable="false">CairoDriveOverspeed</string>
+  <string name="cairodrive_overspeed_title" translatable="false">Over-speed alarm</string>
+  <string name="cairodrive_overspeed_summary" translatable="false">Warn when GPS speed exceeds this (independent of road limit)</string>
+  <string-array name="cairodrive_overspeed_entries" translatable="false">
+    <item>Off</item>
+    <item>60 km/h</item>
+    <item>80 km/h</item>
+    <item>100 km/h</item>
+    <item>120 km/h</item>
+    <item>140 km/h</item>
+  </string-array>
+  <string-array name="cairodrive_overspeed_values" translatable="false">
+    <item>0</item>
+    <item>60</item>
+    <item>80</item>
+    <item>100</item>
+    <item>120</item>
+    <item>140</item>
+  </string-array>
   <string name="cairodrive_router_title" translatable="false">Preferred navigation engine</string>
   <string-array name="cairodrive_router_entries" translatable="false">
     <item>Auto (fastest of all)</item>

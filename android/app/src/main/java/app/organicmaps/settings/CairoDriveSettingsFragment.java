@@ -6,6 +6,7 @@ import androidx.annotation.XmlRes;
 import androidx.preference.PreferenceDataStore;
 import app.organicmaps.R;
 import app.organicmaps.cairodrive.CairoConfig;
+import app.organicmaps.cairodrive.speed.OverspeedConfig;
 
 /// CairoDrive settings sub-screen: the online-features master toggle and the
 /// developer log overlay toggle. Both are backed by {@link CairoConfig} (a
@@ -60,6 +61,16 @@ public class CairoDriveSettingsFragment extends BaseXmlSettingsFragment
           {
           }
         }
+        else if (key.equals(getString(R.string.pref_cairodrive_overspeed)) && value != null)
+        {
+          try
+          {
+            OverspeedConfig.setThresholdKmh(requireContext(), Integer.parseInt(value));
+          }
+          catch (NumberFormatException ignored)
+          {
+          }
+        }
       }
 
       @Nullable
@@ -68,6 +79,8 @@ public class CairoDriveSettingsFragment extends BaseXmlSettingsFragment
       {
         if (key.equals(getString(R.string.pref_cairodrive_router)))
           return CairoConfig.getPreferredRouter(requireContext()).name();
+        if (key.equals(getString(R.string.pref_cairodrive_overspeed)))
+          return String.valueOf(OverspeedConfig.getThresholdKmh(requireContext()));
         return defValue;
       }
     };

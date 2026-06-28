@@ -7,6 +7,7 @@ import app.organicmaps.cairodrive.cameras.OverpassCamera;
 import app.organicmaps.cairodrive.model.GeoPoint;
 import app.organicmaps.cairodrive.reports.CairoReport;
 import app.organicmaps.cairodrive.routing.OnlineRoute;
+import app.organicmaps.cairodrive.safety.Hazard;
 import app.organicmaps.cairodrive.traffic.TrafficIncident;
 import app.organicmaps.sdk.bookmarks.data.Bookmark;
 import app.organicmaps.sdk.bookmarks.data.BookmarkCategory;
@@ -45,6 +46,7 @@ public final class CairoMapOverlay
   private final List<Long> mMarkIds = new ArrayList<>();
   private final List<Long> mTrackIds = new ArrayList<>();
   private final List<Long> mReportIds = new ArrayList<>();
+  private final List<Long> mHazardIds = new ArrayList<>();
 
   private long category()
   {
@@ -77,6 +79,39 @@ public final class CairoMapOverlay
     clearMarks();
     clearTracks();
     clearReports();
+    clearHazards();
+  }
+
+  private void clearHazards()
+  {
+    for (long id : mHazardIds)
+    {
+      try
+      {
+        BookmarkManager.INSTANCE.deleteBookmark(id);
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "deleteHazard failed: " + t.getMessage());
+      }
+    }
+    mHazardIds.clear();
+  }
+
+  /// Draw Cairo safety hazards (speed bumps, school zones, curves, crossings).
+  public void showHazards(@NonNull List<Hazard> hazards)
+  {
+    clearHazards();
+    final long cat = category();
+    if (cat < 0)
+      return;
+    for (Hazard h : hazards)
+    {
+      final Long id = addMarkId(cat, h.location.lat, h.location.lon, h.type.label(), h.type.colorArgb());
+      if (id != null)
+        mHazardIds.add(id);
+    }
+    CairoLog.i(SUB, "hazards drawn=" + mHazardIds.size());
   }
 
   private void clearReports()

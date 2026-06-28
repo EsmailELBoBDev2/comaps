@@ -13,6 +13,8 @@ import app.organicmaps.cairodrive.reports.CairoReport;
 import app.organicmaps.cairodrive.reports.CairoReportStore;
 import app.organicmaps.cairodrive.routing.OnlineRoute;
 import app.organicmaps.cairodrive.routing.RouteCompareManager;
+import app.organicmaps.cairodrive.safety.Hazard;
+import app.organicmaps.cairodrive.safety.HazardAggregator;
 import app.organicmaps.cairodrive.traffic.TrafficAggregator;
 import app.organicmaps.cairodrive.traffic.TrafficIncident;
 import app.organicmaps.sdk.util.log.CairoLog;
@@ -35,6 +37,7 @@ public final class CairoOverlayController
   private final CairoMapOverlay mOverlay = new CairoMapOverlay();
   private final CameraAggregator mCameras = new CameraAggregator();
   private final TrafficAggregator mTraffic = new TrafficAggregator();
+  private final HazardAggregator mHazards = new HazardAggregator();
   private final RouteCompareManager mRouter = new RouteCompareManager();
   private final ExecutorService mIo = Executors.newSingleThreadExecutor();
   private final Handler mUi = new Handler(Looper.getMainLooper());
@@ -65,6 +68,7 @@ public final class CairoOverlayController
     mIo.execute(() -> {
       List<OverpassCamera> cams = new ArrayList<>();
       List<TrafficIncident> incidents = new ArrayList<>();
+      List<Hazard> hazards = new ArrayList<>();
       try
       {
         cams = mCameras.collect(new GeoPoint(lat, lon), FETCH_RADIUS_M);
@@ -72,6 +76,14 @@ public final class CairoOverlayController
       catch (Throwable t)
       {
         CairoLog.w(SUB, "camera fetch failed: " + t.getMessage());
+      }
+      try
+      {
+        hazards = mHazards.collect(new GeoPoint(lat, lon), FETCH_RADIUS_M);
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "hazard fetch failed: " + t.getMessage());
       }
       try
       {
@@ -85,8 +97,10 @@ public final class CairoOverlayController
 
       final List<OverpassCamera> fcams = cams;
       final List<TrafficIncident> fincidents = incidents;
+      final List<Hazard> fhazards = hazards;
       mUi.post(() -> {
         final int count = mOverlay.render(fcams, fincidents);
+        mOverlay.showHazards(fhazards);
         mOverlay.showReports(reports);
         if (badge != null)
           badge.onCameraCount(count);
