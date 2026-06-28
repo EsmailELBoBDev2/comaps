@@ -1,0 +1,86 @@
+name: CairoDrive Debug APK
+
+# Builds a downloadable debug APK on every push and on demand.
+# Adapted from .github/workflows/android-check.yaml (the upstream compile job).
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  JAVA_HOME: /usr/lib/jvm/temurin-21-jdk-amd64  # Java 21 is required for Android Gradle 8 plugin
+  SKIP_MAP_DOWNLOAD: true
+
+jobs:
+  build-apk:
+    name: Build debug APK
+    runs-on: ubuntu-latest
+    # Cancel superseded runs on the same branch/PR.
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Install build tools and dependencies
+        shell: bash
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ninja-build \
+          qt6-base-dev \
+          qt6-declarative-dev \
+          qt6-positioning-dev \
+          libqt6svg6-dev \
+          optipng \
+          libfreetype-dev \
+          libharfbuzz-dev \
+          libxrandr-dev \
+          libxinerama-dev \
+          libxcursor-dev \
+          libxi-dev \
+          python3-pip \
+          zlib1g-dev
+          pip install "protobuf<3.21" --break-system-packages
+
+      - name: Checkout sources
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 200 # enough to get all commits for the current day
+
+      - name: Parallel submodules checkout
+        shell: bash
+        run: git submodule update --depth 1 --init --recursive --jobs=$(($(nproc) * 20))
+
+      # Caches the native compile artifacts (CMake/ninja outputs).
+      - name: Configure ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ github.workflow }}
+
+      # Caches Gradle dependencies and the Android NDK pulled in by the build.
+      - name: Cache Gradle and NDK
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ${{ env.ANDROID_HOME }}/ndk
+          key: gradle-ndk-${{ hashFiles('android/gradle/libs.versions.toml', 'android/**/build.gradle') }}
+          restore-keys: |
+            gradle-ndk-
+
+      - name: Build WebDebug APK
+        shell: bash
+        working-directory: android
+        env:
+          CMAKE_C_COMPILER_LAUNCHER: ccache
+          CMAKE_CXX_COMPILER_LAUNCHER: ccache
+        run: |
+          cmake --version
+          ninja --version
+          ./gradlew -Parm64 assembleWebDebug
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v6
+        with:
+          name: cairodrive-debug-apk
+          path: android/app/build/outputs/apk/**/CoMaps-*.apk
+          if-no-files-found: error

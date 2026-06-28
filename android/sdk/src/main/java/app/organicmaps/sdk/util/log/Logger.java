@@ -119,6 +119,9 @@ public final class Logger
 
     if (logsFolder != null || BuildConfig.DEBUG || level >= Log.INFO)
     {
+      // Redact API keys/tokens before anything is printed to logcat or written to file.
+      msg = SecretScrubber.scrub(msg);
+
       final StringBuilder sb = new StringBuilder(180);
       // Add source point info for file logging, debug builds and ERRORs if its not from core.
       if (tag != null && (logsFolder != null || BuildConfig.DEBUG || level == Log.ERROR))

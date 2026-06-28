@@ -76,6 +76,22 @@ android {
     // Should be customized in flavors.
     buildConfigField 'String', 'REVIEW_URL', '""'
 
+    // --- CairoDrive provider API keys -------------------------------------
+    // Loaded from a gitignored secrets.properties (never committed). Each key
+    // defaults to "" when the file or an entry is absent, so CI and upstream
+    // builds keep working without any secret present. Drop real values into
+    // android/secrets.properties locally (see secrets.properties.example).
+    def cairoSecrets = new Properties()
+    def cairoSecretsFile = rootProject.file('secrets.properties')
+    if (cairoSecretsFile.exists())
+      cairoSecretsFile.withInputStream { cairoSecrets.load(it) }
+    else
+      println('CairoDrive: android/secrets.properties not found - provider keys will be empty')
+    ['MAGIC_LANE', 'TOMTOM', 'MAPBOX', 'GOOGLE_PLACES', 'HERE', 'GEOAPIFY', 'LOCATIONIQ'].each { name ->
+      def value = cairoSecrets.getProperty(name, '').replace('\\', '\\\\').replace('"', '\\"')
+      buildConfigField 'String', "${name}_API_KEY", "\"${value}\""
+    }
+
     base.archivesName = appName.replaceAll('\\s','') + '-' + defaultConfig.versionCode
 
     ndk.debugSymbolLevel = 'full'
