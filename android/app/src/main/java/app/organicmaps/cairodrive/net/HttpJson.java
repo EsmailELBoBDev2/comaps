@@ -32,20 +32,44 @@ public final class HttpJson
   @NonNull
   public static JSONObject getObject(@NonNull String url, @Nullable Map<String, String> headers) throws IOException
   {
-    return new JSONObject(request("GET", url, headers, null));
+    final String raw = request("GET", url, headers, null);
+    try
+    {
+      return new JSONObject(raw);  // throws JSONException on malformed JSON
+    }
+    catch (JSONException e)
+    {
+      throw new IOException("Invalid JSON object response", e);
+    }
   }
 
   @NonNull
   public static JSONArray getArray(@NonNull String url, @Nullable Map<String, String> headers) throws IOException
   {
-    return new JSONArray(request("GET", url, headers, null));
+    final String raw = request("GET", url, headers, null);
+    try
+    {
+      return new JSONArray(raw);
+    }
+    catch (JSONException e)
+    {
+      throw new IOException("Invalid JSON array response", e);
+    }
   }
 
   @NonNull
   public static JSONObject postObject(@NonNull String url, @Nullable Map<String, String> headers,
                                       @NonNull String jsonBody) throws IOException
   {
-    return new JSONObject(request("POST", url, headers, jsonBody));
+    final String raw = request("POST", url, headers, jsonBody);
+    try
+    {
+      return new JSONObject(raw);
+    }
+    catch (JSONException e)
+    {
+      throw new IOException("Invalid JSON object response", e);
+    }
   }
 
   @NonNull
