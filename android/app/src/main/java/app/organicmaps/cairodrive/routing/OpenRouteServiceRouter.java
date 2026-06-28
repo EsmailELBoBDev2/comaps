@@ -85,9 +85,11 @@ public final class OpenRouteServiceRouter implements RouteProvider
     }
   }
 
-  /// GeoJSON coordinate order is [lon, lat].
+  /// GeoJSON coordinate order is [lon, lat]. JSONArray.put(double) validates
+  /// against NaN/Infinity, so it declares JSONException; callers build the
+  /// request inside a try/catch(JSONException).
   @NonNull
-  private static JSONArray coord(@NonNull GeoPoint p)
+  private static JSONArray coord(@NonNull GeoPoint p) throws JSONException
   {
     final JSONArray a = new JSONArray();
     a.put(p.lon);
