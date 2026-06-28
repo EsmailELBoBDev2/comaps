@@ -93,6 +93,11 @@ public final class OverpassCameraClient
     return new ArrayList<>();
   }
 
+  private static double clampLat(double lat)
+  {
+    return Math.max(-90.0, Math.min(90.0, lat));
+  }
+
   /// Builds the Overpass QL query for a bbox of half-extent {@code radiusMeters}
   /// centered on {@code center}.
   @NonNull
