@@ -57,7 +57,10 @@ import app.organicmaps.backup.PeriodicBackupRunner;
 import app.organicmaps.base.BaseMwmFragmentActivity;
 import app.organicmaps.base.OnBackPressListener;
 import app.organicmaps.bookmarks.BookmarkCategoriesActivity;
+import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.cairodrive.devtools.DevLogOverlay;
+import app.organicmaps.cairodrive.overlay.CairoOverlayController;
+import app.organicmaps.cairodrive.overlay.CamerasBadge;
 import app.organicmaps.downloader.DownloaderActivity;
 import app.organicmaps.downloader.DownloaderFragment;
 import app.organicmaps.downloader.OnmapDownloader;
@@ -185,6 +188,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
   private PanelAnimator mPanelAnimator;
   @Nullable
   private OnmapDownloader mOnmapDownloader;
+  // CairoDrive: online camera/traffic map overlay + "N cameras" badge.
+  private final CairoOverlayController mCairoOverlay = new CairoOverlayController();
   private boolean mIsTabletLayout;
   @SuppressWarnings("NotNullFieldNotInitialized")
   @NonNull
@@ -1201,6 +1206,21 @@ public class MwmActivity extends BaseMwmFragmentActivity
 
     // CairoDrive: show the on-screen developer log panel when enabled in settings.
     DevLogOverlay.show(this);
+
+    // CairoDrive: refresh the online camera/traffic overlay + badge when online
+    // features are enabled; otherwise clear them (offline-first default).
+    if (CairoConfig.isOnlineEnabled(this))
+    {
+      final Location cairoLoc = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+      final double lat = cairoLoc != null ? cairoLoc.getLatitude() : CairoConfig.CAIRO_LAT;
+      final double lon = cairoLoc != null ? cairoLoc.getLongitude() : CairoConfig.CAIRO_LON;
+      mCairoOverlay.refresh(this, lat, lon, count -> CamerasBadge.show(this, count));
+    }
+    else
+    {
+      mCairoOverlay.clear();
+      CamerasBadge.hide(this);
+    }
   }
 
   @Override
