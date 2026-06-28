@@ -60,6 +60,7 @@ import app.organicmaps.bookmarks.BookmarkCategoriesActivity;
 import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.cairodrive.devtools.DevLogOverlay;
 import app.organicmaps.cairodrive.overlay.CairoOverlayController;
+import app.organicmaps.cairodrive.overlay.CairoParkingButton;
 import app.organicmaps.cairodrive.overlay.CairoReportButton;
 import app.organicmaps.cairodrive.overlay.CamerasBadge;
 import app.organicmaps.cairodrive.speed.AverageSpeedTracker;
@@ -1231,6 +1232,23 @@ public class MwmActivity extends BaseMwmFragmentActivity
       final double rlat = l != null ? l.getLatitude() : CairoConfig.CAIRO_LAT;
       final double rlon = l != null ? l.getLongitude() : CairoConfig.CAIRO_LON;
       mCairoOverlay.report(this, kind, rlat, rlon);
+    });
+
+    // CairoDrive: parking - tap saves the current spot, long-press clears it.
+    CairoParkingButton.show(this, () -> {
+      final Location l = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+      if (l != null)
+      {
+        mCairoOverlay.park(this, l.getLatitude(), l.getLongitude());
+        android.widget.Toast.makeText(this, "Parked here", android.widget.Toast.LENGTH_SHORT).show();
+      }
+      else
+      {
+        android.widget.Toast.makeText(this, "No location yet", android.widget.Toast.LENGTH_SHORT).show();
+      }
+    }, () -> {
+      mCairoOverlay.unpark(this);
+      android.widget.Toast.makeText(this, "Parking cleared", android.widget.Toast.LENGTH_SHORT).show();
     });
 
     // CairoDrive: over-speed alarm (fires once on crossing the user threshold).

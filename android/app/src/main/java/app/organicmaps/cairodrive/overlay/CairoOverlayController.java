@@ -16,6 +16,7 @@ import app.organicmaps.cairodrive.routing.RouteCompareManager;
 import app.organicmaps.cairodrive.safety.Hazard;
 import app.organicmaps.cairodrive.safety.HazardAggregator;
 import app.organicmaps.cairodrive.traffic.TrafficAggregator;
+import app.organicmaps.cairodrive.trip.ParkingStore;
 import app.organicmaps.cairodrive.traffic.TrafficIncident;
 import app.organicmaps.sdk.util.log.CairoLog;
 import java.util.ArrayList;
@@ -51,14 +52,18 @@ public final class CairoOverlayController
   /// features are disabled. Safe to call from the UI thread.
   public void refresh(@NonNull Context ctx, double lat, double lon, @Nullable BadgeListener badge)
   {
-    // Community reports are local: always shown, even fully offline.
+    // Community reports + parking are local: always shown, even fully offline.
     final List<CairoReport> reports = CairoReportStore.active(ctx, System.currentTimeMillis());
+    final boolean hasPark = ParkingStore.hasParking(ctx);
+    final double pLat = hasPark ? ParkingStore.getParkingLat(ctx) : 0;
+    final double pLon = hasPark ? ParkingStore.getParkingLon(ctx) : 0;
 
     if (!CairoConfig.isOnlineEnabled(ctx))
     {
       mUi.post(() -> {
         mOverlay.render(new ArrayList<>(), new ArrayList<>());  // clears any online marks
         mOverlay.showReports(reports);
+        mOverlay.showParking(hasPark, pLat, pLon);
         if (badge != null)
           badge.onCameraCount(0);
       });
@@ -102,10 +107,25 @@ public final class CairoOverlayController
         final int count = mOverlay.render(fcams, fincidents);
         mOverlay.showHazards(fhazards);
         mOverlay.showReports(reports);
+        mOverlay.showParking(hasPark, pLat, pLon);
         if (badge != null)
           badge.onCameraCount(count);
       });
     });
+  }
+
+  /// Save the current location as "where I parked" and drop a mark.
+  public void park(@NonNull Context ctx, double lat, double lon)
+  {
+    ParkingStore.saveParking(ctx, lat, lon);
+    mUi.post(() -> mOverlay.showParking(true, lat, lon));
+  }
+
+  /// Clear the saved parking spot.
+  public void unpark(@NonNull Context ctx)
+  {
+    ParkingStore.clearParking(ctx);
+    mUi.post(() -> mOverlay.showParking(false, 0, 0));
   }
 
   /// Add a one-tap community report at (lat,lon) and repaint the report marks.

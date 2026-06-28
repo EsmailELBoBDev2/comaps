@@ -47,6 +47,7 @@ public final class CairoMapOverlay
   private final List<Long> mTrackIds = new ArrayList<>();
   private final List<Long> mReportIds = new ArrayList<>();
   private final List<Long> mHazardIds = new ArrayList<>();
+  private long mParkingId = -1L;
 
   private long category()
   {
@@ -96,6 +97,31 @@ public final class CairoMapOverlay
       }
     }
     mHazardIds.clear();
+  }
+
+  /// Show (or clear) the "where I parked" mark.
+  public void showParking(boolean has, double lat, double lon)
+  {
+    if (mParkingId >= 0)
+    {
+      try
+      {
+        BookmarkManager.INSTANCE.deleteBookmark(mParkingId);
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "deleteParking failed: " + t.getMessage());
+      }
+      mParkingId = -1L;
+    }
+    if (!has)
+      return;
+    final long cat = category();
+    if (cat < 0)
+      return;
+    final Long id = addMarkId(cat, lat, lon, "Parked here", 0xFF00897B);
+    if (id != null)
+      mParkingId = id;
   }
 
   /// Draw Cairo safety hazards (speed bumps, school zones, curves, crossings).
