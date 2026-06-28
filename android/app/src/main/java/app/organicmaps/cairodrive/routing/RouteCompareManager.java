@@ -1,6 +1,8 @@
 package app.organicmaps.cairodrive.routing;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.cairodrive.model.GeoPoint;
 import app.organicmaps.sdk.util.log.CairoLog;
 import java.io.IOException;
@@ -36,10 +38,16 @@ public final class RouteCompareManager
   @NonNull
   private final List<RouteProvider> mProviders;
 
-  /// Default wiring: Magic Lane + TomTom + Mapbox.
+  /// Default wiring: Magic Lane + TomTom + Mapbox + OpenRouteService + Geoapify + HERE.
   public RouteCompareManager()
   {
-    this(Arrays.asList(new MagicLaneRouter(), new TomTomRouter(), new MapboxRouter()));
+    this(Arrays.asList(
+        new MagicLaneRouter(),
+        new TomTomRouter(),
+        new MapboxRouter(),
+        new OpenRouteServiceRouter(),
+        new GeoapifyRouter(),
+        new HereRouter()));
   }
 
   /// Testable constructor accepting an explicit provider list.
@@ -49,9 +57,22 @@ public final class RouteCompareManager
   }
 
   /// Queries all available providers, dedupes, ranks, and returns routes
-  /// sorted fastest-first.
+  /// sorted fastest-first. Equivalent to {@link #compare(GeoPoint, GeoPoint,
+  /// CairoConfig.Router)} with {@link CairoConfig.Router#AUTO}.
   @NonNull
   public List<OnlineRoute> compare(@NonNull GeoPoint from, @NonNull GeoPoint to)
+  {
+    return compare(from, to, CairoConfig.Router.AUTO);
+  }
+
+  /// Queries all available providers, dedupes, ranks, and returns routes sorted
+  /// fastest-first. When {@code preferred} is not AUTO and a route from that
+  /// provider survived dedupe, it is moved to the FRONT of the list so it
+  /// becomes the default active route -- its isFastest/isShortest flags (and
+  /// every other route's) are preserved.
+  @NonNull
+  public List<OnlineRoute> compare(@NonNull GeoPoint from, @NonNull GeoPoint to,
+                                   @NonNull CairoConfig.Router preferred)
   {
     final List<OnlineRoute> collected = new ArrayList<>();
     int queried = 0;
@@ -81,10 +102,54 @@ public final class RouteCompareManager
     final List<OnlineRoute> deduped = dedupe(collected);
     rank(deduped);
     deduped.sort(Comparator.comparingDouble(r -> r.durationSeconds));
+    promotePreferred(deduped, preferred);
 
     CairoLog.i(SUB, "compare: " + queried + " providers, " + collected.size()
-        + " routes, " + deduped.size() + " after dedupe");
+        + " routes, " + deduped.size() + " after dedupe"
+        + (preferred == CairoConfig.Router.AUTO ? "" : ", preferred=" + preferred));
     return deduped;
+  }
+
+  /// Moves the first route from the preferred provider (if any) to the front of
+  /// the list, leaving the ranking flags untouched. No-op for AUTO or when the
+  /// preferred provider yielded no surviving route.
+  private static void promotePreferred(@NonNull List<OnlineRoute> routes,
+                                       @NonNull CairoConfig.Router preferred)
+  {
+    if (preferred == CairoConfig.Router.AUTO || routes.isEmpty())
+      return;
+
+    final String wanted = providerName(preferred);
+    if (wanted == null)
+      return;
+
+    for (int i = 0; i < routes.size(); i++)
+    {
+      if (wanted.equals(routes.get(i).provider))
+      {
+        if (i != 0)
+          routes.add(0, routes.remove(i));
+        return;
+      }
+    }
+  }
+
+  /// Maps a {@link CairoConfig.Router} enum value to the matching provider's
+  /// {@link RouteProvider#name()} string. Returns null for AUTO or unmapped values.
+  @Nullable
+  private static String providerName(@NonNull CairoConfig.Router router)
+  {
+    switch (router)
+    {
+    case MAGIC_LANE:        return "Magic Lane";
+    case TOMTOM:            return "TomTom";
+    case MAPBOX:            return "Mapbox";
+    case OPENROUTESERVICE:  return "OpenRouteService";
+    case HERE:              return "HERE";
+    case GEOAPIFY:          return "Geoapify";
+    case AUTO:
+    default:                return null;
+    }
   }
 
   /// Drops routes whose sampled geometry overlaps an already-kept route by
