@@ -18,6 +18,8 @@ public final class CairoKeys
   @NonNull public static String here()          { return BuildConfig.HERE_API_KEY; }
   @NonNull public static String geoapify()      { return BuildConfig.GEOAPIFY_API_KEY; }
   @NonNull public static String locationIq()    { return BuildConfig.LOCATIONIQ_API_KEY; }
+  @NonNull public static String mapillary()      { return BuildConfig.MAPILLARY_API_KEY; }
+  @NonNull public static String openRouteService(){ return BuildConfig.OPENROUTESERVICE_API_KEY; }
 
   public static boolean hasMagicLane()    { return !magicLane().isEmpty(); }
   public static boolean hasTomTom()       { return !tomTom().isEmpty(); }
@@ -26,4 +28,6 @@ public final class CairoKeys
   public static boolean hasHere()         { return !here().isEmpty(); }
   public static boolean hasGeoapify()     { return !geoapify().isEmpty(); }
   public static boolean hasLocationIq()   { return !locationIq().isEmpty(); }
+  public static boolean hasMapillary()    { return !mapillary().isEmpty(); }
+  public static boolean hasOpenRouteService() { return !openRouteService().isEmpty(); }
 }

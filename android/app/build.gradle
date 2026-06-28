@@ -87,7 +87,8 @@ android {
       cairoSecretsFile.withInputStream { cairoSecrets.load(it) }
     else
       println('CairoDrive: android/secrets.properties not found - provider keys will be empty')
-    ['MAGIC_LANE', 'TOMTOM', 'MAPBOX', 'GOOGLE_PLACES', 'HERE', 'GEOAPIFY', 'LOCATIONIQ'].each { name ->
+    ['MAGIC_LANE', 'TOMTOM', 'MAPBOX', 'GOOGLE_PLACES', 'HERE', 'GEOAPIFY', 'LOCATIONIQ',
+     'MAPILLARY', 'OPENROUTESERVICE'].each { name ->
       def value = cairoSecrets.getProperty(name, '').replace('\\', '\\\\').replace('"', '\\"')
       buildConfigField 'String', "${name}_API_KEY", "\"${value}\""
     }
