@@ -213,6 +213,26 @@ public final class CairoMapOverlay
     mTrackIds.clear();
   }
 
+  /// Tap-to-switch: recolour the tapped route line as active (green) and the
+  /// others as alternatives (blue). No-op if the id isn't one of our routes.
+  public void setActiveRoute(long trackId)
+  {
+    if (!mTrackIds.contains(trackId))
+      return;
+    for (long id : mTrackIds)
+    {
+      try
+      {
+        BookmarkManager.INSTANCE.changeTrackColor(id, id == trackId ? COLOR_FASTEST : COLOR_ALT);
+      }
+      catch (Throwable t)
+      {
+        CairoLog.w(SUB, "setActiveRoute failed: " + t.getMessage());
+      }
+    }
+    CairoLog.i(SUB, "active route switched to track " + trackId);
+  }
+
   /// Draw the route-compare polylines: the fastest route in green, the rest in
   /// blue. Call after render() (which clears previous overlay state).
   public void showRoutes(@NonNull List<OnlineRoute> routes)

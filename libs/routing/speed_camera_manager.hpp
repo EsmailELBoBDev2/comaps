@@ -90,6 +90,14 @@ public:
   SpeedCameraOnRoute const & GetClosestCamForTests() const { return m_closestCamera; }
   bool IsSpeedLimitExceeded() const;
 
+  // CairoDrive: closest-camera info for the on-screen HUD (type + live countdown).
+  SpeedCameraType GetClosestCameraType() const
+  {
+    return m_closestCamera.IsValid() ? m_closestCamera.m_type : SpeedCameraType::Unknown;
+  }
+  // Metres to the closest camera ahead, or -1 if none.
+  double GetDistanceToClosestCameraMeters() const { return m_distanceToClosestCameraMeters; }
+
 private:
   // According to https://en.wikibooks.org/wiki/Physics_Study_Guide/Frictional_coefficients
   // average friction of rubber on asphalt is 0.68
@@ -151,6 +159,8 @@ private:
 
 private:
   SpeedCameraOnRoute m_closestCamera;
+  // CairoDrive: cached distance to m_closestCamera for the HUD countdown (-1 = none).
+  double m_distanceToClosestCameraMeters = -1.0;
   uint32_t m_beepSignalCounter;
   uint32_t m_voiceSignalCounter;
 

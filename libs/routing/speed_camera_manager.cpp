@@ -93,6 +93,10 @@ void SpeedCameraManager::OnLocationPositionChanged(location::GpsInfo const & inf
     // If some notifications available now.
     SendNotificationStat(passedDistanceMeters, info.m_speed, m_closestCamera);
   }
+
+  // CairoDrive: cache distance to the closest camera for the HUD countdown.
+  m_distanceToClosestCameraMeters =
+      m_closestCamera.IsValid() ? (m_closestCamera.m_distFromBeginMeters - passedDistanceMeters) : -1.0;
 }
 
 void SpeedCameraManager::GenerateNotifications(std::vector<std::string> & notifications)
@@ -148,6 +152,7 @@ void SpeedCameraManager::Reset()
   m_speedCamClearCallback();
 
   m_closestCamera.Invalidate();
+  m_distanceToClosestCameraMeters = -1.0;  // CairoDrive: clear HUD countdown
 
   m_firstNotCheckedSpeedCameraIndex = 1;
   m_cachedSpeedCameras = std::queue<SpeedCameraOnRoute>();

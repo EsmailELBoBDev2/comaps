@@ -217,6 +217,13 @@ public final class CairoOverlayController
     });
   }
 
+  /// Called when the user taps a map track; if it's one of our route lines,
+  /// make it the active (green) route.
+  public void onTrackTapped(long trackId)
+  {
+    mUi.post(() -> mOverlay.setActiveRoute(trackId));
+  }
+
   public void clear()
   {
     mUi.post(mOverlay::clear);

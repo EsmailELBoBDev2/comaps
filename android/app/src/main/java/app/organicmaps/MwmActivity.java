@@ -61,6 +61,7 @@ import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.cairodrive.devtools.DevLogOverlay;
 import app.organicmaps.cairodrive.overlay.CairoOverlayController;
 import app.organicmaps.cairodrive.overlay.CairoParkingButton;
+import app.organicmaps.cairodrive.overlay.CameraHudView;
 import app.organicmaps.cairodrive.overlay.CairoReportButton;
 import app.organicmaps.cairodrive.overlay.CamerasBadge;
 import app.organicmaps.cairodrive.speed.AverageSpeedTracker;
@@ -100,6 +101,7 @@ import app.organicmaps.sdk.PlacePageActivationListener;
 import app.organicmaps.sdk.Router;
 import app.organicmaps.sdk.bookmarks.data.BookmarkManager;
 import app.organicmaps.sdk.bookmarks.data.MapObject;
+import app.organicmaps.sdk.bookmarks.data.Track;
 import app.organicmaps.sdk.display.DisplayChangedListener;
 import app.organicmaps.sdk.display.DisplayManager;
 import app.organicmaps.sdk.display.DisplayType;
@@ -1347,6 +1349,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
       mTripRecorder.stop();
     SpeedometerView.detach(this);
     CamerasBadge.hide(this);
+    CameraHudView.hide(this);
     CairoReportButton.hide(this);
     CairoParkingButton.hide(this);
     mSpeedometer = null;
@@ -1423,8 +1426,12 @@ public class MwmActivity extends BaseMwmFragmentActivity
   @Override
   public void onPlacePageActivated(@NonNull PlacePageData data)
   {
+    final MapObject mapObject = (MapObject) data;
+    // CairoDrive: tapping one of our route lines switches the active route.
+    if (mapObject.isTrack() && mapObject instanceof Track)
+      mCairoOverlay.onTrackTapped(((Track) mapObject).getTrackId());
     // This will open the place page
-    mPlacePageViewModel.setMapObject((MapObject) data);
+    mPlacePageViewModel.setMapObject(mapObject);
   }
 
   @Override
@@ -2070,6 +2077,20 @@ public class MwmActivity extends BaseMwmFragmentActivity
         mTripRecorder.onLocation(location.getLatitude(), location.getLongitude(), speedMps, location.getTime());
       if (mAvgSpeed.inZone())
         mAvgSpeed.onSample(speedMps, location.getTime());
+
+      // CairoDrive: speed-camera HUD (type + live distance countdown) while navigating.
+      if (RoutingController.get().isNavigating())
+      {
+        final double camDist = Framework.nativeGetClosestCameraDistanceMeters();
+        if (camDist >= 0 && camDist <= 1000)
+          CameraHudView.show(this, Framework.nativeGetClosestCameraType(), camDist);
+        else
+          CameraHudView.hide(this);
+      }
+      else
+      {
+        CameraHudView.hide(this);
+      }
     }
     catch (Throwable t)
     {
