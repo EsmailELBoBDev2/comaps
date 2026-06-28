@@ -95,6 +95,12 @@ static ankerl::unordered_dense::map<std::string, routing::SpeedInUnits> const kR
     {"EE:rural", {90, Units::Metric}},
     {"EE:urban", {50, Units::Metric}},
     {"EE:zone30", {30, Units::Metric}},
+    // CairoDrive: Egypt implicit maxspeed defaults (100/90/60 by road class)
+    // so Egypt ways carrying maxspeed=EG:* (or source:maxspeed=EG:*) resolve.
+    {"EG:motorway", {100, Units::Metric}},
+    {"EG:trunk", {90, Units::Metric}},
+    {"EG:rural", {90, Units::Metric}},
+    {"EG:urban", {60, Units::Metric}},
     {"ES:living_street", {20, Units::Metric}},
     {"ES:motorway", {120, Units::Metric}},
     {"ES:rural", {90, Units::Metric}},
