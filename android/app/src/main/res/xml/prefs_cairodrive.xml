@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <SwitchPreferenceCompat
+    android:defaultValue="false"
+    android:key="@string/pref_cairodrive_online"
+    android:order="1"
+    android:summary="@string/cairodrive_online_summary"
+    android:title="@string/cairodrive_online_title"
+    android:widgetLayout="@layout/preference_switch"
+    app:singleLineTitle="false" />
+
+  <SwitchPreferenceCompat
+    android:defaultValue="false"
+    android:key="@string/pref_cairodrive_dev_overlay"
+    android:order="2"
+    android:summary="@string/cairodrive_dev_overlay_summary"
+    android:title="@string/cairodrive_dev_overlay_title"
+    android:widgetLayout="@layout/preference_switch"
+    app:singleLineTitle="false" />
+
+</androidx.preference.PreferenceScreen>

@@ -57,6 +57,7 @@ import app.organicmaps.backup.PeriodicBackupRunner;
 import app.organicmaps.base.BaseMwmFragmentActivity;
 import app.organicmaps.base.OnBackPressListener;
 import app.organicmaps.bookmarks.BookmarkCategoriesActivity;
+import app.organicmaps.cairodrive.devtools.DevLogOverlay;
 import app.organicmaps.downloader.DownloaderActivity;
 import app.organicmaps.downloader.DownloaderFragment;
 import app.organicmaps.downloader.OnmapDownloader;
@@ -1197,6 +1198,9 @@ public class MwmActivity extends BaseMwmFragmentActivity
     refreshLightStatusBar();
 
     MwmApplication.from(this).getSensorHelper().addListener(this);
+
+    // CairoDrive: show the on-screen developer log panel when enabled in settings.
+    DevLogOverlay.show(this);
   }
 
   @Override

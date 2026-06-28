@@ -53,6 +53,16 @@
   <string name="pref_nav_menu_final_destination" translatable="false">pref_nav_menu_final_destination</string>
   <string name="pref_android_auto_support" translatable="false">pref_android_auto_support</string>
 
+  <!-- CairoDrive settings -->
+  <string name="pref_cairodrive_screen" translatable="false">CairoDriveScreen</string>
+  <string name="pref_cairodrive_online" translatable="false">CairoDriveOnline</string>
+  <string name="pref_cairodrive_dev_overlay" translatable="false">CairoDriveDevOverlay</string>
+  <string name="cairodrive_settings_title" translatable="false">CairoDrive</string>
+  <string name="cairodrive_online_title" translatable="false">Online features</string>
+  <string name="cairodrive_online_summary" translatable="false">Enable online routing, search, traffic and live cameras (requires network; off keeps the app fully offline)</string>
+  <string name="cairodrive_dev_overlay_title" translatable="false">Developer log overlay</string>
+  <string name="cairodrive_dev_overlay_summary" translatable="false">Show the on-screen CairoDrive log panel (mirrored to logcat tag CairoDrive)</string>
+
   <string name="notification_ticker_ltr" translatable="false">%1$s: %2$s</string>
   <string name="notification_ticker_rtl" translatable="false">%2$s :%1$s</string>
 

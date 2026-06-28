@@ -225,6 +225,11 @@ public class SettingsPrefsFragment extends BaseXmlSettingsFragment
         getSettingsActivity().stackFragment(VoiceInstructionsSettingsFragment.class,
                                             getString(R.string.pref_tts_enable_title), null);
       }
+      else if (key.equals(getString(R.string.pref_cairodrive_screen)))
+      {
+        getSettingsActivity().stackFragment(CairoDriveSettingsFragment.class,
+                                            getString(R.string.cairodrive_settings_title), null);
+      }
       else if (key.equals(getString(R.string.pref_map_locale)))
       {
         MapLanguagesFragment langFragment = (MapLanguagesFragment) getSettingsActivity().stackFragment(
