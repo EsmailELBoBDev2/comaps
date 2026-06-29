@@ -25,13 +25,9 @@ public final class CamerasBadge
     final ViewGroup root = (ViewGroup) content;
 
     TextView badge = root.findViewWithTag(TAG);
-    if (cameraCount <= 0)
-    {
-      if (badge != null)
-        root.removeView(badge);
-      return;
-    }
-
+    // Always show the badge (including "0 nearby") so it is a live signal that
+    // the camera layer actually ran -- a missing badge used to be ambiguous
+    // between "found none here" and "never ran".
     if (badge == null)
     {
       badge = new TextView(activity);
@@ -48,7 +44,7 @@ public final class CamerasBadge
       root.addView(badge, lp);
     }
 
-    badge.setText(cameraCount + (cameraCount == 1 ? " camera" : " cameras"));
+    badge.setText("🎥 " + cameraCount + (cameraCount == 0 ? " nearby" : cameraCount == 1 ? " camera" : " cameras"));
   }
 
   public static void hide(@NonNull Activity activity)

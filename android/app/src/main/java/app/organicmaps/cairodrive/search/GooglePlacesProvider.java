@@ -7,29 +7,32 @@ import app.organicmaps.cairodrive.model.GeoPoint;
 import app.organicmaps.cairodrive.net.HttpJson;
 import app.organicmaps.sdk.util.log.CairoLog;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-/// Google Places "Text Search" provider.
+/// Google Places API (NEW) "Text Search" provider.
 ///
 /// Endpoint:
-///   GET https://maps.googleapis.com/maps/api/place/textsearch/json
-///         ?query=<text>&location=<lat>,<lon>&key=<key>
+///   POST https://places.googleapis.com/v1/places:searchText
+///   Headers: X-Goog-Api-Key: <key>
+///            X-Goog-FieldMask: places.displayName,places.formattedAddress,places.location
+///   Body: {"textQuery":"...","locationBias":{"circle":{"center":{...},"radius":...}}}
 ///
-/// Parses results[].name, results[].formatted_address and
-/// results[].geometry.location.lat / .lng.
-///
-/// NOTE: response field names may need tuning against the live API.
+/// We deliberately use the NEW API because keys provisioned today enable
+/// "Places API (New)"; the legacy /maps/api/place/textsearch/json endpoint
+/// returns REQUEST_DENIED for them. Response: places[].displayName.text,
+/// places[].formattedAddress, places[].location.latitude/longitude.
 public final class GooglePlacesProvider implements SearchProvider
 {
   private static final String SUB = "search";
   private static final String NAME = "Google";
-  private static final String BASE = "https://maps.googleapis.com/maps/api/place/textsearch/json";
+  private static final String ENDPOINT = "https://places.googleapis.com/v1/places:searchText";
+  private static final double BIAS_RADIUS_M = 30_000.0;
 
   @NonNull
   @Override
@@ -48,15 +51,14 @@ public final class GooglePlacesProvider implements SearchProvider
   @Override
   public List<OnlinePlace> search(@NonNull String query, @Nullable GeoPoint near) throws IOException
   {
-    final StringBuilder url = new StringBuilder(BASE)
-        .append("?query=").append(encode(query));
-    if (near != null)
-      url.append("&location=").append(near.lat).append(',').append(near.lon);
-    url.append("&key=").append(CairoKeys.googlePlaces());
+    final Map<String, String> headers = new HashMap<>();
+    headers.put("X-Goog-Api-Key", CairoKeys.googlePlaces());
+    headers.put("X-Goog-FieldMask", "places.displayName,places.formattedAddress,places.location");
 
-    final JSONObject root = HttpJson.getObject(url.toString(), HttpJson.noHeaders());
-    final JSONArray results = root.optJSONArray("results");
+    final JSONObject root = HttpJson.postObject(ENDPOINT, headers, buildBody(query, near));
+
     final List<OnlinePlace> places = new ArrayList<>();
+    final JSONArray results = root.optJSONArray("places");
     if (results == null)
       return places;
 
@@ -65,15 +67,13 @@ public final class GooglePlacesProvider implements SearchProvider
       final JSONObject r = results.optJSONObject(i);
       if (r == null)
         continue;
-      final String name = r.optString("name", "");
-      final String address = r.optString("formatted_address", "");
-      final JSONObject geometry = r.optJSONObject("geometry");
-      final JSONObject loc = geometry != null ? geometry.optJSONObject("location") : null;
-      if (loc == null)
+      final JSONObject displayName = r.optJSONObject("displayName");
+      final String name = displayName != null ? displayName.optString("text", "") : "";
+      final String address = r.optString("formattedAddress", "");
+      final JSONObject loc = r.optJSONObject("location");
+      if (loc == null || !loc.has("latitude") || !loc.has("longitude"))
         continue;
-      if (!loc.has("lat") || !loc.has("lng"))
-        continue;
-      final GeoPoint point = new GeoPoint(loc.optDouble("lat", 0.0), loc.optDouble("lng", 0.0));
+      final GeoPoint point = new GeoPoint(loc.optDouble("latitude", 0.0), loc.optDouble("longitude", 0.0));
       places.add(new OnlinePlace(name, address, point, NAME));
     }
     CairoLog.d(SUB, NAME + ": parsed " + places.size() + " places");
@@ -81,16 +81,23 @@ public final class GooglePlacesProvider implements SearchProvider
   }
 
   @NonNull
-  private static String encode(@NonNull String s)
+  private static String buildBody(@NonNull String query, @Nullable GeoPoint near) throws IOException
   {
     try
     {
-      return URLEncoder.encode(s, StandardCharsets.UTF_8.name());
+      final JSONObject body = new JSONObject();
+      body.put("textQuery", query);
+      if (near != null)
+      {
+        final JSONObject center = new JSONObject().put("latitude", near.lat).put("longitude", near.lon);
+        final JSONObject circle = new JSONObject().put("center", center).put("radius", BIAS_RADIUS_M);
+        body.put("locationBias", new JSONObject().put("circle", circle));
+      }
+      return body.toString();
     }
-    catch (UnsupportedEncodingException e)
+    catch (JSONException e)
     {
-      // UTF-8 is always supported; fall back to the raw string.
-      return s;
+      throw new IOException("Failed to build Google Places request", e);
     }
   }
 }
