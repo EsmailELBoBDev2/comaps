@@ -1,5 +1,6 @@
 package app.organicmaps.cairodrive.cameras;
 
+import android.content.Context;
 import androidx.annotation.NonNull;
 import app.organicmaps.cairodrive.model.GeoPoint;
 import app.organicmaps.cairodrive.util.Geo;
@@ -34,13 +35,30 @@ public final class CameraAggregator
   @NonNull
   private final List<CameraSource> mSources;
 
-  /// Default wiring: just the always-available Overpass source. Callers can use
-  /// the other constructor to add a {@link CustomDatasetCameraSource}.
+  /// Default wiring: just the always-available Overpass source. Prefer
+  /// {@link #createDefault(Context)} to also enable the context-backed sources
+  /// (community reports + optional remote dataset).
   public CameraAggregator()
   {
     final List<CameraSource> sources = new ArrayList<>();
     sources.add(new OverpassCameraSource());
     mSources = sources;
+  }
+
+  /// Full multi-source wiring, in priority order (earlier wins dedupe ties):
+  ///   1. Overpass (OSM)        -- primary, keyless, global.
+  ///   2. Remote GeoJSON dataset -- optional curated set (inert without a URL).
+  ///   3. Community reports     -- the user's own reported cameras/radars.
+  /// Overpass leads; the others only FILL GAPS it is missing, and same-spot
+  /// duplicates are hidden by {@link #dedupe}.
+  @NonNull
+  public static CameraAggregator createDefault(@NonNull Context ctx)
+  {
+    final List<CameraSource> sources = new ArrayList<>();
+    sources.add(new OverpassCameraSource());
+    sources.add(new RemoteGeoJsonCameraSource());
+    sources.add(new CommunityCameraSource(ctx));
+    return new CameraAggregator(sources);
   }
 
   /// @param sources ordered list of sources; earlier entries win dedupe ties. A

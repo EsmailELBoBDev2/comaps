@@ -95,6 +95,10 @@ android {
       def value = cairoSecrets.getProperty(name, '').replace('\\', '\\\\').replace('"', '\\"')
       buildConfigField 'String', "${name}_API_KEY", "\"${value}\""
     }
+    // Optional supplementary camera dataset (a GeoJSON FeatureCollection URL).
+    // Empty by default => the source is inert. Merged + deduped with Overpass.
+    def cameraDatasetUrl = cairoSecrets.getProperty('CAMERA_DATASET_URL', '').replace('\\', '\\\\').replace('"', '\\"')
+    buildConfigField 'String', 'CAMERA_DATASET_URL', "\"${cameraDatasetUrl}\""
 
     base.archivesName = appName.replaceAll('\\s','') + '-' + defaultConfig.versionCode
 

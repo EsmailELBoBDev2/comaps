@@ -45,7 +45,11 @@ public final class CairoOverlayController
   private static final long MIN_REFETCH_INTERVAL_MS = 60_000;
 
   private final CairoMapOverlay mOverlay = new CairoMapOverlay();
-  private final CameraAggregator mCameras = new CameraAggregator();
+  // Built lazily with the app context on first use (always from the single IO
+  // thread, so no synchronisation needed). Wires Overpass + remote dataset +
+  // community reports; see CameraAggregator.createDefault.
+  @Nullable
+  private CameraAggregator mCameras;
   private final TrafficAggregator mTraffic = new TrafficAggregator();
   private final HazardAggregator mHazards = new HazardAggregator();
   private final RouteCompareManager mRouter = new RouteCompareManager();
@@ -112,7 +116,7 @@ public final class CairoOverlayController
       List<Hazard> hazards = new ArrayList<>();
       try
       {
-        cams = mCameras.collect(new GeoPoint(lat, lon), FETCH_RADIUS_M);
+        cams = cameras(ctx).collect(new GeoPoint(lat, lon), FETCH_RADIUS_M);
       }
       catch (Throwable t)
       {
@@ -148,6 +152,16 @@ public final class CairoOverlayController
           badge.onCameraCount(count);
       });
     });
+  }
+
+  /// Lazily build the multi-source camera aggregator with the app context.
+  /// Only ever called from the single IO thread, so no locking is needed.
+  @NonNull
+  private CameraAggregator cameras(@NonNull Context ctx)
+  {
+    if (mCameras == null)
+      mCameras = CameraAggregator.createDefault(ctx.getApplicationContext());
+    return mCameras;
   }
 
   /// Save the current location as "where I parked" and drop a mark.
@@ -212,7 +226,7 @@ public final class CairoOverlayController
       try
       {
         final GeoPoint mid = new GeoPoint((from.lat + to.lat) / 2, (from.lon + to.lon) / 2);
-        RouteCameraRanker.annotateFewest(routes, mCameras.collect(mid, FETCH_RADIUS_M));
+        RouteCameraRanker.annotateFewest(routes, cameras(ctx).collect(mid, FETCH_RADIUS_M));
       }
       catch (Throwable t)
       {
