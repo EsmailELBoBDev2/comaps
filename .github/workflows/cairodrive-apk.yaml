@@ -76,15 +76,17 @@ jobs:
         shell: bash
         working-directory: android
         env:
-          MAGIC_LANE: ${{ secrets.MAGIC_LANE }}
+          # Right-hand names match the repo's actual secret names (some have no
+          # underscore, e.g. GOOGLEPLACES/MAGICLANE, and the ORS key is HEIGIT).
+          MAGIC_LANE: ${{ secrets.MAGICLANE }}
           TOMTOM: ${{ secrets.TOMTOM }}
           MAPBOX: ${{ secrets.MAPBOX }}
-          GOOGLE_PLACES: ${{ secrets.GOOGLE_PLACES }}
+          GOOGLE_PLACES: ${{ secrets.GOOGLEPLACES }}
           HERE: ${{ secrets.HERE }}
           GEOAPIFY: ${{ secrets.GEOAPIFY }}
           LOCATIONIQ: ${{ secrets.LOCATIONIQ }}
           MAPILLARY: ${{ secrets.MAPILLARY }}
-          OPENROUTESERVICE: ${{ secrets.OPENROUTESERVICE }}
+          OPENROUTESERVICE: ${{ secrets.HEIGIT }}
           CAMERA_DATASET_URL: ${{ secrets.CAMERA_DATASET_URL }}
         run: |
           {
