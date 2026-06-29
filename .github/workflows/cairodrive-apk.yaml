@@ -67,6 +67,40 @@ jobs:
           restore-keys: |
             gradle-ndk-
 
+      # Materialise android/secrets.properties from GitHub Actions Secrets so the
+      # APK is built with provider keys. Values come from repo Settings -> Secrets
+      # and variables -> Actions (NEVER committed). Any unset secret => blank =>
+      # that provider stays disabled (offline-first). GitHub masks secret values
+      # in logs; we never echo them.
+      - name: Write CairoDrive secrets.properties
+        shell: bash
+        working-directory: android
+        env:
+          MAGIC_LANE: ${{ secrets.MAGIC_LANE }}
+          TOMTOM: ${{ secrets.TOMTOM }}
+          MAPBOX: ${{ secrets.MAPBOX }}
+          GOOGLE_PLACES: ${{ secrets.GOOGLE_PLACES }}
+          HERE: ${{ secrets.HERE }}
+          GEOAPIFY: ${{ secrets.GEOAPIFY }}
+          LOCATIONIQ: ${{ secrets.LOCATIONIQ }}
+          MAPILLARY: ${{ secrets.MAPILLARY }}
+          OPENROUTESERVICE: ${{ secrets.OPENROUTESERVICE }}
+          CAMERA_DATASET_URL: ${{ secrets.CAMERA_DATASET_URL }}
+        run: |
+          {
+            printf 'MAGIC_LANE=%s\n' "$MAGIC_LANE"
+            printf 'TOMTOM=%s\n' "$TOMTOM"
+            printf 'MAPBOX=%s\n' "$MAPBOX"
+            printf 'GOOGLE_PLACES=%s\n' "$GOOGLE_PLACES"
+            printf 'HERE=%s\n' "$HERE"
+            printf 'GEOAPIFY=%s\n' "$GEOAPIFY"
+            printf 'LOCATIONIQ=%s\n' "$LOCATIONIQ"
+            printf 'MAPILLARY=%s\n' "$MAPILLARY"
+            printf 'OPENROUTESERVICE=%s\n' "$OPENROUTESERVICE"
+            printf 'CAMERA_DATASET_URL=%s\n' "$CAMERA_DATASET_URL"
+          } > secrets.properties
+          echo "secrets.properties written (values masked)"
+
       - name: Build WebDebug APK
         shell: bash
         working-directory: android
