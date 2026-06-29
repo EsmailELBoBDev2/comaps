@@ -77,6 +77,9 @@ public final class CairoMapOverlay
         }
       }
       mCatId = BookmarkManager.INSTANCE.createCategory(CATEGORY);
+      // CRITICAL: a mark moved into an invisible category disappears. Force the
+      // category visible so cameras / search / report marks actually render.
+      BookmarkManager.INSTANCE.setVisibility(mCatId, true);
     }
     catch (Throwable t)
     {

@@ -267,7 +267,21 @@ public final class CairoOverlayController
         return;
       }
       final List<OnlinePlace> fp = places;
-      mUi.post(() -> mOverlay.showSearchResults(fp));
+      mUi.post(() -> {
+        mOverlay.showSearchResults(fp);
+        // Visible feedback independent of the mark layer: toast the count and fly
+        // the map to the first hit (online coords land on the OSM map even when
+        // the place isn't in the offline OSM data).
+        android.widget.Toast
+            .makeText(ctx, fp.isEmpty() ? "No results" : ("Found " + fp.size() + " place(s)"),
+                      android.widget.Toast.LENGTH_SHORT)
+            .show();
+        if (!fp.isEmpty())
+        {
+          final OnlinePlace first = fp.get(0);
+          app.organicmaps.sdk.Framework.nativeSetViewportCenter(first.location.lat, first.location.lon, 16);
+        }
+      });
     });
   }
 
