@@ -151,7 +151,8 @@ std::vector<ArrowBorders> CalculateArrowBorders(m2::RectD screenRect, double scr
 
   // Calculate arrow mercator length.
   double glbHalfLen = 0.5 * kArrowSize;
-  double const glbHalfTextureWidth = currentHalfWidth * kArrowHeightFactor * screenScale;
+  // CairoDrive: kArrowWidthBoost enlarges the turn arrows for clearer guidance.
+  double const glbHalfTextureWidth = currentHalfWidth * kArrowHeightFactor * kArrowWidthBoost * screenScale;
   double const glbHalfTextureLen = glbHalfTextureWidth * kArrowAspect;
   if (glbHalfLen < glbHalfTextureLen)
     glbHalfLen = glbHalfTextureLen;
@@ -512,7 +513,8 @@ void RouteRenderer::RenderSubrouteArrows(ref_ptr<dp::GraphicsContext> context, r
   frameValues.SetTo(params);
   math::Matrix<float, 4, 4> mv = screen.GetModelView(subrouteInfo.m_arrowsData->m_pivot, kShapeCoordScalar);
   params.m_modelView = glsl::make_mat4(mv.m_data);
-  auto const arrowHalfWidth = static_cast<float>(currentHalfWidth * kArrowHeightFactor);
+  // CairoDrive: match the enlarged arrow geometry (see kArrowWidthBoost).
+  auto const arrowHalfWidth = static_cast<float>(currentHalfWidth * kArrowHeightFactor * kArrowWidthBoost);
   params.m_arrowHalfWidth = arrowHalfWidth;
 
   // Adjust arrow color depending on route type and subroute distance

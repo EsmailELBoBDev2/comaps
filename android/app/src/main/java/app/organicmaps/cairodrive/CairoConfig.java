@@ -37,10 +37,13 @@ public final class CairoConfig
     return ctx.getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
   }
 
-  /// Master switch for every network-backed feature. Default false = offline-first.
+  /// Master switch for every network-backed feature. Default true so the live
+  /// camera/traffic overlay, online search and route compare work out of the box;
+  /// the user can switch it off in Settings -> Advanced -> CairoDrive to go fully
+  /// offline.
   public static boolean isOnlineEnabled(@NonNull Context ctx)
   {
-    return prefs(ctx).getBoolean(KEY_ONLINE, false);
+    return prefs(ctx).getBoolean(KEY_ONLINE, true);
   }
 
   public static void setOnlineEnabled(@NonNull Context ctx, boolean enabled)

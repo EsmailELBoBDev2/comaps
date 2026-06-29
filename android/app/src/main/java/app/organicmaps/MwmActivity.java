@@ -208,6 +208,19 @@ public class MwmActivity extends BaseMwmFragmentActivity
   private final AverageSpeedTracker mAvgSpeed = new AverageSpeedTracker();
   @Nullable
   private SpeedometerView mSpeedometer;
+  // CairoDrive: periodic overlay refresh so live cameras/traffic follow the map
+  // as the user pans (the one-shot onResume fetch can't see later panning).
+  private static final long CAIRO_REFRESH_MS = 30_000;
+  private final android.os.Handler mCairoRefreshHandler = new android.os.Handler(android.os.Looper.getMainLooper());
+  private final Runnable mCairoRefreshTick = new Runnable()
+  {
+    @Override
+    public void run()
+    {
+      cairoRefreshOverlay();
+      mCairoRefreshHandler.postDelayed(this, CAIRO_REFRESH_MS);
+    }
+  };
   private boolean mIsTabletLayout;
   @SuppressWarnings("NotNullFieldNotInitialized")
   @NonNull
@@ -1225,13 +1238,12 @@ public class MwmActivity extends BaseMwmFragmentActivity
     // CairoDrive: show the on-screen developer log panel when enabled in settings.
     DevLogOverlay.show(this);
 
-    // CairoDrive: refresh the online camera/traffic overlay + badge when online
-    // features are enabled; otherwise clear them (offline-first default).
-    final Location cairoLoc = MwmApplication.from(this).getLocationHelper().getSavedLocation();
-    final double lat = cairoLoc != null ? cairoLoc.getLatitude() : CairoConfig.CAIRO_LAT;
-    final double lon = cairoLoc != null ? cairoLoc.getLongitude() : CairoConfig.CAIRO_LON;
-    // Overlay refresh draws community reports always, online cameras/traffic when enabled.
-    mCairoOverlay.refresh(this, lat, lon, count -> CamerasBadge.show(this, count));
+    // CairoDrive: refresh the online camera/traffic overlay + badge now, then keep
+    // refreshing on a timer so the dots follow the map as the user pans. Online
+    // off => the controller just clears the online marks (offline-first).
+    cairoRefreshOverlay();
+    mCairoRefreshHandler.removeCallbacks(mCairoRefreshTick);
+    mCairoRefreshHandler.postDelayed(mCairoRefreshTick, CAIRO_REFRESH_MS);
 
     // CairoDrive: one-tap community reporting (works offline; reports the current
     // location, falling back to Cairo when no fix yet).
@@ -1271,6 +1283,38 @@ public class MwmActivity extends BaseMwmFragmentActivity
 
     // CairoDrive: tools chooser (route compare / online search / street view).
     CairoToolsButton.show(this, this::showCairoToolsDialog);
+  }
+
+  // CairoDrive: refresh the overlay around the current MAP CENTRE (so cameras
+  // follow panning), falling back to the last GPS fix, then to Cairo. Cheap when
+  // nothing moved: the controller's tile + min-interval gate skips the network.
+  private void cairoRefreshOverlay()
+  {
+    double lat = CairoConfig.CAIRO_LAT;
+    double lon = CairoConfig.CAIRO_LON;
+    try
+    {
+      final double[] center = Framework.nativeGetScreenRectCenter();
+      if (center != null && center.length == 2 && (center[0] != 0 || center[1] != 0))
+      {
+        lat = center[0];
+        lon = center[1];
+      }
+      else
+      {
+        final Location loc = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+        if (loc != null)
+        {
+          lat = loc.getLatitude();
+          lon = loc.getLongitude();
+        }
+      }
+    }
+    catch (Throwable ignored)
+    {
+      // map not ready yet -> Cairo fallback above
+    }
+    mCairoOverlay.refresh(this, lat, lon, count -> CamerasBadge.show(this, count));
   }
 
   private GeoPoint cairoCurrentPoint()
@@ -1346,6 +1390,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
     if (mOnmapDownloader != null)
       mOnmapDownloader.onPause();
     MwmApplication.from(this).getSensorHelper().removeListener(this);
+    // CairoDrive: stop the overlay refresh timer while we're not in the foreground.
+    mCairoRefreshHandler.removeCallbacks(mCairoRefreshTick);
     dismissLocationErrorDialog();
     dismissAlertDialog();
     super.onPause();
@@ -1409,6 +1455,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
 
     // CairoDrive: release the overlay executor and detach our views/buttons so
     // nothing leaks across activity recreation.
+    mCairoRefreshHandler.removeCallbacks(mCairoRefreshTick);
     mCairoOverlay.shutdown();
     if (mTripRecorder.isRecording())
       mTripRecorder.stop();

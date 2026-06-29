@@ -3,7 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <SwitchPreferenceCompat
-    android:defaultValue="false"
+    android:defaultValue="true"
     android:key="@string/pref_cairodrive_online"
     android:order="1"
     android:summary="@string/cairodrive_online_summary"
