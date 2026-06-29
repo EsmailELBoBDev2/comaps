@@ -1005,7 +1005,12 @@ void Framework::LoadViewport()
   }
   else
   {
-    ShowAll();
+    // CairoDrive: on first run (no saved viewport) start centered on Cairo, Egypt
+    // instead of showing the whole world.
+    constexpr double kCairoLat = 30.0444;
+    constexpr double kCairoLon = 31.2357;
+    constexpr int kCairoZoom = 13;
+    SetViewportCenter(mercator::FromLatLon(kCairoLat, kCairoLon), kCairoZoom, false /* isAnim */);
   }
 }
 

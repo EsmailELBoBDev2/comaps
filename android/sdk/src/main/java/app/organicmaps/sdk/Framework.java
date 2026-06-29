@@ -220,6 +220,13 @@ public class Framework
 
   private static native void nativeSetSpeedCamManagerMode(int mode);
 
+  // CairoDrive: closest-camera HUD info. Type ordinal matches
+  // routing::SpeedCameraType (0=Unknown,1=Fixed,2=RedLight,3=Average,4=Mobile);
+  // distance is metres ahead, or < 0 when there is no camera.
+  public static native int nativeGetClosestCameraType();
+
+  public static native double nativeGetClosestCameraDistanceMeters();
+
   public static native void nativeSetRoutingListener(@NonNull RoutingListener listener);
 
   public static native void nativeSetRouteProgressListener(@NonNull RoutingProgressListener listener);

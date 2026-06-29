@@ -152,6 +152,9 @@ android/libnotify.properties
 android/google-play.json
 android/huawei-appgallery.json
 android/res/xml/network_security_config.xml
+
+# CairoDrive provider API keys - NEVER commit real values (see secrets.properties.example)
+android/secrets.properties
 ./server/
 iphone/Maps/app.omaps/
 # Generated file

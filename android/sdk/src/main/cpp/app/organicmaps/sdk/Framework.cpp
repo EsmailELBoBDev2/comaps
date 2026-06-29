@@ -1233,6 +1233,20 @@ JNIEXPORT jint JNICALL Java_app_organicmaps_sdk_Framework_nativeGetSpeedCamManag
   return static_cast<jint>(frm()->GetRoutingManager().GetSpeedCamManager().GetMode());
 }
 
+// CairoDrive: closest-camera info for the HUD (type ordinal + live distance).
+// Additive accessors -- they do NOT touch the RoutingInfo construction on the
+// nav hot path, so a mistake here can only affect the camera HUD.
+JNIEXPORT jint JNICALL Java_app_organicmaps_sdk_Framework_nativeGetClosestCameraType(JNIEnv *, jclass)
+{
+  auto const & scm = frm()->GetRoutingManager().GetSpeedCamManager();
+  return static_cast<jint>(scm.GetClosestCameraType());
+}
+
+JNIEXPORT jdouble JNICALL Java_app_organicmaps_sdk_Framework_nativeGetClosestCameraDistanceMeters(JNIEnv *, jclass)
+{
+  return static_cast<jdouble>(frm()->GetRoutingManager().GetSpeedCamManager().GetDistanceToClosestCameraMeters());
+}
+
 JNIEXPORT jobject JNICALL Java_app_organicmaps_sdk_Framework_nativeGetRouteFollowingInfo(JNIEnv * env, jclass)
 {
   RoutingManager & rm = frm()->GetRoutingManager();

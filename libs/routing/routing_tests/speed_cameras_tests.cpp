@@ -113,7 +113,9 @@ bool TestSerDesSpeedCamera(std::vector<SpeedCameraMetadata> const & speedCameras
     for (auto const & metadata : speedCamerasMetadata)
     {
       auto const & way = metadata.m_ways.back();
-      auto const res = DeserializeSpeedCamera(src, prevFeatureId);
+      // CairoDrive: SerializeSpeedCamera writes the latest format (with the type
+      // byte), so deserialize with the latest version to stay in sync.
+      auto const res = DeserializeSpeedCamera(src, prevFeatureId, SpeedCameraMwmHeader::kLatestVersion);
       TEST_EQUAL(res.first, SegmentCoord(way.m_featureId, way.m_segmentId), ());
       TEST(AlmostEqualAbs(res.second.m_coef, way.m_coef, 1e-5), ());
       TEST_EQUAL(res.second.m_maxSpeedKmPH, metadata.m_maxSpeedKmPH, ());

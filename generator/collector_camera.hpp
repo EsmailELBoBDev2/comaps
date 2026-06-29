@@ -51,6 +51,9 @@ class CameraCollector : public generator::CollectorInterface
     double m_lon = 0.0;
     double m_lat = 0.0;
     uint32_t m_speedKmPH = 0;
+    // CairoDrive: SpeedCameraType numeric value (0 = Unknown), classified from
+    // OSM tags. Stored as raw uint8_t here to keep this header light.
+    uint8_t m_type = 0;
     std::vector<uint64_t> m_ways;
   };
 

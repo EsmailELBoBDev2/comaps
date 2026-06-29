@@ -57,6 +57,20 @@ import app.organicmaps.backup.PeriodicBackupRunner;
 import app.organicmaps.base.BaseMwmFragmentActivity;
 import app.organicmaps.base.OnBackPressListener;
 import app.organicmaps.bookmarks.BookmarkCategoriesActivity;
+import app.organicmaps.cairodrive.CairoConfig;
+import app.organicmaps.cairodrive.devtools.DevLogOverlay;
+import app.organicmaps.cairodrive.overlay.CairoOverlayController;
+import app.organicmaps.cairodrive.overlay.CairoParkingButton;
+import app.organicmaps.cairodrive.overlay.CairoToolsButton;
+import app.organicmaps.cairodrive.overlay.CameraHudView;
+import app.organicmaps.cairodrive.model.GeoPoint;
+import app.organicmaps.cairodrive.overlay.CairoReportButton;
+import app.organicmaps.cairodrive.overlay.CamerasBadge;
+import app.organicmaps.cairodrive.speed.AverageSpeedTracker;
+import app.organicmaps.cairodrive.speed.OverspeedMonitor;
+import app.organicmaps.cairodrive.speed.SpeedometerView;
+import app.organicmaps.cairodrive.trip.ShareEta;
+import app.organicmaps.cairodrive.trip.TripRecorder;
 import app.organicmaps.downloader.DownloaderActivity;
 import app.organicmaps.downloader.DownloaderFragment;
 import app.organicmaps.downloader.OnmapDownloader;
@@ -89,6 +103,7 @@ import app.organicmaps.sdk.PlacePageActivationListener;
 import app.organicmaps.sdk.Router;
 import app.organicmaps.sdk.bookmarks.data.BookmarkManager;
 import app.organicmaps.sdk.bookmarks.data.MapObject;
+import app.organicmaps.sdk.bookmarks.data.Track;
 import app.organicmaps.sdk.display.DisplayChangedListener;
 import app.organicmaps.sdk.display.DisplayManager;
 import app.organicmaps.sdk.display.DisplayType;
@@ -103,6 +118,7 @@ import app.organicmaps.sdk.location.TrackRecorder;
 import app.organicmaps.sdk.maplayer.isolines.IsolinesState;
 import app.organicmaps.sdk.routing.RouteMarkType;
 import app.organicmaps.sdk.routing.RoutingController;
+import app.organicmaps.sdk.routing.RoutingInfo;
 import app.organicmaps.sdk.routing.RoutingOptions;
 import app.organicmaps.sdk.search.SearchEngine;
 import app.organicmaps.sdk.settings.RoadType;
@@ -184,6 +200,27 @@ public class MwmActivity extends BaseMwmFragmentActivity
   private PanelAnimator mPanelAnimator;
   @Nullable
   private OnmapDownloader mOnmapDownloader;
+  // CairoDrive: online camera/traffic map overlay + "N cameras" badge.
+  private final CairoOverlayController mCairoOverlay = new CairoOverlayController();
+  // CairoDrive: driving telemetry (speedometer, over-speed alarm, trip stats, محور avg).
+  private final TripRecorder mTripRecorder = new TripRecorder();
+  private final OverspeedMonitor mOverspeed = new OverspeedMonitor();
+  private final AverageSpeedTracker mAvgSpeed = new AverageSpeedTracker();
+  @Nullable
+  private SpeedometerView mSpeedometer;
+  // CairoDrive: periodic overlay refresh so live cameras/traffic follow the map
+  // as the user pans (the one-shot onResume fetch can't see later panning).
+  private static final long CAIRO_REFRESH_MS = 30_000;
+  private final android.os.Handler mCairoRefreshHandler = new android.os.Handler(android.os.Looper.getMainLooper());
+  private final Runnable mCairoRefreshTick = new Runnable()
+  {
+    @Override
+    public void run()
+    {
+      cairoRefreshOverlay();
+      mCairoRefreshHandler.postDelayed(this, CAIRO_REFRESH_MS);
+    }
+  };
   private boolean mIsTabletLayout;
   @SuppressWarnings("NotNullFieldNotInitialized")
   @NonNull
@@ -1197,6 +1234,147 @@ public class MwmActivity extends BaseMwmFragmentActivity
     refreshLightStatusBar();
 
     MwmApplication.from(this).getSensorHelper().addListener(this);
+
+    // CairoDrive: show the on-screen developer log panel when enabled in settings.
+    DevLogOverlay.show(this);
+
+    // CairoDrive: refresh the online camera/traffic overlay + badge now, then keep
+    // refreshing on a timer so the dots follow the map as the user pans. Online
+    // off => the controller just clears the online marks (offline-first).
+    cairoRefreshOverlay();
+    mCairoRefreshHandler.removeCallbacks(mCairoRefreshTick);
+    mCairoRefreshHandler.postDelayed(mCairoRefreshTick, CAIRO_REFRESH_MS);
+
+    // CairoDrive: one-tap community reporting (works offline; reports the current
+    // location, falling back to Cairo when no fix yet).
+    CairoReportButton.show(this, kind -> {
+      final Location l = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+      final double rlat = l != null ? l.getLatitude() : CairoConfig.CAIRO_LAT;
+      final double rlon = l != null ? l.getLongitude() : CairoConfig.CAIRO_LON;
+      mCairoOverlay.report(this, kind, rlat, rlon);
+    }, this::shareCairoEta);
+
+    // CairoDrive: parking - tap saves the current spot, long-press clears it.
+    CairoParkingButton.show(this, () -> {
+      final Location l = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+      if (l != null)
+      {
+        mCairoOverlay.park(this, l.getLatitude(), l.getLongitude());
+        android.widget.Toast.makeText(this, "Parked here", android.widget.Toast.LENGTH_SHORT).show();
+      }
+      else
+      {
+        android.widget.Toast.makeText(this, "No location yet", android.widget.Toast.LENGTH_SHORT).show();
+      }
+    }, () -> {
+      mCairoOverlay.unpark(this);
+      android.widget.Toast.makeText(this, "Parking cleared", android.widget.Toast.LENGTH_SHORT).show();
+    });
+
+    // CairoDrive: over-speed alarm (fires once on crossing the user threshold).
+    mOverspeed.configure(this);  // cache threshold; avoids prefs reads per GPS fix
+    mOverspeed.setListener((kmh, threshold) ->
+        android.widget.Toast
+            .makeText(this, "Over speed: " + kmh + " km/h (limit " + threshold + ")",
+                      android.widget.Toast.LENGTH_SHORT)
+            .show());
+    // Attach the speedometer once (cached); telemetry updates it per fix.
+    mSpeedometer = SpeedometerView.attach(this);
+
+    // CairoDrive: tools chooser (route compare / online search / street view).
+    CairoToolsButton.show(this, this::showCairoToolsDialog);
+  }
+
+  // CairoDrive: refresh the overlay around the current MAP CENTRE (so cameras
+  // follow panning), falling back to the last GPS fix, then to Cairo. Cheap when
+  // nothing moved: the controller's tile + min-interval gate skips the network.
+  private void cairoRefreshOverlay()
+  {
+    double lat = CairoConfig.CAIRO_LAT;
+    double lon = CairoConfig.CAIRO_LON;
+    try
+    {
+      final double[] center = Framework.nativeGetScreenRectCenter();
+      if (center != null && center.length == 2 && (center[0] != 0 || center[1] != 0))
+      {
+        lat = center[0];
+        lon = center[1];
+      }
+      else
+      {
+        final Location loc = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+        if (loc != null)
+        {
+          lat = loc.getLatitude();
+          lon = loc.getLongitude();
+        }
+      }
+    }
+    catch (Throwable ignored)
+    {
+      // map not ready yet -> Cairo fallback above
+    }
+    mCairoOverlay.refresh(this, lat, lon, count -> CamerasBadge.show(this, count));
+  }
+
+  private GeoPoint cairoCurrentPoint()
+  {
+    final Location l = MwmApplication.from(this).getLocationHelper().getSavedLocation();
+    final double lat = l != null ? l.getLatitude() : CairoConfig.CAIRO_LAT;
+    final double lon = l != null ? l.getLongitude() : CairoConfig.CAIRO_LON;
+    return new GeoPoint(lat, lon);
+  }
+
+  private void showCairoToolsDialog()
+  {
+    final String[] items = {"Compare routes (online)", "Online search", "Street view here (Mapillary)"};
+    new android.app.AlertDialog.Builder(this).setTitle("CairoDrive tools").setItems(items, (dialog, which) -> {
+      if (which == 0)
+        cairoCompareRoutes();
+      else if (which == 1)
+        cairoOnlineSearchDialog();
+      else
+        cairoStreetViewHere();
+    }).show();
+  }
+
+  private void cairoCompareRoutes()
+  {
+    final MapObject end = RoutingController.get().getEndPoint();
+    if (end == null)
+    {
+      android.widget.Toast.makeText(this, "Plan a route first (set a destination)", android.widget.Toast.LENGTH_SHORT)
+          .show();
+      return;
+    }
+    mCairoOverlay.showRouteCompare(this, cairoCurrentPoint(), new GeoPoint(end.getLat(), end.getLon()));
+    android.widget.Toast.makeText(this, "Fetching online routes…", android.widget.Toast.LENGTH_SHORT).show();
+  }
+
+  private void cairoOnlineSearchDialog()
+  {
+    final android.widget.EditText input = new android.widget.EditText(this);
+    input.setHint("Search places online");
+    new android.app.AlertDialog.Builder(this)
+        .setTitle("Online search")
+        .setView(input)
+        .setPositiveButton("Search", (d, w) -> {
+          final String q = input.getText().toString().trim();
+          if (!q.isEmpty())
+            mCairoOverlay.onlineSearch(this, q, cairoCurrentPoint());
+        })
+        .setNegativeButton("Cancel", null)
+        .show();
+  }
+
+  private void cairoStreetViewHere()
+  {
+    mCairoOverlay.mapillaryHere(cairoCurrentPoint(), url -> {
+      if (url == null)
+        android.widget.Toast.makeText(this, "No street image nearby", android.widget.Toast.LENGTH_SHORT).show();
+      else
+        startActivity(new android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url)));
+    });
   }
 
   @Override
@@ -1212,6 +1390,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
     if (mOnmapDownloader != null)
       mOnmapDownloader.onPause();
     MwmApplication.from(this).getSensorHelper().removeListener(this);
+    // CairoDrive: stop the overlay refresh timer while we're not in the foreground.
+    mCairoRefreshHandler.removeCallbacks(mCairoRefreshTick);
     dismissLocationErrorDialog();
     dismissAlertDialog();
     super.onPause();
@@ -1272,6 +1452,20 @@ public class MwmActivity extends BaseMwmFragmentActivity
     mPowerSaveSettings = null;
     if (mRemoveDisplayListener && !isChangingConfigurations())
       mDisplayManager.removeListener(DisplayType.Device);
+
+    // CairoDrive: release the overlay executor and detach our views/buttons so
+    // nothing leaks across activity recreation.
+    mCairoRefreshHandler.removeCallbacks(mCairoRefreshTick);
+    mCairoOverlay.shutdown();
+    if (mTripRecorder.isRecording())
+      mTripRecorder.stop();
+    SpeedometerView.detach(this);
+    CamerasBadge.hide(this);
+    CameraHudView.hide(this);
+    CairoReportButton.hide(this);
+    CairoParkingButton.hide(this);
+    CairoToolsButton.hide(this);
+    mSpeedometer = null;
   }
 
   @Override
@@ -1345,8 +1539,12 @@ public class MwmActivity extends BaseMwmFragmentActivity
   @Override
   public void onPlacePageActivated(@NonNull PlacePageData data)
   {
+    final MapObject mapObject = (MapObject) data;
+    // CairoDrive: tapping one of our route lines switches the active route.
+    if (mapObject.isTrack() && mapObject instanceof Track)
+      mCairoOverlay.onTrackTapped(((Track) mapObject).getTrackId());
     // This will open the place page
-    mPlacePageViewModel.setMapObject((MapObject) data);
+    mPlacePageViewModel.setMapObject(mapObject);
   }
 
   @Override
@@ -1942,11 +2140,75 @@ public class MwmActivity extends BaseMwmFragmentActivity
   {
     dismissLocationErrorDialog();
 
+    // CairoDrive: feed speedometer / over-speed alarm / trip recorder on every fix.
+    updateCairoDriveTelemetry(location);
+
     final RoutingController routing = RoutingController.get();
     if (!routing.isNavigating())
+    {
+      if (mTripRecorder.isRecording())
+        mTripRecorder.stop();
       return;
+    }
+
+    if (!mTripRecorder.isRecording())
+      mTripRecorder.start();
 
     mNavigationController.update(Framework.nativeGetRouteFollowingInfo());
+  }
+
+  // CairoDrive: share the current navigation ETA via the Android share sheet
+  // (long-press the Report button). No-op with a toast when not navigating.
+  private void shareCairoEta()
+  {
+    final RoutingController rc = RoutingController.get();
+    final RoutingInfo info = Framework.nativeGetRouteFollowingInfo();
+    final MapObject end = rc.getEndPoint();
+    if (!rc.isNavigating() || info == null || end == null)
+    {
+      android.widget.Toast.makeText(this, "Start navigation to share an ETA", android.widget.Toast.LENGTH_SHORT)
+          .show();
+      return;
+    }
+    final long etaMs = System.currentTimeMillis() + info.totalTimeInSeconds * 1000L;
+    final String name = end.getName() != null && !end.getName().isEmpty() ? end.getName() : "Destination";
+    ShareEta.shareEta(this, end.getLat(), end.getLon(), etaMs, name);
+  }
+
+  // CairoDrive: drive the speedometer + over-speed alarm + trip/average-speed
+  // trackers from each GPS fix. Never throws into the location pipeline.
+  private void updateCairoDriveTelemetry(@NonNull Location location)
+  {
+    try
+    {
+      final double speedMps = location.hasSpeed() ? location.getSpeed() : 0.0;
+      mOverspeed.onSpeed(speedMps);  // uses cached config (no SharedPreferences on the hot path)
+      if (mSpeedometer != null)
+        mSpeedometer.update(mOverspeed.currentKmh(), mOverspeed.isOver());
+
+      if (mTripRecorder.isRecording())
+        mTripRecorder.onLocation(location.getLatitude(), location.getLongitude(), speedMps, location.getTime());
+      if (mAvgSpeed.inZone())
+        mAvgSpeed.onSample(speedMps, location.getTime());
+
+      // CairoDrive: speed-camera HUD (type + live distance countdown) while navigating.
+      if (RoutingController.get().isNavigating())
+      {
+        final double camDist = Framework.nativeGetClosestCameraDistanceMeters();
+        if (camDist >= 0 && camDist <= 1000)
+          CameraHudView.show(this, Framework.nativeGetClosestCameraType(), camDist);
+        else
+          CameraHudView.hide(this);
+      }
+      else
+      {
+        CameraHudView.hide(this);
+      }
+    }
+    catch (Throwable t)
+    {
+      app.organicmaps.sdk.util.log.CairoLog.w("telemetry", "update failed: " + t.getMessage());
+    }
   }
 
   @Override

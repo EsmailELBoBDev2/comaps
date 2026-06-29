@@ -1,0 +1,102 @@
+name: Sync upstream CoMaps
+
+# Keeps this fork current with upstream CoMaps once a day.
+# Clean merge -> push. Conflicts -> open a dated issue listing the files and stop
+# (never force-push).
+on:
+  schedule:
+    - cron: "0 3 * * *"  # 03:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+env:
+  UPSTREAM_URL: https://github.com/comaps/comaps.git
+  UPSTREAM_BRANCH: main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git and upstream remote
+        shell: bash
+        run: |
+          git config user.name "cairodrive-sync-bot"
+          git config user.email "sync@users.noreply.github.com"
+          git remote add upstream "$UPSTREAM_URL" 2>/dev/null || git remote set-url upstream "$UPSTREAM_URL"
+          git fetch upstream "$UPSTREAM_BRANCH"
+
+      - name: Merge upstream
+        id: merge
+        shell: bash
+        run: |
+          if git merge --no-edit "upstream/${UPSTREAM_BRANCH}"; then
+            echo "status=clean" >> "$GITHUB_OUTPUT"
+            git push origin HEAD
+          else
+            # Collect conflicting paths, then back out cleanly - never force.
+            conflicts="$(git diff --name-only --diff-filter=U | tr '\n' ',' | sed 's/,$//')"
+            git merge --abort
+            echo "status=conflict" >> "$GITHUB_OUTPUT"
+            echo "conflicts=${conflicts}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open conflict issue
+        if: steps.merge.outputs.status == 'conflict'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const date = new Date().toISOString().slice(0, 10);
+            const title = `Upstream sync conflict ${date}`;
+            const files = (`${{ steps.merge.outputs.conflicts }}`)
+              .split(',').map(s => s.trim()).filter(Boolean);
+            const fileList = files.length
+              ? files.map(f => `- \`${f}\``).join('\n')
+              : '_(no file list captured)_';
+            const body = [
+              `Daily upstream sync from \`${process.env.UPSTREAM_URL}\` ` +
+                `(\`${process.env.UPSTREAM_BRANCH}\`) hit merge conflicts and was aborted. ` +
+                `No changes were pushed.`,
+              '',
+              '### Conflicting files',
+              fileList,
+              '',
+              '### Resolve manually',
+              '```bash',
+              'git remote add upstream ' + process.env.UPSTREAM_URL,
+              'git fetch upstream ' + process.env.UPSTREAM_BRANCH,
+              'git merge upstream/' + process.env.UPSTREAM_BRANCH,
+              '# resolve conflicts, then commit and push',
+              '```',
+              '',
+              `_Opened automatically by the \`${context.workflow}\` workflow ` +
+                `(run ${context.runId})._`,
+            ].join('\n');
+
+            // Avoid duplicate issues for the same day.
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'upstream-sync',
+            });
+            if (existing.data.some(i => i.title === title)) {
+              core.info(`Issue "${title}" already open; skipping.`);
+              return;
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              labels: ['upstream-sync'],
+            });
+            core.setFailed('Upstream sync conflict - issue opened.');

@@ -53,6 +53,61 @@
   <string name="pref_nav_menu_final_destination" translatable="false">pref_nav_menu_final_destination</string>
   <string name="pref_android_auto_support" translatable="false">pref_android_auto_support</string>
 
+  <!-- CairoDrive settings -->
+  <string name="pref_cairodrive_screen" translatable="false">CairoDriveScreen</string>
+  <string name="pref_cairodrive_online" translatable="false">CairoDriveOnline</string>
+  <string name="pref_cairodrive_dev_overlay" translatable="false">CairoDriveDevOverlay</string>
+  <string name="pref_cairodrive_headlight" translatable="false">CairoDriveHeadlight</string>
+  <string name="pref_cairodrive_bt" translatable="false">CairoDriveBluetooth</string>
+  <string name="cairodrive_bt_title" translatable="false">Auto-start on Bluetooth</string>
+  <string name="cairodrive_bt_summary" translatable="false">Launch the app when the car\'s Bluetooth connects (best-effort on modern Android)</string>
+  <string name="cairodrive_headlight_title" translatable="false">Headlight ambient mode</string>
+  <string name="cairodrive_headlight_summary" translatable="false">Force the dark map theme while navigating, regardless of time of day</string>
+  <string name="cairodrive_settings_title" translatable="false">CairoDrive</string>
+  <string name="cairodrive_online_title" translatable="false">Online features</string>
+  <string name="cairodrive_online_summary" translatable="false">Enable online routing, search, traffic and live cameras (requires network; off keeps the app fully offline)</string>
+  <string name="cairodrive_dev_overlay_title" translatable="false">Developer log overlay</string>
+  <string name="cairodrive_dev_overlay_summary" translatable="false">Show the on-screen CairoDrive log panel (mirrored to logcat tag CairoDrive)</string>
+  <string name="pref_cairodrive_router" translatable="false">CairoDriveRouter</string>
+  <string name="pref_cairodrive_overspeed" translatable="false">CairoDriveOverspeed</string>
+  <string name="cairodrive_overspeed_title" translatable="false">Over-speed alarm</string>
+  <string name="cairodrive_overspeed_summary" translatable="false">Warn when GPS speed exceeds this (independent of road limit)</string>
+  <string-array name="cairodrive_overspeed_entries" translatable="false">
+    <item>Off</item>
+    <item>60 km/h</item>
+    <item>80 km/h</item>
+    <item>100 km/h</item>
+    <item>120 km/h</item>
+    <item>140 km/h</item>
+  </string-array>
+  <string-array name="cairodrive_overspeed_values" translatable="false">
+    <item>0</item>
+    <item>60</item>
+    <item>80</item>
+    <item>100</item>
+    <item>120</item>
+    <item>140</item>
+  </string-array>
+  <string name="cairodrive_router_title" translatable="false">Preferred navigation engine</string>
+  <string-array name="cairodrive_router_entries" translatable="false">
+    <item>Auto (fastest of all)</item>
+    <item>Magic Lane</item>
+    <item>TomTom</item>
+    <item>Mapbox</item>
+    <item>OpenRouteService</item>
+    <item>HERE</item>
+    <item>Geoapify</item>
+  </string-array>
+  <string-array name="cairodrive_router_values" translatable="false">
+    <item>AUTO</item>
+    <item>MAGIC_LANE</item>
+    <item>TOMTOM</item>
+    <item>MAPBOX</item>
+    <item>OPENROUTESERVICE</item>
+    <item>HERE</item>
+    <item>GEOAPIFY</item>
+  </string-array>
+
   <string name="notification_ticker_ltr" translatable="false">%1$s: %2$s</string>
   <string name="notification_ticker_rtl" translatable="false">%2$s :%1$s</string>
 

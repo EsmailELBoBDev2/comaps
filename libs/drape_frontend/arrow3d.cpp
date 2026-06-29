@@ -40,9 +40,12 @@ namespace df
 {
 namespace arrow3d
 {
-double constexpr kArrowSize = 12.0;
+// CairoDrive: larger/longer navigation turn arrow for better at-a-glance
+// visibility while driving. kArrowSize scales the whole mesh (x/y); the max
+// zoom multiplier is raised so the arrow is more prominent when zoomed in.
+double constexpr kArrowSize = 15.0;  // was 12.0
 double constexpr kArrow3dScaleMin = 1.0;
-double constexpr kArrow3dScaleMax = 2.2;
+double constexpr kArrow3dScaleMax = 2.8;  // was 2.2
 int constexpr kArrow3dMinZoom = 16;
 }  // namespace arrow3d
 

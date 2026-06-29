@@ -5,6 +5,7 @@
 #include "generator/maxspeeds_parser.hpp"
 
 #include "routing/routing_helpers.hpp"
+#include "routing/speed_camera.hpp"
 
 #include "routing_common/maxspeed_conversion.hpp"
 
@@ -42,11 +43,35 @@ std::optional<double> GetMaxSpeedKmPH(std::string const & maxSpeedString)
   return {speedKmPh};
 }
 
+// CairoDrive: classify a speed-camera node into a SpeedCameraType from its OSM
+// tags. Only tags present on the node itself are visible here (enforcement is
+// often modelled on a relation), so callers get a best-effort kind that
+// defaults to Fixed for a plain highway=speed_camera.
+static uint8_t ClassifyCameraType(OsmElement const & element)
+{
+  auto const enforcement = element.GetTag("enforcement");
+  auto const speedCamera = element.GetTag("speed_camera");
+  auto const highway = element.GetTag("highway");
+
+  if (speedCamera == "mobile")
+    return static_cast<uint8_t>(routing::SpeedCameraType::Mobile);
+  if (enforcement.find("average") != std::string::npos || speedCamera == "average_speed" ||
+      speedCamera == "section")
+    return static_cast<uint8_t>(routing::SpeedCameraType::Average);
+  if (enforcement == "traffic_signals" || enforcement == "red_light" || highway == "traffic_signals")
+    return static_cast<uint8_t>(routing::SpeedCameraType::RedLight);
+  if (highway == "speed_camera" || enforcement == "maxspeed")
+    return static_cast<uint8_t>(routing::SpeedCameraType::Fixed);
+  return static_cast<uint8_t>(routing::SpeedCameraType::Unknown);
+}
+
 CameraCollector::CameraInfo::CameraInfo(OsmElement const & element)
   : m_id(element.m_id)
   , m_lon(element.m_lon)
   , m_lat(element.m_lat)
 {
+  m_type = ClassifyCameraType(element);
+
   // Filter long "maxspeed" dummy strings.
   auto const maxspeed = element.GetTag("maxspeed");
   if (maxspeed.empty() || maxspeed.size() > 32)
@@ -70,6 +95,7 @@ CameraCollector::CameraInfo CameraCollector::CameraInfo::Read(ReaderSource<FileR
   camera.m_lat = Uint32ToDouble(latInt, ms::LatLon::kMinLat, ms::LatLon::kMaxLat, kPointCoordBits);
   camera.m_lon = Uint32ToDouble(lonInt, ms::LatLon::kMinLon, ms::LatLon::kMaxLon, kPointCoordBits);
   ReadPrimitiveFromSource(src, camera.m_speedKmPH);
+  ReadPrimitiveFromSource(src, camera.m_type);  // CairoDrive: type byte (after speed)
   auto relatedWaysNumber = ReadPrimitiveFromSource<uint32_t>(src);
   camera.m_ways.reserve(relatedWaysNumber);
   while (relatedWaysNumber--)
@@ -88,6 +114,8 @@ void CameraCollector::CameraInfo::Write(FileWriter & writer, CameraInfo const & 
   WriteToSink(writer, lon);
 
   WriteToSink(writer, camera.m_speedKmPH);
+
+  WriteToSink(writer, camera.m_type);  // CairoDrive: type byte (after speed)
 
   auto const size = static_cast<uint32_t>(camera.m_ways.size());
   WriteToSink(writer, size);

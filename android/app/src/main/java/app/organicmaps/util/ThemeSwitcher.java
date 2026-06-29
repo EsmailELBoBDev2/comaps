@@ -8,6 +8,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import app.organicmaps.MwmApplication;
+import app.organicmaps.cairodrive.CairoConfig;
 import app.organicmaps.downloader.DownloaderStatusIcon;
 import app.organicmaps.sdk.Framework;
 import app.organicmaps.sdk.MapStyle;
@@ -69,6 +70,15 @@ public enum ThemeSwitcher
   public void restart(boolean isRendererActive)
   {
     mRendererActive = isRendererActive;
+    // CairoDrive: headlight ambient mode forces the dark (vehicle-dark) theme
+    // while navigating, regardless of time of day. Restored automatically when
+    // navigation ends, because restart() runs again and the guard is false.
+    if (CairoConfig.isHeadlightMode(mContext) && RoutingController.get().isNavigating())
+    {
+      UiThread.cancelDelayedTasks(mAutoThemeChecker);
+      setThemeAndMapStyle(Config.UiTheme.NIGHT);
+      return;
+    }
     String theme = Config.UiTheme.getUiThemeSettings();
     if (ThemeUtils.isAutoTheme() || ThemeUtils.isNavAutoTheme())
     {
