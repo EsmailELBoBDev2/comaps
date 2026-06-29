@@ -34,7 +34,9 @@
   <color name="button_accent_text_disabled">#4CFFFFFF</color>
 
   <!-- LanesView -->
-  <color name="nav_lane_arrow_active">@color/white_primary</color>
+  <!-- CairoDrive: vivid green active lane so the correct lane pops in dark mode too. -->
+  <color name="cairo_lane_active">#FF00E676</color>
+  <color name="nav_lane_arrow_active">@color/cairo_lane_active</color>
 
   <color name="elevation_profile_dot_enabled">#FF9600</color>
   <color name="elevation_profile">@color/base_accent</color>

@@ -112,7 +112,10 @@
   <color name="routing_button_pressed_tint">#80FFFFFF</color>
 
   <!-- LanesView -->
-  <color name="nav_lane_arrow_active">@color/white_primary</color>
+  <!-- CairoDrive: the lane(s) to take glow vivid green so the correct lane is
+       obvious at a glance (e.g. near a bridge fork); other lanes stay dim. -->
+  <color name="cairo_lane_active">#FF00C853</color>
+  <color name="nav_lane_arrow_active">@color/cairo_lane_active</color>
   <color name="nav_lane_arrow_inactive">@color/black_20</color>
 
   <!-- Editor -->
