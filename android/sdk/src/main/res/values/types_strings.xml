@@ -946,7 +946,7 @@
     <string name="type.railway.funicular">Funicular</string>
     <string name="type.railway.funicular.bridge">Funicular Bridge</string>
     <string name="type.railway.funicular.tunnel">Funicular Tunnel</string>
-    <string name="type.railway.halt">Rail Halt</string>
+    <string name="type.railway.halt">Rail Stop</string>
     <string name="type.railway.level_crossing">Level Crossing</string>
     <string name="type.railway.light_rail">Light Rail</string>
     <string name="type.railway.light_rail.bridge">Light Rail Bridge</string>

@@ -74,7 +74,7 @@
 "highway-bus_stop|@category_transport": "2Bus Stop|bus|stop|U+1F68C|U+1F68F|U+1F68E|U+1F690",
 "railway-tram_stop|@category_transport": "3Tram Stop|tram|stop|U+1F683",
 "amenity-bus_station|@category_transport": "2Bus Station|bus|U+1F68C|U+1F68F|U+1F68D",
-"railway-station|railway-halt|building-train_station|@category_transport": "3Train Station|trainstation|4railway|railroad|4station|U+1F684|U+1F685|U+1F689|U+1F682|U+1F686|U+1F688|U+1F68A|U+1F68B|Rail Halt",
+"railway-station|railway-halt|building-train_station|@category_transport": "3Train Station|trainstation|4railway|railroad|4station|U+1F684|U+1F685|U+1F689|U+1F682|U+1F686|U+1F688|U+1F68A|U+1F68B|Rail Stop",
 "railway-station-funicular": "4Funicular",
 "railway-station-subway|@category_transport": "3Subway Station|subway|3tube|3metro|3underground|U+1F687",
 "amenity-ferry_terminal|@category_transport": "3Ferry|terminal|U+1F6A2|U+1F6A4|U+2693",
