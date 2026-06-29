@@ -1,0 +1,24 @@
+name: cairodrive_lite
+description: CairoDrive Lite - lightweight MapLibre + Google Places navigation/safety app.
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # OSM vector map + 3D buildings (free, no Google/Mapbox billing).
+  maplibre_gl: ^0.20.0
+  # GPS position + speed for the speedometer / alerts.
+  geolocator: ^12.0.0
+  # Plain HTTP for Google Places (New) + Overpass cameras.
+  http: ^1.2.0
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
