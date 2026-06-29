@@ -379,38 +379,45 @@ public final class CairoMapOverlay
   @Nullable
   private Long addMarkId(long cat, double lat, double lon, @NonNull String title, int argb)
   {
-    long bookmarkId = -1L;
+    final Bookmark b;
     try
     {
-      final Bookmark b = BookmarkManager.INSTANCE.addNewBookmark(lat, lon);
-      if (b == null)
-        return null;
-      bookmarkId = b.getBookmarkId();
-      // addNewBookmark targets the last-edited category; move it to ours.
-      BookmarkManager.INSTANCE.notifyCategoryChanging(b, cat);
-      // NOTE: setBookmarkParams takes a predefined-palette INDEX, not an ARGB.
-      // getPredefinedColorIndex returns -1 for non-palette colours (all of ours),
-      // and a -1 index is read out-of-bounds natively. Map to the nearest palette
-      // colour's index instead.
-      BookmarkManager.INSTANCE.setBookmarkParams(bookmarkId, title, nearestColorIndex(argb), "");
-      return bookmarkId;
+      b = BookmarkManager.INSTANCE.addNewBookmark(lat, lon);
     }
     catch (Throwable t)
     {
-      CairoLog.w(SUB, "addMark failed: " + t.getMessage());
-      // The bookmark may have been created before the failure; don't leak it.
-      if (bookmarkId >= 0)
-      {
-        try
-        {
-          BookmarkManager.INSTANCE.deleteBookmark(bookmarkId);
-        }
-        catch (Throwable ignored)
-        {
-        }
-      }
+      CairoLog.w(SUB, "addMark: addNewBookmark threw: " + t.getMessage());
       return null;
     }
+    if (b == null)
+    {
+      CairoLog.w(SUB, "addMark: addNewBookmark returned null (bookmarks not loaded yet?)");
+      return null;
+    }
+    final long bookmarkId = b.getBookmarkId();
+    // Colour + title (setBookmarkParams takes a palette INDEX, not ARGB; -1 would
+    // read out-of-bounds natively, so map to the nearest palette colour). Best
+    // effort -- a failure here must NOT discard the mark.
+    try
+    {
+      BookmarkManager.INSTANCE.setBookmarkParams(bookmarkId, title, nearestColorIndex(argb), "");
+    }
+    catch (Throwable t)
+    {
+      CairoLog.w(SUB, "addMark: setParams failed (kept mark): " + t.getMessage());
+    }
+    // Best-effort move into our category. CRITICAL: if this throws we KEEP the
+    // bookmark -- it still renders in its current (visible) category. The old
+    // code deleted it here, which made every mark vanish when the move failed.
+    try
+    {
+      BookmarkManager.INSTANCE.notifyCategoryChanging(b, cat);
+    }
+    catch (Throwable t)
+    {
+      CairoLog.w(SUB, "addMark: category move failed (kept mark): " + t.getMessage());
+    }
+    return bookmarkId;
   }
 
   /// Index of the predefined palette colour closest (RGB distance) to the given
