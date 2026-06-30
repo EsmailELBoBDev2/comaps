@@ -6,7 +6,7 @@
 "make_a_right_turn_street":"NULL",
 "make_a_sharp_right_turn":"向右急转。",
 "make_a_sharp_right_turn_street":"NULL",
-"enter_the_roundabout":"驶入环岛。",
+"enter_the_roundabout":"在环岛处。",
 "enter_the_roundabout_street":"NULL",
 "enter_the_roundabout_street_verb":"NULL",
 "leave_the_roundabout":"驶出环岛。",
@@ -104,5 +104,6 @@
 "in_1_mile":"在一英里后",
 "in_1_5_miles":"在一点五英里后",
 "in_2_miles":"在两英里后",
-"unknown_camera":"前方有测速摄像头"
+"unknown_camera":"前方有测速摄像头",
+"at_the_end_of_the_road":"在路的尽头，"
 }

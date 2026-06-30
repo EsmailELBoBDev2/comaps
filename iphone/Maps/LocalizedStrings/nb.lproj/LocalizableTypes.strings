@@ -1516,3 +1516,4 @@
 "type.sport.pickleball" = "Pickleball";
 "type.leisure.sports_centre.sport.pickleball" = "Sportssenter";
 "type.organic.no" = "Ingen økologiske alternativer";
+"type.amenity.stage" = "Stage";

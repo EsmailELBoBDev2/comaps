@@ -104,14 +104,14 @@
 "type.amenity.mobile_money_agent" = "Ejo por poŝtelefona mono";
 "type.amenity.motorcycle_parking" = "Parkumejo por motocikloj";
 "type.amenity.nightclub" = "Noktoklubo";
-"type.amenity.nursing_home" = "Nursing Home";
-"type.amenity.parking" = "Parking";
+"type.amenity.nursing_home" = "Maljunulejo";
+"type.amenity.parking" = "Parkejo";
 "type.amenity.parking.fee" = "Parking";
 "type.amenity.parking.multi.storey" = "Multi Storey Parking";
 "type.amenity.parking.multi.storey.fee" = "Multi Storey Parking";
-"type.amenity.parking.no.access" = "Private Parking";
-"type.amenity.parking.permissive" = "Private Parking";
-"type.amenity.parking.private" = "Private Parking";
+"type.amenity.parking.no.access" = "Privata parkejo";
+"type.amenity.parking.permissive" = "Privata parkejo";
+"type.amenity.parking.private" = "Privata parkejo";
 "type.amenity.parking.park_and_ride" = "Park And Ride Parking";
 "type.amenity.parking.underground" = "Underground Parking";
 "type.amenity.parking.underground.fee" = "Underground Parking";
@@ -136,7 +136,7 @@
 "type.amenity.pharmacy" = "Pharmacy";
 "type.amenity.place_of_worship" = "Place of Worship";
 "type.amenity.place_of_worship.buddhist" = "Buddhist Temple";
-"type.amenity.place_of_worship.christian" = "Church";
+"type.amenity.place_of_worship.christian" = "Kirko";
 "type.amenity.place_of_worship.christian.mormon" = "Church of Jesus Christ of Latter Day Saints";
 "type.amenity.place_of_worship.christian.jehovahs_witness" = "Jehovah's Witnesses Kingdom Hall";
 "type.amenity.place_of_worship.hindu" = "Hindu Temple";
@@ -148,7 +148,7 @@
 "type.amenity.post_box" = "Mailbox";
 "type.amenity.post_office" = "Post Office";
 "type.post_office.post_partner" = "Post Partner";
-"type.amenity.prison" = "Prison";
+"type.amenity.prison" = "Malliberejo";
 "type.amenity.pub" = "Pub";
 "type.amenity.public_bookcase" = "Book Exchange";
 "type.amenity.recycling.centre" = "Recycling Centre";
@@ -1508,7 +1508,7 @@
 "type.amenity.dojo" = "Dojo";
 /* https://wiki.openstreetmap.org/wiki/Tag:leisure=sports_hall */
 "type.leisure.sports_hall" = "Sports hall";
-"type.xmas.tree" = "Christmas Tree";
+"type.xmas.tree" = "Kristnaska arbo";
 "type.leisure.sports_centre.sport.four_square" = "Sportejo";
 "type.sport.four_square" = "Kvar Kvadratoj";
 "type.sport.boules" = "Boules";
@@ -1516,3 +1516,4 @@
 "type.sport.pickleball" = "Pickleball";
 "type.leisure.sports_centre.sport.pickleball" = "Sportejo";
 "type.organic.no" = "No organic options";
+"type.amenity.stage" = "Stage";

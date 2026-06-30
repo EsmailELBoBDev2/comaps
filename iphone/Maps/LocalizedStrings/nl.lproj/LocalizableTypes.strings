@@ -1516,3 +1516,4 @@
 "type.sport.pickleball" = "Pickleball";
 "type.leisure.sports_centre.sport.pickleball" = "Sportcentrum";
 "type.organic.no" = "Geen biologisch";
+"type.amenity.stage" = "Podium";

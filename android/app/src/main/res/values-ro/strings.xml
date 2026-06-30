@@ -895,4 +895,15 @@
     <string name="advanced">Avansate</string>
     <string name="pref_speedlimit_title">Afișează limita de viteză</string>
     <string name="rooms">%s camere</string>
+    <string name="downloader_check_updates_button">Caută actualizări</string>
+    <string name="downloader_check_updates_checking">Se verifică actualizările...</string>
+    <string name="downloader_check_updates_no_updates">Nu sunt disponibile actualizări</string>
+    <plurals name="minutes_short">
+        <item quantity="one">%1$d min</item>
+        <item quantity="few">%1$d min</item>
+        <item quantity="other">%1$d min</item>
+    </plurals>
+    <string name="change_app_locale">Limba aplicației</string>
+    <string name="destination">Destinație</string>
+    <string name="pref_maplanguage_local">Limbă Locală</string>
 </resources>

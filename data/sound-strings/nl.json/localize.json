@@ -5,7 +5,7 @@
 "make_a_right_turn_street":"Sla rechtsaf",
 "make_a_sharp_right_turn":"Scherp rechtsaf.",
 "make_a_sharp_right_turn_street":"scherp naar rechts afslaan",
-"enter_the_roundabout":"Rij de rotonde op.",
+"enter_the_roundabout":"Op de rotonde.",
 "enter_the_roundabout_street":"de rotonde op",
 "enter_the_roundabout_street_verb":"Rij",
 "leave_the_roundabout":"Verlaat de rotonde.",
@@ -104,5 +104,6 @@
 "in_1_5_miles":"Over anderhalve mijl",
 "in_2_miles":"Over twee mijl",
 "unknown_camera":"Flitser in zicht",
-"make_a_slight_right_turn_street_verb":"Neem"
+"make_a_slight_right_turn_street_verb":"Neem",
+"at_the_end_of_the_road":"Bij het verlaten van de routine,"
 }

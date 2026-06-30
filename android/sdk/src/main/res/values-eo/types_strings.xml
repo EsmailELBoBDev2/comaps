@@ -117,4 +117,12 @@
     <string name="type.sport.golf">Golfo</string>
     <string name="type.sport.gymnastics">Gimnastiko</string>
     <string name="type.sport.handball">Manpilko</string>
+    <string name="type.amenity.nursing_home">Maljunulejo</string>
+    <string name="type.amenity.parking">Parkejo</string>
+    <string name="type.amenity.parking.no.access">Privata parkejo</string>
+    <string name="type.amenity.parking.permissive">Privata parkejo</string>
+    <string name="type.amenity.parking.private">Privata parkejo</string>
+    <string name="type.xmas.tree">Kristnaska arbo</string>
+    <string name="type.amenity.place_of_worship.christian">Kirko</string>
+    <string name="type.amenity.prison">Malliberejo</string>
 </resources>

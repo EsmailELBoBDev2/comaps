@@ -119,4 +119,25 @@
     <string name="load_kmz_failed">Malsukcesis ŝargi favoratojn. La dosiero eble estas difektita.</string>
     <string name="bookmarks_import">Importi favoratojn</string>
     <string name="sort_bookmarks">Ordigi favoratojn</string>
+    <string name="edit">Redakti</string>
+    <string name="unknown_current_position">Via loko ankoraŭ ne estas determinita</string>
+    <string name="my_position_share_email_subject">Hej, rigardu mian nunan lokon sur la mapo de CoMaps!</string>
+    <string name="share">Kunhavigi</string>
+    <string name="email">Retpoŝto</string>
+    <string name="copied_to_clipboard">Kopiita al tondujo: %s</string>
+    <string name="done">Finita</string>
+    <string name="data_version">Datumoj de OpenStreetMap: %s</string>
+    <string name="tracks_title">Trakoj</string>
+    <string name="length">Longo</string>
+    <string name="share_my_location">Kunhavigi Mian Lokon</string>
+    <string name="prefs_group_general">Ĝeneralaj agordoj</string>
+    <string name="prefs_group_information">Informoj</string>
+    <string name="prefs_group_route">Navigado</string>
+    <string name="pref_zoom_title">Zoom-butonoj</string>
+    <string name="pref_zoom_summary">Montri sur la mapo</string>
+    <string name="off">Malŝaltita</string>
+    <string name="on">Ŝaltita</string>
+    <string name="downloader_update_map">Ĝisdatigu Mapon</string>
+    <string name="google_play_services">Google Fused Location Service</string>
+    <string name="routing_download_maps_along">Elŝutu ĉiujn mapojn laŭlonge de via itinero</string>
 </resources>

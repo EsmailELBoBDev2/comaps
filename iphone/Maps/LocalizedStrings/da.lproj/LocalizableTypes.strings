@@ -80,7 +80,7 @@
 "type.office.diplomatic" = "Ambassade";
 "type.office.security" = "Sikkerhedsvagtkontor";
 "type.building.guardhouse" = "Sikkerhedsbås";
-"type.power.portal" = "Kraftværksportal";
+"type.power.portal" = "Elportal";
 "type.amenity.fast_food" = "Hurtigmad";
 "type.amenity.ferry_terminal" = "Færge";
 "type.amenity.fire_station" = "Brandstation";
@@ -864,8 +864,8 @@
 "type.office.lawyer" = "Advokatkontor";
 "type.office.ngo" = "NGO-kontor";
 "type.office.telecommunication" = "Telekommunikationsfirma";
-"type.organic.only" = "Økologisk";
-"type.organic.yes" = "Økologisk";
+"type.organic.only" = "Kun økologisk";
+"type.organic.yes" = "Økologiske valgmuligheder";
 "type.place.city" = "By";
 "type.place.city.capital" = "Kapital";
 "type.place.city.capital.10" = "By";
@@ -1515,4 +1515,5 @@
 "type.leisure.sports_centre.sport.boules" = "Idrætscenter";
 "type.sport.pickleball" = "Pickleball";
 "type.leisure.sports_centre.sport.pickleball" = "Idrætscenter";
-"type.organic.no" = "No organic options";
+"type.organic.no" = "Ikke økologisk";
+"type.amenity.stage" = "Stage";

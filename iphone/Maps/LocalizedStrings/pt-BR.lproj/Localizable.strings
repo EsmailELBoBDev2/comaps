@@ -877,3 +877,4 @@
 "contribute_to_osm_update_map_description" = "Você precisa atualizar o mapa %@ para a versão mais recente antes de poder contribuir para os dados do OpenStreetMap";
 "editor_add_select_category_recent_subtitle" = "Recentemente usadas";
 "oh_unknown" = "Horário de funcionamento desconhecido";
+"carplay_highway_exit" = "Saída %@";

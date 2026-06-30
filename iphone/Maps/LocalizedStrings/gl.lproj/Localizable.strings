@@ -351,7 +351,7 @@
 "history" = "Historial";
 "search_not_found" = "Non se atopou ningún resultado.";
 /* The message when user did not find anything in the search. */
-"search_not_found_query" = "Descargue a rexión na que está a buscar ou probe a engadir o nome dunha cidade/poboo próximo.";
+"search_not_found_query" = "Descargue a rexión na que está a buscar ou probe a engadir o nome dunha cidade/vila próxima.";
 "search_history_title" = "Historial de procuras";
 "search_history_text" = "Ver procuras recentes.";
 "clear_search" = "Baleirar historial de procuras";
@@ -878,3 +878,4 @@
 "downloader_check_updates_error" = "Erro ao comprobar as actualizacións";
 "editor_add_select_category_recent_subtitle" = "Recently Used";
 "oh_unknown" = "Opening hours unknown";
+"carplay_highway_exit" = "Exit %@";

@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "حدث خطأ أثناء التحقق من التحديثات";
 "editor_add_select_category_recent_subtitle" = "مستخدمة حديثًا";
 "oh_unknown" = "ساعات العمل غير معروفة";
+"carplay_highway_exit" = "Exit %@";

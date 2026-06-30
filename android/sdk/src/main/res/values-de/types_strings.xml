@@ -1520,4 +1520,5 @@
     <string name="type.leisure.sports_centre.sport.pickleball">Sportzentrum</string>
     <string name="type.sport.pickleball">Pickleball</string>
     <string name="type.organic.no">Keine Bio-Produkte</string>
+    <string name="type.amenity.stage">Bühne</string>
 </resources>

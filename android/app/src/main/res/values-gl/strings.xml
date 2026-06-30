@@ -268,7 +268,7 @@
     <string name="search_without_internet_advertisement">Para empezar a buscar e crear rutas, descargue o mapa. Despois diso, xa non necesitará unha conexión a Internet.</string>
     <string name="search_select_map">Seleccionar mapa</string>
     <string name="search_not_found">Non se atopou ningún resultado</string>
-    <string name="search_not_found_query">Descargue a rexión na que está a buscar ou probe a engadir o nome dunha cidade/poboo próximo.</string>
+    <string name="search_not_found_query">Descargue a rexión na que está a buscar ou probe a engadir o nome dunha cidade/vila próxima.</string>
     <string name="search_history_title">Historial de procuras</string>
     <string name="search_history_text">Ver procuras recentes</string>
     <string name="clear_search">Baleirar historial de procuras</string>

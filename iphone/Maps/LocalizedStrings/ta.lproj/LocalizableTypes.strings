@@ -1516,3 +1516,4 @@
 "type.sport.pickleball" = "ஊறுகாய் பந்து";
 "type.leisure.sports_centre.sport.pickleball" = "விளையாட்டு நடுவண்";
 "type.organic.no" = "No organic options";
+"type.amenity.stage" = "Stage";

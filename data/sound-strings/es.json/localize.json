@@ -6,7 +6,7 @@
 "make_a_right_turn_street":"NULL",
 "make_a_sharp_right_turn":"Gire bruscamente a la derecha.",
 "make_a_sharp_right_turn_street":"NULL",
-"enter_the_roundabout":"Entre en la rotonda.",
+"enter_the_roundabout":"En la rotonda.",
 "enter_the_roundabout_street":"NULL",
 "enter_the_roundabout_street_verb":"NULL",
 "leave_the_roundabout":"Salga de la rotonda.",
@@ -104,5 +104,6 @@
 "in_1_mile":"En una milla",
 "in_1_5_miles":"En una milla y media",
 "in_2_miles":"En dos millas",
-"unknown_camera":"Radar de velocidad más adelante"
+"unknown_camera":"Radar de velocidad más adelante",
+"at_the_end_of_the_road":"al final de la calle,"
 }

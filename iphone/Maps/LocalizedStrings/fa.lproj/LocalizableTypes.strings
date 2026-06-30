@@ -548,7 +548,7 @@
 "type.highway.service.tunnel" = "تونل";
 "type.highway.services" = "Service Area";
 "type.highway.speed_camera" = "دوربین سرعت سنج";
-"type.highway.steps" = "مسیر";
+"type.highway.steps" = "پله";
 "type.highway.ladder" = "Ladder";
 /* These translations are used for all type.highway.*.bridge. */
 "type.highway.steps.bridge" = "پل";
@@ -600,7 +600,7 @@
 "type.area_highway.secondary" = "جاده";
 "type.area_highway.service" = "جاده";
 "type.area_highway.tertiary" = "جاده";
-"type.area_highway.steps" = "مسیر";
+"type.area_highway.steps" = "پله";
 "type.area_highway.track" = "جاده";
 "type.area_highway.trunk" = "جاده";
 "type.area_highway.unclassified" = "جاده";
@@ -1516,3 +1516,4 @@
 "type.sport.pickleball" = "Pickleball";
 "type.leisure.sports_centre.sport.pickleball" = "Sports Centre";
 "type.organic.no" = "No organic options";
+"type.amenity.stage" = "Stage";

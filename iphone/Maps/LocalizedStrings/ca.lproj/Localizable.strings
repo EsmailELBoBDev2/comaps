@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "No s'han pogut comprovar les actualitzacions";
 "editor_add_select_category_recent_subtitle" = "Usades Recentment";
 "oh_unknown" = "Opening hours unknown";
+"carplay_highway_exit" = "Exit %@";

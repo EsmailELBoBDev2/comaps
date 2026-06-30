@@ -115,15 +115,15 @@
 /* Kml file loading failed */
 "load_kmz_failed" = "Malsukcesis ŝargi favoratojn. La dosiero eble estas difektita.";
 /* resource for context menu */
-"edit" = "Edit";
+"edit" = "Redakti";
 /* Warning message when doing search around current position */
-"unknown_current_position" = "Your location hasn't been determined yet";
+"unknown_current_position" = "Via loko ankoraŭ ne estas determinita";
 /* Subject for emailed bookmark */
 "bookmark_share_email_subject" = "Hey, check out my pin in CoMaps!";
 /* Subject for emailed position */
-"my_position_share_email_subject" = "Hey, check out my current location on the CoMaps map!";
+"my_position_share_email_subject" = "Hej, rigardu mian nunan lokon sur la mapo de CoMaps!";
 /* Share by email button text, also used in editor and About. */
-"email" = "Email";
+"email" = "Retpoŝto";
 /* Text for message to copy something */
 "copy_to_clipboard" = "Copy to Clipboard";
 /* Text for message when used successfully copied something */
@@ -131,18 +131,18 @@
 /* place preview title */
 "info" = "Info";
 /* Used for bookmark editing */
-"done" = "Done";
+"done" = "Finita";
 /* Prints version number in About dialog */
 "version" = "CoMaps version: %@";
 "version %@ (%@)" = "Version %@ (%@)";
 "version: %@ (%@)\nmap data: %@" = "Version: %@ (%@)\nMap Data: %@";
 /* Title for tracks category in bookmarks manager */
-"tracks_title" = "Tracks";
+"tracks_title" = "Trakoj";
 /* Length of track in cell that describes route */
-"length" = "Length";
-"share_my_location" = "Share My Location";
-"prefs_group_route" = "Navigation";
-"pref_zoom_title" = "Zoom buttons";
+"length" = "Longo";
+"share_my_location" = "Kunhavigi Mian Lokon";
+"prefs_group_route" = "Navigado";
+"pref_zoom_title" = "Zoom-butonoj";
 "pref_left_button_type" = "Left Main Button";
 /* Settings «Map» category: «Map Language» title */
 "pref_maplanguage_title" = "Map Language";
@@ -159,9 +159,9 @@
 /* Generic «Disabled» string */
 "disabled" = "Disabled";
 /* Generic «Off» string */
-"off" = "Off";
+"off" = "Malŝaltita";
 /* Generic «On» string */
-"on" = "On";
+"on" = "Ŝaltita";
 /* Generic «Auto» string */
 "auto" = "Auto";
 /* Settings «Map» category: «Perspective view» title */
@@ -270,7 +270,7 @@
 /* Item in context menu. */
 "downloader_delete_map" = "Delete Map";
 /* Text for routing error dialog */
-"routing_download_maps_along" = "Download all of the maps along your route";
+"routing_download_maps_along" = "Elŝutu ĉiujn mapojn laŭlonge de via itinero";
 /* Text for routing error dialog */
 "routing_requires_all_map" = "In order to create a route, we need to download and update all the maps from your location to your destination.";
 /* bookmark button text */
@@ -878,3 +878,4 @@
 "downloader_check_updates_error" = "Eraro okazis dum eltrovado de aktualigaĵoj";
 "editor_add_select_category_recent_subtitle" = "Recently Used";
 "oh_unknown" = "Opening hours unknown";
+"carplay_highway_exit" = "Exit %@";

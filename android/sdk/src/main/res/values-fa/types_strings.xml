@@ -336,7 +336,7 @@
     <!-- These translations are used for all type.highway.*.tunnel. -->
     <string name="type.highway.service.tunnel">تونل</string>
     <string name="type.highway.speed_camera">دوربین سرعت سنج</string>
-    <string name="type.highway.steps">مسیر</string>
+    <string name="type.highway.steps">پله</string>
     <!-- These translations are used for all type.highway.*.bridge. -->
     <string name="type.highway.steps.bridge">پل</string>
     <!-- These translations are used for all type.highway.*.tunnel. -->
@@ -386,7 +386,7 @@
     <string name="type.area_highway.secondary">جاده</string>
     <string name="type.area_highway.service">جاده</string>
     <string name="type.area_highway.tertiary">جاده</string>
-    <string name="type.area_highway.steps">مسیر</string>
+    <string name="type.area_highway.steps">پله</string>
     <string name="type.area_highway.track">جاده</string>
     <string name="type.area_highway.trunk">جاده</string>
     <string name="type.area_highway.unclassified">جاده</string>

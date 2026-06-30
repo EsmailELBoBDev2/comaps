@@ -1516,3 +1516,4 @@
 "type.sport.pickleball" = "Pickleball";
 "type.leisure.sports_centre.sport.pickleball" = "Centro Desportivo";
 "type.organic.no" = "Sem opções orgânicas";
+"type.amenity.stage" = "Stage";

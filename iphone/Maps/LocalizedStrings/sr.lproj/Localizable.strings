@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "Грешка при провери ажурирања";
 "editor_add_select_category_recent_subtitle" = "Недавно коришћено";
 "oh_unknown" = "Непознато радно време";
+"carplay_highway_exit" = "Излаз %@";

@@ -876,3 +876,4 @@
 "downloader_check_updates_error" = "Viga uuenduste olemaolu kontrollimisel";
 "editor_add_select_category_recent_subtitle" = "Hiljuti kasutatud";
 "oh_unknown" = "Tööaeg pole teada";
+"carplay_highway_exit" = "Ärapööre %@";

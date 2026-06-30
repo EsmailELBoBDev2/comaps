@@ -6,7 +6,7 @@
 "make_a_right_turn_street":"NULL",
 "make_a_sharp_right_turn":"கூர்மையாக வலதுபுறம் திரும்புங்கள்.",
 "make_a_sharp_right_turn_street":"NULL",
-"enter_the_roundabout":"ரவுண்டபௌட்டை நுழையுங்கள்.",
+"enter_the_roundabout":"ரவுண்டபௌட்டில்.",
 "enter_the_roundabout_street":"NULL",
 "enter_the_roundabout_street_verb":"NULL",
 "leave_the_roundabout":"ரவுண்டபௌட்டை வெளியேறுங்கள்.",
@@ -104,5 +104,6 @@
 "in_1_mile":"ஒன்று மைலில்",
 "in_1_5_miles":"ஒன்றரை மைலில்",
 "in_2_miles":"இரண்டு மைலில்",
-"unknown_camera":"கேமரா முன்னால் இருக்கிறது"
+"unknown_camera":"வேக கேமரா முன்னால் இருக்கிறது",
+"at_the_end_of_the_road":"சாலையின் இறுதியில்,"
 }

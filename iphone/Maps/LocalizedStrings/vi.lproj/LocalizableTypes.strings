@@ -1516,3 +1516,4 @@
 "type.sport.pickleball" = "Pickleball";
 "type.leisure.sports_centre.sport.pickleball" = "Trung tâm thể dục thể thao";
 "type.organic.no" = "Không có lựa chọn hữu cơ";
+"type.amenity.stage" = "Stage";

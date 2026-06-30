@@ -1515,4 +1515,5 @@
     <string name="type.leisure.sports_centre.sport.pickleball">Sportovní centrum</string>
     <string name="type.sport.pickleball">Pickleball</string>
     <string name="type.organic.no">Žádné přírodní volby</string>
+    <string name="type.amenity.stage">Scéna</string>
 </resources>

@@ -345,7 +345,7 @@
     <string name="type.entrance">Entrée</string>
     <!-- This is for main/primary entrances, for secondary entrances see type.entrance -->
     <string name="type.entrance.main">Entrée principale</string>
-    <string name="type.entrance.exit">Sortie</string>
+    <string name="type.entrance.exit">Sortie (uniquement)</string>
     <string name="type.fee.no">Gratuit</string>
     <string name="type.healthcare.laboratory">Laboratoire médical</string>
     <string name="type.healthcare.physiotherapist">Physiothérapeute</string>

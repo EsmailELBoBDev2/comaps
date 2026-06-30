@@ -693,7 +693,7 @@
 "type.landuse.vineyard" = "Виноград";
 "type.landuse.plant_nursery" = "Расадник";
 "type.leisure" = "Слободно време";
-"type.leisure.bandstand" = "Бина";
+"type.leisure.bandstand" = "Музички павиљон";
 "type.leisure.common" = "Јавно земљиште";
 "type.leisure.dog_park" = "Парк за псе";
 "type.leisure.escape_game" = "Соба за бекство (Escape Room)";
@@ -1516,3 +1516,4 @@
 "type.sport.pickleball" = "Пиклбол";
 "type.leisure.sports_centre.sport.pickleball" = "Спортски центар";
 "type.organic.no" = "Нема органску храну";
+"type.amenity.stage" = "Бина";
