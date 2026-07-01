@@ -877,3 +877,7 @@
 "editor_add_select_category_recent_subtitle" = "Recentemente usados";
 "oh_unknown" = "Horas de abertura desconhecidas";
 "carplay_highway_exit" = "Saída %@";
+"capacity_charging_no" = "No spaces with chargers";
+"capacity_disabled_yes" = "Has dedicated disabled spaces";
+"capacity_disabled_no" = "No dedicated disabled spaces";
+"capacity_charging_yes" = "Has spaces with chargers";

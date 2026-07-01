@@ -2,8 +2,12 @@
 
 #include "3party/ankerl/unordered_dense.h"
 #include "3party/jansson/jansson/src/jansson.h"
+#include "base/exception.hpp"
+#include "base/geo_object_id.hpp"
 #include "boost/container/flat_map.hpp"
 #include "indexer/reviews_model.hpp"
+
+#include <string>
 
 namespace generator
 {

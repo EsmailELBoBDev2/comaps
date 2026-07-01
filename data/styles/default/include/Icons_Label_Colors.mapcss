@@ -122,7 +122,7 @@ node[leisure=sports_centre][sport=swimming],
 node[leisure=water_park],
 {text-color: @water_light_label;text-halo-radius: 0.1;text-halo-opacity: 0.7;text-halo-color: @label_halo_light;}
 
-area[amenity=university][name]
+area[amenity=university][name],
 node[aeroway=gate],
 node[amenity=atm],
 node[amenity=bank],

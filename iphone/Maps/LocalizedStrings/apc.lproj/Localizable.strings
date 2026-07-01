@@ -487,7 +487,6 @@
 "no" = "No";
 "yes_available" = "Yes";
 "no_available" = "No";
-"capacity" = "Capacity: %@";
 "network" = "Network: %@";
 "trip_finished" = "You have arrived!";
 "keyboard_availability_alert" = "Keyboard is not available while driving";
@@ -616,3 +615,7 @@
 "contribute_to_osm_update_map_description" = "You need to update the %@ map to the latest version before you can contribute to the OpenStreetMap data";
 "oh_unknown" = "Opening hours unknown";
 "carplay_highway_exit" = "Exit %@";
+"capacity_disabled_yes" = "Has dedicated disabled spaces";
+"capacity_disabled_no" = "No dedicated disabled spaces";
+"capacity_charging_yes" = "Has spaces with chargers";
+"capacity_charging_no" = "No spaces with chargers";

@@ -741,8 +741,8 @@ public:
   {
     switch (purpose)
     {
-    case Purpose::Weight: return 20 * 60;  // seconds
-    case Purpose::ETA: return 20 * 60;     // seconds
+    case Purpose::Weight: return 10 * 60;  // seconds
+    case Purpose::ETA: return 10 * 60;     // seconds
     }
     UNREACHABLE();
   }

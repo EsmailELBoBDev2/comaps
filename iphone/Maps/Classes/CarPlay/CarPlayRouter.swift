@@ -279,9 +279,13 @@ extension CarPlayRouter {
     }
     // CarPlay requires at least one variant; use "" when the turn has no road name.
     primaryManeuver.instructionVariants = variants.isEmpty ? [""] : variants
-    if let imageName = routeInfo.turnImageName,
-      let symbol = UIImage(named: imageName) {
-      primaryManeuver.symbolImage = symbol
+    if let imageName = routeInfo.turnImageName {
+      if routeInfo.roundExitNumber != 0,
+        let symbol = roundaboutSymbol(named: imageName, exitNumber: routeInfo.roundExitNumber) {
+        primaryManeuver.symbolImage = symbol
+      } else if let symbol = UIImage(named: imageName) {
+        primaryManeuver.symbolImage = symbol
+      }
     }
     if let estimates = createEstimates(routeInfo) {
       primaryManeuver.initialTravelEstimates = estimates
@@ -322,59 +326,34 @@ extension CarPlayRouter {
     return maneuvers
   }
 
-  /// Instruction strings for the upcoming maneuver, ordered longest-first so CarPlay can pick the
-  /// one that best fits the available width (per Apple's guidance the array must be descending in
-  /// length). Built from the structured, shield-resolved road components (roadName, roadRef,
-  /// junctionRef, ...)
+  /// Instruction strings for the upcoming maneuver
   private func instructionVariants(for info: RouteInfo) -> [String] {
-    func clean(_ s: String) -> String { s.trimmingCharacters(in: .whitespacesAndNewlines) }
-    /// Joins a leading label and a trailing destination with an arrow, tolerating empty sides.
-    func compose(_ lead: String, _ tail: String) -> String {
-      if lead.isEmpty { return tail }
-      if tail.isEmpty { return lead }
-      return "\(lead) → \(tail)"
+    return NavigationInstructionFormatter.instructionVariants(roadName: info.roadName,
+                                                              roadRef: info.roadRef,
+                                                              junctionRef: info.junctionRef,
+                                                              destinationRef: info.destinationRef,
+                                                              destination: info.destination,
+                                                              isLink: info.isLink)
+  }
+
+  /// Draw the roundabout symbol with `exitNumber` in its centre
+  private func roundaboutSymbol(named name: String, exitNumber: Int) -> UIImage? {
+    guard exitNumber > 0, let base = UIImage(named: name) else { return nil }
+    let size = base.size
+    let renderer = UIGraphicsImageRenderer(size: size)
+    let image = renderer.image { _ in
+      base.withRenderingMode(.alwaysTemplate).withTintColor(.white, renderingMode: .alwaysOriginal)
+        .draw(in: CGRect(origin: .zero, size: size))
+      let text = String(exitNumber) as NSString
+      let font = UIFont.systemFont(ofSize: size.height * 0.30, weight: .bold)
+      let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.white]
+      let textSize = text.size(withAttributes: attrs)
+      // Centre on the cap height (not the line box) so the digit is optically centred
+      let origin = CGPoint(x: (size.width - textSize.width) / 2,
+                           y: size.height / 2 - font.ascender + font.capHeight / 2)
+      text.draw(at: origin, withAttributes: attrs)
     }
-
-    let name = clean(info.roadName)
-    let ref = clean(info.roadRef)
-    let junctionRef = clean(info.junctionRef)
-    let destinationRef = clean(info.destinationRef)
-    let destination = clean(info.destination)
-
-    var candidates: [String]
-    let hasExitInfo = !junctionRef.isEmpty || !destinationRef.isEmpty || !destination.isEmpty
-    if info.isLink || hasExitInfo {
-      let exitLabel = junctionRef.isEmpty ? "" : String(format: L("carplay_highway_exit"), junctionRef)
-      // "Exit 6A: US 101 South"
-      let lead = [exitLabel, destinationRef].filter { !$0.isEmpty }.joined(separator: ": ")
-      // Destinations are "; "-separated; the first one is the primary place.
-      let firstDestination = clean(String(destination.split(separator: ";", maxSplits: 1).first ?? ""))
-      // Switch out ";" with a nicer separator.
-      let destinationList = destination.split(separator: ";").map { clean(String($0)) }.filter { !$0.isEmpty }.joined(separator: " / ")
-      candidates = [
-        compose(lead, destinationList),
-        firstDestination == destination ? "" : compose(lead, firstDestination),
-        lead,
-        exitLabel,
-        // A link with no exit data at all (no junction/destination/ref) would otherwise produce
-        // nothing here, so fall back to its plain road name/ref.
-        [ref, name].filter { !$0.isEmpty }.joined(separator: " "),
-        name,
-      ]
-    } else {
-      candidates = [
-        [ref, name].filter { !$0.isEmpty }.joined(separator: " "),
-        name,
-        ref,
-      ]
-    }
-
-    // Drop empties, dedupe preserving order, then enforce descending length.
-    var seen = Set<String>()
-    return candidates
-      .map(clean)
-      .filter { !$0.isEmpty && seen.insert($0).inserted }
-      .sorted { $0.count > $1.count }
+    return image.withRenderingMode(.alwaysOriginal)
   }
 
   /// Lane strip for the symbol-only second maneuver, as a `CPImageSet`.

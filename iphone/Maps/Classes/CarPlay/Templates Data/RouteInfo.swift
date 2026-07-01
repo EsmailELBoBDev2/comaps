@@ -51,6 +51,21 @@ enum LaneWay: UInt8 {
     case .reverseRight: return "arrow.uturn.right"
     }
   }
+
+  /// Name of the turn-arrow asset (NavigationDashboard/Turn/*) used to draw lane guidance
+  var turnImageName: String {
+    switch self {
+    case .none, .through: return "straight"
+    case .slightLeft, .mergeToLeft: return "slight_left"
+    case .left: return "simple_left"
+    case .sharpLeft: return "sharp_left"
+    case .reverseLeft: return "uturn_left"
+    case .slightRight, .mergeToRight: return "slight_right"
+    case .right: return "simple_right"
+    case .sharpRight: return "sharp_right"
+    case .reverseRight: return "uturn_right"
+    }
+  }
 }
 
 /// High-level driving maneuver for the upcoming turn.
@@ -122,6 +137,68 @@ final class LaneInfo: NSObject {
   @objc init(laneWays: [NSNumber], recommendedWay: UInt8) {
     self.laneWays = laneWays.map { $0.uint8Value }
     self.recommendedWay = recommendedWay
+  }
+}
+
+/// Instead of the legacy `GetFullRoadName`, build turn instruction strings variants as needed by CarPlay.
+/// Ordered longest first, per Apple guidelines.
+/// Reused by the phone navigation panel
+@objc(MWMNavigationInstructionFormatter)
+final class NavigationInstructionFormatter: NSObject {
+  @objc static func instructionVariants(roadName: String,
+                                        roadRef: String,
+                                        junctionRef: String,
+                                        destinationRef: String,
+                                        destination: String,
+                                        isLink: Bool) -> [String] {
+    func clean(_ s: String) -> String { s.trimmingCharacters(in: .whitespacesAndNewlines) }
+    /// Joins a leading label and a trailing destination with an arrow, tolerating empty sides.
+    func compose(_ lead: String, _ tail: String) -> String {
+      if lead.isEmpty { return tail }
+      if tail.isEmpty { return lead }
+      return "\(lead) → \(tail)"
+    }
+
+    let name = clean(roadName)
+    let ref = clean(roadRef)
+    let junctionRef = clean(junctionRef)
+    let destinationRef = clean(destinationRef)
+    let destination = clean(destination)
+
+    var candidates: [String]
+    let hasExitInfo = !junctionRef.isEmpty || !destinationRef.isEmpty || !destination.isEmpty
+    if isLink || hasExitInfo {
+      let exitLabel = junctionRef.isEmpty ? "" : String(format: L("carplay_highway_exit"), junctionRef)
+      // "Exit 6A: US 101 South"
+      let lead = [exitLabel, destinationRef].filter { !$0.isEmpty }.joined(separator: ": ")
+      // Destinations are "; "-separated; the first one is the primary place.
+      let firstDestination = clean(String(destination.split(separator: ";", maxSplits: 1).first ?? ""))
+      // Switch out ";" with a nicer separator.
+      let destinationList = destination.split(separator: ";").map { clean(String($0)) }.filter { !$0.isEmpty }.joined(separator: " / ")
+      candidates = [
+        compose(lead, destinationList),
+        firstDestination == destination ? "" : compose(lead, firstDestination),
+        lead,
+        exitLabel,
+        // A link with no exit data at all (no junction/destination/ref) would produce nothing,
+        // fall back to its plain road name/ref.
+        [ref, name].filter { !$0.isEmpty }.joined(separator: " "),
+        name,
+      ]
+    } else {
+      candidates = [
+        [ref, name].filter { !$0.isEmpty }.joined(separator: " "),
+        name,
+        ref,
+      ]
+    }
+
+    // Drop empties, dedupe as variants may be equal, then enforce descending length.
+    var seen = Set<String>()
+    return candidates
+      .map(clean)
+      .filter { !$0.isEmpty && seen.insert($0).inserted }
+      .sorted { $0.count > $1.count }
   }
 }
 

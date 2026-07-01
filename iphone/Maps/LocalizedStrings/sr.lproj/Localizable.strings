@@ -877,3 +877,7 @@
 "editor_add_select_category_recent_subtitle" = "Недавно коришћено";
 "oh_unknown" = "Непознато радно време";
 "carplay_highway_exit" = "Излаз %@";
+"capacity_disabled_yes" = "Has dedicated disabled spaces";
+"capacity_disabled_no" = "No dedicated disabled spaces";
+"capacity_charging_yes" = "Has spaces with chargers";
+"capacity_charging_no" = "No spaces with chargers";

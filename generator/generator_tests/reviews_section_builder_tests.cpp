@@ -10,6 +10,7 @@ using namespace std::chrono;
 using namespace generator::reviews;
 using namespace ::reviews;
 using base::GeoObjectId;
+using base::Json;
 
 UNIT_TEST(Reviews_ParseJson)
 {
